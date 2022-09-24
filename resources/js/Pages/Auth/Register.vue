@@ -1,6 +1,6 @@
 <template>
 
-    <Head title='Acessar conta' />
+    <Head title='Criar uma conta' />
 
     <p>Hello, welcome to your first Inertia app!</p>
 

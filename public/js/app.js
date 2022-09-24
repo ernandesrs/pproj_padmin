@@ -26415,6 +26415,14 @@ var map = {
 	"./Auth/Login.vue": [
 		"./resources/js/Pages/Auth/Login.vue",
 		"resources_js_Pages_Auth_Login_vue"
+	],
+	"./Auth/Register": [
+		"./resources/js/Pages/Auth/Register.vue",
+		"resources_js_Pages_Auth_Register_vue"
+	],
+	"./Auth/Register.vue": [
+		"./resources/js/Pages/Auth/Register.vue",
+		"resources_js_Pages_Auth_Register_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -26553,7 +26561,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resources_js_Pages_Auth_Login_vue") return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
