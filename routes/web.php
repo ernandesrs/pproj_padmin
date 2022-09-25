@@ -20,5 +20,7 @@ Route::get('/', function () {
 
 Route::group(["prefix" => "auth"], function () {
     Route::get("/login", [AuthController::class, "login"])->name("auth.login");
+    Route::post("/login", [AuthController::class, "authenticate"])->name("auth.authenticate");
     Route::get("/register", [AuthController::class, "register"])->name("auth.register");
+    Route::post("/register", [AuthController::class, "store"])->name("auth.store");
 });
