@@ -71,9 +71,7 @@
             </div>
 
             <div>
-                <button
-                    class="px-3 py-2 bg-blue-700 disabled:bg-blue-500 text-gray-200 disabled:text-gray-400"
-                    type="submit" :disabled="form.processing">Cadastrar</button>
+                <ButtonUi text="Cadastrar" type="submit" :disabled="form.processing" />
             </div>
         </div>
     </form>
@@ -84,9 +82,10 @@
 
 import Layout from './../../Layouts/Auth.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
+import ButtonUi from '../../components/Ui/ButtonUi.vue';
 
 export default {
-    components: { Head },
+    components: { Head, ButtonUi },
     layout: (h, page) => h(Layout, () => child), // Using a render function
     layout: Layout, // Using the shorthand
 
