@@ -21,10 +21,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       navs: [{
         text: 'Login',
-        url: '/auth/login'
+        url: this.$route("auth.login"),
+        activeIn: ['auth.login']
       }, {
         text: 'Cadastro',
-        url: '/auth/register'
+        url: this.$route("auth.register"),
+        activeIn: ['auth.register']
       }]
     };
   }
@@ -265,13 +267,13 @@ var _hoisted_2 = {
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col-12 col-lg-6 col-xl-5 py-4 bg-primary"
+  "class": "col-12 col-lg-5 col-xl-5 py-4 bg-primary"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_4 = {
-  "class": "col-12 col-lg-6 col-xl-7 py-4 px-5"
+  "class": "col-12 col-lg-7 col-xl-7 py-4 px-5"
 };
 var _hoisted_5 = {
   "class": "d-flex justify-content-end mb-4"
@@ -279,21 +281,17 @@ var _hoisted_5 = {
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Início ");
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "ms-auto"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "card card-body border-0"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    "class": "px-3 py-2 rounded",
-    href: "/"
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['px-3 py-2 rounded me-auto', {
+      'bg-primary text-light': _ctx.$route().current() == 'front.index'
+    }]),
+    href: _ctx.$route('front.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_6];
@@ -301,11 +299,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), _hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.navs, function (nav) {
+  }, 8
+  /* PROPS */
+  , ["class", "href"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.navs, function (nav) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
       key: nav.url,
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['px-3 py-2 rounded', {
-        'bg-primary text-light': _ctx.$page.url == nav.url
+        'bg-primary text-light': nav.activeIn.includes(_ctx.$route().current())
       }]),
       href: nav.url
     }, {
@@ -322,7 +322,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["class", "href"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])])]);
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])])]);
 }
 
 /***/ }),

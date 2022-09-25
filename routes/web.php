@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect("/auth/login");
-});
+})->name("front.index");
 
 Route::group(["prefix" => "auth"], function () {
     Route::get("/login", [AuthController::class, "login"])->name("auth.login");
