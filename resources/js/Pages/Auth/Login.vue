@@ -21,7 +21,7 @@
             </div>
 
             <div class="col-12 text-center">
-                <ButtonUi text="Login" type="submit" :disabled="form.processing" />
+                <ButtonUi text="Login" type="submit" icon="checkLg" :disabled="form.processing" />
             </div>
         </div>
 

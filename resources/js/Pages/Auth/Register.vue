@@ -43,7 +43,7 @@
             </div>
 
             <div class="col-12 text-center">
-                <ButtonUi text="Cadastrar" type="submit" :disabled="form.processing" />
+                <ButtonUi text="Cadastrar" type="submit" icon="login" :disabled="form.processing" />
             </div>
         </div>
     </form>
