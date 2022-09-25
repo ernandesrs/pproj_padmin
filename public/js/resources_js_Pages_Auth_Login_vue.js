@@ -63,8 +63,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
 
   function submit() {
-    console.log(form);
-    return;
     form.post("/auth/login", {
       onError: function onError() {
         console.log("Erro!");
@@ -284,16 +282,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "row"
+  "class": "row justify-content-center"
 };
 var _hoisted_2 = {
-  "class": "col-12"
+  "class": "col-12 col-md-10 col-lg-8"
 };
 var _hoisted_3 = {
-  "class": "col-12"
+  "class": "col-12 col-md-10 col-lg-8"
 };
 var _hoisted_4 = {
-  "class": "col-12"
+  "class": "col-12 col-md-10 col-lg-8"
 };
 var _hoisted_5 = {
   "class": "col-12 text-center"
@@ -373,7 +371,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = ["for"];
-var _hoisted_2 = ["type", "id", "name", "readonly", "disabled", "value"];
+var _hoisted_2 = ["type", "id", "name", "readonly", "disabled", "value", "autocomplete"];
 var _hoisted_3 = ["for"];
 var _hoisted_4 = {
   key: 1,
@@ -398,7 +396,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: $props.name,
     readonly: $props.readonly,
     disabled: $props.disabled,
-    value: $props.modelValue
+    value: $props.modelValue,
+    autocomplete: $props.type == 'password' ? 'new-password' : ''
   }, null, 42
   /* CLASS, PROPS, HYDRATE_EVENTS */
   , _hoisted_2), $props.label && $options.isCheckOrRadioType ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", {
@@ -459,7 +458,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main {\r\n    width: 100%;\r\n    min-height: 100vh;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.main>.container {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.main>.container>.box {\r\n    width: 100%;\r\n    max-width: 375px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main {\r\n    width: 100%;\r\n    min-height: 100vh;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.main>.container {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.main>.container>.box {\r\n    width: 100%;\r\n    max-width: 575px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

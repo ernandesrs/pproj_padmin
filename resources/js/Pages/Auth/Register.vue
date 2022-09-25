@@ -3,74 +3,44 @@
     <Head title='Criar uma conta' />
 
     <form @submit.prevent="submit">
-        <div class="flex flex-col">
-            <div class="flex flex-col mb-3">
-                <label for="first_name">Nome:</label>
-                <input class="border py-1 px-3" id="first_name"
-                    v-model="form.first_name" />
-                <div v-if="form.errors.first_name" class="text-red-700">
-                    {{form.errors.first_name}}
-                </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <InputForm label="Nome" name="first_name" v-model="form.first_name"
+                    :error-message="form.errors.first_name" />
             </div>
 
-            <div class="flex flex-col mb-3">
-                <label for="last_name">Sobrenome:</label>
-                <input class="border py-1 px-3" id="last_name" v-model="form.last_name" />
-                <div v-if="form.errors.last_name" class="text-red-700">
-                    {{form.errors.last_name}}
-                </div>
+            <div class="col-12 col-md-6">
+                <InputForm label="Sobrenome" name="last_name" v-model="form.last_name"
+                    :error-message="form.errors.last_name" />
             </div>
 
-            <div class="flex flex-col mb-3">
-                <label for="username">Usuário:</label>
-                <input class="border py-1 px-3" id="username" v-model="form.username" />
-                <div v-if="form.errors.username" class="text-red-700">
-                    {{form.errors.username}}
-                </div>
+            <div class="col-12 col-md-6">
+                <InputForm label="Usuário" name="username" v-model="form.username"
+                    :error-message="form.errors.username" />
             </div>
 
-            <div class="flex flex-col mb-3">
-                <label for="gender">Gênero:</label>
-                <select class="border py-1 px-3" id="gender" v-model="form.gender">
-                    <option value="male">
-                        Masculino
-                    </option>
-                    <option value="female">
-                        Feminino
-                    </option>
-                </select>
-                <div v-if="form.errors.gender" class="text-red-700">
-                    {{form.errors.gender}}
-                </div>
+            <div class="col-12 col-md-6">
+                <InputForm label="Gênero" name="gender" v-model="form.gender"
+                    :error-message="form.errors.gender" />
             </div>
 
-            <div class="flex flex-col mb-3">
-                <label for="email">Email:</label>
-                <input class="border py-1 px-3" id="email" v-model="form.email" />
-                <div v-if="form.errors.email" class="text-red-700">
-                    {{form.errors.email}}
-                </div>
+            <div class="col-12">
+                <InputForm label="Email" type="email" name="email" v-model="form.email"
+                    :error-message="form.errors.email" />
             </div>
 
-            <div class="flex flex-col mb-6">
-                <label for="password">Senha:</label>
-                <input class="border py-1 px-3" type="password" id="password"
-                    v-model="form.password" />
-                <div v-if="form.errors.password" class="text-red-700">
-                    {{form.errors.password}}
-                </div>
+            <div class="col-12 col-md-6">
+                <InputForm label="Senha" type="password" name="password"
+                    v-model="form.password" :error-message="form.errors.password" />
             </div>
 
-            <div class="flex flex-col mb-6">
-                <label for="password_confirmation">Confirmar senha:</label>
-                <input class="border py-1 px-3" type="password" id="password_confirmation"
-                    v-model="form.password_confirmation" />
-                <div v-if="form.errors.password_confirmation" class="text-red-700">
-                    {{form.errors.password_confirmation}}
-                </div>
+            <div class="col-12 col-md-6">
+                <InputForm label="Confirmar senha" type="password"
+                    name="password_confirmation" v-model="form.password_confirmation"
+                    :error-message="form.errors.password_confirmation" />
             </div>
 
-            <div>
+            <div class="col-12 text-center">
                 <ButtonUi text="Cadastrar" type="submit" :disabled="form.processing" />
             </div>
         </div>
@@ -83,9 +53,10 @@
 import Layout from './../../Layouts/Auth.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../components/Ui/ButtonUi.vue';
+import InputForm from '../../components/Form/InputForm.vue';
 
 export default {
-    components: { Head, ButtonUi },
+    components: { Head, ButtonUi, InputForm },
     layout: (h, page) => h(Layout, () => child), // Using a render function
     layout: Layout, // Using the shorthand
 
@@ -94,6 +65,7 @@ export default {
             first_name: null,
             last_name: null,
             username: null,
+            gender: null,
             email: null,
             password: null,
             password_confirmation: null

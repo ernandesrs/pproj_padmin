@@ -5,7 +5,8 @@
 
     <div :class="inputContainerStyle">
         <input @input="updateValue" :class="inputStyle" :type="type" :id="name"
-            :name="name" :readonly="readonly" :disabled="disabled" :value="modelValue" />
+            :name="name" :readonly="readonly" :disabled="disabled" :value="modelValue"
+            :autocomplete="type=='password'?'new-password':''" />
 
         <label v-if="label && isCheckOrRadioType" class="form-check-label" :for="name">
             {{ label }}

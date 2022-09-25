@@ -53,6 +53,6 @@ export default {
 
 .main>.container>.box {
     width: 100%;
-    max-width: 375px;
+    max-width: 575px;
 }
 </style>
