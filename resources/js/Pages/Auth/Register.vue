@@ -20,8 +20,10 @@
             </div>
 
             <div class="col-12 col-md-6">
-                <InputForm label="Gênero" name="gender" v-model="form.gender"
-                    :error-message="form.errors.gender" />
+                <SelectForm label="Gênero" name="gender" :options="[
+                    {text: 'Masculino', value: 'male'},
+                    {text: 'Feminino', value: 'female'},
+                ]" v-model="form.gender" />
             </div>
 
             <div class="col-12">
@@ -54,9 +56,10 @@ import Layout from './../../Layouts/Auth.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../components/Ui/ButtonUi.vue';
 import InputForm from '../../components/Form/InputForm.vue';
+import SelectForm from '../../components/Form/SelectForm.vue';
 
 export default {
-    components: { Head, ButtonUi, InputForm },
+    components: { Head, ButtonUi, InputForm, SelectForm },
     layout: (h, page) => h(Layout, () => child), // Using a render function
     layout: Layout, // Using the shorthand
 
@@ -65,13 +68,15 @@ export default {
             first_name: null,
             last_name: null,
             username: null,
-            gender: null,
+            gender: "none",
             email: null,
             password: null,
             password_confirmation: null
         });
 
         function submit() {
+            console.log(form);
+            return;
             form.post("/auth/register", {
                 onError: () => {
                     console.log("Erro!");
