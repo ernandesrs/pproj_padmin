@@ -1,0 +1,16 @@
+#app {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+    }
+
+    .auth-box {
+        width: 100%;
+        max-width: 575px;
+    }
+}

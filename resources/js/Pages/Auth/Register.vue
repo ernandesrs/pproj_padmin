@@ -14,12 +14,12 @@
                     :error-message="form.errors.last_name" />
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-sm-7 col-md-6">
                 <InputForm label="Usuário" name="username" v-model="form.username"
                     :error-message="form.errors.username" />
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-sm-5 col-md-6">
                 <SelectForm label="Gênero" name="gender" :options="[
                     {text: 'Masculino', value: 'male'},
                     {text: 'Feminino', value: 'female'},
