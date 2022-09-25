@@ -5,13 +5,19 @@
     <form @submit.prevent="submit">
         <div class="row">
             <div class="col-12">
-                <InputForm label="E-mail" type="email" :error-message="form.errors.email"
-                    v-model="form.email" />
+                <InputForm label="E-mail" type="email" name="email"
+                    :error-message="form.errors.email" v-model="form.email" />
             </div>
 
             <div class="col-12">
-                <InputForm label="Senha" type="password"
+                <InputForm label="Senha" type="password" name="password"
                     :error-message="form.errors.password" v-model="form.password" />
+            </div>
+
+            <div class="col-12">
+                <InputForm label="Lembre-se de mim" type="checkbox" name="remember_me"
+                    :error-message="form.errors.remember_me" v-model="form.remember_me"
+                    inline />
             </div>
 
             <div class="col-12 text-center">
@@ -39,9 +45,11 @@ export default {
         const form = useForm({
             email: null,
             password: null,
+            remember_me: null,
         })
 
         function submit() {
+            console.log(form); return;
             form.post("/auth/login", {
                 onError: () => {
                     console.log("Erro!");

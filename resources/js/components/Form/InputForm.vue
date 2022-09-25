@@ -1,10 +1,15 @@
 <template>
-    <label v-if="label" :for="name" class="mb-1">
+    <label v-if="label && !isCheckOrRadioType" :for="name" class="mb-1">
         {{ label }}
     </label>
-    <div class="input-group has-validation mb-3">
-        <input @input="updateValue" :class="style" :type="type" :id="name" :name="name"
-            :readonly="readonly" :disabled="disabled" :value="modelValue" />
+
+    <div :class="inputContainerStyle">
+        <input @input="updateValue" :class="inputStyle" :type="type" :id="name"
+            :name="name" :readonly="readonly" :disabled="disabled" :value="modelValue" />
+
+        <label v-if="label && isCheckOrRadioType" class="form-check-label" :for="name">
+            {{ label }}
+        </label>
 
         <small v-if="errorMessage" class="invalid-feedback">
             {{ errorMessage }}
@@ -23,13 +28,22 @@ export default {
 
         borderless: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
-        disabled: { type: Boolean, default: false }
+        disabled: { type: Boolean, default: false },
+        inline: { type: Boolean, default: false },
     },
 
     computed: {
-        style() {
-            return `form-control ${this.borderless ? "border-0" : ""} ${this.errorMessage ? "is-invalid" : ""}`;
+        inputContainerStyle() {
+            return `${this.isCheckOrRadioType ? 'form-check' + (this.inline ? ' form-check-inline' : '') : 'input-group'} has-validation mb-3`;
         },
+
+        inputStyle() {
+            return `${this.isCheckOrRadioType ? "form-check-input" : "form-control"} ${this.borderless ? "border-0" : ""} ${this.errorMessage ? "is-invalid" : ""}`;
+        },
+
+        isCheckOrRadioType() {
+            return this.type == "checkbox" || this.type == "radio";
+        }
     },
 
     methods: {
