@@ -14,8 +14,10 @@
                     Cadastrar
                     </Link>
                 </header>
-                <div class="pt-5 pb-8 px-6">
-                    <slot />
+                <div class="">
+                    <div class="card card-body border-0">
+                        <slot />
+                    </div>
                 </div>
             </div>
         </div>

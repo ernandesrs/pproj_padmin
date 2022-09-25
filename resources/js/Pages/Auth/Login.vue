@@ -3,28 +3,22 @@
     <Head title='Acessar conta' />
 
     <form @submit.prevent="submit">
-        <div class="flex flex-col">
-            <div class="flex flex-col mb-3">
-                <label for="email">Email:</label>
-                <input class="border py-1 px-3" id="email" v-model="form.email" />
-                <div v-if="form.errors.email" class="text-red-700">
-                    {{form.errors.email}}
-                </div>
+        <div class="row">
+            <div class="col-12">
+                <InputForm label="E-mail" type="email" :error-message="form.errors.email"
+                    v-model="form.email" />
             </div>
 
-            <div class="flex flex-col mb-6">
-                <label for="password">Senha:</label>
-                <input class="border py-1 px-3" type="password" id="password"
-                    v-model="form.password" />
-                <div v-if="form.errors.password" class="text-red-700">
-                    {{form.errors.password}}
-                </div>
+            <div class="col-12">
+                <InputForm label="Senha" type="password"
+                    :error-message="form.errors.password" v-model="form.password" />
             </div>
 
-            <div>
+            <div class="col-12 text-center">
                 <ButtonUi text="Login" type="submit" :disabled="form.processing" />
             </div>
         </div>
+
     </form>
 
 </template>
@@ -34,11 +28,12 @@
 import Layout from './../../Layouts/Auth.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../components/Ui/ButtonUi.vue';
+import InputForm from '../../components/Form/InputForm.vue';
 
 export default {
-    components: { Head, useForm, ButtonUi },
-    layout: (h, page) => h(Layout, () => child), // Using a render function
-    layout: Layout, // Using the shorthand
+    components: { Head, useForm, ButtonUi, InputForm },
+    layout: (h, page) => h(Layout, () => child),
+    layout: Layout,
 
     setup() {
         const form = useForm({
