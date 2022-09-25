@@ -7,8 +7,12 @@ InertiaProgress.init();
 createInertiaApp({
     resolve: name => import(`./Pages/${name}`),
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
+        const vueApp = createApp({ render: () => h(App, props) });
+
+        vueApp.config.globalProperties.$route = route;
+
+        vueApp.use(plugin)
             .mount(el)
     },
 });
+

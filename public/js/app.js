@@ -19574,11 +19574,13 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init();
         App = _ref.App,
         props = _ref.props,
         plugin = _ref.plugin;
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
+    var vueApp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(App, props);
       }
-    }).use(plugin).mount(el);
+    });
+    vueApp.config.globalProperties.$route = route;
+    vueApp.use(plugin).mount(el);
   }
 });
 
