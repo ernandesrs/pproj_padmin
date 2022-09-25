@@ -75,8 +75,6 @@ export default {
         });
 
         function submit() {
-            console.log(form);
-            return;
             form.post("/auth/register", {
                 onError: () => {
                     console.log("Erro!");

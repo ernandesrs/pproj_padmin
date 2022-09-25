@@ -69,8 +69,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
 
   function submit() {
-    console.log(form);
-    return;
     form.post("/auth/register", {
       onError: function onError() {
         console.log("Erro!");
