@@ -15,6 +15,9 @@
                     {{ nav.text }}
                     </Link>
                 </div>
+
+                <AlertUi ref="alert" />
+
                 <div class="card card-body border-0">
                     <slot />
                 </div>
@@ -26,10 +29,12 @@
 <script>
 
 import { Link } from '@inertiajs/inertia-vue3'
+import AlertUi from '../components/Ui/AlertUi.vue';
 
 export default {
     components: {
         Link,
+        AlertUi
     },
     data() {
         return {
@@ -47,6 +52,22 @@ export default {
             ],
         };
     },
+
+    updated() {
+        this.showFlashMessage();
+    },
+
+    methods: {
+        showFlashMessage() {
+            let flash = this.$page.props.flash;
+
+            if (flash) {
+                this.$refs.alert.add(flash.message, flash.variant);
+            } else {
+                this.$refs.alert.clear();
+            }
+        },
+    }
 }
 
 </script>

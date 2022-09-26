@@ -10829,3 +10829,23 @@ textarea.form-control-lg {
   width: 100%;
   max-width: 575px;
 }
+#app .alert {
+  width: 100%;
+}
+#app .alert .alert-icon {
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+#app .alert.alert-float {
+  max-width: 375px;
+  position: fixed;
+  right: 1.5rem;
+  z-index: 999;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+#app .alert.alert-float.alert-float-top {
+  top: 1rem;
+}
+#app .alert.alert-float.alert-float-bottom {
+  bottom: 1rem;
+}
