@@ -345,7 +345,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       theMessage: null,
-      theVariant: null
+      theVariant: null,
+      time: null,
+      timeStatus: 0,
+      timerHandler: null,
+      intervalHandler: null
     };
   },
   props: {
@@ -358,6 +362,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     },
     fixed: {
+      type: Boolean,
+      "default": false
+    },
+    noAutoClose: {
       type: Boolean,
       "default": false
     },
@@ -383,7 +391,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     alertStyle: function alertStyle() {
       var position = this.position == 'top' ? 'alert-float-top' : 'alert-float-bottom';
-      return "alert alert-".concat(this.theVariant, " ").concat(!this.fixed ? 'alert-float ' + position : '', " py-2");
+      return "alert alert-".concat(this.theVariant, " ").concat(!this.fixed ? 'alert-float ' + position : '', " py-0 px-0");
     },
     alertIcon: function alertIcon() {
       var alertIcons = {
@@ -400,10 +408,31 @@ __webpack_require__.r(__webpack_exports__);
     add: function add(message, variant) {
       this.theMessage = message;
       this.theVariant = variant;
+
+      if (!this.noAutoClose) {
+        this.time = 10;
+        this.timer();
+      }
     },
     clear: function clear() {
       this.theMessage = null;
       this.theVariant = null;
+
+      if (!this.noAutoClose && this.timerHandler) {
+        clearTimeout(this.timerHandler);
+        clearInterval(this.intervalHandler);
+        this.timeStatus = 0;
+      }
+    },
+    timer: function timer() {
+      var _this = this;
+
+      this.timerHandler = setTimeout(function () {
+        _this.clear();
+      }, this.time * 1000);
+      this.intervalHandler = setInterval(function () {
+        _this.timeStatus++;
+      }, 100);
     }
   }
 });
@@ -932,7 +961,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "d-flex align-items-center"
+  "class": "alert-inner d-flex align-items-center py-2 px-3"
 };
 var _hoisted_2 = {
   "class": "d-flex align-items-center me-auto"
@@ -961,14 +990,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         innerHTML: $data.theMessage
       }, null, 8
       /* PROPS */
-      , _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+      , _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.timeStatus), 1
+      /* TEXT */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         onClick: $options.clear,
         type: "button",
         icon: "xLg",
         size: "sm"
       }, null, 8
       /* PROPS */
-      , ["onClick"])])], 2
+      , ["onClick"])]), $data.time ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        key: 0,
+        "class": "alert-timer",
+        style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)(["width:".concat($data.timeStatus, "%;")])
+      }, null, 4
+      /* STYLE */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
       /* CLASS */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
@@ -1069,7 +1106,6 @@ var icons = {
   get: function get(name) {
     var _icons$name;
 
-    console.log("AQUI");
     return (_icons$name = icons[name]) !== null && _icons$name !== void 0 ? _icons$name : '';
   }
 });

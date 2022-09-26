@@ -10831,6 +10831,8 @@ textarea.form-control-lg {
 }
 #app .alert {
   width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 #app .alert .alert-icon {
   font-size: 1.5rem;
@@ -10848,4 +10850,14 @@ textarea.form-control-lg {
 }
 #app .alert.alert-float.alert-float-bottom {
   bottom: 1rem;
+}
+#app .alert .alert-timer {
+  width: 10%;
+  background-color: red;
+  border-style: solid;
+  height: 4px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  opacity: 0.25;
 }

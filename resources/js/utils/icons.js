@@ -22,7 +22,6 @@ const icons = {
 export default {
     icons,
     get(name) {
-        console.log("AQUI");
         return icons[name] ?? '';
     }
 };
