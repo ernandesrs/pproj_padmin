@@ -1,7 +1,7 @@
 <template>
     <button :type="type" :class="style" :disabled="disabled">
         <IconUi v-if="icon" :icon="icon" />
-        <span :class="{'ms-2': icon }">
+        <span :class="{'ms-2': icon && text }">
             {{text}}
         </span>
     </button>
@@ -14,7 +14,7 @@ import IconUi from './IconUi.vue';
 export default {
     props: {
         text: { type: String, default: null },
-        variation: { type: String, default: "primary" },
+        variant: { type: String, default: null },
         icon: { type: String, default: null },
         size: { type: String, default: null },
         type: { type: String, default: "button" },
@@ -23,7 +23,8 @@ export default {
     },
     computed: {
         style() {
-            return `btn ${this.size ? "btn-" + this.size : null} ${(this.outlined ? "btn-outline-" : "btn-") + this.variation}`;
+            let bg = this.variant ? ((this.outlined ? "btn-outline-" : "btn-") + this.variant) : 'bg-transparent';
+            return `btn ${this.size ? "btn-" + this.size : ""} ${bg}`;
         }
     },
     components: { IconUi }
