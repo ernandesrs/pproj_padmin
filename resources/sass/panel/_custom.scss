@@ -9,19 +9,19 @@
 
 .wrapp {
     display: flex;
-    background-color: red;
+    background-color: $light;
     height: 100vh;
 
     .sidebar {
-        background-color: blue;
+        background-color: $dark;
         width: 100%;
         max-width: 225px;
         position: fixed;
-        z-index: 500;
+        z-index: 900;
         height: 100%;
+        overflow: hidden;
 
         .sidebar-inner {
-            background-color: pink;
             height: calc(100vh - $spacer);
             margin-top: $spacer / 2;
             overflow-x: hidden;
@@ -48,7 +48,7 @@
     }
 
     .main {
-        background-color: yellow;
+        background-color: transparent;
         width: 100%;
 
         .topbar {
@@ -63,6 +63,8 @@
                 width: 30px;
                 height: 30px;
                 font-size: 1.5rem;
+                position: relative;
+                z-index: 901;
 
                 &::before {
                     line-height: 0;
@@ -71,7 +73,7 @@
         }
 
         .content {
-            background-color: pink;
+            background-color: transparent;
             height: calc(100vh - 40px);
             overflow-x: hidden;
             overflow-y: auto;

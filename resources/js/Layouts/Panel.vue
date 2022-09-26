@@ -1,6 +1,9 @@
 <template>
     <div class="wrapp">
 
+        <BackdropUi @click="sidebarToggle" v-if="inMobile" v-show="sidebar.visible"
+            fixed />
+
         <aside v-if="sidebar.visible" class="container-fluid sidebar">
             <div class="sidebar-inner">
                 <header class="header">
@@ -25,7 +28,9 @@
                     class="sidebar-toggler order-md-first" />
             </div>
 
-            <main class="container-fluid content"></main>
+            <main class="container-fluid content">
+                <slot />
+            </main>
         </div>
 
     </div>
@@ -36,9 +41,10 @@
 const WIDTH_MOBILE = 768;
 
 import ButtonUi from '../components/Ui/ButtonUi.vue';
+import BackdropUi from '../components/Ui/BackdropUi.vue';
 
 export default {
-    components: { ButtonUi },
+    components: { ButtonUi, BackdropUi },
 
     data() {
         return {

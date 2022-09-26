@@ -10857,19 +10857,19 @@ textarea.form-control-lg {
 
 .wrapp {
   display: flex;
-  background-color: red;
+  background-color: #f8f9fa;
   height: 100vh;
 }
 .wrapp .sidebar {
-  background-color: blue;
+  background-color: #212529;
   width: 100%;
   max-width: 225px;
   position: fixed;
-  z-index: 500;
+  z-index: 900;
   height: 100%;
+  overflow: hidden;
 }
 .wrapp .sidebar .sidebar-inner {
-  background-color: pink;
   height: calc(100vh - 1rem);
   margin-top: 0.5rem;
   overflow-x: hidden;
@@ -10890,7 +10890,7 @@ textarea.form-control-lg {
   margin-bottom: 0;
 }
 .wrapp .main {
-  background-color: yellow;
+  background-color: transparent;
   width: 100%;
 }
 .wrapp .main .topbar {
@@ -10905,12 +10905,14 @@ textarea.form-control-lg {
   width: 30px;
   height: 30px;
   font-size: 1.5rem;
+  position: relative;
+  z-index: 901;
 }
 .wrapp .main .topbar .sidebar-toggler::before {
   line-height: 0;
 }
 .wrapp .main .content {
-  background-color: pink;
+  background-color: transparent;
   height: calc(100vh - 40px);
   overflow-x: hidden;
   overflow-y: auto;
