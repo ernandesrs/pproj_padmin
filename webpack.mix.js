@@ -14,4 +14,5 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass("resources/sass/app.scss", "public/css")
+    .sass("resources/sass/panel/app.scss", "public/css/panel")
     .css("node_modules/bootstrap-icons/font/bootstrap-icons.css", "public/css");

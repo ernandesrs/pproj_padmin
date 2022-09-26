@@ -23962,6 +23962,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/panel/app.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/panel/app.scss ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap-icons/font/bootstrap-icons.css":
 /*!***************************************************************!*\
   !*** ./node_modules/bootstrap-icons/font/bootstrap-icons.css ***!
@@ -26483,6 +26496,14 @@ function compileToFunction(template, options) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Admin/Index": [
+		"./resources/js/Pages/Admin/Index.vue",
+		"resources_js_Pages_Admin_Index_vue"
+	],
+	"./Admin/Index.vue": [
+		"./resources/js/Pages/Admin/Index.vue",
+		"resources_js_Pages_Admin_Index_vue"
+	],
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.vue",
 		"resources_js_Pages_Auth_Login_vue"
@@ -26648,7 +26669,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
@@ -26761,6 +26782,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
 /******/ 			"css/bootstrap-icons": 0,
+/******/ 			"css/panel/app": 0,
 /******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
@@ -26773,7 +26795,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
 /******/ 					} else {
-/******/ 						if(!/^css\/(app|bootstrap\-icons)$/.test(chunkId)) {
+/******/ 						if(!/^css\/((|panel\/)app|bootstrap\-icons)$/.test(chunkId)) {
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
 /******/ 							promises.push(installedChunkData[2] = promise);
@@ -26853,9 +26875,10 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/bootstrap-icons","css/app"], () => (__webpack_require__("./node_modules/bootstrap-icons/font/bootstrap-icons.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./resources/sass/panel/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./node_modules/bootstrap-icons/font/bootstrap-icons.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

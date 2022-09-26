@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect("/auth/login");
+    return redirect("/admin");
 })->name("front.index");
 
 Route::group(["prefix" => "auth"], function () {
@@ -23,4 +24,8 @@ Route::group(["prefix" => "auth"], function () {
     Route::post("/login", [AuthController::class, "authenticate"])->name("auth.authenticate");
     Route::get("/register", [AuthController::class, "register"])->name("auth.register");
     Route::post("/register", [AuthController::class, "store"])->name("auth.store");
+});
+
+Route::group(["prefix" => "admin"], function () {
+    Route::get("/", [AdminController::class, "index"])->name("admin.index");
 });

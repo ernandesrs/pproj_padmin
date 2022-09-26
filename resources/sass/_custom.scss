@@ -13,42 +13,4 @@
         width: 100%;
         max-width: 575px;
     }
-
-    .alert {
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-
-        .alert-icon {
-            font-size: 1.5rem;
-            opacity: 0.60;
-        }
-
-        &.alert-float {
-            max-width: 375px;
-            position: fixed;
-            right: $spacer * 1.5;
-            z-index: 999;
-            box-shadow: $box-shadow;
-
-            &.alert-float-top {
-                top: $spacer;
-            }
-
-            &.alert-float-bottom {
-                bottom: $spacer;
-            }
-        }
-
-        .alert-timer {
-            width: 10%;
-            background-color: red;
-            border-style: solid;
-            height: 4px;
-            position: relative;
-            left: 0;
-            bottom: 0;
-            opacity: 0.25;
-        }
-    }
 }

@@ -10850,14 +10850,7 @@ textarea.form-control-lg {
 #app {
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 #app a {
   text-decoration: none;
-}
-#app .auth-box {
-  width: 100%;
-  max-width: 575px;
 }
