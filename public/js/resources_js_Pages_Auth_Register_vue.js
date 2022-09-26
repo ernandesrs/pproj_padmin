@@ -1097,6 +1097,8 @@ var icons = {
   checkCircleFill: 'bi bi-check-circle-fill',
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
   infoCircleFill: 'bi bi-info-circle-fill',
+  listRight: 'bi bi-filter-right',
+  listLeft: 'bi bi-filter-left',
   login: 'bi bi-box-arrow-right',
   logout: 'bi bi-box-arrow-left',
   home: 'bi bi-house',

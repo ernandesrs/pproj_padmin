@@ -10,6 +10,8 @@ const icons = {
 
     infoCircleFill: 'bi bi-info-circle-fill',
 
+    listRight: 'bi bi-filter-right',
+    listLeft: 'bi bi-filter-left',
     login: 'bi bi-box-arrow-right',
     logout: 'bi bi-box-arrow-left',
 

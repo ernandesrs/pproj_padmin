@@ -1,8 +1,80 @@
 #app {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
 
     a {
         text-decoration: none;
+    }
+}
+
+.wrapp {
+    display: flex;
+    background-color: red;
+    height: 100vh;
+
+    .sidebar {
+        background-color: blue;
+        width: 100%;
+        max-width: 225px;
+        position: fixed;
+        z-index: 500;
+        height: 100%;
+
+        .sidebar-inner {
+            background-color: pink;
+            height: calc(100vh - $spacer);
+            margin-top: $spacer / 2;
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .header {
+                background-color: $dark;
+
+                a {
+                    color: $light;
+
+                    img {
+                        width: 100%;
+                    }
+
+                    .logo-text {
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .main {
+        background-color: yellow;
+        width: 100%;
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            height: 40px;
+
+            .sidebar-toggler {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+                font-size: 1.5rem;
+
+                &::before {
+                    line-height: 0;
+                }
+            }
+        }
+
+        .content {
+            background-color: pink;
+            height: calc(100vh - 40px);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
     }
 }

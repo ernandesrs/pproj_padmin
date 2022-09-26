@@ -10849,8 +10849,81 @@ textarea.form-control-lg {
 
 #app {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 #app a {
   text-decoration: none;
+}
+
+.wrapp {
+  display: flex;
+  background-color: red;
+  height: 100vh;
+}
+.wrapp .sidebar {
+  background-color: blue;
+  width: 100%;
+  max-width: 225px;
+  position: fixed;
+  z-index: 500;
+  height: 100%;
+}
+.wrapp .sidebar .sidebar-inner {
+  background-color: pink;
+  height: calc(100vh - 1rem);
+  margin-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.wrapp .sidebar .sidebar-inner .header {
+  background-color: #212529;
+}
+.wrapp .sidebar .sidebar-inner .header a {
+  color: #f8f9fa;
+}
+.wrapp .sidebar .sidebar-inner .header a img {
+  width: 100%;
+}
+.wrapp .sidebar .sidebar-inner .header a .logo-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.wrapp .main {
+  background-color: yellow;
+  width: 100%;
+}
+.wrapp .main .topbar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+.wrapp .main .topbar .sidebar-toggler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 1.5rem;
+}
+.wrapp .main .topbar .sidebar-toggler::before {
+  line-height: 0;
+}
+.wrapp .main .content {
+  background-color: pink;
+  height: calc(100vh - 40px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .wrapp .sidebar {
+    position: relative;
+  }
+  .wrapp .main {
+    max-width: calc(100% - 225px);
+  }
+  .wrapp .main.main-full {
+    max-width: 100%;
+  }
 }

@@ -1,0 +1,15 @@
+@media(min-width: 768px) {
+    .wrapp {
+        .sidebar {
+            position: relative;
+        }
+
+        .main {
+            max-width: calc(100% - 225px);
+
+            &.main-full {
+                max-width: 100%;
+            }
+        }
+    }
+}
