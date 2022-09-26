@@ -4,7 +4,7 @@
             <div class="alert-inner d-flex align-items-center py-2 px-3">
                 <div class="d-flex align-items-center me-auto">
                     <IconUi :icon="alertIcon" class="alert-icon" />
-                    <p class="mb-0 ms-3" v-html="theMessage"></p>{{timeStatus}}
+                    <p class="mb-0 ms-3" v-html="theMessage"></p>
                 </div>
                 <ButtonUi @click="clear" type="button" icon="xLg" size="sm" />
             </div>
@@ -74,6 +74,9 @@ export default {
             this.theMessage = message;
             this.theVariant = variant;
 
+            if (this.timerHandler)
+                this.timerReset();
+
             if (!this.noAutoClose) {
                 this.time = 10;
                 this.timer();
@@ -83,9 +86,7 @@ export default {
             this.theMessage = null;
             this.theVariant = null;
             if (!this.noAutoClose && this.timerHandler) {
-                clearTimeout(this.timerHandler);
-                clearInterval(this.intervalHandler);
-                this.timeStatus = 0;
+                this.timerReset();
             }
         },
         timer() {
@@ -97,6 +98,11 @@ export default {
                 this.timeStatus++;
             }, 100);
         },
+        timerReset() {
+            clearTimeout(this.timerHandler);
+            clearInterval(this.intervalHandler);
+            this.timeStatus = 0;
+        }
     }
 };
 </script>
