@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,13 @@ Route::group(["prefix" => "auth"], function () {
 
 Route::group(["prefix" => "admin"], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
+
+    Route::group(["prefix" => "users"], function () {
+        Route::get("/", [AdminUserController::class, "index"])->name("admin.users.index");
+        Route::get("/create", [AdminUserController::class, "create"])->name("admin.users.create");
+        Route::post("/create", [AdminUserController::class, "store"])->name("admin.users.store");
+        Route::get("/edit/{user}", [AdminUserController::class, "edit"])->name("admin.users.edit");
+        Route::post("/edit/{user}", [AdminUserController::class, "update"])->name("admin.users.update");
+        Route::post("/destroy/{user}", [AdminUserController::class, "destroy"])->name("admin.users.destroy");
+    });
 });
