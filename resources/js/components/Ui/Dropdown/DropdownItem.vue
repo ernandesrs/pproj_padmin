@@ -20,7 +20,7 @@ export default {
     },
     computed: {
         tag() {
-            if (typeof this.to != undefined)
+            if (this.to)
                 return 'Link';
 
             return 'a';
