@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
@@ -15,7 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        Inertia::setRootView("panel");
+        return Inertia::render("Admin/Users/List", [
+            "users" => User::paginate(18)
+        ]);
     }
 
     /**
@@ -25,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        Inertia::setRootView("panel");
+        return Inertia::render("Admin/Users/Form");
     }
 
     /**
@@ -58,7 +63,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        Inertia::setRootView("panel");
+        return Inertia::render("Admin/Users/Form", [
+            "user" => $user
+        ]);
     }
 
     /**
