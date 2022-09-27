@@ -1,9 +1,12 @@
 <template>
     <button :type="type" :class="style" :disabled="disabled">
-        <IconUi v-if="icon" :icon="icon" />
-        <span :class="{'ms-2': icon && text }">
-            {{text}}
-        </span>
+        <slot v-if="$slots.buttonContent" name="buttonContent" />
+        <template v-else>
+            <IconUi v-if="icon" :icon="icon" />
+            <span :class="{'ms-2': icon && text }">
+                {{text}}
+            </span>
+        </template>
     </button>
 </template>
 

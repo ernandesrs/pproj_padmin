@@ -22,7 +22,29 @@
 
         <div class="main" :class="{'main-full': !inMobile && !sidebar.visible}">
             <div class="container-fluid topbar">
-                <div class="me-auto"></div>
+                <div class="d-flex me-auto w-100">
+
+                    <span class="ms-auto"></span>
+                    <DropdownUi icon="userCircle" text="User Name">
+                        <template v-slot:dropdownMenu>
+                            <div
+                                class="d-flex flex-column justify-content-center align-items-center">
+                                <img class="img-fluid img-thumbnail rounded-circle"
+                                    src="https://via.placeholder.com/175x175?name=photo"
+                                    alt="" style="width:60px;height:60px;">
+                                <h6 class="fw-semibold pt-2 text-muted text-center">
+                                    User Name
+                                </h6>
+                            </div>
+                            <DropdownDivider />
+                            <DropdownHeader text="Menu" />
+                            <DropdownItem text="Perfil" icon="userCircle" to="#" />
+                            <DropdownItem text="Logout" icon="logout"
+                                :to="$route('auth.login')" />
+                        </template>
+                    </DropdownUi>
+
+                </div>
 
                 <ButtonUi @click="sidebarToggle" :icon="sidebar.togglerIcon"
                     class="sidebar-toggler order-md-first" />
@@ -42,9 +64,13 @@ const WIDTH_MOBILE = 768;
 
 import ButtonUi from '../components/Ui/ButtonUi.vue';
 import BackdropUi from '../components/Ui/BackdropUi.vue';
+import DropdownUi from '../components/Ui/Dropdown/DropdownUi.vue';
+import DropdownItem from '../components/Ui/Dropdown/DropdownItem.vue';
+import DropdownDivider from '../components/Ui/Dropdown/DropdownDivider.vue';
+import DropdownHeader from '../components/Ui/Dropdown/DropdownHeader.vue';
 
 export default {
-    components: { ButtonUi, BackdropUi },
+    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader },
 
     data() {
         return {
@@ -60,7 +86,7 @@ export default {
                         activeIn: ['admin.index']
                     },
                 ],
-            }
+            },
         };
     },
 

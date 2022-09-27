@@ -1039,6 +1039,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: $props.type,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.style),
     disabled: $props.disabled
+  }, [_ctx.$slots.buttonContent ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "buttonContent", {
+    key: 0
+  }) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 1
   }, [$props.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_IconUi, {
     key: 0,
     icon: $props.icon
@@ -1050,7 +1054,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.text), 3
   /* TEXT, CLASS */
-  )], 10
+  )], 64
+  /* STABLE_FRAGMENT */
+  ))], 10
   /* CLASS, PROPS */
   , _hoisted_1);
 }
@@ -1102,6 +1108,12 @@ var icons = {
   login: 'bi bi-box-arrow-right',
   logout: 'bi bi-box-arrow-left',
   home: 'bi bi-house',
+  user: 'bi bi-person',
+  users: 'bi bi-people',
+  userX: 'bi bi-person-x',
+  userCheck: 'bi bi-person-check',
+  userPlus: 'bi bi-person-plus',
+  userCircle: 'bi bi-person-circle',
   x: 'bi bi-x',
   xLg: 'bi bi-x-lg'
 };

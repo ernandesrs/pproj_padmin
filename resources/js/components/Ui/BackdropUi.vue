@@ -41,7 +41,6 @@ export default {
             return `${this.light ? "backdrop-light" : "backdrop-dark"} opacity-75`;
         },
         showedClass() {
-            console.log(this.showed);
             if (this.showed)
                 return this.leaveFromEnterToClass;
             return null;

@@ -11,8 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .vue()
+mix.vue()
+    .css("node_modules/bootstrap-icons/font/bootstrap-icons.css", "public/css")
+
+    .js('resources/js/app.js', 'public/js')
     .sass("resources/sass/app.scss", "public/css")
+
     .sass("resources/sass/panel/app.scss", "public/css/panel")
-    .css("node_modules/bootstrap-icons/font/bootstrap-icons.css", "public/css");
+    .scripts(["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"], "public/js/panel/bootstrap.js");

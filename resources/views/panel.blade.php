@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
     <link href="{{ asset('css/panel/app.css') }}" rel="stylesheet" />
     @routes
-    <script src="{{ asset('/js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/panel/bootstrap.js') }}"></script>
     @inertiaHead
 </head>
 

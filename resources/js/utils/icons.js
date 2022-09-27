@@ -17,6 +17,13 @@ const icons = {
 
     home: 'bi bi-house',
 
+    user: 'bi bi-person',
+    users: 'bi bi-people',
+    userX: 'bi bi-person-x',
+    userCheck: 'bi bi-person-check',
+    userPlus: 'bi bi-person-plus',
+    userCircle: 'bi bi-person-circle',
+
     x: 'bi bi-x',
     xLg: 'bi bi-x-lg',
 };
