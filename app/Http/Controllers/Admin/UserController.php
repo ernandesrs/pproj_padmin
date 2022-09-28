@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreUpdateRequest;
 use App\Models\User;
@@ -95,6 +96,7 @@ class UserController extends Controller
         Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/Form", [
             "user" => $user,
+            "photo" => Thumb::thumb($user->photo, "user.normal"),
             "pageTitle" => "Editar usuário",
             "buttons" => [
                 "button_back" => route("admin.users.index"),

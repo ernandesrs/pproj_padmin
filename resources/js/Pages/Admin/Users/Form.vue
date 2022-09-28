@@ -2,6 +2,7 @@
 
     <div class="row justify-content-center">
         <div v-if="form?.id" class="col-12 col-md-4 mb-3 mb-md-0">
+            <img class="img-fluid rounded-circle" :src="photo" />
         </div>
 
         <div class="col-12 col-md-8">
@@ -100,6 +101,7 @@ export default {
                 password_confirmation: null
             }
         },
+        photo: { type: String, default: null }
     },
 
     data() {
