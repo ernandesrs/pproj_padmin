@@ -1,6 +1,6 @@
 <template>
 
-    <Head :title='$page.props.pageTitle' />
+    <Head :title="$page.props?.pageTitle ? `PADMIN - ${$page.props.pageTitle}` : 'PADMIN - Painel administrativo em Laravel e Vue com Inertia JS'" />
 
     <div class="wrapp">
 
