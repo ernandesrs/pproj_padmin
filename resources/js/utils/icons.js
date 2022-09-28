@@ -1,6 +1,8 @@
 const icons = {
     app: 'bi bi-app',
     appIndicator: 'bi bi-app-indicator',
+    arrowLeft: 'bi bi-arrow-left',
+    arrowRight: 'bi bi-arrow-right',
 
     check: 'bi bi-check',
     checkLg: 'bi bi-check-lg',
@@ -18,6 +20,8 @@ const icons = {
     home: 'bi bi-house',
 
     pieChart: 'bi bi-pie-chart',
+    plus: 'bi bi-plus',
+    plusLg: 'bi bi-plus-lg',
 
     user: 'bi bi-person',
     users: 'bi bi-people',

@@ -399,7 +399,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_Dropdown_DropdownHeader_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Ui/Dropdown/DropdownHeader.vue */ "./resources/js/Components/Ui/Dropdown/DropdownHeader.vue");
 /* harmony import */ var _Components_Nav_NavItemUi_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/Nav/NavItemUi.vue */ "./resources/js/Components/Nav/NavItemUi.vue");
 /* harmony import */ var _Components_Nav_NavUi_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Components/Nav/NavUi.vue */ "./resources/js/Components/Nav/NavUi.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 var WIDTH_MOBILE = 768;
+
 
 
 
@@ -417,7 +419,8 @@ var WIDTH_MOBILE = 768;
     DropdownDivider: _Components_Ui_Dropdown_DropdownDivider_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     DropdownHeader: _Components_Ui_Dropdown_DropdownHeader_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     NavItemUi: _Components_Nav_NavItemUi_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    NavUi: _Components_Nav_NavUi_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    NavUi: _Components_Nav_NavUi_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__.Head
   },
   data: function data() {
     return {
@@ -542,17 +545,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../../Layouts/Panel.vue */ "./resources/js/Layouts/Panel.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 var _components$layout$la;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_components$layout$la = {
-  components: {
-    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head
-  },
+  components: {},
   layout: function layout(h, page) {
     return h(_Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_0__["default"], function () {
       return child;
@@ -1012,7 +1011,32 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_16 = {
   "class": "container-fluid content"
 };
+var _hoisted_17 = {
+  key: 0,
+  "class": "py-2 d-flex align-items-center"
+};
+var _hoisted_18 = {
+  "class": "fs-5 fw-semibold mb-0"
+};
+var _hoisted_19 = {
+  key: 0,
+  "class": "ms-2"
+};
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "mx-1"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_21 = {
+  "class": "py-2"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _ctx$$page$props;
+
+  var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
+
   var _component_BackdropUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BackdropUi");
 
   var _component_NavItemUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NavItemUi");
@@ -1029,7 +1053,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$data.inMobile ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BackdropUi, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
+    title: _ctx.$page.props.pageTitle
+  }, null, 8
+  /* PROPS */
+  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$data.inMobile ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BackdropUi, {
     key: 0,
     onClick: $options.sidebarToggle,
     fixed: ""
@@ -1130,9 +1158,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "sidebar-toggler order-md-first"
   }, null, 8
   /* PROPS */
-  , ["onClick", "icon"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])], 2
+  , ["onClick", "icon"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_16, [_ctx.$page.component != 'Admin/Index' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
+  /* TEXT */
+  ), (_ctx$$page$props = _ctx.$page.props) !== null && _ctx$$page$props !== void 0 && _ctx$$page$props.buttons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [_ctx.$page.props.buttons.button_back ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
+    key: 0,
+    text: "Voltar",
+    icon: "arrowLeft",
+    variant: "primary",
+    to: _ctx.$page.props.buttons.button_back
+  }, null, 8
+  /* PROPS */
+  , ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_20, _ctx.$page.props.buttons.button_new ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
+    key: 1,
+    text: "Criar novo",
+    icon: "plusLg",
+    variant: "success",
+    to: _ctx.$page.props.buttons.button_new,
+    outlined: ""
+  }, null, 8
+  /* PROPS */
+  , ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])], 2
   /* CLASS */
-  )]);
+  )])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -1149,12 +1198,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "bg-dark text-light"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Head, {
-    title: "Usuários"
-  });
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1);
 }
 
 /***/ }),
@@ -1172,6 +1220,8 @@ __webpack_require__.r(__webpack_exports__);
 var icons = {
   app: 'bi bi-app',
   appIndicator: 'bi bi-app-indicator',
+  arrowLeft: 'bi bi-arrow-left',
+  arrowRight: 'bi bi-arrow-right',
   check: 'bi bi-check',
   checkLg: 'bi bi-check-lg',
   checkCircleFill: 'bi bi-check-circle-fill',
@@ -1183,6 +1233,8 @@ var icons = {
   logout: 'bi bi-box-arrow-left',
   home: 'bi bi-house',
   pieChart: 'bi bi-pie-chart',
+  plus: 'bi bi-plus',
+  plusLg: 'bi bi-plus-lg',
   user: 'bi bi-person',
   users: 'bi bi-people',
   userX: 'bi bi-person-x',

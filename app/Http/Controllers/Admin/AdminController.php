@@ -11,6 +11,8 @@ class AdminController extends Controller
     public function index()
     {
         Inertia::setRootView("panel");
-        return Inertia::render("Admin/Index");
+        return Inertia::render("Admin/Index", [
+            "pageTitle" => "Dashboard"
+        ]);
     }
 }

@@ -1,16 +1,16 @@
 <template>
 
-    <Head title='Usuários' />
+    <div class="bg-dark text-light">
+    </div>
 
 </template>
 
 <script>
 
 import Layout from './../../../Layouts/Panel.vue';
-import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
-    components: { Head },
+    components: { },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
     props: {

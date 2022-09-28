@@ -1,4 +1,7 @@
 <template>
+
+    <Head :title='$page.props.pageTitle' />
+
     <div class="wrapp">
 
         <BackdropUi @click="sidebarToggle" v-if="inMobile" v-show="sidebar.visible"
@@ -75,7 +78,25 @@
             </div>
 
             <main class="container-fluid content">
-                <slot />
+                <div v-if="$page.component != 'Admin/Index'"
+                    class="py-2 d-flex align-items-center">
+
+                    <h1 class="fs-5 fw-semibold mb-0">{{ $page.props.pageTitle }}</h1>
+
+                    <div v-if="$page.props?.buttons" class="ms-2">
+                        <ButtonUi v-if="$page.props.buttons.button_back" text="Voltar"
+                            icon="arrowLeft" variant="primary"
+                            :to="$page.props.buttons.button_back" />
+                        <span class="mx-1"></span>
+                        <ButtonUi v-if="$page.props.buttons.button_new" text="Criar novo"
+                            icon="plusLg" variant="success"
+                            :to="$page.props.buttons.button_new" outlined />
+                    </div>
+                </div>
+
+                <div class="py-2">
+                    <slot />
+                </div>
             </main>
         </div>
 
@@ -94,9 +115,10 @@ import DropdownDivider from '../Components/Ui/Dropdown/DropdownDivider.vue';
 import DropdownHeader from '../Components/Ui/Dropdown/DropdownHeader.vue';
 import NavItemUi from '../Components/Nav/NavItemUi.vue';
 import NavUi from '../Components/Nav/NavUi.vue';
+import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
-    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi },
+    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi, Head },
 
     data() {
         return {

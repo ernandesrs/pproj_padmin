@@ -1,7 +1,5 @@
 <template>
 
-    <Head title='Dashboard' />
-
     <ButtonUi text="Opa" variant="primary" href="https://www.google.com"
         target="_blank" />
 
@@ -10,11 +8,10 @@
 <script>
 
 import Layout from './../../Layouts/Panel.vue';
-import { Head } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../Components/Ui/ButtonUi.vue';
 
 export default {
-    components: { Head, ButtonUi },
+    components: { ButtonUi },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
 

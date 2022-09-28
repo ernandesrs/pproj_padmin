@@ -1147,6 +1147,8 @@ __webpack_require__.r(__webpack_exports__);
 var icons = {
   app: 'bi bi-app',
   appIndicator: 'bi bi-app-indicator',
+  arrowLeft: 'bi bi-arrow-left',
+  arrowRight: 'bi bi-arrow-right',
   check: 'bi bi-check',
   checkLg: 'bi bi-check-lg',
   checkCircleFill: 'bi bi-check-circle-fill',
@@ -1158,6 +1160,8 @@ var icons = {
   logout: 'bi bi-box-arrow-left',
   home: 'bi bi-house',
   pieChart: 'bi bi-pie-chart',
+  plus: 'bi bi-plus',
+  plusLg: 'bi bi-plus-lg',
   user: 'bi bi-person',
   users: 'bi bi-people',
   userX: 'bi bi-person-x',
