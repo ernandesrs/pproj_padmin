@@ -26,6 +26,7 @@ export default {
     props: {
         label: { type: String, default: null },
         name: { type: String, default: null },
+        errorMessage: { type: String, default: null },
         modelValue: { type: String, default: "none" },
         options: { type: Array, default: [] },
         text: { type: String, default: null },
@@ -35,7 +36,7 @@ export default {
     },
     computed: {
         selectStyle() {
-            return `form-select`;
+            return `form-select ${this.errorMessage ? "is-invalid" : ""}`;
         },
         theOptions() {
             return [

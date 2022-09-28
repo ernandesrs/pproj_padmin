@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateValue: function updateValue(e) {
-      this.$emit("update:modelValue", e.target.value);
+      if (this.type == 'file') this.$emit("update:modelValue", e);else this.$emit("update:modelValue", e.target.value);
     }
   },
   components: {
@@ -159,6 +159,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       type: String,
       "default": null
     },
+    errorMessage: {
+      type: String,
+      "default": null
+    },
     modelValue: {
       type: String,
       "default": "none"
@@ -182,7 +186,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   computed: {
     selectStyle: function selectStyle() {
-      return "form-select";
+      return "form-select ".concat(this.errorMessage ? "is-invalid" : "");
     },
     theOptions: function theOptions() {
       var _this$text;
@@ -742,7 +746,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* KEYED_FRAGMENT */
       ))], 42
       /* CLASS, PROPS, HYDRATE_EVENTS */
-      , _hoisted_2), _ctx.errorMessage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.errorMessage), 1
+      , _hoisted_2), $props.errorMessage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errorMessage), 1
       /* TEXT */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),

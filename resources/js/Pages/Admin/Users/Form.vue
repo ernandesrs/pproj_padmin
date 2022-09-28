@@ -12,6 +12,7 @@
                             v-model="form.first_name"
                             :error-message="form.errors.first_name" />
                     </div>
+
                     <div class="col-12 col-sm-6">
                         <InputForm label="Sobrenome" name="last_name"
                             v-model="form.last_name"
@@ -25,7 +26,7 @@
 
                     <div class="col-12 col-sm-5 col-md-6">
                         <SelectForm label="Gênero" name="gender" :options="[
-                            {text: 'Escolha', value: 0},
+                            {text: 'Não definir', value: 0},
                             {text: 'Masculino', value: 1},
                             {text: 'Feminino', value: 2},
                         ]" v-model="form.gender" :error-message="form.errors.gender" />
@@ -33,12 +34,20 @@
 
                     <div class="col-12">
                         <InputForm label="Email" type="email" name="email"
-                            v-model="form.email" :error-message="form.errors.email" />
+                            v-model="form.email" :error-message="form.errors.email"
+                            :disabled="form?.id ? true : false" />
                     </div>
 
                     <div v-if="form.id" class="col-12">
-                        <InputForm label="Foto" type="file" name="photo"
+                        <InputForm
+                            @update:modelValue="form.photo = $event.target.files[0]"
+                            label="Foto" type="file" name="photo"
                             :error-message="form.errors.photo" />
+
+                        <progress v-if="form.progress" :value="form.progress.percentage"
+                            max="100">
+                            {{ form.progress.percentage }}%
+                        </progress>
                     </div>
 
                     <div class="col-12 col-md-6">
@@ -67,9 +76,9 @@
 
 <script>
 
+import { useForm } from '@inertiajs/inertia-vue3';
 import Layout from './../../../Layouts/Panel.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
-import { useForm } from '@inertiajs/inertia-vue3';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 
@@ -85,7 +94,8 @@ export default {
                 last_name: null,
                 username: null,
                 email: null,
-                gender: 0,
+                photo: null,
+                gender: 'none',
                 password: null,
                 password_confirmation: null
             }
@@ -94,13 +104,24 @@ export default {
 
     data() {
         return {
-            form: useForm(this.user)
+            form: useForm({
+                id: this.user?.id ?? null,
+                first_name: this.user?.first_name ?? null,
+                last_name: this.user?.last_name ?? null,
+                username: this.user?.username ?? null,
+                email: this.user?.email ?? null,
+                photo: null,
+                gender: this.user?.gender ?? 'none',
+                password: null,
+                password_confirmation: null
+            })
         };
     },
 
     methods: {
         submit() {
-            this.form.post("/auth/register");
+            let action = this.form?.id ? route('admin.users.update', { user: this.form.id }) : route('admin.users.create');
+            this.form.post(action);
         }
     }
 }

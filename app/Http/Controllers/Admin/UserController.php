@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -45,12 +50,27 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UserStoreUpdateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreUpdateRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $validated["password"] = Hash::make($validated["password"]);
+
+        /** User $user */
+        $user = new User();
+        $user->first_name = $validated["first_name"];
+        $user->last_name = $validated["last_name"];
+        $user->username = $validated["username"];
+        $user->gender = $validated["gender"];
+        $user->email = $validated["email"];
+        $user->password = $validated["password"];
+        $user->confirmation_token = Str::random(20);
+        $user->save();
+
+        return redirect()->route("admin.users.edit", ["user" => $user->id]);
     }
 
     /**
@@ -86,13 +106,35 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UserStoreUpdateRequest  $request
      * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserStoreUpdateRequest $request, User $user)
     {
-        //
+        $validated = $request->validated();
+
+        if ($photo = $validated["photo"]) {
+            if ($user->photo)
+                Storage::delete("public/{$user->photo}");
+
+            $user->photo = $photo->store("avatars", "public");
+        }
+
+        $user->first_name = $validated["first_name"];
+        $user->last_name = $validated["last_name"];
+        $user->username = $validated["username"];
+        $user->gender = $validated["gender"];
+
+        if ($pass = $validated["password"] ?? null)
+            $user->password = Hash::make($pass);
+
+        $user->save();
+
+        Session::flash("flash_alert", [
+            "message" => "Os dados de " . $user->first_name . " foram atualizados com sucesso!",
+            "variant" => "success"
+        ]);
     }
 
     /**

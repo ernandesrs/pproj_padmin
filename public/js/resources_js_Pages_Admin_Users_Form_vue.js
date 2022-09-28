@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateValue: function updateValue(e) {
-      this.$emit("update:modelValue", e.target.value);
+      if (this.type == 'file') this.$emit("update:modelValue", e);else this.$emit("update:modelValue", e.target.value);
     }
   },
   components: {
@@ -159,6 +159,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       type: String,
       "default": null
     },
+    errorMessage: {
+      type: String,
+      "default": null
+    },
     modelValue: {
       type: String,
       "default": "none"
@@ -182,7 +186,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   computed: {
     selectStyle: function selectStyle() {
-      return "form-select";
+      return "form-select ".concat(this.errorMessage ? "is-invalid" : "");
     },
     theOptions: function theOptions() {
       var _this$text;
@@ -873,9 +877,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../../Layouts/Panel.vue */ "./resources/js/Layouts/Panel.vue");
-/* harmony import */ var _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Components/Form/InputForm.vue */ "./resources/js/Components/Form/InputForm.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../Layouts/Panel.vue */ "./resources/js/Layouts/Panel.vue");
+/* harmony import */ var _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Components/Form/InputForm.vue */ "./resources/js/Components/Form/InputForm.vue");
 /* harmony import */ var _Components_Form_SelectForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Components/Form/SelectForm.vue */ "./resources/js/Components/Form/SelectForm.vue");
 /* harmony import */ var _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Components/Ui/ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
 var _components$layout$la;
@@ -889,16 +893,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_components$layout$la = {
   components: {
-    InputForm: _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    InputForm: _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     SelectForm: _Components_Form_SelectForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     ButtonUi: _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   layout: function layout(h, page) {
-    return h(_Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_0__["default"], function () {
+    return h(_Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_1__["default"], function () {
       return child;
     });
   }
-}, _defineProperty(_components$layout$la, "layout", _Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_0__["default"]), _defineProperty(_components$layout$la, "props", {
+}, _defineProperty(_components$layout$la, "layout", _Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_1__["default"]), _defineProperty(_components$layout$la, "props", {
   user: {
     type: Object,
     "default": {
@@ -907,18 +911,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       last_name: null,
       username: null,
       email: null,
-      gender: 0,
+      photo: null,
+      gender: 'none',
       password: null,
       password_confirmation: null
     }
   }
 }), _defineProperty(_components$layout$la, "data", function data() {
+  var _this$user$id, _this$user, _this$user$first_name, _this$user2, _this$user$last_name, _this$user3, _this$user$username, _this$user4, _this$user$email, _this$user5, _this$user$gender, _this$user6;
+
   return {
-    form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)(this.user)
+    form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
+      id: (_this$user$id = (_this$user = this.user) === null || _this$user === void 0 ? void 0 : _this$user.id) !== null && _this$user$id !== void 0 ? _this$user$id : null,
+      first_name: (_this$user$first_name = (_this$user2 = this.user) === null || _this$user2 === void 0 ? void 0 : _this$user2.first_name) !== null && _this$user$first_name !== void 0 ? _this$user$first_name : null,
+      last_name: (_this$user$last_name = (_this$user3 = this.user) === null || _this$user3 === void 0 ? void 0 : _this$user3.last_name) !== null && _this$user$last_name !== void 0 ? _this$user$last_name : null,
+      username: (_this$user$username = (_this$user4 = this.user) === null || _this$user4 === void 0 ? void 0 : _this$user4.username) !== null && _this$user$username !== void 0 ? _this$user$username : null,
+      email: (_this$user$email = (_this$user5 = this.user) === null || _this$user5 === void 0 ? void 0 : _this$user5.email) !== null && _this$user$email !== void 0 ? _this$user$email : null,
+      photo: null,
+      gender: (_this$user$gender = (_this$user6 = this.user) === null || _this$user6 === void 0 ? void 0 : _this$user6.gender) !== null && _this$user$gender !== void 0 ? _this$user$gender : 'none',
+      password: null,
+      password_confirmation: null
+    })
   };
 }), _defineProperty(_components$layout$la, "methods", {
   submit: function submit() {
-    this.form.post("/auth/register");
+    var _this$form;
+
+    var action = (_this$form = this.form) !== null && _this$form !== void 0 && _this$form.id ? route('admin.users.update', {
+      user: this.form.id
+    }) : route('admin.users.create');
+    this.form.post(action);
   }
 }), _components$layout$la);
 
@@ -1099,7 +1121,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* KEYED_FRAGMENT */
       ))], 42
       /* CLASS, PROPS, HYDRATE_EVENTS */
-      , _hoisted_2), _ctx.errorMessage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.errorMessage), 1
+      , _hoisted_2), $props.errorMessage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errorMessage), 1
       /* TEXT */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
@@ -1848,17 +1870,18 @@ var _hoisted_10 = {
   key: 0,
   "class": "col-12"
 };
-var _hoisted_11 = {
-  "class": "col-12 col-md-6"
-};
+var _hoisted_11 = ["value"];
 var _hoisted_12 = {
   "class": "col-12 col-md-6"
 };
 var _hoisted_13 = {
+  "class": "col-12 col-md-6"
+};
+var _hoisted_14 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$data$form;
+  var _$data$form, _$data$form2;
 
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
@@ -1867,7 +1890,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(_$data$form = $data.form) !== null && _$data$form !== void 0 && _$data$form.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
@@ -1904,7 +1927,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     label: "Gênero",
     name: "gender",
     options: [{
-      text: 'Escolha',
+      text: 'Não definir',
       value: 0
     }, {
       text: 'Masculino',
@@ -1928,39 +1951,49 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.form.email = $event;
     }),
-    "error-message": $data.form.errors.email
+    "error-message": $data.form.errors.email,
+    disabled: (_$data$form2 = $data.form) !== null && _$data$form2 !== void 0 && _$data$form2.id ? true : false
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), $data.form.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message", "disabled"])]), $data.form.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return $data.form.photo = $event.target.files[0];
+    }),
     label: "Foto",
     type: "file",
     name: "photo",
     "error-message": $data.form.errors.photo
   }, null, 8
   /* PROPS */
-  , ["error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["error-message"]), $data.form.progress ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("progress", {
+    key: 0,
+    value: $data.form.progress.percentage,
+    max: "100"
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.progress.percentage) + "% ", 9
+  /* TEXT, PROPS */
+  , _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Senha",
     type: "password",
     name: "password",
     modelValue: $data.form.password,
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.form.password = $event;
     }),
     "error-message": $data.form.errors.password
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Confirmar senha",
     type: "password",
     name: "password_confirmation",
     modelValue: $data.form.password_confirmation,
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.form.password_confirmation = $event;
     }),
     "error-message": $data.form.errors.password_confirmation
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     text: "Cadastrar",
     type: "submit",
     variant: "primary",

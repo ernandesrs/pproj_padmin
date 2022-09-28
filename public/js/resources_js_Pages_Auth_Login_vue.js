@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateValue: function updateValue(e) {
-      this.$emit("update:modelValue", e.target.value);
+      if (this.type == 'file') this.$emit("update:modelValue", e);else this.$emit("update:modelValue", e.target.value);
     }
   },
   components: {
