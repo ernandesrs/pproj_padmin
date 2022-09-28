@@ -6,6 +6,13 @@
         subtitle: user.email,
         coverStyle: 'circle'
     }">
+        <template v-slot:badges>
+            <BadgeUi class="mb-1 me-1" :text="terms.user.level[user.level]" icon="user" />
+            <BadgeUi class="mb-1 me-1"
+                :text="`${user.email_verified_at ? 'Verificado':'Não verificado'}`"
+                variant="secondary" />
+        </template>
+
         <template v-slot:actions>
             <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.users.edit', {id:
             user.id})" />
@@ -22,17 +29,29 @@
 import Layout from './../../../Layouts/Panel.vue';
 import ListItem from '../../../Components/ListItem.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
+import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
 
 export default {
-    components: { ListItem, ButtonUi },
+    components: { ListItem, ButtonUi, BadgeUi },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
     props: {
         users: { type: Array, default: [] }
     },
 
-    setup() {
-        return {}
+    data() {
+        return {
+            terms: {
+                user: {
+                    level: {
+                        1: 'Usuário',
+                        5: 'Membro',
+                        8: 'Administrador',
+                        9: 'Super',
+                    }
+                }
+            }
+        };
     },
 
     methods: {

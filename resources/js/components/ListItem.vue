@@ -7,6 +7,9 @@
             <div class="d-flex flex-column ms-2 list-item-info">
                 <h5 class="mb-0 fs-6 fw-semibold">{{ theTitle }}</h5>
                 <p class="mb-0 text-muted">{{ theSubtitle }}</p>
+                <div class="d-flex flex-wrap">
+                    <slot name="badges" />
+                </div>
             </div>
         </div>
         <div
@@ -17,7 +20,10 @@
 </template>
 
 <script>
+
 export default {
+    components: {},
+
     props: {
         item: { type: Object, default: null },
 
