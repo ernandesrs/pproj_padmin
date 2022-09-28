@@ -26,6 +26,7 @@ export default {
         type: { type: String, default: "button" },
         disabled: { type: Boolean, default: false },
         outlined: { type: Boolean, default: false },
+        customClass: { type: String, default: null },
 
         // 
         href: { type: String, default: null },
@@ -45,6 +46,8 @@ export default {
             return 'button';
         },
         style() {
+            if (this.customClass) return this.customClass;
+
             let bg = this.variant ? ((this.outlined ? "btn-outline-" : "btn-") + this.variant) : 'bg-transparent';
             return `btn ${this.size ? "btn-" + this.size : ""} ${bg}`;
         },

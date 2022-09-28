@@ -26496,6 +26496,30 @@ function compileToFunction(template, options) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Admin/Examples/Example1": [
+		"./resources/js/Pages/Admin/Examples/Example1.vue",
+		"resources_js_Pages_Admin_Examples_Example1_vue"
+	],
+	"./Admin/Examples/Example1.vue": [
+		"./resources/js/Pages/Admin/Examples/Example1.vue",
+		"resources_js_Pages_Admin_Examples_Example1_vue"
+	],
+	"./Admin/Examples/Example2": [
+		"./resources/js/Pages/Admin/Examples/Example2.vue",
+		"resources_js_Pages_Admin_Examples_Example2_vue"
+	],
+	"./Admin/Examples/Example2.vue": [
+		"./resources/js/Pages/Admin/Examples/Example2.vue",
+		"resources_js_Pages_Admin_Examples_Example2_vue"
+	],
+	"./Admin/Examples/Example3": [
+		"./resources/js/Pages/Admin/Examples/Example3.vue",
+		"resources_js_Pages_Admin_Examples_Example3_vue"
+	],
+	"./Admin/Examples/Example3.vue": [
+		"./resources/js/Pages/Admin/Examples/Example3.vue",
+		"resources_js_Pages_Admin_Examples_Example3_vue"
+	],
 	"./Admin/Index": [
 		"./resources/js/Pages/Admin/Index.vue",
 		"resources_js_Pages_Admin_Index_vue"
@@ -26685,7 +26709,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Admin_Examples_Example1_vue":1,"resources_js_Pages_Admin_Examples_Example2_vue":1,"resources_js_Pages_Admin_Examples_Example3_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

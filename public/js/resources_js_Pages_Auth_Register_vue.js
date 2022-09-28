@@ -491,6 +491,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
+    customClass: {
+      type: String,
+      "default": null
+    },
     // 
     href: {
       type: String,
@@ -518,6 +522,7 @@ __webpack_require__.r(__webpack_exports__);
       return 'button';
     },
     style: function style() {
+      if (this.customClass) return this.customClass;
       var bg = this.variant ? (this.outlined ? "btn-outline-" : "btn-") + this.variant : 'bg-transparent';
       return "btn ".concat(this.size ? "btn-" + this.size : "", " ").concat(bg);
     },
@@ -1152,6 +1157,7 @@ var icons = {
   login: 'bi bi-box-arrow-right',
   logout: 'bi bi-box-arrow-left',
   home: 'bi bi-house',
+  pieChart: 'bi bi-pie-chart',
   user: 'bi bi-person',
   users: 'bi bi-people',
   userX: 'bi bi-person-x',

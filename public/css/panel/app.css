@@ -10889,6 +10889,27 @@ textarea.form-control-lg {
   font-weight: 600;
   margin-bottom: 0;
 }
+.wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .nav .nav-link,
+.wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .subnav .nav-link {
+  display: flex;
+  align-items: center;
+  color: #f8f9fa;
+  padding: 0.25rem 1rem;
+  margin-bottom: 2px;
+}
+.wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .nav .nav-link .icon,
+.wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .subnav .nav-link .icon {
+  font-size: 1.2rem;
+}
+.wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .nav .nav-link.active {
+  background-color: rgba(248, 249, 250, 0.125);
+  border-radius: 0.375rem;
+}
+.wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .nav.subnav .nav-link.active {
+  background-color: rgba(248, 249, 250, 0);
+  border-left: 3px solid rgba(13, 110, 253, 0.25);
+  border-radius: 0.09375rem;
+}
 .wrapp .main {
   background-color: transparent;
   width: 100%;

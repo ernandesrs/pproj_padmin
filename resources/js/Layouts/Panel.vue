@@ -15,7 +15,31 @@
                         </a>
                     </div>
                 </header>
+
                 <div class="sidebar-elements">
+                    <div class="sidebar-element">
+                        <NavUi>
+                            <template v-for="(nav, key) in sidebar.navs" :key="nav.text">
+                                <NavItemUi v-if="!nav.items" :item="nav" />
+
+                                <template v-else>
+                                    <NavItemUi :item="nav" subnav
+                                        data-bs-toggle="collapse"
+                                        :href="('#subnav' + key)" />
+
+                                    <div :class="['collapse', {'show': nav.activeIn.includes($page.component)}]"
+                                        :id="('subnav' + key)">
+                                        <NavUi subnav>
+                                            <template v-for="subnav in nav.items"
+                                                :key="subnav.text">
+                                                <NavItemUi :item="subnav" />
+                                            </template>
+                                        </NavUi>
+                                    </div>
+                                </template>
+                            </template>
+                        </NavUi>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -68,9 +92,11 @@ import DropdownUi from '../components/Ui/Dropdown/DropdownUi.vue';
 import DropdownItem from '../components/Ui/Dropdown/DropdownItem.vue';
 import DropdownDivider from '../components/Ui/Dropdown/DropdownDivider.vue';
 import DropdownHeader from '../components/Ui/Dropdown/DropdownHeader.vue';
+import NavItemUi from '../components/Nav/NavItemUi.vue';
+import NavUi from '../components/Nav/NavUi.vue';
 
 export default {
-    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader },
+    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi },
 
     data() {
         return {
@@ -82,9 +108,62 @@ export default {
                 navs: [
                     {
                         text: 'Dashboard',
-                        url: this.$route("admin.index"),
-                        activeIn: ['admin.index']
+                        to: this.$route("admin.index"),
+                        icon: 'pieChart',
+                        activeIn: ['Admin/Index']
                     },
+                    {
+                        text: 'Usuarios',
+                        to: this.$route("admin.users.index"),
+                        icon: 'users',
+                        activeIn: ['Admin/Users/List', 'Admin/Users/Form']
+                    },
+                    {
+                        text: 'Examples',
+                        href: '#',
+                        icon: 'app',
+                        activeIn: ['Admin/Examples/Example1', 'Admin/Examples/Example2', 'Admin/Examples/Example3'],
+                        items: [
+                            {
+                                text: 'Example 1',
+                                to: this.$route('admin.example1'),
+                                icon: 'appIndicator',
+                                activeIn: ['Admin/Examples/Example1']
+                            },
+                            {
+                                text: 'Example 2',
+                                to: this.$route('admin.example2'),
+                                icon: 'appIndicator',
+                                activeIn: ['Admin/Examples/Example2']
+                            },
+                            {
+                                text: 'Example 3',
+                                to: this.$route('admin.example3'),
+                                icon: 'appIndicator',
+                                activeIn: ['Admin/Examples/Example3']
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Navgroup #2',
+                        to: '#',
+                        icon: 'appIndicator',
+                        activeIn: [],
+                        items: [
+                            {
+                                text: 'Navitem #1',
+                                to: null,
+                                icon: 'app',
+                                activeIn: []
+                            },
+                            {
+                                text: 'Navitem #2',
+                                to: '#2',
+                                icon: null,
+                                activeIn: []
+                            }
+                        ]
+                    }
                 ],
             },
         };
@@ -158,3 +237,4 @@ export default {
 }
 
 </script>
+

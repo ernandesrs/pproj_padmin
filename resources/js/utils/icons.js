@@ -17,6 +17,8 @@ const icons = {
 
     home: 'bi bi-house',
 
+    pieChart: 'bi bi-pie-chart',
+
     user: 'bi bi-person',
     users: 'bi bi-people',
     userX: 'bi bi-person-x',

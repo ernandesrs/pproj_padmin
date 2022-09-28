@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ExampleController as AdminExampleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,12 @@ Route::group(["prefix" => "admin"], function () {
         Route::get("/edit/{user}", [AdminUserController::class, "edit"])->name("admin.users.edit");
         Route::post("/edit/{user}", [AdminUserController::class, "update"])->name("admin.users.update");
         Route::post("/destroy/{user}", [AdminUserController::class, "destroy"])->name("admin.users.destroy");
+    });
+
+    Route::group(["prefix" => "example"], function () {
+        Route::get("/", [AdminExampleController::class, "example1"])->name("admin.example1");
+        Route::get("/example2", [AdminExampleController::class, "example2"])->name("admin.example2");
+        Route::get("/example3", [AdminExampleController::class, "example3"])->name("admin.example3");
+        Route::get("/example4", [AdminExampleController::class, "example4"])->name("admin.example4");
     });
 });

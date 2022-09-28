@@ -44,6 +44,46 @@
                     }
                 }
             }
+
+            .sidebar-elements {
+                .sidebar-element {
+
+                    .nav,
+                    .subnav {
+                        .nav-link {
+                            display: flex;
+                            align-items: center;
+                            color: $light;
+                            padding: $spacer / 4 $spacer;
+                            margin-bottom: 2px;
+
+                            .icon {
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+
+                    .nav {
+                        .nav-link {
+                            &.active {
+                                background-color: rgb($light, 0.125);
+                                border-radius: $border-radius;
+                            }
+                        }
+
+                        &.subnav {
+                            .nav-link {
+                                &.active {
+                                    background-color: rgb($light, 0);
+                                    border-left: 3px solid rgb($primary, 0.25);
+                                    border-radius: $border-radius / 4;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
         }
     }
 
