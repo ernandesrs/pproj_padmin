@@ -19,9 +19,12 @@ const icons = {
 
     home: 'bi bi-house',
 
+    pencilSquare: 'bi bi-pencil-square',
     pieChart: 'bi bi-pie-chart',
     plus: 'bi bi-plus',
     plusLg: 'bi bi-plus-lg',
+
+    trash: 'bi bi-trash',
 
     user: 'bi bi-person',
     users: 'bi bi-people',
