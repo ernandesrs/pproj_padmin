@@ -8,7 +8,8 @@
     }">
         <template v-slot:badges>
             <BadgeUi class="mb-1 me-1" :text="terms.user.level[user.level]" icon="user" />
-            <BadgeUi class="mb-1 me-1" :icon="`${user.email_verified_at ? 'checkLg':'xLg'}`"
+            <BadgeUi class="mb-1 me-1"
+                :icon="`${user.email_verified_at ? 'checkLg':'xLg'}`"
                 :text="`${user.email_verified_at ? 'Verificado':'Não verificado'}`"
                 variant="secondary" />
         </template>
@@ -22,6 +23,8 @@
         </template>
     </ListItem>
 
+    <PaginationUi label="Páginação de usuários" :pages="users?.meta?.links" />
+
 </template>
 
 <script>
@@ -30,9 +33,10 @@ import Layout from './../../../Layouts/Panel.vue';
 import ListItem from '../../../Components/ListItem.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
+import PaginationUi from '../../../Components/PaginationUi.vue';
 
 export default {
-    components: { ListItem, ButtonUi, BadgeUi },
+    components: { ListItem, ButtonUi, BadgeUi, PaginationUi },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
     props: {

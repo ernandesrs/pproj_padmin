@@ -1822,8 +1822,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     text: "Criar novo",
     icon: "plusLg",
     variant: "success",
-    to: _ctx.$page.props.buttons.button_new,
-    outlined: ""
+    to: _ctx.$page.props.buttons.button_new
   }, null, 8
   /* PROPS */
   , ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {

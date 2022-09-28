@@ -90,7 +90,7 @@
                         <span class="mx-1"></span>
                         <ButtonUi v-if="$page.props.buttons.button_new" text="Criar novo"
                             icon="plusLg" variant="success"
-                            :to="$page.props.buttons.button_new" outlined />
+                            :to="$page.props.buttons.button_new" />
                     </div>
                 </div>
 
