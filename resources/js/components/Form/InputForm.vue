@@ -45,7 +45,10 @@ export default {
     },
     methods: {
         updateValue(e) {
-            this.$emit("update:modelValue", e.target.value);
+            if (this.type == 'file')
+                this.$emit("update:modelValue", e);
+            else
+                this.$emit("update:modelValue", e.target.value);
         }
     },
     components: { GroupForm }
