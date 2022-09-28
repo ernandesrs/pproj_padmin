@@ -1676,7 +1676,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ListItem, {
       key: user.id,
       item: {
-        cover: 'https://via.placeholder.com/125x125?text=Photo',
+        cover: user.thumb_small,
         title: user.first_name + ' ' + user.last_name,
         subtitle: user.email,
         coverStyle: 'circle'
@@ -1691,11 +1691,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS */
         , ["text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1",
+          icon: "".concat(user.email_verified_at ? 'checkLg' : 'xLg'),
           text: "".concat(user.email_verified_at ? 'Verificado' : 'Não verificado'),
           variant: "secondary"
         }, null, 8
         /* PROPS */
-        , ["text"])];
+        , ["icon", "text"])];
       }),
       actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {

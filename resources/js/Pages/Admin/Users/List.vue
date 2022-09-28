@@ -1,14 +1,14 @@
 <template>
 
     <ListItem v-for="user in users.data" :key="user.id" :item="{
-        cover: 'https://via.placeholder.com/125x125?text=Photo',
+        cover: user.thumb_small,
         title: user.first_name + ' ' + user.last_name,
         subtitle: user.email,
         coverStyle: 'circle'
     }">
         <template v-slot:badges>
             <BadgeUi class="mb-1 me-1" :text="terms.user.level[user.level]" icon="user" />
-            <BadgeUi class="mb-1 me-1"
+            <BadgeUi class="mb-1 me-1" :icon="`${user.email_verified_at ? 'checkLg':'xLg'}`"
                 :text="`${user.email_verified_at ? 'Verificado':'Não verificado'}`"
                 variant="secondary" />
         </template>

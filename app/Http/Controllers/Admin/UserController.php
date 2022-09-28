@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,9 +23,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $resourceColletion = UserResource::collection(User::orderBy("level", "DESC")->orderBy("created_at", "DESC")->paginate(18));
+
         Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/List", [
-            "users" => User::paginate(18),
+            "users" => $resourceColletion,
             "pageTitle" => "Usuários",
             "buttons" => [
                 "button_new" => route("admin.users.create")
@@ -95,8 +98,7 @@ class UserController extends Controller
     {
         Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/Form", [
-            "user" => $user,
-            "photo" => Thumb::thumb($user->photo, "user.normal"),
+            "user" => new UserResource($user),
             "pageTitle" => "Editar usuário",
             "buttons" => [
                 "button_back" => route("admin.users.index"),

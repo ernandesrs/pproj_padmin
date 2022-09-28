@@ -2,7 +2,20 @@
 
     <div class="row justify-content-center">
         <div v-if="form?.id" class="col-12 col-md-4 mb-3 mb-md-0">
-            <img class="img-fluid rounded-circle" :src="photo" />
+            <div class="d-flex flex-column align-items-center">
+                <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
+                <div class="py-3 text-center">
+                    <p class="mb-0">
+                        <strong>Registro:</strong> <span class="text-muted">{{
+                        getDate(user.created_at) }}</span>
+                    </p>
+                    <p class="mb-0">
+                        <span class="badge bg-primary">
+                            Nível: {{ terms.user.level[user.level] }}
+                        </span>
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="col-12 col-md-8">
@@ -100,8 +113,7 @@ export default {
                 password: null,
                 password_confirmation: null
             }
-        },
-        photo: { type: String, default: null }
+        }
     },
 
     data() {
@@ -116,7 +128,18 @@ export default {
                 gender: this.user?.gender ?? 'none',
                 password: null,
                 password_confirmation: null
-            })
+            }),
+
+            terms: {
+                user: {
+                    level: {
+                        1: 'Usuário',
+                        5: 'Membro',
+                        8: 'Administrador',
+                        9: 'Super',
+                    }
+                }
+            }
         };
     },
 
@@ -124,6 +147,10 @@ export default {
         submit() {
             let action = this.form?.id ? route('admin.users.update', { user: this.form.id }) : route('admin.users.create');
             this.form.post(action);
+        },
+
+        getDate(data) {
+            return (new Date(data)).toLocaleDateString("pt-BR");
         }
     }
 }
