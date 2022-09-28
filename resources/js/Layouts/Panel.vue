@@ -94,7 +94,9 @@
                     </div>
                 </div>
 
-                <div class="py-2">
+                <AlertUi ref="alert" />
+
+                <div class="py-4">
                     <slot />
                 </div>
             </main>
@@ -116,9 +118,10 @@ import DropdownHeader from '../Components/Ui/Dropdown/DropdownHeader.vue';
 import NavItemUi from '../Components/Nav/NavItemUi.vue';
 import NavUi from '../Components/Nav/NavUi.vue';
 import { Head } from '@inertiajs/inertia-vue3';
+import AlertUi from '../Components/Ui/AlertUi.vue';
 
 export default {
-    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi, Head },
+    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi, Head, AlertUi },
 
     data() {
         return {
@@ -193,10 +196,11 @@ export default {
 
     mounted() {
         this.windowResizeMonitor();
+        this.showFlashMessage();
     },
 
     updated() {
-        // this.showFlashMessage();
+        this.showFlashMessage();
     },
 
     watch: {

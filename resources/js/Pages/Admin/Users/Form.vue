@@ -1,22 +1,108 @@
 <template>
 
+    <div class="row justify-content-center">
+        <div v-if="form?.id" class="col-12 col-md-4 mb-3 mb-md-0">
+        </div>
+
+        <div class="col-12 col-md-8">
+            <form @submit.prevent="submit">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <InputForm label="Nome" name="first_name"
+                            v-model="form.first_name"
+                            :error-message="form.errors.first_name" />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <InputForm label="Sobrenome" name="last_name"
+                            v-model="form.last_name"
+                            :error-message="form.errors.last_name" />
+                    </div>
+
+                    <div class="col-12 col-sm-7 col-md-6">
+                        <InputForm label="Usuário" name="username" v-model="form.username"
+                            :error-message="form.errors.username" />
+                    </div>
+
+                    <div class="col-12 col-sm-5 col-md-6">
+                        <SelectForm label="Gênero" name="gender" :options="[
+                            {text: 'Escolha', value: 0},
+                            {text: 'Masculino', value: 1},
+                            {text: 'Feminino', value: 2},
+                        ]" v-model="form.gender" :error-message="form.errors.gender" />
+                    </div>
+
+                    <div class="col-12">
+                        <InputForm label="Email" type="email" name="email"
+                            v-model="form.email" :error-message="form.errors.email" />
+                    </div>
+
+                    <div v-if="form.id" class="col-12">
+                        <InputForm label="Foto" type="file" name="photo"
+                            :error-message="form.errors.photo" />
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <InputForm label="Senha" type="password" name="password"
+                            v-model="form.password"
+                            :error-message="form.errors.password" />
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <InputForm label="Confirmar senha" type="password"
+                            name="password_confirmation"
+                            v-model="form.password_confirmation"
+                            :error-message="form.errors.password_confirmation" />
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <ButtonUi text="Cadastrar" type="submit" variant="primary"
+                            icon="checkLg" :disabled="form.processing" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </template>
 
 <script>
 
 import Layout from './../../../Layouts/Panel.vue';
+import InputForm from '../../../Components/Form/InputForm.vue';
+import { useForm } from '@inertiajs/inertia-vue3';
+import SelectForm from '../../../Components/Form/SelectForm.vue';
+import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 
 export default {
-    components: {},
+    components: { InputForm, SelectForm, ButtonUi },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
     props: {
-        user: { type: Object, default: null },
+        user: {
+            type: Object, default: {
+                id: null,
+                first_name: null,
+                last_name: null,
+                username: null,
+                email: null,
+                gender: 0,
+                password: null,
+                password_confirmation: null
+            }
+        },
     },
 
-    setup() {
-        return {}
+    data() {
+        return {
+            form: useForm(this.user)
+        };
     },
+
+    methods: {
+        submit() {
+            this.form.post("/auth/register");
+        }
+    }
 }
 
 </script>
