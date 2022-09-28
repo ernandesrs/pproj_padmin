@@ -54,9 +54,9 @@
 
 import Layout from './../../Layouts/Auth.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
-import ButtonUi from '../../components/Ui/ButtonUi.vue';
-import InputForm from '../../components/Form/InputForm.vue';
-import SelectForm from '../../components/Form/SelectForm.vue';
+import ButtonUi from '../../Components/Ui/ButtonUi.vue';
+import InputForm from '../../Components/Form/InputForm.vue';
+import SelectForm from '../../Components/Form/SelectForm.vue';
 
 export default {
     components: { Head, ButtonUi, InputForm, SelectForm },

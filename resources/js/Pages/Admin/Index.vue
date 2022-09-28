@@ -11,7 +11,7 @@
 
 import Layout from './../../Layouts/Panel.vue';
 import { Head } from '@inertiajs/inertia-vue3';
-import ButtonUi from '../../components/Ui/ButtonUi.vue';
+import ButtonUi from '../../Components/Ui/ButtonUi.vue';
 
 export default {
     components: { Head, ButtonUi },

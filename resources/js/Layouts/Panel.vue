@@ -86,14 +86,14 @@
 
 const WIDTH_MOBILE = 768;
 
-import ButtonUi from '../components/Ui/ButtonUi.vue';
-import BackdropUi from '../components/Ui/BackdropUi.vue';
-import DropdownUi from '../components/Ui/Dropdown/DropdownUi.vue';
-import DropdownItem from '../components/Ui/Dropdown/DropdownItem.vue';
-import DropdownDivider from '../components/Ui/Dropdown/DropdownDivider.vue';
-import DropdownHeader from '../components/Ui/Dropdown/DropdownHeader.vue';
-import NavItemUi from '../components/Nav/NavItemUi.vue';
-import NavUi from '../components/Nav/NavUi.vue';
+import ButtonUi from '../Components/Ui/ButtonUi.vue';
+import BackdropUi from '../Components/Ui/BackdropUi.vue';
+import DropdownUi from '../Components/Ui/Dropdown/DropdownUi.vue';
+import DropdownItem from '../Components/Ui/Dropdown/DropdownItem.vue';
+import DropdownDivider from '../Components/Ui/Dropdown/DropdownDivider.vue';
+import DropdownHeader from '../Components/Ui/Dropdown/DropdownHeader.vue';
+import NavItemUi from '../Components/Nav/NavItemUi.vue';
+import NavUi from '../Components/Nav/NavUi.vue';
 
 export default {
     components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi },
@@ -159,7 +159,7 @@ export default {
                             {
                                 text: 'Navitem #2',
                                 to: '#2',
-                                icon: null,
+                                icon: 'app',
                                 activeIn: []
                             }
                         ]

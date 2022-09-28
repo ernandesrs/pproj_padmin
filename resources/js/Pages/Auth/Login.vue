@@ -34,8 +34,8 @@
 
 import Layout from './../../Layouts/Auth.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
-import ButtonUi from '../../components/Ui/ButtonUi.vue';
-import InputForm from '../../components/Form/InputForm.vue';
+import ButtonUi from '../../Components/Ui/ButtonUi.vue';
+import InputForm from '../../Components/Form/InputForm.vue';
 
 export default {
     components: { Head, useForm, ButtonUi, InputForm },

@@ -29,7 +29,7 @@
 <script>
 
 import { Link } from '@inertiajs/inertia-vue3'
-import AlertUi from '../components/Ui/AlertUi.vue';
+import AlertUi from '../Components/Ui/AlertUi.vue';
 
 export default {
     components: {
