@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="ms-auto">
-                        <Filter @hasFiltered="setFilteredData" />
+                        <Filter v-if="$page.props?.filterAction" />
                     </div>
                 </div>
 
@@ -133,7 +133,6 @@ export default {
         return {
             windowWidth: null,
             inMobile: false,
-            filteredData: null,
             sidebar: {
                 visible: true,
                 togglerIcon: null,
@@ -266,10 +265,6 @@ export default {
             else if (currentWidth >= WIDTH_MOBILE && (!this.windowWidth || this.windowWidth <= currentWidth))
                 this.windowWidth = currentWidth;
         },
-
-        setFilteredData(data) {
-            this.filteredData = data;
-        }
     }
 }
 

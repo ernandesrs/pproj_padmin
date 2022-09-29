@@ -1,12 +1,12 @@
 <template>
 
-    <div v-if="!getData.length"
+    <div v-if="!users.data?.length"
         class="px-5 py-3 mt-2 mb-4 fs-5 fw-semibold text-center border text-muted">
-        <span v-if="localFiltering">Sem resultados para sua filtragem!</span>
+        <span v-if="isFiltering">Sem resultados para sua filtragem!</span>
         <span v-else>Sem nada para listagem!</span>
     </div>
 
-    <ListItem v-else v-for="user in getData" :key="user.id" :item="{
+    <ListItem v-else v-for="user in users.data" :key="user.id" :item="{
         cover: user.thumb_small,
         title: user.first_name + ' ' + user.last_name,
         subtitle: user.email,
@@ -29,8 +29,7 @@
         </template>
     </ListItem>
 
-    <PaginationUi v-if="!localFiltering" label="Páginação de usuários"
-        :pages="mainList?.meta?.links" />
+    <PaginationUi label="Paginação de usuários" :pages="users?.meta?.links" />
 
 </template>
 
@@ -49,7 +48,6 @@ export default {
 
     data() {
         return {
-            localFiltering: false,
             terms: {
                 user: {
                     level: {
@@ -64,29 +62,18 @@ export default {
     },
 
     props: {
-        mainList: { type: Object, default: [] }
+        users: { type: Object, default: [] },
+        isFiltering: { type: Boolean, default: false },
     },
 
     methods: {
         deleteConfirm() {
             if (!window.confirm("Tem certeza de que deseja excluir este usuário?"))
                 return;
-        }
+        },
     },
 
     computed: {
-        getData() {
-            let filtered = this.$parent.filteredData;
-
-            if (filtered) {
-                this.localFiltering = true;
-                return filtered;
-            }
-
-            this.localFiltering = false;
-
-            return this.mainList.data;
-        }
     }
 }
 

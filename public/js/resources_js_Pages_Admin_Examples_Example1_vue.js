@@ -48,44 +48,23 @@ __webpack_require__.r(__webpack_exports__);
     return {
       filterForm: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
         search: null,
-        search_on: "local",
         filter: 1
-      }),
-      filterResult: null
+      })
     };
   },
-  watch: {
-    filterResult: function filterResult() {
-      this.sendResult();
-    }
-  },
+  watch: {},
   methods: {
     filterFormSubmit: function filterFormSubmit() {
-      var _this$$page$props, _this$$page$props2, _this$$page$props2$ma;
+      var _this$$page$props;
 
       var filterAction = (_this$$page$props = this.$page.props) === null || _this$$page$props === void 0 ? void 0 : _this$$page$props.filterAction;
-      var filterResult = null;
 
-      if (!this.filterForm.search) {
-        if (this.filterResult) this.filterResult = null;
+      if (!filterAction) {
         return;
       }
 
-      if (this.filterForm.search_on === "all" && filterAction) {
-        this.filterForm.get(filterAction);
-        return;
-      }
-
-      var data = (_this$$page$props2 = this.$page.props) === null || _this$$page$props2 === void 0 ? void 0 : (_this$$page$props2$ma = _this$$page$props2.mainList) === null || _this$$page$props2$ma === void 0 ? void 0 : _this$$page$props2$ma.data;
-      if (!data || data.lenght < 1) return;
-      var searchBy = this.filterForm.search;
-      filterResult = data.filter(function (el) {
-        return el.full_name.includes(searchBy) || el.username.includes(searchBy) || el.email.includes(searchBy) ? el : null;
-      });
-      this.filterResult = filterResult;
-    },
-    sendResult: function sendResult() {
-      this.$emit("hasFiltered", this.filterResult);
+      if (!this.filterForm.search) window.location = route("admin.users.index");
+      this.filterForm.get(filterAction);
     }
   }
 });
@@ -893,7 +872,6 @@ var WIDTH_MOBILE = 768;
     return {
       windowWidth: null,
       inMobile: false,
-      filteredData: null,
       sidebar: {
         visible: true,
         togglerIcon: null,
@@ -998,9 +976,6 @@ var WIDTH_MOBILE = 768;
     getWindowSize: function getWindowSize() {
       var currentWidth = window.innerWidth;
       if (currentWidth < WIDTH_MOBILE && (!this.windowWidth || this.windowWidth > currentWidth)) this.windowWidth = currentWidth;else if (currentWidth >= WIDTH_MOBILE && (!this.windowWidth || this.windowWidth <= currentWidth)) this.windowWidth = currentWidth;
-    },
-    setFilteredData: function setFilteredData(data) {
-      this.filteredData = data;
     }
   }
 });
@@ -1092,25 +1067,11 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "input-group"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-  value: "local"
-}, "Local", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-  value: "all"
-}, "Todos", -1
-/* HOISTED */
-);
-
-var _hoisted_4 = [_hoisted_2, _hoisted_3];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
-    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.filterFormSubmit && $options.filterFormSubmit.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -1122,19 +1083,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Buscar por"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.filterForm.search]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "class": "form-select",
-    name: "search_on",
-    id: "search_on",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.filterForm.search_on = $event;
-    }),
-    style: {
-      "max-width": "100px"
-    }
-  }, _hoisted_4, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.filterForm.search_on]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.filterForm.search]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     icon: "search",
     type: "submit",
     variant: "secondary"
@@ -1889,7 +1838,7 @@ var _hoisted_22 = {
   "class": "py-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _ctx$$page$props, _ctx$$page$props2;
+  var _ctx$$page$props, _ctx$$page$props2, _ctx$$page$props3;
 
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -2036,11 +1985,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: _ctx.$page.props.buttons.button_new
   }, null, 8
   /* PROPS */
-  , ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Filter, {
-    onHasFiltered: $options.setFilteredData
-  }, null, 8
-  /* PROPS */
-  , ["onHasFiltered"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
+  , ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(_ctx$$page$props3 = _ctx.$page.props) !== null && _ctx$$page$props3 !== void 0 && _ctx$$page$props3.filterAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Filter, {
+    key: 0
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
     ref: "alert"
   }, null, 512
   /* NEED_PATCH */

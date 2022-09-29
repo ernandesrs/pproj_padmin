@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -17,17 +18,24 @@ use Inertia\Inertia;
 class UserController extends Controller
 {
     /**
+     * @var boolean
+     */
+    private bool $filtering = false;
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $resourceColletion = UserResource::collection(User::orderBy("level", "DESC")->orderBy("created_at", "DESC")->paginate(18));
+        $results = $this->filter($request);
 
         Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/List", [
-            "mainList" => $resourceColletion,
+            "users" => UserResource::collection($results),
+            "filterAction" => route("admin.users.index"),
+            "isFiltering" => $this->filtering,
             "pageTitle" => "Usuários",
             "buttons" => [
                 "button_new" => route("admin.users.create")
@@ -38,7 +46,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -55,7 +63,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  UserStoreUpdateRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function store(UserStoreUpdateRequest $request)
     {
@@ -92,7 +100,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit(User $user)
     {
@@ -150,5 +158,28 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    public function filter(Request $request)
+    {
+        $filters = $this->validate($request, [
+            "filter" => ["nullable", "boolean"],
+            "search" => ["nullable", "string"],
+        ]);
+
+        $users = User::whereNotNull("id")->orderBy("level", "DESC")->orderBy("created_at", "DESC");
+
+        if ($filters["filter"] ?? null) {
+            if ($filters["search"] ?? null)
+                $users->whereRaw("MATCH(first_name,last_name,username,email) AGAINST('{$filters['search']}')");
+
+            $this->filtering = true;
+        }
+
+        return $users->paginate(18);
     }
 }
