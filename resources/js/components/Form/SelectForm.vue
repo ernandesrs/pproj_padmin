@@ -1,7 +1,5 @@
 <template>
-    <label v-if="label && !isCheckOrRadioType" :for="name" class="mb-1">
-        {{ label }}
-    </label>
+    <LabelForm v-if="label" :label="label" :name="name" />
 
     <GroupForm>
         <select @input="updateValue" :class="selectStyle" :name="name" :id="name"
@@ -11,18 +9,19 @@
                 {{ option.text }}
             </option>
         </select>
-        <small v-if="errorMessage" class="invalid-feedback">
-            {{ errorMessage }}
-        </small>
+
+        <InvalidFeedbackForm v-if="errorMessage" :error-message="errorMessage" />
     </GroupForm>
 </template>
 
 <script>
 
 import GroupForm from './GroupForm.vue';
+import LabelForm from './LabelForm.vue';
+import InvalidFeedbackForm from './InvalidFeedbackForm.vue';
 
 export default {
-    components: { GroupForm },
+    components: { GroupForm, LabelForm, InvalidFeedbackForm },
     props: {
         label: { type: String, default: null },
         name: { type: String, default: null },

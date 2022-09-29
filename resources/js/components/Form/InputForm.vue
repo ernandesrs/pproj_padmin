@@ -1,7 +1,5 @@
 <template>
-    <label v-if="label && !isCheckOrRadioType" :for="name" class="mb-1">
-        {{ label }}
-    </label>
+    <LabelForm v-if="label && !isCheckOrRadioType" :label="label" :name="name" />
 
     <GroupForm :is-check="isCheckOrRadioType" :is-radio="isCheckOrRadioType"
         :inline="inline">
@@ -9,19 +7,18 @@
             :name="name" :readonly="readonly" :disabled="disabled" :value="modelValue"
             :autocomplete="type=='password'?'new-password':''" />
 
-        <label v-if="label && isCheckOrRadioType" class="form-check-label" :for="name">
-            {{ label }}
-        </label>
+        <LabelForm v-if="label && isCheckOrRadioType" class="form-check-label"
+            :label="label" :name="name" />
 
-        <small v-if="errorMessage" class="invalid-feedback">
-            {{ errorMessage }}
-        </small>
+        <InvalidFeedbackForm v-if="errorMessage" :error-message="errorMessage" />
     </GroupForm>
 </template>
 
 <script>
 
 import GroupForm from './GroupForm.vue';
+import LabelForm from './LabelForm.vue';
+import InvalidFeedbackForm from './InvalidFeedbackForm.vue';
 
 export default {
     props: {
@@ -51,6 +48,6 @@ export default {
                 this.$emit("update:modelValue", e.target.value);
         }
     },
-    components: { GroupForm }
+    components: { GroupForm, LabelForm, InvalidFeedbackForm }
 };
 </script>

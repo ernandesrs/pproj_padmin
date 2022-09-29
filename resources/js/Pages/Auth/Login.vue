@@ -50,6 +50,8 @@ export default {
         })
 
         function submit() {
+            console.log(form);
+
             form.post("/auth/login", {
                 onError: () => {
                     console.log("Erro!");

@@ -27,7 +27,7 @@ class UserController extends Controller
 
         Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/List", [
-            "users" => $resourceColletion,
+            "mainList" => $resourceColletion,
             "pageTitle" => "Usuários",
             "buttons" => [
                 "button_new" => route("admin.users.create")

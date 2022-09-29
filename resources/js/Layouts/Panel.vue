@@ -1,6 +1,7 @@
 <template>
 
-    <Head :title="$page.props?.pageTitle ? `PADMIN - ${$page.props.pageTitle}` : 'PADMIN - Painel administrativo em Laravel e Vue com Inertia JS'" />
+    <Head
+        :title="$page.props?.pageTitle ? `PADMIN - ${$page.props.pageTitle}` : 'PADMIN - Painel administrativo em Laravel e Vue com Inertia JS'" />
 
     <div class="wrapp">
 
@@ -92,6 +93,10 @@
                             icon="plusLg" variant="success"
                             :to="$page.props.buttons.button_new" />
                     </div>
+
+                    <div class="ms-auto">
+                        <Filter @hasFiltered="setFilteredData" />
+                    </div>
                 </div>
 
                 <AlertUi ref="alert" />
@@ -109,6 +114,7 @@
 
 const WIDTH_MOBILE = 768;
 
+import { Head } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../Components/Ui/ButtonUi.vue';
 import BackdropUi from '../Components/Ui/BackdropUi.vue';
 import DropdownUi from '../Components/Ui/Dropdown/DropdownUi.vue';
@@ -117,16 +123,17 @@ import DropdownDivider from '../Components/Ui/Dropdown/DropdownDivider.vue';
 import DropdownHeader from '../Components/Ui/Dropdown/DropdownHeader.vue';
 import NavItemUi from '../Components/Nav/NavItemUi.vue';
 import NavUi from '../Components/Nav/NavUi.vue';
-import { Head } from '@inertiajs/inertia-vue3';
 import AlertUi from '../Components/Ui/AlertUi.vue';
+import Filter from '../Components/Filter.vue';
 
 export default {
-    components: { ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi, Head, AlertUi },
+    components: { Head, ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi, AlertUi, Filter },
 
     data() {
         return {
             windowWidth: null,
             inMobile: false,
+            filteredData: null,
             sidebar: {
                 visible: true,
                 togglerIcon: null,
@@ -258,6 +265,10 @@ export default {
                 this.windowWidth = currentWidth;
             else if (currentWidth >= WIDTH_MOBILE && (!this.windowWidth || this.windowWidth <= currentWidth))
                 this.windowWidth = currentWidth;
+        },
+
+        setFilteredData(data) {
+            this.filteredData = data;
         }
     }
 }

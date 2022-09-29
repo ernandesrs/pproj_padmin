@@ -1,6 +1,12 @@
 <template>
 
-    <ListItem v-for="user in users.data" :key="user.id" :item="{
+    <div v-if="!getData.length"
+        class="px-5 py-3 mt-2 mb-4 fs-5 fw-semibold text-center border text-muted">
+        <span v-if="localFiltering">Sem resultados para sua filtragem!</span>
+        <span v-else>Sem nada para listagem!</span>
+    </div>
+
+    <ListItem v-else v-for="user in getData" :key="user.id" :item="{
         cover: user.thumb_small,
         title: user.first_name + ' ' + user.last_name,
         subtitle: user.email,
@@ -23,7 +29,8 @@
         </template>
     </ListItem>
 
-    <PaginationUi label="Páginação de usuários" :pages="users?.meta?.links" />
+    <PaginationUi v-if="!localFiltering" label="Páginação de usuários"
+        :pages="mainList?.meta?.links" />
 
 </template>
 
@@ -36,15 +43,13 @@ import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
 import PaginationUi from '../../../Components/PaginationUi.vue';
 
 export default {
-    components: { ListItem, ButtonUi, BadgeUi, PaginationUi },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    props: {
-        users: { type: Array, default: [] }
-    },
+    components: { ListItem, ButtonUi, BadgeUi, PaginationUi },
 
     data() {
         return {
+            localFiltering: false,
             terms: {
                 user: {
                     level: {
@@ -58,10 +63,29 @@ export default {
         };
     },
 
+    props: {
+        mainList: { type: Object, default: [] }
+    },
+
     methods: {
         deleteConfirm() {
             if (!window.confirm("Tem certeza de que deseja excluir este usuário?"))
                 return;
+        }
+    },
+
+    computed: {
+        getData() {
+            let filtered = this.$parent.filteredData;
+
+            if (filtered) {
+                this.localFiltering = true;
+                return filtered;
+            }
+
+            this.localFiltering = false;
+
+            return this.mainList.data;
         }
     }
 }

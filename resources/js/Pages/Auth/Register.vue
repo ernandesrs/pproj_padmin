@@ -23,7 +23,8 @@
                 <SelectForm label="Gênero" name="gender" :options="[
                     {text: 'Masculino', value: 'male'},
                     {text: 'Feminino', value: 'female'},
-                ]" v-model="form.gender" />
+                ]" v-model="form.gender"
+                    :error-message="form.errors.gender" />
             </div>
 
             <div class="col-12">
@@ -43,7 +44,8 @@
             </div>
 
             <div class="col-12 text-center">
-                <ButtonUi text="Cadastrar" type="submit" variant="primary" icon="login" :disabled="form.processing" />
+                <ButtonUi text="Cadastrar" type="submit" variant="primary" icon="login"
+                    :disabled="form.processing" />
             </div>
         </div>
     </form>
@@ -75,6 +77,7 @@ export default {
         });
 
         function submit() {
+            console.log(this.form);
             form.post("/auth/register", {
                 onError: () => {
                     console.log("Erro!");

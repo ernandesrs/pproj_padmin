@@ -24,6 +24,8 @@ const icons = {
     plus: 'bi bi-plus',
     plusLg: 'bi bi-plus-lg',
 
+    search: 'bi bi-search',
+
     trash: 'bi bi-trash',
 
     user: 'bi bi-person',
