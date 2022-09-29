@@ -24,8 +24,10 @@
             <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.users.edit', {id:
             user.id})" />
             <span class="mx-1"></span>
-            <ButtonUi @click="deleteConfirm" icon="trash" variant="danger" size="sm"
-                outlined />
+            <ButtonConfirmationUi @hasClicked="deleteClick" @hasConfirmed="deleteConfirm"
+                @hasCanceled="deleteCancel" confirm-text="Excluir?" icon="trash"
+                variant="danger" size="sm" :data-action="$route('admin.users.destroy',
+                {user: user.id})" />
         </template>
     </ListItem>
 
@@ -40,11 +42,12 @@ import ListItem from '../../../Components/ListItem.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
 import PaginationUi from '../../../Components/PaginationUi.vue';
+import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { ListItem, ButtonUi, BadgeUi, PaginationUi },
+    components: { ListItem, ButtonUi, BadgeUi, PaginationUi, ButtonConfirmationUi },
 
     data() {
         return {
@@ -67,9 +70,15 @@ export default {
     },
 
     methods: {
-        deleteConfirm() {
-            if (!window.confirm("Tem certeza de que deseja excluir este usuário?"))
-                return;
+        deleteClick(e) {
+            console.log(e.target);
+        },
+        deleteConfirm(e) {
+            console.log("Excluir!");
+            console.log(e.target);
+        },
+        deleteCancel(e) {
+            console.log("Cancelar e ocultar botões de confirmação!");
         },
     },
 

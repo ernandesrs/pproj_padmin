@@ -10855,6 +10855,11 @@ textarea.form-control-lg {
   text-decoration: none;
 }
 
+a > span,
+button > span {
+  pointer-events: none;
+}
+
 .wrapp {
   display: flex;
   background-color: #f8f9fa;

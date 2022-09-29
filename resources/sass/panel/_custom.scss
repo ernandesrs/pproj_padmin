@@ -7,6 +7,11 @@
     }
 }
 
+a>span,
+button>span {
+    pointer-events: none;
+}
+
 .wrapp {
     display: flex;
     background-color: $light;
