@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreUpdateRequest;
 use App\Http\Resources\UserResource;
@@ -9,7 +10,6 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -157,7 +157,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->photo) {
+            Thumb::clear($user->photo);
+            Storage::delete("public/{$user->photo}");
+        }
+
+        $user->delete();
+
+        return redirect()->route("admin.users.index");
     }
 
     /**

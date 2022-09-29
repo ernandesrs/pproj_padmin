@@ -1195,9 +1195,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_BadgeUi_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Components/Ui/BadgeUi.vue */ "./resources/js/Components/Ui/BadgeUi.vue");
 /* harmony import */ var _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Components/PaginationUi.vue */ "./resources/js/Components/PaginationUi.vue");
 /* harmony import */ var _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Components/Ui/ButtonConfirmationUi.vue */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 var _layout$layout$compon;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1240,15 +1242,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     "default": false
   }
 }), _defineProperty(_layout$layout$compon, "methods", {
-  deleteClick: function deleteClick(e) {
-    console.log(e.target);
+  deleteClick: function deleteClick(e) {// 
   },
   deleteConfirm: function deleteConfirm(e) {
-    console.log("Excluir!");
-    console.log(e.target);
+    var action = e.target.getAttribute("data-action");
+    if (!action) return;
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.post(action);
   },
-  deleteCancel: function deleteCancel(e) {
-    console.log("Cancelar e ocultar botões de confirmação!");
+  deleteCancel: function deleteCancel(e) {// 
   }
 }), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
 

@@ -43,6 +43,7 @@ import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
 import PaginationUi from '../../../Components/PaginationUi.vue';
 import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
@@ -71,14 +72,17 @@ export default {
 
     methods: {
         deleteClick(e) {
-            console.log(e.target);
+            // 
         },
         deleteConfirm(e) {
-            console.log("Excluir!");
-            console.log(e.target);
+            let action = e.target.getAttribute("data-action");
+
+            if (!action) return;
+
+            Inertia.post(action);
         },
         deleteCancel(e) {
-            console.log("Cancelar e ocultar botões de confirmação!");
+            // 
         },
     },
 
