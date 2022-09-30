@@ -37,8 +37,12 @@ class UserResource extends JsonResource
         $arr['thumb_large'] = Thumb::thumb($this->photo, "user.large");
         $arr['can'] = [
             'delete' => (new UserPolicy())->delete(auth()->user(), $this->resource),
-            'update' => (new UserPolicy())->update(auth()->user(), $this->resource)
+            'update' => (new UserPolicy())->update(auth()->user(), $this->resource),
+            'promote' => (new UserPolicy())->promote(auth()->user(), $this->resource),
+            'demote' => (new UserPolicy())->demote(auth()->user(), $this->resource),
         ];
+        $arr['next_level'] = $this->resource->nextLevel();
+        $arr['previous_level'] = $this->resource->previousLevel();
 
         return $arr;
     }

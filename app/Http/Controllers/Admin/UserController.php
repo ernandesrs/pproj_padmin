@@ -177,20 +177,22 @@ class UserController extends Controller
      */
     public function promote(User $user)
     {
-        switch ($user->level) {
-            case User::LEVEL_1:
-                $user->level = User::LEVEL_2;
-                break;
-            case User::LEVEL_2:
-                $user->level = User::LEVEL_8;
+        $this->authorize("promote", $user);
+
+        if ($level = $user->nextLevel()) {
+            $user->level = $level;
+            $user->save();
+
+            session()->flash("flash_alert", [
+                "variant" => "success",
+                "message" => "{$user->first_name} foi promovido(a) de nível com sucesso!",
+            ]);
+        } else {
+            session()->flash("flash_alert", [
+                "variant" => "warning",
+                "message" => "{$user->first_name} já possui o nível máximo de usuário!",
+            ]);
         }
-
-        $user->save();
-
-        session()->flash("flash_alert", [
-            "variant" => "success",
-            "message" => "{$user->first_name} foi promovido(a) de nível com sucesso!",
-        ]);
 
         return redirect()->back();
     }
@@ -201,20 +203,22 @@ class UserController extends Controller
      */
     public function demote(User $user)
     {
-        switch ($user->level) {
-            case User::LEVEL_8;
-                $user->level = User::LEVEL_2;
-                break;
-            case User::LEVEL_2:
-                $user->level = User::LEVEL_1;
+        $this->authorize("demote", $user);
+
+        if ($level = $user->previousLevel()) {
+            $user->level = $level;
+            $user->save();
+
+            session()->flash("flash_alert", [
+                "variant" => "success",
+                "message" => "{$user->first_name} foi rebaixado(a) de nível com sucesso!",
+            ]);
+        } else {
+            session()->flash("flash_alert", [
+                "variant" => "warning",
+                "message" => "{$user->first_name} já possui o nível mínimo de usuário!",
+            ]);
         }
-
-        $user->save();
-
-        session()->flash("flash_alert", [
-            "variant" => "success",
-            "message" => "{$user->first_name} foi rebaixado(a) de nível com sucesso!",
-        ]);
 
         return redirect()->back();
     }

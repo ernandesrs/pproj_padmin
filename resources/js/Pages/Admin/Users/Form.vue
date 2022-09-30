@@ -5,10 +5,12 @@
             <div class="d-flex flex-column align-items-center">
                 <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
                 <div class="d-flex pt-3">
-                    <ButtonConfirmationUi @hasConfirmed="promoteConfirm" text="Promover"
+                    <ButtonConfirmationUi v-if="user.next_level && user.can.promote"
+                        @hasConfirmed="promoteConfirm" text="Promover"
                         confirm-text="Promover?" size="sm" variant="success"
                         icon="userPlus" class="m-1" position="center" />
-                    <ButtonConfirmationUi @hasConfirmed="demoteConfirm" text="Rebaixar"
+                    <ButtonConfirmationUi v-if="user.previous_level && user.can.demote"
+                        @hasConfirmed="demoteConfirm" text="Rebaixar"
                         confirm-text="Rebaixar?" size="sm" variant="danger"
                         icon="userMinus" class="m-1" position="center" />
                 </div>

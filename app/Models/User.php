@@ -85,4 +85,42 @@ class User extends Authenticatable
     {
         return self::GENDERS;
     }
+
+    /**
+     * @return null|int
+     */
+    public function nextLevel()
+    {
+        $level = null;
+
+        switch ($this->level) {
+            case self::LEVEL_1:
+                $level = self::LEVEL_2;
+                break;
+            case self::LEVEL_2:
+                $level = self::LEVEL_8;
+                break;
+        }
+
+        return $level;
+    }
+
+    /**
+     * @return null|int
+     */
+    public function previousLevel()
+    {
+        $level = null;
+
+        switch ($this->level) {
+            case self::LEVEL_8:
+                $level = self::LEVEL_2;
+                break;
+            case self::LEVEL_2:
+                $level = self::LEVEL_1;
+                break;
+        }
+
+        return $level;
+    }
 }

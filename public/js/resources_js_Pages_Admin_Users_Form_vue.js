@@ -2343,7 +2343,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     src: $props.user.thumb_normal
   }, null, 8
   /* PROPS */
-  , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+  , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$props.user.next_level && $props.user.can.promote ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
+    key: 0,
     onHasConfirmed: $options.promoteConfirm,
     text: "Promover",
     "confirm-text": "Promover?",
@@ -2354,7 +2355,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     position: "center"
   }, null, 8
   /* PROPS */
-  , ["onHasConfirmed"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+  , ["onHasConfirmed"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.user.previous_level && $props.user.can.demote ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
+    key: 1,
     onHasConfirmed: $options.demoteConfirm,
     text: "Rebaixar",
     "confirm-text": "Rebaixar?",
@@ -2365,7 +2367,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     position: "center"
   }, null, 8
   /* PROPS */
-  , ["onHasConfirmed"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1
+  , ["onHasConfirmed"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, " Nível: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.terms.user.level[$props.user.level]), 1
   /* TEXT */
