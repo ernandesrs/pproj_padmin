@@ -276,7 +276,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       "default": null
     },
     modelValue: {
-      type: String,
+      type: [String, Number],
       "default": "none"
     },
     options: {

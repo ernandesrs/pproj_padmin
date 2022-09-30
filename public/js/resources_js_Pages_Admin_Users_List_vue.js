@@ -276,7 +276,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       "default": null
     },
     modelValue: {
-      type: String,
+      type: [String, Number],
       "default": "none"
     },
     options: {
@@ -1242,9 +1242,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   PaginationUi: _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   ButtonConfirmationUi: _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }), _defineProperty(_layout$layout$compon, "data", function data() {
-  return {
-    terms: {}
-  };
+  return {};
 }), _defineProperty(_layout$layout$compon, "props", {
   users: {
     type: Object,

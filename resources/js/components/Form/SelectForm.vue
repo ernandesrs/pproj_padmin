@@ -26,7 +26,7 @@ export default {
         label: { type: String, default: null },
         name: { type: String, default: null },
         errorMessage: { type: String, default: null },
-        modelValue: { type: String, default: "none" },
+        modelValue: { type: [String, Number], default: "none" },
         options: { type: Array, default: [] },
         text: { type: String, default: null },
 
