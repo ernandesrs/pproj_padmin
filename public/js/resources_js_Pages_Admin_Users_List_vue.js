@@ -1900,7 +1900,7 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = {
   key: 0,
-  "class": "d-flex align-items-center bg-light position-absolute top-0 end-0"
+  "class": "d-flex align-items-center bg-light shadow position-absolute top-0 end-0 w-100 h-100"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
@@ -1922,7 +1922,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" confirm button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.confirm,
     type: "button",
-    text: $props.text,
     icon: "checkLg",
     variant: "success",
     size: $props.size,
@@ -1930,17 +1929,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "data-action": $props.dataAction
   }, null, 8
   /* PROPS */
-  , ["onClick", "text", "size", "data-action"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cancel button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["onClick", "size", "data-action"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cancel button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.cancel,
     type: "button",
-    text: $props.text,
     icon: "xLg",
     variant: "danger",
     size: $props.size,
     "class": "ms-1 me-1"
   }, null, 8
   /* PROPS */
-  , ["onClick", "text", "size"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  , ["onClick", "size"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -2571,7 +2569,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var icons = {
+var _icons;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var icons = (_icons = {
   app: 'bi bi-app',
   appIndicator: 'bi bi-app-indicator',
   arrowLeft: 'bi bi-arrow-left',
@@ -2597,10 +2599,8 @@ var icons = {
   userX: 'bi bi-person-x',
   userCheck: 'bi bi-person-check',
   userPlus: 'bi bi-person-plus',
-  userCircle: 'bi bi-person-circle',
-  x: 'bi bi-x',
-  xLg: 'bi bi-x-lg'
-};
+  userCircle: 'bi bi-person-circle'
+}, _defineProperty(_icons, "userPlus", 'bi bi-person-plus'), _defineProperty(_icons, "userMinus", 'bi bi-person-dash'), _defineProperty(_icons, "x", 'bi bi-x'), _defineProperty(_icons, "xLg", 'bi bi-x-lg'), _icons);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   icons: icons,
   get: function get(name) {

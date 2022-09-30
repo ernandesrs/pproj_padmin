@@ -6,18 +6,18 @@
             :variant="variant" :size="size" :outlined="outlined" />
 
         <div v-if="showConfirmButtons"
-            class="d-flex align-items-center bg-light position-absolute top-0 end-0">
+            class="d-flex align-items-center bg-light shadow position-absolute top-0 end-0 w-100 h-100">
             <span :class="['fs-6 fw-normal me-2 text-' + variant]">
                 {{ confirmText }}
             </span>
 
             <!-- confirm button -->
-            <ButtonUi @click="confirm" type="button" :text="text" icon="checkLg"
+            <ButtonUi @click="confirm" type="button" icon="checkLg"
                 variant="success" :size="size" class="ms-1 me-1"
                 :data-action="dataAction" />
 
             <!-- cancel button -->
-            <ButtonUi @click="cancel" type="button" :text="text" icon="xLg"
+            <ButtonUi @click="cancel" type="button" icon="xLg"
                 variant="danger" :size="size" class="ms-1 me-1" />
         </div>
     </div>
