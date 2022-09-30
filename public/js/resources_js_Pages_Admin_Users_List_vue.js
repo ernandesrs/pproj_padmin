@@ -2395,7 +2395,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownItem, {
         text: "Logout",
         icon: "logout",
-        to: _ctx.$route('auth.login')
+        to: _ctx.$route('auth.logout')
       }, null, 8
       /* PROPS */
       , ["to"])];

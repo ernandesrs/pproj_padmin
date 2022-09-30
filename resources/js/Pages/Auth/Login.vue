@@ -47,22 +47,13 @@ export default {
             email: null,
             password: null,
             remember_me: null,
-        })
+        });
 
         function submit() {
-            console.log(form);
-
-            form.post("/auth/login", {
-                onError: () => {
-                    console.log("Erro!");
-                },
-                onSuccess: () => {
-                    console.log("Sucesso!");
-                }
-            });
+            form.post("/auth/login");
         }
 
-        return { form, submit }
+        return { form, submit };
     },
 
     props: {

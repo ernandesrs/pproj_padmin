@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\ExampleController as AdminExampleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +22,19 @@ Route::get('/', function () {
 })->name("front.index");
 
 Route::group(["prefix" => "auth"], function () {
-    Route::get("/login", [AuthController::class, "login"])->name("auth.login");
-    Route::post("/login", [AuthController::class, "authenticate"])->name("auth.authenticate");
-    Route::get("/register", [AuthController::class, "register"])->name("auth.register");
-    Route::post("/register", [AuthController::class, "store"])->name("auth.store");
+    Route::group(["middleware" => ["guest"]], function () {
+        Route::get("/login", [AuthController::class, "login"])->name("auth.login");
+        Route::post("/login", [AuthController::class, "authenticate"])->name("auth.authenticate");
+        Route::get("/register", [AuthController::class, "register"])->name("auth.register");
+        Route::post("/register", [AuthController::class, "store"])->name("auth.store");
+    });
+
+    Route::group(["middleware" => ["auth"]], function () {
+        Route::get("/logout", [AuthController::class, "logout"])->name("auth.logout");
+    });
 });
 
-Route::group(["prefix" => "admin"], function () {
+Route::group(["prefix" => "admin", "middleware" => ["auth"]], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
 
     Route::group(["prefix" => "users"], function () {

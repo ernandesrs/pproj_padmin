@@ -68,7 +68,7 @@
                             <DropdownHeader text="Menu" />
                             <DropdownItem text="Perfil" icon="userCircle" to="#" />
                             <DropdownItem text="Logout" icon="logout"
-                                :to="$route('auth.login')" />
+                                :to="$route('auth.logout')" />
                         </template>
                     </DropdownUi>
 
