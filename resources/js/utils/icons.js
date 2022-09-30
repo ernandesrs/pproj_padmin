@@ -16,6 +16,8 @@ const icons = {
     listLeft: 'bi bi-filter-left',
     login: 'bi bi-box-arrow-right',
     logout: 'bi bi-box-arrow-left',
+    load: 'bi bi-arrow-clockwise',
+    loading: 'bi bi-arrow-clockwise animation-rotate-z',
 
     home: 'bi bi-house',
 

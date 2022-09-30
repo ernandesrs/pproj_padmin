@@ -1,0 +1,14 @@
+.animation-rotate-z {
+    animation-name: RotateZ;
+    animation-duration: 1.25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    display: block;
+
+    @keyframes RotateZ {
+        100% {
+            transform: rotateZ(360deg);
+        }
+    }
+}
