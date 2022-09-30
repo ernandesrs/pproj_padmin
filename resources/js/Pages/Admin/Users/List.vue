@@ -13,7 +13,8 @@
         coverStyle: 'circle'
     }">
         <template v-slot:badges>
-            <BadgeUi class="mb-1 me-1" :text="terms.user.level[user.level]" icon="user" />
+            <BadgeUi class="mb-1 me-1" :text="terms?.level['level_' + user.level]"
+                icon="user" />
             <BadgeUi class="mb-1 me-1"
                 :icon="`${user.email_verified_at ? 'checkLg':'xLg'}`"
                 :text="`${user.email_verified_at ? 'Verificado':'Não verificado'}`"
@@ -53,21 +54,13 @@ export default {
 
     data() {
         return {
-            terms: {
-                user: {
-                    level: {
-                        1: 'Usuário',
-                        5: 'Membro',
-                        8: 'Administrador',
-                        9: 'Super',
-                    }
-                }
-            }
+            terms: {}
         };
     },
 
     props: {
         users: { type: Object, default: [] },
+        terms: { type: Object, default: {} },
         isFiltering: { type: Boolean, default: false },
     },
 

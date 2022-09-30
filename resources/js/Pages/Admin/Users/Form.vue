@@ -21,7 +21,7 @@
                     </p>
                     <p class="mb-0">
                         <span class="badge bg-primary">
-                            Nível: {{ terms.user.level[user.level] }}
+                            Nível: {{ terms.level['level_'+user.level] }}
                         </span>
                     </p>
                 </div>
@@ -126,7 +126,8 @@ export default {
                 password: null,
                 password_confirmation: null
             }
-        }
+        },
+        terms: { type: Object, default: {} }
     },
 
     data() {
@@ -142,17 +143,6 @@ export default {
                 password: null,
                 password_confirmation: null
             }),
-
-            terms: {
-                user: {
-                    level: {
-                        1: 'Usuário',
-                        5: 'Membro',
-                        8: 'Administrador',
-                        9: 'Super',
-                    }
-                }
-            }
         };
     },
 

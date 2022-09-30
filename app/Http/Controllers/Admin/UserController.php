@@ -34,6 +34,7 @@ class UserController extends Controller
         Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/List", [
             "users" => UserResource::collection($results),
+            "terms" => __("terms.user"),
             "filterAction" => route("admin.users.index"),
             "isFiltering" => $this->filtering,
             "pageTitle" => "Usuários",
@@ -107,6 +108,7 @@ class UserController extends Controller
         Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/Form", [
             "user" => new UserResource($user),
+            "terms" => __("terms.user"),
             "pageTitle" => "Editar usuário",
             "buttons" => [
                 "button_back" => route("admin.users.index"),

@@ -1130,6 +1130,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       password: null,
       password_confirmation: null
     }
+  },
+  terms: {
+    type: Object,
+    "default": {}
   }
 }), _defineProperty(_components$layout$la, "data", function data() {
   var _this$user$id, _this$user, _this$user$first_name, _this$user2, _this$user$last_name, _this$user3, _this$user$username, _this$user4, _this$user$email, _this$user5, _this$user$gender, _this$user6;
@@ -1145,17 +1149,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       gender: (_this$user$gender = (_this$user6 = this.user) === null || _this$user6 === void 0 ? void 0 : _this$user6.gender) !== null && _this$user$gender !== void 0 ? _this$user$gender : 'none',
       password: null,
       password_confirmation: null
-    }),
-    terms: {
-      user: {
-        level: {
-          1: 'Usuário',
-          5: 'Membro',
-          8: 'Administrador',
-          9: 'Super'
-        }
-      }
-    }
+    })
   };
 }), _defineProperty(_components$layout$la, "methods", {
   submit: function submit() {
@@ -2369,7 +2363,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["onHasConfirmed"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, " Nível: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.terms.user.level[$props.user.level]), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, " Nível: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.terms.level['level_' + $props.user.level]), 1
   /* TEXT */
   )])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {

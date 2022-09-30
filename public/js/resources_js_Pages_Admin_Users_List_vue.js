@@ -1243,21 +1243,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   ButtonConfirmationUi: _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }), _defineProperty(_layout$layout$compon, "data", function data() {
   return {
-    terms: {
-      user: {
-        level: {
-          1: 'Usuário',
-          5: 'Membro',
-          8: 'Administrador',
-          9: 'Super'
-        }
-      }
-    }
+    terms: {}
   };
 }), _defineProperty(_layout$layout$compon, "props", {
   users: {
     type: Object,
     "default": []
+  },
+  terms: {
+    type: Object,
+    "default": {}
   },
   isFiltering: {
     type: Boolean,
@@ -2525,9 +2520,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, {
       badges: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        var _$props$terms;
+
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1",
-          text: $data.terms.user.level[user.level],
+          text: (_$props$terms = $props.terms) === null || _$props$terms === void 0 ? void 0 : _$props$terms.level['level_' + user.level],
           icon: "user"
         }, null, 8
         /* PROPS */
