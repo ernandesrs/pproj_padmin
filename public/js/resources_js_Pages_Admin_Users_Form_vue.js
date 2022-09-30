@@ -619,8 +619,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showConfirmButtons: false,
-      animationName: 'slide-fade-right'
+      showConfirmButtons: false
     };
   },
   mounted: function mounted() {
@@ -1093,9 +1092,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Form_SelectForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Components/Form/SelectForm.vue */ "./resources/js/Components/Form/SelectForm.vue");
 /* harmony import */ var _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Components/Ui/ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
 /* harmony import */ var _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Components/Ui/ButtonConfirmationUi.vue */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 var _components$layout$la;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1167,6 +1168,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   getDate: function getDate(data) {
     return new Date(data).toLocaleDateString("pt-BR");
+  },
+  promoteConfirm: function promoteConfirm() {
+    var action = this.$route("admin.users.promote", {
+      user: this.user.id
+    });
+    this.request(action);
+  },
+  demoteConfirm: function demoteConfirm() {
+    var action = this.$route("admin.users.demote", {
+      user: this.user.id
+    });
+    this.request(action);
+  },
+  request: function request(action) {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.post(action);
   }
 }), _components$layout$la);
 
@@ -2328,6 +2344,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+    onHasConfirmed: $options.promoteConfirm,
     text: "Promover",
     "confirm-text": "Promover?",
     size: "sm",
@@ -2335,7 +2352,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     icon: "userPlus",
     "class": "m-1",
     position: "center"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+  }, null, 8
+  /* PROPS */
+  , ["onHasConfirmed"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+    onHasConfirmed: $options.demoteConfirm,
     text: "Rebaixar",
     "confirm-text": "Rebaixar?",
     size: "sm",
@@ -2343,7 +2363,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     icon: "userMinus",
     "class": "m-1",
     position: "center"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1
+  }, null, 8
+  /* PROPS */
+  , ["onHasConfirmed"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, " Nível: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.terms.user.level[$props.user.level]), 1
   /* TEXT */

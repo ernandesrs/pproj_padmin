@@ -744,8 +744,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showConfirmButtons: false,
-      animationName: 'slide-fade-right'
+      showConfirmButtons: false
     };
   },
   mounted: function mounted() {

@@ -50,7 +50,6 @@ export default {
     data() {
         return {
             showConfirmButtons: false,
-            animationName: 'slide-fade-right',
         };
     },
 

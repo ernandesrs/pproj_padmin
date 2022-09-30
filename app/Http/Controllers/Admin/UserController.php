@@ -172,6 +172,54 @@ class UserController extends Controller
     }
 
     /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function promote(User $user)
+    {
+        switch ($user->level) {
+            case User::LEVEL_1:
+                $user->level = User::LEVEL_2;
+                break;
+            case User::LEVEL_2:
+                $user->level = User::LEVEL_8;
+        }
+
+        $user->save();
+
+        session()->flash("flash_alert", [
+            "variant" => "success",
+            "message" => "{$user->first_name} foi promovido(a) de nível com sucesso!",
+        ]);
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function demote(User $user)
+    {
+        switch ($user->level) {
+            case User::LEVEL_8;
+                $user->level = User::LEVEL_2;
+                break;
+            case User::LEVEL_2:
+                $user->level = User::LEVEL_1;
+        }
+
+        $user->save();
+
+        session()->flash("flash_alert", [
+            "variant" => "success",
+            "message" => "{$user->first_name} foi rebaixado(a) de nível com sucesso!",
+        ]);
+
+        return redirect()->back();
+    }
+
+    /**
      * @param Request $request
      * @return void
      */

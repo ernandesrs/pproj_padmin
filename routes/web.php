@@ -44,6 +44,8 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], fu
         Route::get("/edit/{user}", [AdminUserController::class, "edit"])->name("admin.users.edit");
         Route::post("/edit/{user}", [AdminUserController::class, "update"])->name("admin.users.update");
         Route::post("/destroy/{user}", [AdminUserController::class, "destroy"])->name("admin.users.destroy");
+        Route::post("/promote/{user}", [AdminUserController::class, "promote"])->name("admin.users.promote");
+        Route::post("/demote/{user}", [AdminUserController::class, "demote"])->name("admin.users.demote");
     });
 
     Route::group(["prefix" => "example"], function () {
