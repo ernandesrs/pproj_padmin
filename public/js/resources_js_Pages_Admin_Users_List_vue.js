@@ -701,11 +701,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      showConfirmButtons: false
-    };
-  },
   components: {
     ButtonUi: _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -743,6 +738,14 @@ __webpack_require__.r(__webpack_exports__);
       "default": 'Confirmar?'
     }
   },
+  data: function data() {
+    return {
+      showConfirmButtons: false
+    };
+  },
+  mounted: function mounted() {
+    document.addEventListener("click", this.clickOut);
+  },
   methods: {
     click: function click(e) {
       this.$emit("hasClicked", e);
@@ -754,6 +757,10 @@ __webpack_require__.r(__webpack_exports__);
     cancel: function cancel(e) {
       this.$emit("hasCanceled", e);
       this.showConfirmButtons = false;
+    },
+    clickOut: function clickOut(e) {
+      if (this.$el.contains(e.target)) return;
+      this.cancel(e);
     }
   }
 });
@@ -1896,11 +1903,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "position-relative"
+  "class": "position-relative bg-warning"
 };
 var _hoisted_2 = {
   key: 0,
-  "class": "d-flex align-items-center bg-light shadow position-absolute top-0 end-0 w-100 h-100"
+  "class": "d-flex align-items-center bg-light shadow py-2 px-3 position-absolute top-50 end-0 translate-middle-y"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
@@ -1916,7 +1923,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["onClick", "text", "icon", "variant", "size", "outlined"]), $data.showConfirmButtons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['fs-6 fw-normal me-2 text-' + $props.variant])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['fs-6 fw-normal px-2 text-' + $props.variant])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.confirmText), 3
   /* TEXT, CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" confirm button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
@@ -1925,7 +1932,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     icon: "checkLg",
     variant: "success",
     size: $props.size,
-    "class": "ms-1 me-1",
+    "class": "ms-2",
     "data-action": $props.dataAction
   }, null, 8
   /* PROPS */
@@ -1935,7 +1942,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     icon: "xLg",
     variant: "danger",
     size: $props.size,
-    "class": "ms-1 me-1"
+    "class": "ms-2"
   }, null, 8
   /* PROPS */
   , ["onClick", "size"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);

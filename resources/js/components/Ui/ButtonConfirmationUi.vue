@@ -1,24 +1,23 @@
 <template>
 
-    <div class="position-relative">
+    <div class="position-relative bg-warning">
         <!-- the button -->
         <ButtonUi @click="click" type="button" :text="text" :icon="icon"
             :variant="variant" :size="size" :outlined="outlined" />
 
         <div v-if="showConfirmButtons"
-            class="d-flex align-items-center bg-light shadow position-absolute top-0 end-0 w-100 h-100">
-            <span :class="['fs-6 fw-normal me-2 text-' + variant]">
+            class="d-flex align-items-center bg-light shadow py-2 px-3 position-absolute top-50 end-0 translate-middle-y">
+            <span :class="['fs-6 fw-normal px-2 text-' + variant]">
                 {{ confirmText }}
             </span>
 
             <!-- confirm button -->
-            <ButtonUi @click="confirm" type="button" icon="checkLg"
-                variant="success" :size="size" class="ms-1 me-1"
-                :data-action="dataAction" />
+            <ButtonUi @click="confirm" type="button" icon="checkLg" variant="success"
+                :size="size" class="ms-2" :data-action="dataAction" />
 
             <!-- cancel button -->
-            <ButtonUi @click="cancel" type="button" icon="xLg"
-                variant="danger" :size="size" class="ms-1 me-1" />
+            <ButtonUi @click="cancel" type="button" icon="xLg" variant="danger"
+                :size="size" class="ms-2" />
         </div>
     </div>
 
@@ -29,11 +28,6 @@
 import ButtonUi from './ButtonUi.vue';
 
 export default {
-    data() {
-        return {
-            showConfirmButtons: false
-        };
-    },
     components: { ButtonUi },
     props: {
         text: { type: String, default: null },
@@ -46,6 +40,16 @@ export default {
         outlined: { type: Boolean, default: false },
 
         confirmText: { type: String, default: 'Confirmar?' },
+    },
+
+    data() {
+        return {
+            showConfirmButtons: false
+        };
+    },
+
+    mounted() {
+        document.addEventListener("click", this.clickOut);
     },
 
     methods: {
@@ -61,6 +65,12 @@ export default {
         cancel(e) {
             this.$emit("hasCanceled", e);
             this.showConfirmButtons = false;
+        },
+
+        clickOut(e) {
+            if (this.$el.contains(e.target))
+                return;
+            this.cancel(e);
         }
     }
 };
