@@ -14,12 +14,14 @@
                 </span>
 
                 <!-- confirm button -->
-                <ButtonUi @click="confirm" type="button" icon="checkLg" variant="success"
-                    :size="size" class="ms-2" :data-action="dataAction" />
+                <ButtonUi @click="confirm" type="button" variant="success" :size="size"
+                    class="ms-2" :data-action="dataAction" :icon="buttonConfirm.icon"
+                    :disabled="buttonConfirm.disabled" />
 
                 <!-- cancel button -->
-                <ButtonUi @click="cancel" type="button" icon="xLg" variant="danger"
-                    :size="size" class="ms-2" />
+                <ButtonUi @click="cancel" type="button" variant="danger" :size="size"
+                    class="ms-2" :icon="buttonCancel.icon"
+                    :disabled="buttonCancel.disabled" />
             </div>
         </Transition>
     </div>
@@ -28,6 +30,7 @@
 
 <script>
 
+import { Inertia } from '@inertiajs/inertia';
 import ButtonUi from './ButtonUi.vue';
 
 export default {
@@ -37,7 +40,9 @@ export default {
         variant: { type: String, default: null },
         icon: { type: String, default: null },
         size: { type: String, default: null },
+
         dataAction: { type: String, default: null },
+        confirmWithRequest: { type: Boolean, default: false },
 
         position: { type: String, default: 'right' },
 
@@ -50,6 +55,15 @@ export default {
     data() {
         return {
             showConfirmButtons: false,
+            waitRequest: false,
+            buttonConfirm: {
+                icon: 'checkLg',
+                disabled: false
+            },
+            buttonCancel: {
+                icon: 'xLg',
+                disabled: false
+            }
         };
     },
 
@@ -64,18 +78,49 @@ export default {
         },
 
         confirm(e) {
-            this.$emit("hasConfirmed", e);
+            if (!this.confirmWithRequest) {
+                this.$emit("hasConfirmed", e);
+                return;
+            }
+
+            this.request(e);
         },
 
         cancel(e) {
             this.$emit("hasCanceled", e);
-            this.showConfirmButtons = false;
+            this.close();
         },
 
         clickOut(e) {
+            if (this.waitRequest)
+                return;
             if (this.$el.contains(e.target))
                 return;
             this.cancel(e);
+        },
+
+        close() {
+            this.showConfirmButtons = false;
+        },
+
+        request(e) {
+            let action = e.target.getAttribute("data-action");
+            if (!action)
+                return;
+
+            Inertia.post(action, null, {
+                onStart: visit => {
+                    this.waitRequest = true;
+                    this.buttonCancel.disabled = this.buttonConfirm.disabled = true;
+                    this.buttonConfirm.icon = 'loading';
+                },
+                onFinish: visit => {
+                    this.waitRequest = false;
+                    this.buttonCancel.disabled = this.buttonConfirm.disabled = false;
+                    this.buttonConfirm.icon = 'checkLg';
+                    this.close();
+                }
+            });
         }
     },
 

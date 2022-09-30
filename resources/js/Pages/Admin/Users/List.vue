@@ -25,11 +25,9 @@
             <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.users.edit', {id:
             user.id})" />
 
-            <ButtonConfirmationUi v-if="user.can.delete" @hasClicked="deleteClick"
-                @hasConfirmed="deleteConfirm" @hasCanceled="deleteCancel"
-                confirm-text="Excluir?" icon="trash" variant="danger" size="sm"
-                :data-action="$route('admin.users.destroy',
-                {user: user.id})" class="ms-2" position="right" />
+            <ButtonConfirmationUi v-if="user.can.delete" confirm-text="Excluir?"
+                icon="trash" variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.users.destroy',
+                {user: user.id})" confirm-with-request />
         </template>
     </ListItem>
 
@@ -64,19 +62,6 @@ export default {
     },
 
     methods: {
-        deleteClick(e) {
-            // 
-        },
-        deleteConfirm(e) {
-            let action = e.target.getAttribute("data-action");
-
-            if (!action) return;
-
-            Inertia.post(action);
-        },
-        deleteCancel(e) {
-            // 
-        },
     },
 
     computed: {

@@ -698,11 +698,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    ButtonUi: _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ButtonUi: _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     text: {
@@ -725,6 +727,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": null
     },
+    confirmWithRequest: {
+      type: Boolean,
+      "default": false
+    },
     position: {
       type: String,
       "default": 'right'
@@ -744,7 +750,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showConfirmButtons: false
+      showConfirmButtons: false,
+      waitRequest: false,
+      buttonConfirm: {
+        icon: 'checkLg',
+        disabled: false
+      },
+      buttonCancel: {
+        icon: 'xLg',
+        disabled: false
+      }
     };
   },
   mounted: function mounted() {
@@ -756,15 +771,44 @@ __webpack_require__.r(__webpack_exports__);
       this.showConfirmButtons = true;
     },
     confirm: function confirm(e) {
-      this.$emit("hasConfirmed", e);
+      if (!this.confirmWithRequest) {
+        this.$emit("hasConfirmed", e);
+        return;
+      }
+
+      this.request(e);
     },
     cancel: function cancel(e) {
       this.$emit("hasCanceled", e);
-      this.showConfirmButtons = false;
+      this.close();
     },
     clickOut: function clickOut(e) {
+      if (this.waitRequest) return;
       if (this.$el.contains(e.target)) return;
       this.cancel(e);
+    },
+    close: function close() {
+      this.showConfirmButtons = false;
+    },
+    request: function request(e) {
+      var _this = this;
+
+      var action = e.target.getAttribute("data-action");
+      if (!action) return;
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(action, null, {
+        onStart: function onStart(visit) {
+          _this.waitRequest = true;
+          _this.buttonCancel.disabled = _this.buttonConfirm.disabled = true;
+          _this.buttonConfirm.icon = 'loading';
+        },
+        onFinish: function onFinish(visit) {
+          _this.waitRequest = false;
+          _this.buttonCancel.disabled = _this.buttonConfirm.disabled = false;
+          _this.buttonConfirm.icon = 'checkLg';
+
+          _this.close();
+        }
+      });
     }
   },
   computed: {
@@ -1256,17 +1300,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     type: Boolean,
     "default": false
   }
-}), _defineProperty(_layout$layout$compon, "methods", {
-  deleteClick: function deleteClick(e) {// 
-  },
-  deleteConfirm: function deleteConfirm(e) {
-    var action = e.target.getAttribute("data-action");
-    if (!action) return;
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.post(action);
-  },
-  deleteCancel: function deleteCancel(e) {// 
-  }
-}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
+}), _defineProperty(_layout$layout$compon, "methods", {}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
 
 /***/ }),
 
@@ -1934,23 +1968,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" confirm button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         onClick: $options.confirm,
         type: "button",
-        icon: "checkLg",
         variant: "success",
         size: $props.size,
         "class": "ms-2",
-        "data-action": $props.dataAction
+        "data-action": $props.dataAction,
+        icon: $data.buttonConfirm.icon,
+        disabled: $data.buttonConfirm.disabled
       }, null, 8
       /* PROPS */
-      , ["onClick", "size", "data-action"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cancel button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+      , ["onClick", "size", "data-action", "icon", "disabled"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cancel button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         onClick: $options.cancel,
         type: "button",
-        icon: "xLg",
         variant: "danger",
         size: $props.size,
-        "class": "ms-2"
+        "class": "ms-2",
+        icon: $data.buttonCancel.icon,
+        disabled: $data.buttonCancel.disabled
       }, null, 8
       /* PROPS */
-      , ["onClick", "size"])], 2
+      , ["onClick", "size", "icon", "disabled"])], 2
       /* CLASS */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
@@ -2547,21 +2583,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS */
         , ["to"]), user.can["delete"] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
           key: 0,
-          onHasClicked: $options.deleteClick,
-          onHasConfirmed: $options.deleteConfirm,
-          onHasCanceled: $options.deleteCancel,
           "confirm-text": "Excluir?",
           icon: "trash",
           variant: "danger",
           size: "sm",
+          "class": "ms-2",
+          position: "right",
           "data-action": _ctx.$route('admin.users.destroy', {
             user: user.id
           }),
-          "class": "ms-2",
-          position: "right"
+          "confirm-with-request": ""
         }, null, 8
         /* PROPS */
-        , ["onHasClicked", "onHasConfirmed", "onHasCanceled", "data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+        , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
       }),
       _: 2
       /* DYNAMIC */
@@ -2611,6 +2645,8 @@ var icons = (_icons = {
   listLeft: 'bi bi-filter-left',
   login: 'bi bi-box-arrow-right',
   logout: 'bi bi-box-arrow-left',
+  load: 'bi bi-arrow-clockwise',
+  loading: 'bi bi-arrow-clockwise animation-rotate-z',
   home: 'bi bi-house',
   pencilSquare: 'bi bi-pencil-square',
   pieChart: 'bi bi-pie-chart',

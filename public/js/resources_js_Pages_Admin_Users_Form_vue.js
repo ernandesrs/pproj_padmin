@@ -573,11 +573,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    ButtonUi: _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ButtonUi: _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     text: {
@@ -600,6 +602,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": null
     },
+    confirmWithRequest: {
+      type: Boolean,
+      "default": false
+    },
     position: {
       type: String,
       "default": 'right'
@@ -619,7 +625,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showConfirmButtons: false
+      showConfirmButtons: false,
+      waitRequest: false,
+      buttonConfirm: {
+        icon: 'checkLg',
+        disabled: false
+      },
+      buttonCancel: {
+        icon: 'xLg',
+        disabled: false
+      }
     };
   },
   mounted: function mounted() {
@@ -631,15 +646,44 @@ __webpack_require__.r(__webpack_exports__);
       this.showConfirmButtons = true;
     },
     confirm: function confirm(e) {
-      this.$emit("hasConfirmed", e);
+      if (!this.confirmWithRequest) {
+        this.$emit("hasConfirmed", e);
+        return;
+      }
+
+      this.request(e);
     },
     cancel: function cancel(e) {
       this.$emit("hasCanceled", e);
-      this.showConfirmButtons = false;
+      this.close();
     },
     clickOut: function clickOut(e) {
+      if (this.waitRequest) return;
       if (this.$el.contains(e.target)) return;
       this.cancel(e);
+    },
+    close: function close() {
+      this.showConfirmButtons = false;
+    },
+    request: function request(e) {
+      var _this = this;
+
+      var action = e.target.getAttribute("data-action");
+      if (!action) return;
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(action, null, {
+        onStart: function onStart(visit) {
+          _this.waitRequest = true;
+          _this.buttonCancel.disabled = _this.buttonConfirm.disabled = true;
+          _this.buttonConfirm.icon = 'loading';
+        },
+        onFinish: function onFinish(visit) {
+          _this.waitRequest = false;
+          _this.buttonCancel.disabled = _this.buttonConfirm.disabled = false;
+          _this.buttonConfirm.icon = 'checkLg';
+
+          _this.close();
+        }
+      });
     }
   },
   computed: {
@@ -1162,21 +1206,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   getDate: function getDate(data) {
     return new Date(data).toLocaleDateString("pt-BR");
-  },
-  promoteConfirm: function promoteConfirm() {
-    var action = this.$route("admin.users.promote", {
-      user: this.user.id
-    });
-    this.request(action);
-  },
-  demoteConfirm: function demoteConfirm() {
-    var action = this.$route("admin.users.demote", {
-      user: this.user.id
-    });
-    this.request(action);
-  },
-  request: function request(action) {
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.post(action);
   }
 }), _components$layout$la);
 
@@ -1701,23 +1730,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" confirm button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         onClick: $options.confirm,
         type: "button",
-        icon: "checkLg",
         variant: "success",
         size: $props.size,
         "class": "ms-2",
-        "data-action": $props.dataAction
+        "data-action": $props.dataAction,
+        icon: $data.buttonConfirm.icon,
+        disabled: $data.buttonConfirm.disabled
       }, null, 8
       /* PROPS */
-      , ["onClick", "size", "data-action"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cancel button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+      , ["onClick", "size", "data-action", "icon", "disabled"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cancel button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         onClick: $options.cancel,
         type: "button",
-        icon: "xLg",
         variant: "danger",
         size: $props.size,
-        "class": "ms-2"
+        "class": "ms-2",
+        icon: $data.buttonCancel.icon,
+        disabled: $data.buttonCancel.disabled
       }, null, 8
       /* PROPS */
-      , ["onClick", "size"])], 2
+      , ["onClick", "size", "icon", "disabled"])], 2
       /* CLASS */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
@@ -2339,29 +2370,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$props.user.next_level && $props.user.can.promote ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
     key: 0,
-    onHasConfirmed: $options.promoteConfirm,
     text: "Promover",
     "confirm-text": "Promover?",
     size: "sm",
     variant: "success",
     icon: "userPlus",
     "class": "m-1",
-    position: "center"
+    position: "center",
+    "data-action": _ctx.$route('admin.users.promote', {
+      user: $props.user.id
+    }),
+    "confirm-with-request": ""
   }, null, 8
   /* PROPS */
-  , ["onHasConfirmed"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.user.previous_level && $props.user.can.demote ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
+  , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.user.previous_level && $props.user.can.demote ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
     key: 1,
-    onHasConfirmed: $options.demoteConfirm,
     text: "Rebaixar",
     "confirm-text": "Rebaixar?",
     size: "sm",
     variant: "danger",
     icon: "userMinus",
     "class": "m-1",
-    position: "center"
+    position: "center",
+    "data-action": _ctx.$route('admin.users.demote', {
+      user: $props.user.id
+    }),
+    "confirm-with-request": ""
   }, null, 8
   /* PROPS */
-  , ["onHasConfirmed"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1
+  , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, " Nível: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.terms.level['level_' + $props.user.level]), 1
   /* TEXT */
@@ -2512,6 +2549,8 @@ var icons = (_icons = {
   listLeft: 'bi bi-filter-left',
   login: 'bi bi-box-arrow-right',
   logout: 'bi bi-box-arrow-left',
+  load: 'bi bi-arrow-clockwise',
+  loading: 'bi bi-arrow-clockwise animation-rotate-z',
   home: 'bi bi-house',
   pencilSquare: 'bi bi-pencil-square',
   pieChart: 'bi bi-pie-chart',

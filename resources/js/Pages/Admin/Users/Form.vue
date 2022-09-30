@@ -6,13 +6,15 @@
                 <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
                 <div class="d-flex pt-3">
                     <ButtonConfirmationUi v-if="user.next_level && user.can.promote"
-                        @hasConfirmed="promoteConfirm" text="Promover"
-                        confirm-text="Promover?" size="sm" variant="success"
-                        icon="userPlus" class="m-1" position="center" />
+                        text="Promover" confirm-text="Promover?" size="sm"
+                        variant="success" icon="userPlus" class="m-1" position="center"
+                        :data-action="$route('admin.users.promote', {user: user.id})"
+                        confirm-with-request />
                     <ButtonConfirmationUi v-if="user.previous_level && user.can.demote"
-                        @hasConfirmed="demoteConfirm" text="Rebaixar"
-                        confirm-text="Rebaixar?" size="sm" variant="danger"
-                        icon="userMinus" class="m-1" position="center" />
+                        text="Rebaixar" confirm-text="Rebaixar?" size="sm"
+                        variant="danger" icon="userMinus" class="m-1" position="center"
+                        :data-action="$route('admin.users.demote', {user: user.id})"
+                        confirm-with-request />
                 </div>
                 <div class="py-3 text-center">
                     <p class="mb-0">
@@ -155,20 +157,6 @@ export default {
         getDate(data) {
             return (new Date(data)).toLocaleDateString("pt-BR");
         },
-
-        promoteConfirm() {
-            let action = this.$route("admin.users.promote", { user: this.user.id });
-            this.request(action);
-        },
-
-        demoteConfirm() {
-            let action = this.$route("admin.users.demote", { user: this.user.id });
-            this.request(action);
-        },
-
-        request(action) {
-            Inertia.post(action);
-        }
     }
 }
 
