@@ -53,15 +53,16 @@
                 <div class="d-flex me-auto w-100">
 
                     <span class="ms-auto"></span>
-                    <DropdownUi icon="userCircle" text="User Name">
+                    <DropdownUi icon="userCircle"
+                        :text="`${auth.full_name.substring(0, 10) + (auth.full_name.length > 10 ? '...' : '')}`">
                         <template v-slot:dropdownMenu>
                             <div
                                 class="d-flex flex-column justify-content-center align-items-center">
                                 <img class="img-fluid img-thumbnail rounded-circle"
-                                    src="https://via.placeholder.com/175x175?name=photo"
-                                    alt="" style="width:60px;height:60px;">
+                                    :src="auth.thumb_small" :alt="auth.full_name"
+                                    style="width:60px;height:60px;">
                                 <h6 class="fw-semibold pt-2 text-muted text-center">
-                                    User Name
+                                    {{ auth.full_name }}
                                 </h6>
                             </div>
                             <DropdownDivider />
@@ -128,6 +129,10 @@ import Filter from '../Components/Filter.vue';
 
 export default {
     components: { Head, ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi, AlertUi, Filter },
+
+    props: {
+        auth: { type: Object, default: {} }
+    },
 
     data() {
         return {

@@ -5,7 +5,7 @@
             data-bs-toggle="dropdown">
             <template v-slot:buttonContent>
                 <IconUi icon="userCircle" class="fs-4" style="line-height: 0;" />
-                <span class="ms-2">User Name</span>
+                <span class="ms-2">{{ text }}</span>
             </template>
         </ButtonUi>
         <div class="dropdown-menu dropdown-menu-end">
