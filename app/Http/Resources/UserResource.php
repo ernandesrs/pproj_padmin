@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Helpers\Thumb;
+use App\Policies\UserPolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -34,6 +35,10 @@ class UserResource extends JsonResource
         $arr['thumb_small'] = Thumb::thumb($this->photo, "user.small");
         $arr['thumb_normal'] = Thumb::thumb($this->photo, "user.normal");
         $arr['thumb_large'] = Thumb::thumb($this->photo, "user.large");
+        $arr['can'] = [
+            'delete' => (new UserPolicy())->delete(auth()->user(), $this->resource),
+            'update' => (new UserPolicy())->update(auth()->user(), $this->resource)
+        ];
 
         return $arr;
     }

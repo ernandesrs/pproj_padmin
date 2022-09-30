@@ -18,7 +18,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->level > $model->level;
+        return $user->id == $model->id || $user->level > $model->level;
     }
 
     /**

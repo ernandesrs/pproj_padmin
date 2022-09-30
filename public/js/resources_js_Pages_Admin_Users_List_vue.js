@@ -2473,13 +2473,6 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   key: 1
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "mx-1"
-}, null, -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$props$users$data, _$props$users, _$props$users$meta;
 
@@ -2531,7 +2524,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })
         }, null, 8
         /* PROPS */
-        , ["to"]), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+        , ["to"]), user.can["delete"] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
+          key: 0,
           onHasClicked: $options.deleteClick,
           onHasConfirmed: $options.deleteConfirm,
           onHasCanceled: $options.deleteCancel,
@@ -2541,10 +2535,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           size: "sm",
           "data-action": _ctx.$route('admin.users.destroy', {
             user: user.id
-          })
+          }),
+          "class": "ms-2"
         }, null, 8
         /* PROPS */
-        , ["onHasClicked", "onHasConfirmed", "onHasCanceled", "data-action"])];
+        , ["onHasClicked", "onHasConfirmed", "onHasCanceled", "data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
       }),
       _: 2
       /* DYNAMIC */

@@ -23,11 +23,12 @@
         <template v-slot:actions>
             <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.users.edit', {id:
             user.id})" />
-            <span class="mx-1"></span>
-            <ButtonConfirmationUi @hasClicked="deleteClick" @hasConfirmed="deleteConfirm"
-                @hasCanceled="deleteCancel" confirm-text="Excluir?" icon="trash"
-                variant="danger" size="sm" :data-action="$route('admin.users.destroy',
-                {user: user.id})" />
+
+            <ButtonConfirmationUi v-if="user.can.delete" @hasClicked="deleteClick"
+                @hasConfirmed="deleteConfirm" @hasCanceled="deleteCancel"
+                confirm-text="Excluir?" icon="trash" variant="danger" size="sm"
+                :data-action="$route('admin.users.destroy',
+                {user: user.id})" class="ms-2" />
         </template>
     </ListItem>
 

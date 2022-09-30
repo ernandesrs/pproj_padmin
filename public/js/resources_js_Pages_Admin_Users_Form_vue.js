@@ -2141,10 +2141,11 @@ var _hoisted_22 = {
   "class": "col-12 col-md-6"
 };
 var _hoisted_23 = {
+  key: 1,
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$data$form, _$data$form2;
+  var _$data$form, _$data$form2, _$props$user, _$props$user2;
 
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
@@ -2265,7 +2266,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.password_confirmation
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "error-message"])]), (_$props$user = $props.user) !== null && _$props$user !== void 0 && _$props$user.id && $props.user.can.update || !((_$props$user2 = $props.user) !== null && _$props$user2 !== void 0 && _$props$user2.id) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     text: "Cadastrar",
     type: "submit",
     variant: "primary",
@@ -2273,7 +2274,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $data.form.processing
   }, null, 8
   /* PROPS */
-  , ["disabled"])])])], 32
+  , ["disabled"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32
   /* HYDRATE_EVENTS */
   )])]);
 }

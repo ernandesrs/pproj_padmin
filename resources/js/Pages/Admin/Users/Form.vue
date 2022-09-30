@@ -77,7 +77,7 @@
                             :error-message="form.errors.password_confirmation" />
                     </div>
 
-                    <div class="col-12 text-center">
+                    <div v-if="user?.id && user.can.update || !user?.id" class="col-12 text-center">
                         <ButtonUi text="Cadastrar" type="submit" variant="primary"
                             icon="checkLg" :disabled="form.processing" />
                     </div>
