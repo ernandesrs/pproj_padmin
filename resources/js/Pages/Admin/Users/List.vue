@@ -28,7 +28,7 @@
                 @hasConfirmed="deleteConfirm" @hasCanceled="deleteCancel"
                 confirm-text="Excluir?" icon="trash" variant="danger" size="sm"
                 :data-action="$route('admin.users.destroy',
-                {user: user.id})" class="ms-2" />
+                {user: user.id})" class="ms-2" position="right" />
         </template>
     </ListItem>
 

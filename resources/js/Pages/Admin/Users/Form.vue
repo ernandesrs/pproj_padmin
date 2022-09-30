@@ -4,6 +4,10 @@
         <div v-if="form?.id" class="col-12 col-md-4 mb-3 mb-md-0">
             <div class="d-flex flex-column align-items-center">
                 <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
+                <div class="d-flex pt-3">
+                    <ButtonConfirmationUi text="Promover" confirm-text="Promover?" size="sm" variant="success" icon="userPlus" class="m-1" position="center" />
+                    <ButtonConfirmationUi text="Rebaixar" confirm-text="Rebaixar?" size="sm" variant="danger" icon="userMinus" class="m-1" position="center" />
+                </div>
                 <div class="py-3 text-center">
                     <p class="mb-0">
                         <strong>Registro:</strong> <span class="text-muted">{{
@@ -95,9 +99,10 @@ import Layout from './../../../Layouts/Panel.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
+import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
 
 export default {
-    components: { InputForm, SelectForm, ButtonUi },
+    components: { InputForm, SelectForm, ButtonUi, ButtonConfirmationUi },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
     props: {

@@ -725,6 +725,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": null
     },
+    position: {
+      type: String,
+      "default": 'right'
+    },
     disabled: {
       type: Boolean,
       "default": false
@@ -740,7 +744,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showConfirmButtons: false
+      showConfirmButtons: false,
+      animationName: 'slide-fade-right'
     };
   },
   mounted: function mounted() {
@@ -761,6 +766,11 @@ __webpack_require__.r(__webpack_exports__);
     clickOut: function clickOut(e) {
       if (this.$el.contains(e.target)) return;
       this.cancel(e);
+    }
+  },
+  computed: {
+    animationName: function animationName() {
+      return "slide-fade-".concat(this.position);
     }
   }
 });
@@ -1903,11 +1913,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "position-relative bg-warning"
-};
-var _hoisted_2 = {
-  key: 0,
-  "class": "d-flex align-items-center bg-light shadow py-2 px-3 buttons-position"
+  "class": "position-relative"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
@@ -1923,10 +1929,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["onClick", "text", "icon", "variant", "size", "outlined"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    name: "slide-fade"
+    name: $options.animationName
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [$data.showConfirmButtons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      return [$data.showConfirmButtons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        key: 0,
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["d-flex align-items-center bg-light shadow py-2 px-3 buttons", "".concat('position-' + $props.position)])
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['fs-6 fw-normal px-2 text-' + $props.variant])
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.confirmText), 3
       /* TEXT, CLASS */
@@ -1949,12 +1958,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "ms-2"
       }, null, 8
       /* PROPS */
-      , ["onClick", "size"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      , ["onClick", "size"])], 2
+      /* CLASS */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
 
-  })]);
+  }, 8
+  /* PROPS */
+  , ["name"])]);
 }
 
 /***/ }),
@@ -2550,7 +2563,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "data-action": _ctx.$route('admin.users.destroy', {
             user: user.id
           }),
-          "class": "ms-2"
+          "class": "ms-2",
+          position: "right"
         }, null, 8
         /* PROPS */
         , ["onHasClicked", "onHasConfirmed", "onHasCanceled", "data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
@@ -2713,7 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.buttons-position {\r\n    position: absolute;\r\n    top: 50%;\r\n    right: 0;\r\n    transform: translate(0%, -50%);\n}\n.slide-fade-enter-active {\r\n    transition: all 0.25s ease-out;\n}\n.slide-fade-leave-active {\r\n    transition: all 0.125s ease-in-out;\n}\n.slide-fade-enter-to,\r\n.slide-fade-leavel-from {\r\n    transform: translate(0%, -50%) scale(1);\n}\n.slide-fade-enter-from,\r\n.slide-fade-leave-to {\r\n    transform: translate(100%, -50%) scale(0.5);\r\n    opacity: 0.5;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.buttons {\r\n    position: absolute;\r\n    z-index: 100;\r\n    top: 50%;\n}\n.position-left {\r\n    left: 0;\r\n    transform: translate(0%, -50%) scale(1);\n}\n.position-center {\r\n    right: 50%;\r\n    transform: translate(50%, -50%) scale(1);\n}\n.position-right {\r\n    right: 0;\r\n    transform: translate(0%, -50%) scale(1);\n}\n.slide-fade-left-enter-from,\r\n.slide-fade-left-leave-to {\r\n    transform: translate(-100%, -50%) scale(0.75);\r\n    opacity: 0;\n}\n.slide-fade-center-enter-from,\r\n.slide-fade-center-leave-to {\r\n    transform: translate(50%, -50%) scale(0.75);\r\n    opacity: 0;\n}\n.slide-fade-right-enter-from,\r\n.slide-fade-right-leave-to {\r\n    transform: translate(100%, -50%) scale(0.75);\r\n    opacity: 0;\n}\n.slide-fade-right-enter-active,\r\n.slide-fade-left-enter-active,\r\n.slide-fade-center-enter-active {\r\n    transition: all 0.25s ease-out;\n}\n.slide-fade-right-leave-active,\r\n.slide-fade-left-leave-active,\r\n.slide-fade-center-leave-active {\r\n    transition: all 0.25s ease-in-out;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
