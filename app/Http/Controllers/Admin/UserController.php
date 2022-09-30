@@ -124,6 +124,8 @@ class UserController extends Controller
      */
     public function update(UserStoreUpdateRequest $request, User $user)
     {
+        $this->authorize("update", $user);
+
         $validated = $request->validated();
 
         if ($photo = $validated["photo"]) {
@@ -157,6 +159,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize("delete", $user);
+
         if ($user->photo) {
             Thumb::clear($user->photo);
             Storage::delete("public/{$user->photo}");
