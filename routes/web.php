@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect("/admin");
+    return "front: :D";
 })->name("front.index");
 
 Route::group(["prefix" => "auth"], function () {
@@ -34,7 +34,7 @@ Route::group(["prefix" => "auth"], function () {
     });
 });
 
-Route::group(["prefix" => "admin", "middleware" => ["auth"]], function () {
+Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
 
     Route::group(["prefix" => "users"], function () {
