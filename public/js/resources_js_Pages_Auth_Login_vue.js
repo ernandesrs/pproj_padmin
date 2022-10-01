@@ -440,6 +440,9 @@ __webpack_require__.r(__webpack_exports__);
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link,
     AlertUi: _Components_Ui_AlertUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: {
+    auth: {}
+  },
   data: function data() {
     return {
       navs: [{
@@ -875,6 +878,7 @@ var _hoisted_4 = {
   "class": "col-12 col-lg-7 col-xl-7 py-4 px-5"
 };
 var _hoisted_5 = {
+  key: 0,
   "class": "d-flex justify-content-end mb-4"
 };
 var _hoisted_6 = ["href"];
@@ -886,14 +890,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_AlertUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AlertUi");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_ctx.$page.component != 'Auth/Verification/Verify' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['px-3 py-2 rounded me-auto', {
       'bg-primary text-light': _ctx.$route().current() == 'front.index'
     }]),
     href: _ctx.$route('front.index')
   }, " Início ", 10
   /* CLASS, PROPS */
-  , _hoisted_6), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.navs, function (nav) {
+  , _hoisted_6), !$props.auth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 0
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.navs, function (nav) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
       key: nav.url,
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['px-3 py-2 rounded', {
@@ -914,7 +920,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["class", "href"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
     ref: "alert"
   }, null, 512
   /* NEED_PATCH */

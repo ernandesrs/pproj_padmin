@@ -26575,6 +26575,22 @@ var map = {
 	"./Auth/Register.vue": [
 		"./resources/js/Pages/Auth/Register.vue",
 		"resources_js_Pages_Auth_Register_vue"
+	],
+	"./Auth/Verification/Notify": [
+		"./resources/js/Pages/Auth/Verification/Notify.vue",
+		"resources_js_Pages_Auth_Verification_Notify_vue"
+	],
+	"./Auth/Verification/Notify.vue": [
+		"./resources/js/Pages/Auth/Verification/Notify.vue",
+		"resources_js_Pages_Auth_Verification_Notify_vue"
+	],
+	"./Auth/Verification/Verify": [
+		"./resources/js/Pages/Auth/Verification/Verify.vue",
+		"resources_js_Pages_Auth_Verification_Verify_vue"
+	],
+	"./Auth/Verification/Verify.vue": [
+		"./resources/js/Pages/Auth/Verification/Verify.vue",
+		"resources_js_Pages_Auth_Verification_Verify_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -26725,7 +26741,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Admin_Examples_Example1_vue":1,"resources_js_Pages_Admin_Examples_Example2_vue":1,"resources_js_Pages_Admin_Examples_Example3_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Password_Forget_vue":1,"resources_js_Pages_Auth_Password_Reset_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Admin_Examples_Example1_vue":1,"resources_js_Pages_Admin_Examples_Example2_vue":1,"resources_js_Pages_Admin_Examples_Example3_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Password_Forget_vue":1,"resources_js_Pages_Auth_Password_Reset_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_Verification_Notify_vue":1,"resources_js_Pages_Auth_Verification_Verify_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

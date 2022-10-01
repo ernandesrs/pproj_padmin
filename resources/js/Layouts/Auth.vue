@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-12 col-lg-5 col-xl-5 py-4 bg-primary"></div>
             <div class="col-12 col-lg-7 col-xl-7 py-4 px-5">
-                <div class="d-flex justify-content-end mb-4">
+                <div v-if="$page.component != 'Auth/Verification/Verify'" class="d-flex justify-content-end mb-4">
                     <a :class="['px-3 py-2 rounded me-auto', {'bg-primary text-light': $route().current() == 'front.index'}]"
                         :href="$route('front.index')">
                         Início
                     </a>
-                    <Link v-for="nav in navs" v-bind:key="nav.url"
+                    <Link v-if="!auth" v-for="nav in navs" v-bind:key="nav.url"
                         :class="['px-3 py-2 rounded', {'bg-primary text-light': nav.activeIn.includes($route().current())}]"
                         :href="nav.url">
                     {{ nav.text }}
@@ -34,6 +34,9 @@ export default {
     components: {
         Link,
         AlertUi
+    },
+    props: {
+        auth: {}
     },
     data() {
         return {
