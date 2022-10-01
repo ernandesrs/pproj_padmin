@@ -1178,11 +1178,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     label: "Gênero",
     name: "gender",
     options: [{
+      text: 'Não definir',
+      value: 0
+    }, {
       text: 'Masculino',
-      value: 'male'
+      value: 1
     }, {
       text: 'Feminino',
-      value: 'female'
+      value: 2
     }],
     modelValue: $setup.form.gender,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {

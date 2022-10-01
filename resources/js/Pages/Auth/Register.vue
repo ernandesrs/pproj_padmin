@@ -21,8 +21,9 @@
 
             <div class="col-12 col-sm-5 col-md-6">
                 <SelectForm label="Gênero" name="gender" :options="[
-                    {text: 'Masculino', value: 'male'},
-                    {text: 'Feminino', value: 'female'},
+                    {text: 'Não definir', value: 0},
+                    {text: 'Masculino', value: 1},
+                    {text: 'Feminino', value: 2},
                 ]" v-model="form.gender"
                     :error-message="form.errors.gender" />
             </div>
