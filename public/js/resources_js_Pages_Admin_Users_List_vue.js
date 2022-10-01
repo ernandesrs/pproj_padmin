@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     inputContainerStyle: function inputContainerStyle() {
-      return "".concat(this.isCheck || this.isRadio ? 'form-check' + (this.inline ? ' form-check-inline' : '') : 'input-group', " has-validation mb-3");
+      return "".concat(this.isCheck || this.isRadio ? 'form-check' + (this.inline ? ' form-check-inline' : '') : 'input-group', " has-validation");
     }
   }
 });
@@ -122,6 +122,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    GroupForm: _GroupForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    LabelForm: _LabelForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    InvalidFeedbackForm: _InvalidFeedbackForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   props: {
     label: {
       type: String,
@@ -172,11 +177,6 @@ __webpack_require__.r(__webpack_exports__);
     updateValue: function updateValue(e) {
       if (this.type == 'file') this.$emit("update:modelValue", e);else this.$emit("update:modelValue", e.target.value);
     }
-  },
-  components: {
-    GroupForm: _GroupForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    LabelForm: _LabelForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    InvalidFeedbackForm: _InvalidFeedbackForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 

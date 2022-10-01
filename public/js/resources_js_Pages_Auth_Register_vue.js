@@ -44,7 +44,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     inputContainerStyle: function inputContainerStyle() {
-      return "".concat(this.isCheck || this.isRadio ? 'form-check' + (this.inline ? ' form-check-inline' : '') : 'input-group', " has-validation mb-3");
+      return "".concat(this.isCheck || this.isRadio ? 'form-check' + (this.inline ? ' form-check-inline' : '') : 'input-group', " has-validation");
     }
   }
 });
@@ -68,6 +68,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    GroupForm: _GroupForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    LabelForm: _LabelForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    InvalidFeedbackForm: _InvalidFeedbackForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   props: {
     label: {
       type: String,
@@ -118,11 +123,6 @@ __webpack_require__.r(__webpack_exports__);
     updateValue: function updateValue(e) {
       if (this.type == 'file') this.$emit("update:modelValue", e);else this.$emit("update:modelValue", e.target.value);
     }
-  },
-  components: {
-    GroupForm: _GroupForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    LabelForm: _LabelForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    InvalidFeedbackForm: _InvalidFeedbackForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -1109,28 +1109,28 @@ var _hoisted_1 = {
   "class": "row"
 };
 var _hoisted_2 = {
-  "class": "col-12 col-md-6"
+  "class": "col-12 col-md-6 mb-4"
 };
 var _hoisted_3 = {
-  "class": "col-12 col-md-6"
+  "class": "col-12 col-md-6 mb-4"
 };
 var _hoisted_4 = {
-  "class": "col-12 col-sm-7 col-md-6"
+  "class": "col-12 col-sm-7 col-md-6 mb-4"
 };
 var _hoisted_5 = {
-  "class": "col-12 col-sm-5 col-md-6"
+  "class": "col-12 col-sm-5 col-md-6 mb-4"
 };
 var _hoisted_6 = {
-  "class": "col-12"
+  "class": "col-12 mb-4"
 };
 var _hoisted_7 = {
-  "class": "col-12 col-md-6"
+  "class": "col-12 col-md-6 mb-4"
 };
 var _hoisted_8 = {
-  "class": "col-12 col-md-6"
+  "class": "col-12 col-md-6 mb-4"
 };
 var _hoisted_9 = {
-  "class": "col-12 text-center"
+  "class": "col-12 text-center mb-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");

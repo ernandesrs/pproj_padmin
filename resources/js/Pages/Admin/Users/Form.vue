@@ -33,24 +33,24 @@
         <div class="col-12 col-md-8">
             <form @submit.prevent="submit">
                 <div class="row">
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-6 mb-4">
                         <InputForm label="Nome" name="first_name"
                             v-model="form.first_name"
                             :error-message="form.errors.first_name" />
                     </div>
 
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-6 mb-4">
                         <InputForm label="Sobrenome" name="last_name"
                             v-model="form.last_name"
                             :error-message="form.errors.last_name" />
                     </div>
 
-                    <div class="col-12 col-sm-7 col-md-6">
+                    <div class="col-12 col-sm-7 col-md-6 mb-4">
                         <InputForm label="Usuário" name="username" v-model="form.username"
                             :error-message="form.errors.username" />
                     </div>
 
-                    <div class="col-12 col-sm-5 col-md-6">
+                    <div class="col-12 col-sm-5 col-md-6 mb-4">
                         <SelectForm label="Gênero" name="gender" :options="[
                             {text: 'Não definir', value: 0},
                             {text: 'Masculino', value: 1},
@@ -58,13 +58,13 @@
                         ]" v-model="form.gender" :error-message="form.errors.gender" />
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mb-4">
                         <InputForm label="Email" type="email" name="email"
                             v-model="form.email" :error-message="form.errors.email"
                             :disabled="form?.id ? true : false" />
                     </div>
 
-                    <div v-if="form.id" class="col-12">
+                    <div v-if="form.id" class="col-12 mb-4">
                         <InputForm
                             @update:modelValue="form.photo = $event.target.files[0]"
                             label="Foto" type="file" name="photo"
@@ -76,13 +76,13 @@
                         </progress>
                     </div>
 
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 mb-4">
                         <InputForm label="Senha" type="password" name="password"
                             v-model="form.password"
                             :error-message="form.errors.password" />
                     </div>
 
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 mb-4">
                         <InputForm label="Confirmar senha" type="password"
                             name="password_confirmation"
                             v-model="form.password_confirmation"

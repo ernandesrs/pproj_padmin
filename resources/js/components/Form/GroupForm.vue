@@ -16,7 +16,7 @@ export default {
 
     computed: {
         inputContainerStyle() {
-            return `${this.isCheck || this.isRadio ? 'form-check' + (this.inline ? ' form-check-inline' : '') : 'input-group'} has-validation mb-3`;
+            return `${this.isCheck || this.isRadio ? 'form-check' + (this.inline ? ' form-check-inline' : '') : 'input-group'} has-validation`;
         },
     }
 };

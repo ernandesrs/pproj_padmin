@@ -4,25 +4,27 @@
 
     <form @submit.prevent="submit">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
+            <div class="col-12 col-md-10 col-lg-8 mb-4">
                 <InputForm label="E-mail" type="email" name="email"
                     :error-message="form.errors.email" v-model="form.email" />
             </div>
 
-            <div class="col-12 col-md-10 col-lg-8">
+            <div class="col-12 col-md-10 col-lg-8 mb-4">
                 <InputForm label="Senha" type="password" name="password"
                     :error-message="form.errors.password" v-model="form.password" />
             </div>
 
-            <div class="col-12 col-md-10 col-lg-8">
+            <div class="col-12 col-md-10 col-lg-8 mb-4 d-flex align-items-center">
                 <InputForm label="Lembre-se de mim" type="checkbox" name="remember_me"
                     :error-message="form.errors.remember_me" v-model="form.remember_me"
                     inline />
+
+                <span class="ms-auto"></span>
+                <ButtonUi text="Login" type="submit" variant="primary" icon="checkLg"
+                    :disabled="form.processing" />
             </div>
 
             <div class="col-12 text-center">
-                <ButtonUi text="Login" type="submit" variant="primary" icon="checkLg"
-                    :disabled="form.processing" />
             </div>
         </div>
 

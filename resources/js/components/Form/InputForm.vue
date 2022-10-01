@@ -21,6 +21,7 @@ import LabelForm from './LabelForm.vue';
 import InvalidFeedbackForm from './InvalidFeedbackForm.vue';
 
 export default {
+    components: { GroupForm, LabelForm, InvalidFeedbackForm },
     props: {
         label: { type: String, default: null },
         type: { type: String, default: "text" },
@@ -48,6 +49,5 @@ export default {
                 this.$emit("update:modelValue", e.target.value);
         }
     },
-    components: { GroupForm, LabelForm, InvalidFeedbackForm }
 };
 </script>
