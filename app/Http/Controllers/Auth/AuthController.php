@@ -89,6 +89,41 @@ class AuthController extends Controller
     }
 
     /**
+     * @param string $token
+     * @return void
+     */
+    public function verify(string $token)
+    {
+        $tokenDecoded = explode("|", base64_decode($token));
+
+        $route = null;
+        $user = User::where("confirmation_token", $tokenDecoded[0] ?? null)->first();
+        if (!$user) {
+            $route = "auth.login";
+            session()->flash("flash_alert", [
+                "variant" => "danger",
+                "message" => "Link de verificação com token inválido! Solicite um novo link de verificação.",
+            ]);
+        } else {
+            $user->confirmation_token = null;
+            $user->email_verified_at = now();
+            $user->save();
+
+            session()->flash("flash_alert", [
+                "variant" => "success",
+                "message" => "Sua conta foi verificada com sucesso!",
+            ]);
+
+            if (auth()->user())
+                $route = "admin.index";
+            else
+                $route = "auth.login";
+        }
+
+        return redirect()->route($route);
+    }
+
+    /**
      * @return void
      */
     public function logout()
