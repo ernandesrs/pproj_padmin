@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExampleController as AdminExampleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Mail\RegisterVerificationMail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,10 @@ Route::get('/', function () {
     return "front: :D";
 })->name("front.index");
 
+Route::get('/mailable', function () {
+    return (new RegisterVerificationMail(auth()->user()));
+})->name("front.mailable");
+
 Route::group(["prefix" => "auth"], function () {
     Route::group(["middleware" => ["guest"]], function () {
         Route::get("/login", [AuthController::class, "login"])->name("auth.login");
@@ -28,6 +33,8 @@ Route::group(["prefix" => "auth"], function () {
         Route::get("/register", [AuthController::class, "register"])->name("auth.register");
         Route::post("/register", [AuthController::class, "store"])->name("auth.store");
     });
+
+    Route::get("/verificar/{token}", [AuthController::class, "verify"])->name("auth.verify");
 
     Route::group(["middleware" => ["auth"]], function () {
         Route::get("/logout", [AuthController::class, "logout"])->name("auth.logout");
