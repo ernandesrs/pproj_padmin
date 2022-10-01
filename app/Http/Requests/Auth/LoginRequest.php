@@ -17,6 +17,18 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'remember_me' => ($this->remember_me ?? null) == 'on' ? true : false,
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -25,7 +37,8 @@ class LoginRequest extends FormRequest
     {
         return [
             "email" => ["required", "email"],
-            "password" => ["required"]
+            "password" => ["required"],
+            "remember_me" => ["nullable", "boolean"],
         ];
     }
 }

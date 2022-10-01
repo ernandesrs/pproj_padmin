@@ -28,8 +28,11 @@ class AuthController extends Controller
     public function authenticate(LoginRequest $request)
     {
         $validated = $request->validated();
+        $remember = $validated["remember_me"] ?? false;
 
-        if (auth()->attempt($validated, $validated["remember_me"] ?? false)) {
+        unset($validated["remember_me"]);
+
+        if (auth()->attempt($validated, $remember)) {
             $user = auth()->user();
             $v = $user->gender == 2 ? "a" : "o";
 
