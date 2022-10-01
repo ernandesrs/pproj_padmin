@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ForgetPassword;
 use App\Events\UserRegistered;
+use App\Listeners\SendRecoveryLink;
 use App\Listeners\SendVerificationMail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserRegistered::class => [
             SendVerificationMail::class
+        ],
+        ForgetPassword::class => [
+            SendRecoveryLink::class
         ]
     ];
 

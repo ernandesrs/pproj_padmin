@@ -25,6 +25,7 @@
             </div>
 
             <div class="col-12 text-center">
+                <Link :href="$route('auth.forget')">Esquecia minha senha</Link>
             </div>
         </div>
 
@@ -35,12 +36,12 @@
 <script>
 
 import Layout from './../../Layouts/Auth.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import { Head, useForm, Link } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../Components/Ui/ButtonUi.vue';
 import InputForm from '../../Components/Form/InputForm.vue';
 
 export default {
-    components: { Head, useForm, ButtonUi, InputForm },
+    components: { Head, useForm, ButtonUi, InputForm, Link },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
 

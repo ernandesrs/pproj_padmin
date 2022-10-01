@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExampleController as AdminExampleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Mail\RegisterVerificationMail;
+use App\Http\Controllers\Auth\ForgetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +23,13 @@ Route::get('/', function () {
 })->name("front.index");
 
 Route::get('/mailable', function () {
-    return (new RegisterVerificationMail(auth()->user()));
+    $user = \App\Models\User::where("email", "rsouza.ernandes@gmail.com")->first();
+    $reset = new \App\Models\PasswordReset();
+    $reset->id = 10;
+    $reset->token = "a";
+    $reset->email = $user->email;
+
+    return (new \App\Mail\RecoveryPasswordMail($user, $reset));
 })->name("front.mailable");
 
 Route::group(["prefix" => "auth"], function () {
@@ -34,7 +40,11 @@ Route::group(["prefix" => "auth"], function () {
         Route::post("/register", [AuthController::class, "store"])->name("auth.store");
     });
 
-    Route::get("/verificar/{token}", [AuthController::class, "verify"])->name("auth.verify");
+    Route::get("/verify/{token}", [AuthController::class, "verify"])->name("auth.verify");
+    Route::get("/forget-password", [ForgetController::class, "forget"])->name("auth.forget");
+    Route::post("/forget-password", [ForgetController::class, "sendRecoveryLink"])->name("auth.sendRecoveryLink");
+    Route::get("/reset-password/{token}", [ForgetController::class, "reset"])->name("auth.reset");
+    Route::post("/reset-password", [ForgetController::class, "resetPassword"])->name("auth.resetPassword");
 
     Route::group(["middleware" => ["auth"]], function () {
         Route::get("/logout", [AuthController::class, "logout"])->name("auth.logout");
