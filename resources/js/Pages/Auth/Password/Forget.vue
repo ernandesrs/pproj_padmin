@@ -29,17 +29,16 @@
   
 <script>
 
-import Layout from './../../Layouts/Auth.vue';
+import Layout from './../../../Layouts/Auth.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
-import ButtonUi from '../../Components/Ui/ButtonUi.vue';
-import InputForm from '../../Components/Form/InputForm.vue';
+import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
+import InputForm from '../../../Components/Form/InputForm.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
     components: { Head, useForm, ButtonUi, InputForm },
     props: {
-        user: {},
         hasSent: false
     },
 

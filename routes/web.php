@@ -38,13 +38,14 @@ Route::group(["prefix" => "auth"], function () {
         Route::post("/login", [AuthController::class, "authenticate"])->name("auth.authenticate");
         Route::get("/register", [AuthController::class, "register"])->name("auth.register");
         Route::post("/register", [AuthController::class, "store"])->name("auth.store");
+
+        Route::get("/forget-password", [ForgetController::class, "forget"])->name("auth.forget");
+        Route::post("/forget-password", [ForgetController::class, "sendRecoveryLink"])->name("auth.sendRecoveryLink");
+        Route::get("/reset-password/{token}", [ForgetController::class, "reset"])->name("auth.reset");
+        Route::post("/reset-password", [ForgetController::class, "resetPassword"])->name("auth.resetPassword");
     });
 
     Route::get("/verify/{token}", [AuthController::class, "verify"])->name("auth.verify");
-    Route::get("/forget-password", [ForgetController::class, "forget"])->name("auth.forget");
-    Route::post("/forget-password", [ForgetController::class, "sendRecoveryLink"])->name("auth.sendRecoveryLink");
-    Route::get("/reset-password/{token}", [ForgetController::class, "reset"])->name("auth.reset");
-    Route::post("/reset-password", [ForgetController::class, "resetPassword"])->name("auth.resetPassword");
 
     Route::group(["middleware" => ["auth"]], function () {
         Route::get("/logout", [AuthController::class, "logout"])->name("auth.logout");

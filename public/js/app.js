@@ -26544,14 +26544,6 @@ var map = {
 		"./resources/js/Pages/Admin/Users/List.vue",
 		"resources_js_Pages_Admin_Users_List_vue"
 	],
-	"./Auth/Forget": [
-		"./resources/js/Pages/Auth/Forget.vue",
-		"resources_js_Pages_Auth_Forget_vue"
-	],
-	"./Auth/Forget.vue": [
-		"./resources/js/Pages/Auth/Forget.vue",
-		"resources_js_Pages_Auth_Forget_vue"
-	],
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.vue",
 		"resources_js_Pages_Auth_Login_vue"
@@ -26559,6 +26551,22 @@ var map = {
 	"./Auth/Login.vue": [
 		"./resources/js/Pages/Auth/Login.vue",
 		"resources_js_Pages_Auth_Login_vue"
+	],
+	"./Auth/Password/Forget": [
+		"./resources/js/Pages/Auth/Password/Forget.vue",
+		"resources_js_Pages_Auth_Password_Forget_vue"
+	],
+	"./Auth/Password/Forget.vue": [
+		"./resources/js/Pages/Auth/Password/Forget.vue",
+		"resources_js_Pages_Auth_Password_Forget_vue"
+	],
+	"./Auth/Password/Reset": [
+		"./resources/js/Pages/Auth/Password/Reset.vue",
+		"resources_js_Pages_Auth_Password_Reset_vue"
+	],
+	"./Auth/Password/Reset.vue": [
+		"./resources/js/Pages/Auth/Password/Reset.vue",
+		"resources_js_Pages_Auth_Password_Reset_vue"
 	],
 	"./Auth/Register": [
 		"./resources/js/Pages/Auth/Register.vue",
@@ -26717,7 +26725,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Admin_Examples_Example1_vue":1,"resources_js_Pages_Admin_Examples_Example2_vue":1,"resources_js_Pages_Admin_Examples_Example3_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Forget_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Admin_Examples_Example1_vue":1,"resources_js_Pages_Admin_Examples_Example2_vue":1,"resources_js_Pages_Admin_Examples_Example3_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Password_Forget_vue":1,"resources_js_Pages_Auth_Password_Reset_vue":1,"resources_js_Pages_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
