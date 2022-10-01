@@ -2,22 +2,12 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExampleController as AdminExampleController;
+use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
 use App\Http\Controllers\Auth\VerifyController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return "front: :D";
@@ -62,6 +52,13 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], fu
         Route::post("/destroy/{user}", [AdminUserController::class, "destroy"])->name("admin.users.destroy");
         Route::post("/promote/{user}", [AdminUserController::class, "promote"])->name("admin.users.promote");
         Route::post("/demote/{user}", [AdminUserController::class, "demote"])->name("admin.users.demote");
+    });
+
+    Route::group(["prefix" => "medias"], function () {
+        Route::get("/images", [AdminImageController::class, "index"])->name("admin.medias.images.index");
+        Route::post("/images/store", [AdminImageController::class, "store"])->name("admin.medias.images.store");
+        Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
+        Route::post("/images/delete/{image}", [AdminImageController::class, "delete"])->name("admin.medias.images.delete");
     });
 
     Route::group(["prefix" => "example"], function () {
