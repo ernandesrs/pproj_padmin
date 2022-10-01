@@ -39,6 +39,7 @@ class RegisterVerificationMail extends Mailable
             ->to($this->user->email, $this->user->first_name . " " . $this->user->last_name)
             ->with([
                 'name' => $this->user->first_name,
+                'gender' => $this->user->gender,
                 'verificationLink' => route('auth.verify', [
                     'token' => base64_encode($this->user->confirmation_token . '|' . time())
                 ])

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserRegistered;
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreUpdateRequest;
@@ -83,7 +84,14 @@ class UserController extends Controller
         $user->confirmation_token = Str::random(20);
         $user->save();
 
-        return redirect()->route("admin.users.edit", ["user" => $user->id]);
+        event(new UserRegistered($user));
+
+        session()->flash("flash_alert", [
+            "variant" => "success",
+            "message" => "Novo usuário cadastrado com sucesso, um link de verificação foi enviado para o email informado."
+        ]);
+
+        return Inertia::location(route("admin.users.edit", ["user" => $user->id]));
     }
 
     /**
