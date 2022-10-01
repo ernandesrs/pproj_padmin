@@ -4,8 +4,8 @@
         <div v-if="icon" :class="iconCardStyle">
             <IconUi :icon="icon" />
         </div>
-        <div class="ms-2">
-            <h2 class="fs-5 fw-semibold mb-1" v-html="title"></h2>
+        <div :class="{'ms-2': icon}">
+            <h2 v-if="title" v-html="title" class="fs-5 fw-semibold mb-1"></h2>
             <div v-if="$slots.content">
                 <slot name="content" />
             </div>
