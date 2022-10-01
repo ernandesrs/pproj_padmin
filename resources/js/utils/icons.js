@@ -7,10 +7,13 @@ const icons = {
     check: 'bi bi-check',
     checkLg: 'bi bi-check-lg',
     checkCircleFill: 'bi bi-check-circle-fill',
+    collection: 'bi bi-collection',
+    collectionPlay: 'bi bi-collection-play',
 
     exclamationCircleFill: 'bi bi-exclamation-circle-fill',
 
     infoCircleFill: 'bi bi-info-circle-fill',
+    images: 'bi bi-images',
 
     listRight: 'bi bi-filter-right',
     listLeft: 'bi bi-filter-left',
@@ -29,6 +32,8 @@ const icons = {
     search: 'bi bi-search',
 
     trash: 'bi bi-trash',
+
+    video: 'bi bi-play-btn',
 
     user: 'bi bi-person',
     users: 'bi bi-people',

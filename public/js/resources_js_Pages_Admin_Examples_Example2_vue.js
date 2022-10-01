@@ -892,25 +892,20 @@ var WIDTH_MOBILE = 768;
           icon: 'users',
           activeIn: ['Admin/Users/List', 'Admin/Users/Form']
         }, {
-          text: 'Examples',
+          text: 'Mídias',
           href: '#',
-          icon: 'app',
-          activeIn: ['Admin/Examples/Example1', 'Admin/Examples/Example2', 'Admin/Examples/Example3'],
+          icon: 'collection',
+          activeIn: ['Admin/Medias/Images/List'],
           items: [{
-            text: 'Example 1',
-            to: this.$route('admin.example1'),
-            icon: 'appIndicator',
-            activeIn: ['Admin/Examples/Example1']
+            text: 'Imagens',
+            to: this.$route('admin.medias.images.index'),
+            icon: 'images',
+            activeIn: ['Admin/Medias/Images/List']
           }, {
-            text: 'Example 2',
-            to: this.$route('admin.example2'),
-            icon: 'appIndicator',
-            activeIn: ['Admin/Examples/Example2']
-          }, {
-            text: 'Example 3',
-            to: this.$route('admin.example3'),
-            icon: 'appIndicator',
-            activeIn: ['Admin/Examples/Example3']
+            text: 'Vídeos',
+            to: '#',
+            icon: 'collectionPlay',
+            activeIn: ['']
           }]
         }, {
           text: 'Navgroup #2',
@@ -2053,8 +2048,11 @@ var icons = (_icons = {
   check: 'bi bi-check',
   checkLg: 'bi bi-check-lg',
   checkCircleFill: 'bi bi-check-circle-fill',
+  collection: 'bi bi-collection',
+  collectionPlay: 'bi bi-collection-play',
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
   infoCircleFill: 'bi bi-info-circle-fill',
+  images: 'bi bi-images',
   listRight: 'bi bi-filter-right',
   listLeft: 'bi bi-filter-left',
   login: 'bi bi-box-arrow-right',
@@ -2068,6 +2066,7 @@ var icons = (_icons = {
   plusLg: 'bi bi-plus-lg',
   search: 'bi bi-search',
   trash: 'bi bi-trash',
+  video: 'bi bi-play-btn',
   user: 'bi bi-person',
   users: 'bi bi-people',
   userX: 'bi bi-person-x',

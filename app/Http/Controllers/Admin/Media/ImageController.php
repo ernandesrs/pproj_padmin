@@ -5,17 +5,33 @@ namespace App\Http\Controllers\Admin\Media;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
 use App\Models\Media\Image;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ImageController extends Controller
 {
     /**
+     * @var boolean
+     */
+    private bool $filtering = false;
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        //
+        Inertia::setRootView("panel");
+        return Inertia::render("Admin/Medias/Images/List", [
+            "users" => null,
+            "filterAction" => route("admin.medias.images.index"),
+            "isFiltering" => $this->filtering,
+            "pageTitle" => "Imagens",
+            "buttons" => [
+                "button_new" => "#"
+            ]
+        ]);
     }
 
     /**

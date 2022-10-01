@@ -155,28 +155,22 @@ export default {
                         activeIn: ['Admin/Users/List', 'Admin/Users/Form']
                     },
                     {
-                        text: 'Examples',
+                        text: 'Mídias',
                         href: '#',
-                        icon: 'app',
-                        activeIn: ['Admin/Examples/Example1', 'Admin/Examples/Example2', 'Admin/Examples/Example3'],
+                        icon: 'collection',
+                        activeIn: ['Admin/Medias/Images/List'],
                         items: [
                             {
-                                text: 'Example 1',
-                                to: this.$route('admin.example1'),
-                                icon: 'appIndicator',
-                                activeIn: ['Admin/Examples/Example1']
+                                text: 'Imagens',
+                                to: this.$route('admin.medias.images.index'),
+                                icon: 'images',
+                                activeIn: ['Admin/Medias/Images/List']
                             },
                             {
-                                text: 'Example 2',
-                                to: this.$route('admin.example2'),
-                                icon: 'appIndicator',
-                                activeIn: ['Admin/Examples/Example2']
-                            },
-                            {
-                                text: 'Example 3',
-                                to: this.$route('admin.example3'),
-                                icon: 'appIndicator',
-                                activeIn: ['Admin/Examples/Example3']
+                                text: 'Vídeos',
+                                to: '#',
+                                icon: 'collectionPlay',
+                                activeIn: ['']
                             }
                         ]
                     },
