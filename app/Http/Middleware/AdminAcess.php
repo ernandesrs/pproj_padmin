@@ -21,6 +21,8 @@ class AdminAcess
         if (!in_array($request->user()->level, [User::LEVEL_8, User::LEVEL_MASTER]))
             return Inertia::location(route("front.index"));
 
+        Inertia::setRootView("panel");
+
         return $next($request);
     }
 }

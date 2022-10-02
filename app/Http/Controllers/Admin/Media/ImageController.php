@@ -22,14 +22,17 @@ class ImageController extends Controller
      */
     public function index()
     {
-        Inertia::setRootView("panel");
         return Inertia::render("Admin/Medias/Images/List", [
             "users" => null,
             "filterAction" => route("admin.medias.images.index"),
             "isFiltering" => $this->filtering,
             "pageTitle" => "Imagens",
             "buttons" => [
-                "button_new" => "#"
+                "new" => [
+                    "text" => "Upload",
+                    "icon" => "image",
+                    "url" => ""
+                ]
             ]
         ]);
     }

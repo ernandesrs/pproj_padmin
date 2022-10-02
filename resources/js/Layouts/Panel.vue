@@ -85,14 +85,16 @@
 
                     <h1 class="fs-5 fw-semibold mb-0">{{ $page.props.pageTitle }}</h1>
 
-                    <div v-if="$page.props?.buttons" class="ms-2">
-                        <ButtonUi v-if="$page.props.buttons.button_back" text="Voltar"
-                            icon="arrowLeft" variant="primary"
-                            :to="$page.props.buttons.button_back" />
+                    <div v-if="buttons" class="ms-2">
+                        <ButtonUi v-if="buttons?.back"
+                            :text="`${buttons.back.text ?? 'Voltar'}`"
+                            :icon="`${buttons.back.icon ?? 'arrowLeft'}`"
+                            variant="primary" :to="buttons.back?.url" />
                         <span class="mx-1"></span>
-                        <ButtonUi v-if="$page.props.buttons.button_new" text="Criar novo"
-                            icon="plusLg" variant="success"
-                            :to="$page.props.buttons.button_new" />
+                        <ButtonUi v-if="buttons.new"
+                            :text="`${buttons.new.text ?? 'Criar novo'}`"
+                            :icon="`${buttons.new.icon ?? 'plusLg'}`" variant="success"
+                            :to="buttons.new.url" />
                     </div>
 
                     <div class="ms-auto">
@@ -131,7 +133,8 @@ export default {
     components: { Head, ButtonUi, BackdropUi, DropdownUi, DropdownItem, DropdownDivider, DropdownHeader, NavItemUi, NavUi, AlertUi, Filter },
 
     props: {
-        auth: { type: Object, default: {} }
+        auth: { type: Object, default: {} },
+        buttons: { type: Object, default: {} },
     },
 
     data() {

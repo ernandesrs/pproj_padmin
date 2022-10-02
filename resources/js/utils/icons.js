@@ -14,6 +14,7 @@ const icons = {
 
     infoCircleFill: 'bi bi-info-circle-fill',
     images: 'bi bi-images',
+    image: 'bi bi-image',
 
     listRight: 'bi bi-filter-right',
     listLeft: 'bi bi-filter-left',

@@ -1029,6 +1029,7 @@ var icons = (_icons = {
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
   infoCircleFill: 'bi bi-info-circle-fill',
   images: 'bi bi-images',
+  image: 'bi bi-image',
   listRight: 'bi bi-filter-right',
   listLeft: 'bi bi-filter-left',
   login: 'bi bi-box-arrow-right',

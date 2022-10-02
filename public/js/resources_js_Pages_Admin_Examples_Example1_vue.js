@@ -872,6 +872,10 @@ var WIDTH_MOBILE = 768;
     auth: {
       type: Object,
       "default": {}
+    },
+    buttons: {
+      type: Object,
+      "default": {}
     }
   },
   data: function data() {
@@ -1828,7 +1832,7 @@ var _hoisted_24 = {
   "class": "py-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _ctx$$page$props, _ctx$$page$props2, _ctx$$page$props3;
+  var _ctx$$page$props, _$props$buttons, _$props$buttons$back$, _$props$buttons$back$2, _$props$buttons$back, _$props$buttons$new$t, _$props$buttons$new$i, _ctx$$page$props2;
 
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -1973,23 +1977,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["onClick", "icon"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_18, [_ctx.$page.component != 'Admin/Index' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
   /* TEXT */
-  ), (_ctx$$page$props2 = _ctx.$page.props) !== null && _ctx$$page$props2 !== void 0 && _ctx$$page$props2.buttons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [_ctx.$page.props.buttons.button_back ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
+  ), $props.buttons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(_$props$buttons = $props.buttons) !== null && _$props$buttons !== void 0 && _$props$buttons.back ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
     key: 0,
-    text: "Voltar",
-    icon: "arrowLeft",
+    text: "".concat((_$props$buttons$back$ = $props.buttons.back.text) !== null && _$props$buttons$back$ !== void 0 ? _$props$buttons$back$ : 'Voltar'),
+    icon: "".concat((_$props$buttons$back$2 = $props.buttons.back.icon) !== null && _$props$buttons$back$2 !== void 0 ? _$props$buttons$back$2 : 'arrowLeft'),
     variant: "primary",
-    to: _ctx.$page.props.buttons.button_back
+    to: (_$props$buttons$back = $props.buttons.back) === null || _$props$buttons$back === void 0 ? void 0 : _$props$buttons$back.url
   }, null, 8
   /* PROPS */
-  , ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_22, _ctx.$page.props.buttons.button_new ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
+  , ["text", "icon", "to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_22, $props.buttons["new"] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
     key: 1,
-    text: "Criar novo",
-    icon: "plusLg",
+    text: "".concat((_$props$buttons$new$t = $props.buttons["new"].text) !== null && _$props$buttons$new$t !== void 0 ? _$props$buttons$new$t : 'Criar novo'),
+    icon: "".concat((_$props$buttons$new$i = $props.buttons["new"].icon) !== null && _$props$buttons$new$i !== void 0 ? _$props$buttons$new$i : 'plusLg'),
     variant: "success",
-    to: _ctx.$page.props.buttons.button_new
+    to: $props.buttons["new"].url
   }, null, 8
   /* PROPS */
-  , ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(_ctx$$page$props3 = _ctx.$page.props) !== null && _ctx$$page$props3 !== void 0 && _ctx$$page$props3.filterAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Filter, {
+  , ["text", "icon", "to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(_ctx$$page$props2 = _ctx.$page.props) !== null && _ctx$$page$props2 !== void 0 && _ctx$$page$props2.filterAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Filter, {
     key: 0
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
     ref: "alert"
@@ -2053,6 +2057,7 @@ var icons = (_icons = {
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
   infoCircleFill: 'bi bi-info-circle-fill',
   images: 'bi bi-images',
+  image: 'bi bi-image',
   listRight: 'bi bi-filter-right',
   listLeft: 'bi bi-filter-left',
   login: 'bi bi-box-arrow-right',

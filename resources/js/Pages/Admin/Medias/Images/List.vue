@@ -14,11 +14,12 @@
 
 import Layout from './../../../../Layouts/Panel.vue';
 import PaginationUi from '../../../../Components/PaginationUi.vue';
+import CardUi from '../../../../Components/Ui/CardUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { PaginationUi },
+    components: { PaginationUi, CardUi },
 
     data() {
         return {

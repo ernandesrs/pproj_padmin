@@ -32,7 +32,6 @@ class UserController extends Controller
     {
         $results = $this->filter($request);
 
-        Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/List", [
             "users" => UserResource::collection($results),
             "terms" => __("terms.user"),
@@ -40,7 +39,9 @@ class UserController extends Controller
             "isFiltering" => $this->filtering,
             "pageTitle" => "Usuários",
             "buttons" => [
-                "button_new" => route("admin.users.create")
+                "new" => [
+                    "url" => route("admin.users.create")
+                ]
             ]
         ]);
     }
@@ -52,11 +53,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/Form", [
             "pageTitle" => "Novo usuário",
             "buttons" => [
-                "button_back" => route("admin.users.index"),
+                "back" => [
+                    "url" => route("admin.users.index")
+                ]
             ]
         ]);
     }
@@ -113,14 +115,17 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        Inertia::setRootView("panel");
         return Inertia::render("Admin/Users/Form", [
             "user" => new UserResource($user),
             "terms" => __("terms.user"),
             "pageTitle" => "Editar usuário",
             "buttons" => [
-                "button_back" => route("admin.users.index"),
-                "button_new" => route("admin.users.create")
+                "back" => [
+                    "url" => route("admin.users.index")
+                ],
+                "new" => [
+                    "url" => route("admin.users.create")
+                ]
             ]
         ]);
     }
