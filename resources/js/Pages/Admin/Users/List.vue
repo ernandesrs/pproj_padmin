@@ -1,12 +1,8 @@
 <template>
 
-    <div v-if="!users.data?.length"
-        class="px-5 py-3 mt-2 mb-4 fs-5 fw-semibold text-center border text-muted">
-        <span v-if="isFiltering">Sem resultados para sua filtragem!</span>
-        <span v-else>Sem nada para listagem!</span>
-    </div>
+    <EmptyList :show="!users?.data?.length" :is-filter="isFiltering" />
 
-    <ListItem v-else v-for="user in users.data" :key="user.id" :item="{
+    <ListItem v-for="user in users.data" :key="user.id" :item="{
         cover: user.thumb_small,
         title: user.first_name + ' ' + user.last_name,
         subtitle: user.email,
@@ -26,7 +22,8 @@
             user.id})" />
 
             <ButtonConfirmationUi v-if="user.can.delete" confirm-text="Excluir?"
-                icon="trash" variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.users.destroy',
+                icon="trash" variant="danger" size="sm" class="ms-2" position="right"
+                :data-action="$route('admin.users.destroy',
                 {user: user.id})" confirm-with-request />
         </template>
     </ListItem>
@@ -43,12 +40,12 @@ import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
 import PaginationUi from '../../../Components/PaginationUi.vue';
 import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
-import { Inertia } from '@inertiajs/inertia';
+import EmptyList from '../../../Components/EmptyList.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { ListItem, ButtonUi, BadgeUi, PaginationUi, ButtonConfirmationUi },
+    components: { ListItem, ButtonUi, BadgeUi, PaginationUi, ButtonConfirmationUi, EmptyList },
 
     data() {
         return {

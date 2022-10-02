@@ -1,12 +1,8 @@
 <template>
 
-    <div v-if="!images?.data?.length"
-        class="px-5 py-3 mt-2 mb-4 fs-5 fw-semibold text-center border text-muted">
-        <span v-if="isFiltering">Sem resultados para sua filtragem!</span>
-        <span v-else>Sem nada para listagem!</span>
-    </div>
+    <EmptyList :show="!images?.length" :is-filter="isFiltering" />
 
-    <PaginationUi label="Paginação de usuários" :pages="images?.meta?.links" />
+    <PaginationUi label="Paginação de imagens" :pages="images?.meta?.links" />
 
 </template>
 
@@ -15,11 +11,12 @@
 import Layout from './../../../../Layouts/Panel.vue';
 import PaginationUi from '../../../../Components/PaginationUi.vue';
 import CardUi from '../../../../Components/Ui/CardUi.vue';
+import EmptyList from '../../../../Components/EmptyList.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { PaginationUi, CardUi },
+    components: { PaginationUi, CardUi, EmptyList },
 
     data() {
         return {
