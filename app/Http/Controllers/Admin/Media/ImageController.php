@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Media;
 
+use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
 use App\Http\Resources\ImageResource;
 use App\Models\Media\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ImageController extends Controller
@@ -70,14 +72,15 @@ class ImageController extends Controller
     {
         $validated = $request->validated();
 
-        $image = new Image();
-        $image->user_id = auth()->user()->id;
-        $image->name = $validated["name"] ?? $validated["file"]->getClientOriginalName();
-        $image->tags = $validated["tags"] ?? null;
-        $image->extension = $validated["file"]->getClientOriginalExtension();
-        $image->size = $validated["file"]->getSize();
-        $image->path = $validated["file"]->store($this->imagesDir, "public");
-        $image->save();
+        $file = $validated["file"];
+        Image::create([
+            "user_id" => auth()->user()->id,
+            "name" => $validated["name"] ?? $file->getClientOriginalName(),
+            "tags" => $validated["tags"] ?? null,
+            "extension" => $file->getClientOriginalExtension(),
+            "size" => $file->getSize(),
+            "path" => $file->store($this->imagesDir, "public"),
+        ]);
 
         session()->flash("flash_alert", [
             "variant" => "success",
@@ -95,7 +98,7 @@ class ImageController extends Controller
      */
     public function show(Image $image)
     {
-        //
+        // 
     }
 
     /**
@@ -118,6 +121,16 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $this->authorize("delete", $image);
+
+        Thumb::clear($image->path);
+        Storage::delete("public/{$image->path}");
+        $image->delete();
+
+        session()->flash("flash_alert", [
+            "variant" => "info",
+            "message" => "Imagem exluída com sucesso!"
+        ]);
+        return back();
     }
 }
