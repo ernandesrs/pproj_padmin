@@ -737,7 +737,7 @@ __webpack_require__.r(__webpack_exports__);
       return "d-flex justify-content-center align-items-center fs-1 bg-dark text-light rounded icon-card";
     },
     cardStyle: function cardStyle() {
-      return "card card-body ".concat(!this.border ? 'border-0' : '', " ").concat(this.noShadow ? '' : 'shadow-sm', " ").concat(this.hover ? 'shadow-lg' : '', " flex-row align-items-center");
+      return "card card-body ".concat(!this.border ? 'border-0' : '', " ").concat(this.noShadow ? '' : 'shadow-sm', " ").concat(this.hover ? 'shadow-lg' : '', " flex-row justify-content-center align-items-center");
     }
   }
 });

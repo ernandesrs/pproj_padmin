@@ -37,7 +37,7 @@ export default {
             return `d-flex justify-content-center align-items-center fs-1 bg-dark text-light rounded icon-card`;
         },
         cardStyle() {
-            return `card card-body ${!this.border ? 'border-0' : ''} ${this.noShadow ? '' : 'shadow-sm'} ${this.hover ? 'shadow-lg' : ''} flex-row align-items-center`;
+            return `card card-body ${!this.border ? 'border-0' : ''} ${this.noShadow ? '' : 'shadow-sm'} ${this.hover ? 'shadow-lg' : ''} flex-row justify-content-center align-items-center`;
         }
     }
 };

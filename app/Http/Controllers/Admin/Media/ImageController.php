@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Media;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
+use App\Http\Resources\ImageResource;
 use App\Models\Media\Image;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -28,7 +29,7 @@ class ImageController extends Controller
     public function index()
     {
         return Inertia::render("Admin/Medias/Images/List", [
-            "users" => null,
+            "images" => ImageResource::collection(Image::whereNotNull("id")->orderBy("created_at", "DESC")->paginate(18)),
             "filterAction" => route("admin.medias.images.index"),
             "isFiltering" => $this->filtering,
             "pageTitle" => "Imagens",
