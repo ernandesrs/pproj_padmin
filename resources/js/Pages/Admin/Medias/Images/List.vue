@@ -10,13 +10,12 @@
 
 import Layout from './../../../../Layouts/Panel.vue';
 import PaginationUi from '../../../../Components/PaginationUi.vue';
-import CardUi from '../../../../Components/Ui/CardUi.vue';
 import EmptyList from '../../../../Components/EmptyList.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { PaginationUi, CardUi, EmptyList },
+    components: { PaginationUi, EmptyList },
 
     data() {
         return {

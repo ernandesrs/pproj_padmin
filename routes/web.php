@@ -56,6 +56,7 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], fu
 
     Route::group(["prefix" => "medias"], function () {
         Route::get("/images", [AdminImageController::class, "index"])->name("admin.medias.images.index");
+        Route::get("/images/create", [AdminImageController::class, "create"])->name("admin.medias.images.create");
         Route::post("/images/store", [AdminImageController::class, "store"])->name("admin.medias.images.store");
         Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
         Route::post("/images/delete/{image}", [AdminImageController::class, "delete"])->name("admin.medias.images.delete");

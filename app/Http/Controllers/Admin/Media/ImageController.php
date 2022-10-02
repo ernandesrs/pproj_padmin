@@ -16,6 +16,11 @@ class ImageController extends Controller
     private bool $filtering = false;
 
     /**
+     * @var string
+     */
+    private string $imagesDir = "images";
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Inertia\Response
@@ -31,7 +36,24 @@ class ImageController extends Controller
                 "new" => [
                     "text" => "Upload",
                     "icon" => "image",
-                    "url" => ""
+                    "url" => route("admin.medias.images.create")
+                ]
+            ]
+        ]);
+    }
+
+    /**
+     * Render the upload view
+     *
+     * @return \Inertia\Response
+     */
+    public function create()
+    {
+        return Inertia::render("Admin/Medias/Images/Form", [
+            "pageTitle" => "Novo upload",
+            "buttons" => [
+                "back" => [
+                    "url" => route("admin.medias.images.index")
                 ]
             ]
         ]);
@@ -45,7 +67,23 @@ class ImageController extends Controller
      */
     public function store(ImageRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $image = new Image();
+        $image->user_id = auth()->user()->id;
+        $image->name = $validated["name"] ?? $validated["file"]->getClientOriginalName();
+        $image->tags = $validated["tags"] ?? null;
+        $image->extension = $validated["file"]->getClientOriginalExtension();
+        $image->size = $validated["file"]->getSize();
+        $image->path = $validated["file"]->store($this->imagesDir, "public");
+        $image->save();
+
+        session()->flash("flash_alert", [
+            "variant" => "success",
+            "message" => "Nova imagem salva com sucesso!"
+        ]);
+
+        return redirect()->route("admin.medias.images.index");
     }
 
     /**
