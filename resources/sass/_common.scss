@@ -1,0 +1,36 @@
+.bkdrop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb($dark, 0.75);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 950;
+
+    &.light {
+        background-color: rgb($light, 0.75);
+    }
+}
+
+.modal-ui {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 951;
+
+    .modal-ui-inner {
+        width: 100%;
+        max-width: 425px;
+        background-color: $light;
+    }
+
+    &.top {
+        align-items: flex-start;
+    }
+}

@@ -737,7 +737,7 @@ __webpack_require__.r(__webpack_exports__);
       return "d-flex justify-content-center align-items-center fs-1 bg-dark text-light rounded icon-card";
     },
     cardStyle: function cardStyle() {
-      return "card card-body ".concat(!this.border ? 'border-0' : '', " ").concat(this.noShadow ? '' : 'shadow-sm', " ").concat(this.hover ? 'shadow-lg' : '', " flex-row justify-content-center align-items-center");
+      return "card card-body ".concat(!this.border ? 'border-0' : '', " ").concat(this.noShadow ? '' : 'shadow-sm', " ").concat(this.hover && !this.noShadow ? 'shadow-lg' : '', " flex-row justify-content-center align-items-center");
     }
   }
 });
@@ -1714,9 +1714,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["icon"])], 2
   /* CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['w-100', {
       'ms-2': $props.icon
-    })
+    }])
   }, [$props.title ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", {
     key: 0,
     innerHTML: $props.title,

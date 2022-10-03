@@ -1,5 +1,28 @@
 <template>
 
+    <ModalUi @modalClose="modalClosed" :show="showModal">
+        <form @submit.prevent="updateImage">
+            <div class="mb-3 text-center">
+                <img class="img-fluid" :src="image.thumb_small">
+            </div>
+
+            <div class="mb-3">
+                <InputForm label="Nome:" type="text" v-model="updateForm.name"
+                    :error-message="updateForm.errors.name" />
+            </div>
+
+            <div class="mb-3">
+                <InputForm label="Tags:" type="text" v-model="updateForm.tags"
+                    :error-message="updateForm.errors.tags" />
+            </div>
+
+            <div class="text-center">
+                <ButtonUi type="submit" variant="primary" text="Atualizar" icon="checkLg"
+                    :disabled="updateForm.processing" />
+            </div>
+        </form>
+    </ModalUi>
+
     <EmptyList :show="!images?.data?.length" :is-filter="isFiltering" />
 
     <div class="row justify-content-center">
@@ -54,12 +77,14 @@ import CardUi from '../../../../Components/Ui/CardUi.vue';
 import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../../Components/Ui/ButtonConfirmationUi.vue';
 import InputForm from '../../../../Components/Form/InputForm.vue';
+import ModalUi from '../../../../Components/Ui/ModalUi.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { useForm } from '@inertiajs/inertia-vue3';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { PaginationUi, EmptyList, CardUi, ButtonUi, ButtonConfirmationUi, InputForm },
+    components: { PaginationUi, EmptyList, CardUi, ButtonUi, ButtonConfirmationUi, InputForm, ModalUi },
 
     props: {
         images: { type: Object, default: [] },
@@ -69,7 +94,13 @@ export default {
     },
 
     data() {
-        return {};
+        return {
+            showModal: false,
+            updateForm: useForm({
+                name: null,
+                tags: null
+            })
+        };
     },
 
     mounted() {
@@ -84,8 +115,20 @@ export default {
         },
 
         showEditModal() {
-            if (this.image?.id)
-                console.log("Editando");
+            if (!this.image?.id) return;
+
+            this.updateForm.name = this.image.name;
+            this.updateForm.tags = this.image.tags;
+
+            this.showModal = true;
+        },
+
+        updateImage() {
+            // update
+        },
+
+        modalClosed() {
+            this.showModal = false;
         }
     },
 

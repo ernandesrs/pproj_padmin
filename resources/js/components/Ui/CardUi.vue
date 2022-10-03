@@ -4,7 +4,7 @@
         <div v-if="icon" :class="iconCardStyle">
             <IconUi :icon="icon" />
         </div>
-        <div :class="{'ms-2': icon}">
+        <div :class="['w-100', {'ms-2': icon}]">
             <h2 v-if="title" v-html="title" class="fs-5 fw-semibold mb-1"></h2>
             <div v-if="$slots.content">
                 <slot name="content" />
@@ -37,7 +37,7 @@ export default {
             return `d-flex justify-content-center align-items-center fs-1 bg-dark text-light rounded icon-card`;
         },
         cardStyle() {
-            return `card card-body ${!this.border ? 'border-0' : ''} ${this.noShadow ? '' : 'shadow-sm'} ${this.hover ? 'shadow-lg' : ''} flex-row justify-content-center align-items-center`;
+            return `card card-body ${!this.border ? 'border-0' : ''} ${this.noShadow ? '' : 'shadow-sm'} ${this.hover && !this.noShadow ? 'shadow-lg' : ''} flex-row justify-content-center align-items-center`;
         }
     }
 };
