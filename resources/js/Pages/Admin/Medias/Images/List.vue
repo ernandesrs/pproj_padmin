@@ -7,9 +7,12 @@
             class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <CardUi border>
                 <template v-slot:content>
-                    <div class="text-center">
-                        <img class="img-fluid img-thumbnail" :src="image.thumb_small"
-                            :alt="image.name">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center align-items-center"
+                            style="width: 100%; max-width: 200px; min-height: 100px; ">
+                            <img class="img-fluid" :src="image.thumb_small"
+                                :alt="image.name">
+                        </div>
                         <div class="text-center pt-2">
                             <h2 class="fs-6 fw-semibold text-muted mb-0">
                                 <a :href="image.url" target="_blank"
@@ -26,8 +29,9 @@
                             </small>
                         </div>
                         <div class="d-flex justify-content-center pt-1">
-                            <ButtonUi size="sm" variant="info"
-                                icon="pencilSquare" class="mx-1 my-1" :to="$route('admin.medias.images.edit', {image: image.id})" />
+                            <ButtonUi size="sm" variant="info" icon="pencilSquare"
+                                class="mx-1 my-1"
+                                :to="$route('admin.medias.images.edit', {image: image.id})" />
                             <ButtonConfirmationUi confirm-text="Excluir?" size="sm"
                                 variant="danger" icon="trash" position="center"
                                 class="mx-1 my-1"
