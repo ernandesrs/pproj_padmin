@@ -5,8 +5,12 @@ namespace App\Helpers;
 use CoffeeCode\Cropper\Cropper;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\returnSelf;
+
 class Thumb
 {
+    public const allowedExtensions = ["jpg", "jpeg", "png"];
+
     public const presets = [
         "default" =>  "img/default-image.png",
         "notfound" =>  "img/notfound-image.png",
@@ -34,18 +38,24 @@ class Thumb
 
     /**
      * @param null|string $path
-     * @param string $presetPath String contendo o caminho para o array de presets,ex.: user.small ou user.normal ou user.large
+     * @param null|string $presetPath String contendo o caminho para o array de presets,
+     * ex.: user.small ou user.normal ou user.large. When null return the origin image
      * 
      * @return string
      */
-    public static function thumb(?string $path, string $presetPath): string
+    public static function thumb(?string $path, ?string $presetPath = null): string
     {
+        if (!$presetPath)
+            return Storage::url($path);
+
         $sizeArr = self::getPreset($presetPath);
 
         $width = $sizeArr[0];
         $height = $sizeArr[1] ?? null;
 
         $imagePath = self::getPath($path, $presetPath);
+        if (!in_array(pathinfo($imagePath)['extension'], self::allowedExtensions))
+            return Storage::url($path);
 
         return Storage::url(self::make($imagePath, $width, $height));
     }
