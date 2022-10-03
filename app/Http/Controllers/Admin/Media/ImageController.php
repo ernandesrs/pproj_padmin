@@ -32,7 +32,6 @@ class ImageController extends Controller
     {
         return Inertia::render("Admin/Medias/Images/List", [
             "images" => ImageResource::collection(Image::whereNotNull("id")->orderBy("created_at", "DESC")->paginate(18)),
-            "image" => session()->get("image", null),
             "filterAction" => route("admin.medias.images.index"),
             "isFiltering" => $this->filtering,
             "pageTitle" => "Imagens",
@@ -103,15 +102,48 @@ class ImageController extends Controller
     }
 
     /**
+     * Render the upload view
+     *
+     * @param  \App\Models\Media\Image  $image
+     * @return \Inertia\Response
+     */
+    public function edit(Image $image)
+    {
+        return Inertia::render("Admin/Medias/Images/Form", [
+            "pageTitle" => "Editar imagem",
+            "image" => new ImageResource($image),
+            "buttons" => [
+                "back" => [
+                    "url" => route("admin.medias.images.index")
+                ],
+                "new" => [
+                    "url" => route("admin.medias.images.create")
+                ]
+            ]
+        ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ImageRequest  $request
      * @param  \App\Models\Media\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function update(ImageRequest $request, Image $image)
     {
-        //
+        $this->authorize("update", $image);
+
+        $validated = $request->validated();
+        $image->name = $validated["name"];
+        $image->tags = $validated["tags"];
+        $image->save();
+
+        session()->flash("flash_alert", [
+            "variant" => "success",
+            "message" => "Dados da imagem foram atualizados com sucesso!"
+        ]);
+        return redirect()->route("admin.medias.images.index");
     }
 
     /**

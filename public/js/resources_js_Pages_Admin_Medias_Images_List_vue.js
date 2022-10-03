@@ -1315,13 +1315,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../Components/Ui/ButtonConfirmationUi.vue */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue");
 /* harmony import */ var _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../Components/Form/InputForm.vue */ "./resources/js/Components/Form/InputForm.vue");
 /* harmony import */ var _Components_Ui_ModalUi_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../Components/Ui/ModalUi.vue */ "./resources/js/Components/Ui/ModalUi.vue");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 var _layout$layout$compon;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
 
 
 
@@ -1350,10 +1346,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     type: Object,
     "default": []
   },
-  image: {
-    type: Object,
-    "default": {}
-  },
   terms: {
     type: Object,
     "default": {}
@@ -1364,33 +1356,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
   return {
-    showModal: false,
-    updateForm: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_9__.useForm)({
-      name: null,
-      tags: null
-    })
+    showModal: false
   };
-}), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
-  this.showEditModal();
-}), _defineProperty(_layout$layout$compon, "methods", {
-  getImageData: function getImageData(e) {
-    var action = e.target.getAttribute("data-action");
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__.Inertia.get(action);
-  },
-  showEditModal: function showEditModal() {
-    var _this$image;
-
-    if (!((_this$image = this.image) !== null && _this$image !== void 0 && _this$image.id)) return;
-    this.updateForm.name = this.image.name;
-    this.updateForm.tags = this.image.tags;
-    this.showModal = true;
-  },
-  updateImage: function updateImage() {// update
-  },
-  modalClosed: function modalClosed() {
-    this.showModal = false;
-  }
-}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
+}), _defineProperty(_layout$layout$compon, "methods", {}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
 
 /***/ }),
 
@@ -2662,58 +2630,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "mb-3 text-center"
-};
-var _hoisted_2 = ["src"];
-var _hoisted_3 = {
-  "class": "mb-3"
-};
-var _hoisted_4 = {
-  "class": "mb-3"
-};
-var _hoisted_5 = {
-  "class": "text-center"
-};
-var _hoisted_6 = {
   "class": "row justify-content-center"
 };
-var _hoisted_7 = {
+var _hoisted_2 = {
   "class": "text-center"
 };
-var _hoisted_8 = ["src", "alt"];
-var _hoisted_9 = {
+var _hoisted_3 = ["src", "alt"];
+var _hoisted_4 = {
   "class": "text-center pt-2"
 };
-var _hoisted_10 = {
+var _hoisted_5 = {
   "class": "fs-6 fw-semibold text-muted mb-0"
 };
-var _hoisted_11 = ["href"];
-var _hoisted_12 = {
+var _hoisted_6 = ["href"];
+var _hoisted_7 = {
   "class": "text-muted"
 };
-var _hoisted_13 = {
+var _hoisted_8 = {
   "class": "mb-0"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Tam:", -1
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Tam:", -1
 /* HOISTED */
 );
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
 
-var _hoisted_16 = {
+var _hoisted_11 = {
   "class": "d-flex justify-content-center pt-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$props$images, _$props$images$data, _$props$images2, _$props$images3, _$props$images3$meta;
 
-  var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
+  var _component_EmptyList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EmptyList");
 
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
-
-  var _component_ModalUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalUi");
-
-  var _component_EmptyList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EmptyList");
 
   var _component_ButtonConfirmationUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonConfirmationUi");
 
@@ -2721,63 +2672,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_PaginationUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PaginationUi");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalUi, {
-    onModalClose: $options.modalClosed,
-    show: $data.showModal
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.updateImage && $options.updateImage.apply($options, arguments);
-        }, ["prevent"]))
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-        "class": "img-fluid",
-        src: $props.image.thumb_small
-      }, null, 8
-      /* PROPS */
-      , _hoisted_2)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
-        label: "Nome:",
-        type: "text",
-        modelValue: $data.updateForm.name,
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-          return $data.updateForm.name = $event;
-        }),
-        "error-message": $data.updateForm.errors.name
-      }, null, 8
-      /* PROPS */
-      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
-        label: "Tags:",
-        type: "text",
-        modelValue: $data.updateForm.tags,
-        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return $data.updateForm.tags = $event;
-        }),
-        "error-message": $data.updateForm.errors.tags
-      }, null, 8
-      /* PROPS */
-      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
-        type: "submit",
-        variant: "primary",
-        text: "Atualizar",
-        icon: "checkLg",
-        disabled: $data.updateForm.processing
-      }, null, 8
-      /* PROPS */
-      , ["disabled"])])], 32
-      /* HYDRATE_EVENTS */
-      )];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["onModalClose", "show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EmptyList, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EmptyList, {
     show: !((_$props$images = $props.images) !== null && _$props$images !== void 0 && (_$props$images$data = _$props$images.data) !== null && _$props$images$data !== void 0 && _$props$images$data.length),
     "is-filter": $props.isFiltering
   }, null, 8
   /* PROPS */
-  , ["show", "is-filter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$props$images2 = $props.images) === null || _$props$images2 === void 0 ? void 0 : _$props$images2.data, function (image) {
+  , ["show", "is-filter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$props$images2 = $props.images) === null || _$props$images2 === void 0 ? void 0 : _$props$images2.data, function (image) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: image.id,
       "class": "col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
@@ -2785,32 +2685,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       border: ""
     }, {
       content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           "class": "img-fluid img-thumbnail",
           src: image.thumb_small,
           alt: image.name
         }, null, 8
         /* PROPS */
-        , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        , _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
           href: image.url,
           target: "_blank",
           title: "Visualizar original"
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)("".concat(image.name.substring(0, 15), "\n                                    ").concat(image.name.length > 15 ? '...' : '')), 9
         /* TEXT, PROPS */
-        , _hoisted_11)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_13, [_hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((image.size / 1000000).toFixed(3)) + " Mb", 1
+        , _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, [_hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((image.size / 1000000).toFixed(3)) + " Mb", 1
         /* TEXT */
-        )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
-          onClick: $options.getImageData,
+        )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
           size: "sm",
           variant: "info",
           icon: "pencilSquare",
           "class": "mx-1 my-1",
-          "data-action": _ctx.$route('admin.medias.images.show', {
+          to: _ctx.$route('admin.medias.images.edit', {
             image: image.id
           })
         }, null, 8
         /* PROPS */
-        , ["onClick", "data-action"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+        , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
           "confirm-text": "Excluir?",
           size: "sm",
           variant: "danger",

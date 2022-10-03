@@ -1051,6 +1051,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   PaginationUi: _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
   InputForm: _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   ButtonUi: _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+}), _defineProperty(_layout$layout$compon, "props", {
+  image: {
+    type: Object,
+    "default": {}
+  }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
   return {
     form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
@@ -1059,11 +1064,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       file: null
     })
   };
-}), _defineProperty(_layout$layout$compon, "props", {}), _defineProperty(_layout$layout$compon, "methods", {
+}), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
+  var _this$image;
+
+  if (!((_this$image = this.image) !== null && _this$image !== void 0 && _this$image.id)) return;
+  this.form.name = this.image.name;
+  this.form.tags = this.image.tags;
+}), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
-    this.form.post(route("admin.medias.images.store"));
+    var _this$image2, _this$image3;
+
+    var action = route("admin.medias.images.store");
+    if ((_this$image2 = this.image) !== null && _this$image2 !== void 0 && _this$image2.id) action = route("admin.medias.images.update", {
+      image: (_this$image3 = this.image) === null || _this$image3 === void 0 ? void 0 : _this$image3.id
+    });
+    this.form.post(action);
   }
-}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
+}), _layout$layout$compon);
 
 /***/ }),
 
@@ -2123,19 +2140,27 @@ var _hoisted_2 = {
   "class": "row justify-content-center px-lg-5"
 };
 var _hoisted_3 = {
-  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
+  key: 0,
+  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4 text-center"
 };
-var _hoisted_4 = {
-  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
-};
+var _hoisted_4 = ["src"];
 var _hoisted_5 = {
   "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
 };
-var _hoisted_6 = ["value"];
+var _hoisted_6 = {
+  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
+};
 var _hoisted_7 = {
+  key: 1,
+  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
+};
+var _hoisted_8 = ["value"];
+var _hoisted_9 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _$props$image, _$props$image2, _$props$image3;
+
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
@@ -2144,7 +2169,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(_$props$image = $props.image) !== null && _$props$image !== void 0 && _$props$image.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    "class": "img-fluid",
+    src: $props.image.thumb_small
+  }, null, 8
+  /* PROPS */
+  , _hoisted_4)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "text",
     name: "name",
     modelValue: $data.form.name,
@@ -2155,7 +2185,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.name
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "text",
     name: "tags",
     modelValue: $data.form.tags,
@@ -2166,7 +2196,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.tags
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message"])]), !((_$props$image2 = $props.image) !== null && _$props$image2 !== void 0 && _$props$image2.id) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.form.file = $event.target.files[0];
     }),
@@ -2182,11 +2212,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     max: "100"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.progress.percentage) + "% ", 9
   /* TEXT, PROPS */
-  , _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     variant: "primary",
-    text: "Enviar"
-  })])])])], 32
+    text: "".concat((_$props$image3 = $props.image) !== null && _$props$image3 !== void 0 && _$props$image3.id ? 'Atualizar' : 'Enviar')
+  }, null, 8
+  /* PROPS */
+  , ["text"])])])])], 32
   /* HYDRATE_EVENTS */
   );
 }
