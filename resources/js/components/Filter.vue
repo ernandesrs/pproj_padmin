@@ -41,7 +41,7 @@ export default {
             }
 
             if (!this.filterForm.search)
-                window.location = route("admin.users.index")
+                window.location = filterAction;
 
             this.filterForm.get(filterAction);
         },

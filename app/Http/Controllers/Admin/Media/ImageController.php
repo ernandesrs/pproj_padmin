@@ -26,12 +26,14 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * Request $request
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $images = $this->filter($request);
         return Inertia::render("Admin/Medias/Images/List", [
-            "images" => ImageResource::collection(Image::whereNotNull("id")->orderBy("created_at", "DESC")->paginate(18)),
+            "images" => ImageResource::collection($images),
             "filterAction" => route("admin.medias.images.index"),
             "isFiltering" => $this->filtering,
             "pageTitle" => "Imagens",
@@ -165,5 +167,28 @@ class ImageController extends Controller
             "message" => "Imagem exluída com sucesso!"
         ]);
         return back();
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    private function filter(Request $request)
+    {
+        $filters = $this->validate($request, [
+            "filter" => ["nullable", "boolean"],
+            "search" => ["nullable", "string"],
+        ]);
+
+        $users = Image::whereNotNull("id")->orderBy("created_at", "DESC");
+
+        if ($filters["filter"] ?? null) {
+            if ($filters["search"] ?? null)
+                $users->whereRaw("MATCH(name,tags) AGAINST('{$filters['search']}')");
+
+            $this->filtering = true;
+        }
+
+        return $users->paginate(18);
     }
 }

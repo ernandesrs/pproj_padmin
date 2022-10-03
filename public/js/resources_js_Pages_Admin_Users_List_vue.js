@@ -88,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      if (!this.filterForm.search) window.location = route("admin.users.index");
+      if (!this.filterForm.search) window.location = filterAction;
       this.filterForm.get(filterAction);
     }
   }
