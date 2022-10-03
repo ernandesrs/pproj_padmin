@@ -1,7 +1,6 @@
 <template>
 
     <EmptyList :show="!images?.data?.length" :is-filter="isFiltering" />
-    {{image?.id ? true : false}}
 
     <div class="row justify-content-center">
         <div v-for="image in images?.data" :key="image.id"

@@ -2540,7 +2540,7 @@ var _hoisted_11 = {
   "class": "d-flex justify-content-center pt-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$props$images, _$props$images$data, _$props$image, _$props$images2, _$props$images3, _$props$images3$meta;
+  var _$props$images, _$props$images$data, _$props$images2, _$props$images3, _$props$images3$meta;
 
   var _component_EmptyList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EmptyList");
 
@@ -2557,9 +2557,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "is-filter": $props.isFiltering
   }, null, 8
   /* PROPS */
-  , ["show", "is-filter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$image = $props.image) !== null && _$props$image !== void 0 && _$props$image.id ? true : false) + " ", 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$props$images2 = $props.images) === null || _$props$images2 === void 0 ? void 0 : _$props$images2.data, function (image) {
+  , ["show", "is-filter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$props$images2 = $props.images) === null || _$props$images2 === void 0 ? void 0 : _$props$images2.data, function (image) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: image.id,
       "class": "col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
