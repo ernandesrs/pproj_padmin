@@ -1241,9 +1241,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_CardUi_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Components/Ui/CardUi.vue */ "./resources/js/Components/Ui/CardUi.vue");
 /* harmony import */ var _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../Components/Ui/ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
 /* harmony import */ var _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../Components/Ui/ButtonConfirmationUi.vue */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue");
+/* harmony import */ var _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../Components/Form/InputForm.vue */ "./resources/js/Components/Form/InputForm.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 var _layout$layout$compon;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1262,13 +1266,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   EmptyList: _Components_EmptyList_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   CardUi: _Components_Ui_CardUi_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   ButtonUi: _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-  ButtonConfirmationUi: _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
-}), _defineProperty(_layout$layout$compon, "data", function data() {
-  return {};
+  ButtonConfirmationUi: _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  InputForm: _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }), _defineProperty(_layout$layout$compon, "props", {
   images: {
     type: Object,
     "default": []
+  },
+  image: {
+    type: Object,
+    "default": {}
   },
   terms: {
     type: Object,
@@ -1278,7 +1285,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     type: Boolean,
     "default": false
   }
-}), _defineProperty(_layout$layout$compon, "methods", {}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
+}), _defineProperty(_layout$layout$compon, "data", function data() {
+  return {};
+}), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
+  this.showEditModal();
+}), _defineProperty(_layout$layout$compon, "methods", {
+  getImageData: function getImageData(e) {
+    var action = e.target.getAttribute("data-action");
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_7__.Inertia.get(action);
+  },
+  showEditModal: function showEditModal() {
+    var _this$image;
+
+    if ((_this$image = this.image) !== null && _this$image !== void 0 && _this$image.id) console.log("Editando");
+  }
+}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
 
 /***/ }),
 
@@ -2519,7 +2540,7 @@ var _hoisted_11 = {
   "class": "d-flex justify-content-center pt-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$props$images, _$props$images$data, _$props$images2, _$props$images3, _$props$images3$meta;
+  var _$props$images, _$props$images$data, _$props$image, _$props$images2, _$props$images3, _$props$images3$meta;
 
   var _component_EmptyList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EmptyList");
 
@@ -2536,7 +2557,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "is-filter": $props.isFiltering
   }, null, 8
   /* PROPS */
-  , ["show", "is-filter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$props$images2 = $props.images) === null || _$props$images2 === void 0 ? void 0 : _$props$images2.data, function (image) {
+  , ["show", "is-filter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$image = $props.image) !== null && _$props$image !== void 0 && _$props$image.id ? true : false) + " ", 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$props$images2 = $props.images) === null || _$props$images2 === void 0 ? void 0 : _$props$images2.data, function (image) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: image.id,
       "class": "col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
@@ -2559,11 +2582,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, [_hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((image.size / 1000000).toFixed(3)) + " Mb", 1
         /* TEXT */
         )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+          onClick: $options.getImageData,
           size: "sm",
           variant: "info",
           icon: "pencilSquare",
-          "class": "mx-1 my-1"
-        }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+          "class": "mx-1 my-1",
+          "data-action": _ctx.$route('admin.medias.images.show', {
+            image: image.id
+          })
+        }, null, 8
+        /* PROPS */
+        , ["onClick", "data-action"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
           "confirm-text": "Excluir?",
           size: "sm",
           variant: "danger",

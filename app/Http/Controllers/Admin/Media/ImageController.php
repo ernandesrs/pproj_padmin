@@ -32,6 +32,7 @@ class ImageController extends Controller
     {
         return Inertia::render("Admin/Medias/Images/List", [
             "images" => ImageResource::collection(Image::whereNotNull("id")->orderBy("created_at", "DESC")->paginate(18)),
+            "image" => session()->get("image", null),
             "filterAction" => route("admin.medias.images.index"),
             "isFiltering" => $this->filtering,
             "pageTitle" => "Imagens",
@@ -98,7 +99,7 @@ class ImageController extends Controller
      */
     public function show(Image $image)
     {
-        // 
+        return back()->with("image", new ImageResource($image));
     }
 
     /**

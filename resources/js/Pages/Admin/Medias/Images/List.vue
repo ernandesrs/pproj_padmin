@@ -1,6 +1,7 @@
 <template>
 
     <EmptyList :show="!images?.data?.length" :is-filter="isFiltering" />
+    {{image?.id ? true : false}}
 
     <div class="row justify-content-center">
         <div v-for="image in images?.data" :key="image.id"
@@ -26,10 +27,12 @@
                             </small>
                         </div>
                         <div class="d-flex justify-content-center pt-1">
-                            <ButtonUi size="sm" variant="info" icon="pencilSquare"
-                                class="mx-1 my-1" />
-                            <ButtonConfirmationUi confirm-text="Excluir?" size="sm" variant="danger" icon="trash"
-                                position="center" class="mx-1 my-1"
+                            <ButtonUi @click="getImageData" size="sm" variant="info"
+                                icon="pencilSquare" class="mx-1 my-1"
+                                :data-action="$route('admin.medias.images.show', {image: image.id})" />
+                            <ButtonConfirmationUi confirm-text="Excluir?" size="sm"
+                                variant="danger" icon="trash" position="center"
+                                class="mx-1 my-1"
                                 :data-action="$route('admin.medias.images.destroy', {image: image.id})"
                                 confirm-with-request outlined />
                         </div>
@@ -51,24 +54,40 @@ import EmptyList from '../../../../Components/EmptyList.vue';
 import CardUi from '../../../../Components/Ui/CardUi.vue';
 import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../../Components/Ui/ButtonConfirmationUi.vue';
+import InputForm from '../../../../Components/Form/InputForm.vue';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { PaginationUi, EmptyList, CardUi, ButtonUi, ButtonConfirmationUi },
-
-    data() {
-        return {
-        };
-    },
+    components: { PaginationUi, EmptyList, CardUi, ButtonUi, ButtonConfirmationUi, InputForm },
 
     props: {
         images: { type: Object, default: [] },
+        image: { type: Object, default: {} },
         terms: { type: Object, default: {} },
         isFiltering: { type: Boolean, default: false },
     },
 
+    data() {
+        return {};
+    },
+
+    mounted() {
+        this.showEditModal();
+    },
+
     methods: {
+        getImageData(e) {
+            let action = e.target.getAttribute("data-action");
+
+            Inertia.get(action);
+        },
+
+        showEditModal() {
+            if (this.image?.id)
+                console.log("Editando");
+        }
     },
 
     computed: {
