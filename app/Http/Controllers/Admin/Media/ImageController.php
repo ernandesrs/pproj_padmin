@@ -180,15 +180,15 @@ class ImageController extends Controller
             "search" => ["nullable", "string"],
         ]);
 
-        $users = Image::whereNotNull("id")->orderBy("created_at", "DESC");
+        $images = Image::whereNotNull("id")->orderBy("created_at", "DESC");
 
         if ($filters["filter"] ?? null) {
             if ($filters["search"] ?? null)
-                $users->whereRaw("MATCH(name,tags) AGAINST('{$filters['search']}')");
+                $images->whereRaw("MATCH(name,tags) AGAINST('{$filters['search']}')");
 
             $this->filtering = true;
         }
 
-        return $users->paginate(18);
+        return $images->paginate(18);
     }
 }
