@@ -942,15 +942,15 @@ var WIDTH_MOBILE = 768;
             activeIn: ['']
           }]
         }, {
-          text: 'Navgroup #2',
+          text: 'Gerenciar site',
           to: '#',
-          icon: 'appIndicator',
-          activeIn: [],
+          icon: 'layoutWtf',
+          activeIn: ['Admin/Pages/List', 'Admin/Pages/Form'],
           items: [{
-            text: 'Navitem #1',
-            to: null,
-            icon: 'app',
-            activeIn: []
+            text: 'Páginas',
+            to: this.$route("admin.pages.index"),
+            icon: 'fileEarmarkText',
+            activeIn: ['Admin/Pages/List', 'Admin/Pages/Form']
           }, {
             text: 'Navitem #2',
             to: '#2',
@@ -2250,9 +2250,13 @@ var icons = (_icons = {
   collection: 'bi bi-collection',
   collectionPlay: 'bi bi-collection-play',
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
+  fileEarmark: 'bi bi-file-earmark',
+  fileEarmarkText: 'bi bi-file-earmark-text',
+  fileEarmarkPlus: 'file-earmark-plus',
   infoCircleFill: 'bi bi-info-circle-fill',
   images: 'bi bi-images',
   image: 'bi bi-image',
+  layoutWtf: 'bi bi-layout-wtf',
   listRight: 'bi bi-filter-right',
   listLeft: 'bi bi-filter-left',
   login: 'bi bi-box-arrow-right',

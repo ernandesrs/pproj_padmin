@@ -178,16 +178,16 @@ export default {
                         ]
                     },
                     {
-                        text: 'Navgroup #2',
+                        text: 'Gerenciar site',
                         to: '#',
-                        icon: 'appIndicator',
-                        activeIn: [],
+                        icon: 'layoutWtf',
+                        activeIn: ['Admin/Pages/List', 'Admin/Pages/Form'],
                         items: [
                             {
-                                text: 'Navitem #1',
-                                to: null,
-                                icon: 'app',
-                                activeIn: []
+                                text: 'Páginas',
+                                to: this.$route("admin.pages.index"),
+                                icon: 'fileEarmarkText',
+                                activeIn: ['Admin/Pages/List', 'Admin/Pages/Form']
                             },
                             {
                                 text: 'Navitem #2',
