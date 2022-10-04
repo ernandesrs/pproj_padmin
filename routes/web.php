@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExampleController as AdminExampleController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
+use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
@@ -63,6 +64,13 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], fu
         Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
         Route::post("/images/delete/{image}", [AdminImageController::class, "destroy"])->name("admin.medias.images.destroy");
     });
+
+    Route::get("/pages", [AdminPageController::class, "index"])->name("admin.pages.index");
+    Route::get("/pages/create", [AdminPageController::class, "create"])->name("admin.pages.create");
+    Route::post("/pages/store", [AdminPageController::class, "store"])->name("admin.pages.store");
+    Route::get("/pages/edit/{page}", [AdminPageController::class, "edit"])->name("admin.pages.edit");
+    Route::post("/pages/update/{page}", [AdminPageController::class, "update"])->name("admin.pages.update");
+    Route::post("/pages/destroy/{page}", [AdminPageController::class, "destroy"])->name("admin.pages.destroy");
 
     Route::group(["prefix" => "example"], function () {
         Route::get("/", [AdminExampleController::class, "example1"])->name("admin.example1");
