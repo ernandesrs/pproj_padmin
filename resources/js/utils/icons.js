@@ -14,7 +14,7 @@ const icons = {
 
     fileEarmark: 'bi bi-file-earmark',
     fileEarmarkText: 'bi bi-file-earmark-text',
-    fileEarmarkPlus: 'file-earmark-plus',
+    fileEarmarkPlus: 'bt bi-file-earmark-plus',
 
     infoCircleFill: 'bi bi-info-circle-fill',
     images: 'bi bi-images',

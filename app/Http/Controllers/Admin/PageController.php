@@ -31,6 +31,7 @@ class PageController extends Controller
             "pageTitle" => "Páginas",
             "buttons" => [
                 "new" => [
+                    "icon" => "fileEarmarkPlus",
                     "text" => "Nova página",
                     "url" => route("admin.pages.create")
                 ]
@@ -94,6 +95,7 @@ class PageController extends Controller
                     "url" => route("admin.pages.index")
                 ],
                 "new" => [
+                    "icon" => "fileEarmarkPlus",
                     "text" => "Nova página",
                     "url" => route("admin.pages.create")
                 ]
