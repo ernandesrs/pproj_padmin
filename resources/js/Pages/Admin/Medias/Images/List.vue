@@ -7,7 +7,8 @@
             class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <CardUi border>
                 <template v-slot:content>
-                    <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div
+                        class="d-flex flex-column justify-content-center align-items-center">
                         <div class="d-flex justify-content-center align-items-center"
                             style="width: 100%; max-width: 200px; min-height: 100px; ">
                             <img class="img-fluid" :src="image.thumb_small"
@@ -29,12 +30,12 @@
                             </small>
                         </div>
                         <div class="d-flex justify-content-center pt-1">
-                            <ButtonUi size="sm" variant="info" icon="pencilSquare"
-                                class="mx-1 my-1"
+                            <ButtonUi v-if="image.can.update" size="sm" variant="info"
+                                icon="pencilSquare" class="mx-1 my-1"
                                 :to="$route('admin.medias.images.edit', {image: image.id})" />
-                            <ButtonConfirmationUi confirm-text="Excluir?" size="sm"
-                                variant="danger" icon="trash" position="center"
-                                class="mx-1 my-1"
+                            <ButtonConfirmationUi v-if="image.can.delete"
+                                confirm-text="Excluir?" size="sm" variant="danger"
+                                icon="trash" position="center" class="mx-1 my-1"
                                 :data-action="$route('admin.medias.images.destroy', {image: image.id})"
                                 confirm-with-request outlined />
                         </div>
