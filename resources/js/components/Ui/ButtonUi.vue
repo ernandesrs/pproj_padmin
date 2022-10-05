@@ -4,9 +4,7 @@
         <slot v-if="$slots.buttonContent" name="buttonContent" />
         <template v-else>
             <IconUi v-if="icon" :icon="icon" />
-            <span :class="{'ms-2': icon && text }">
-                {{text}}
-            </span>
+            <span :class="{'ms-2': icon && text }" v-html="text"></span>
         </template>
     </Component>
 </template>
@@ -27,6 +25,7 @@ export default {
         disabled: { type: Boolean, default: false },
         outlined: { type: Boolean, default: false },
         customClass: { type: String, default: null },
+        isActive: { type: Boolean, default: false },
 
         // 
         href: { type: String, default: null },
@@ -49,7 +48,7 @@ export default {
             if (this.customClass) return this.customClass;
 
             let bg = this.variant ? ((this.outlined ? "btn-outline-" : "btn-") + this.variant) : 'bg-transparent';
-            return `btn ${this.size ? "btn-" + this.size : ""} ${bg}`;
+            return `btn ${this.size ? "btn-" + this.size : ""} ${bg} ${this.isActive ? 'active' : false}`;
         },
         getHref() {
             return this.href ?? (this.to ?? null);

@@ -27,6 +27,8 @@
         "@inertiajs/inertia": "^0.11.0",
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/progress": "^0.2.7",
-        "bootstrap-icons": "^1.9.1"
+        "@tinymce/tinymce-vue": "^4.0.7",
+        "bootstrap-icons": "^1.9.1",
+        "tinymce": "^6.2.0"
     }
 }
