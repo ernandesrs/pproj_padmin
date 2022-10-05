@@ -1539,14 +1539,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       content: '',
       view_path: null,
       status: 1,
-      schedule_to: null
+      schedule_to: null,
+      cover: null
     })
   };
 }), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
   this.setPageContentOnForm();
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
-    console.log(this.form.content);
+    console.log(this.form.cover);
   },
   setPageContentOnForm: function setPageContentOnForm() {
     var _this$page;
@@ -2698,17 +2699,21 @@ var _hoisted_17 = {
 var _hoisted_18 = {
   "class": "col-12 mb-4"
 };
-var _hoisted_19 = {
-  "class": "col-12 mb-4 d-flex align-items-center"
-};
+var _hoisted_19 = ["value"];
 var _hoisted_20 = {
   "class": "col-12 mb-4"
 };
 var _hoisted_21 = {
+  "class": "col-12 mb-4 d-flex align-items-center"
+};
+var _hoisted_22 = {
+  "class": "col-12 mb-4"
+};
+var _hoisted_23 = {
   key: 0,
   "class": "col-12 mb-4"
 };
-var _hoisted_22 = {
+var _hoisted_24 = {
   "class": "col-12 mb-4 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2718,12 +2723,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_EditorTiny = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditorTiny");
 
-  var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
-
   var _component_SelectForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SelectForm");
 
+  var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
-    onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
@@ -2771,12 +2776,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     alt: $props.page.title
   }, null, 8
   /* PROPS */
-  , _hoisted_16)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_17, "Preview"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
-    variant: "success",
-    text: "Inserir capa",
-    icon: "image",
-    size: "ms"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , _hoisted_16)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_17, "Preview"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.form.cover = $event.target.files[0];
+    }),
+    label: "Capa:",
+    type: "file",
+    name: "cover",
+    "error-message": $data.form.errors.cover
+  }, null, 8
+  /* PROPS */
+  , ["error-message"]), $data.form.progress ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("progress", {
+    key: 0,
+    value: $data.form.progress.percentage,
+    max: "100"
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.progress.percentage) + "% ", 9
+  /* TEXT, PROPS */
+  , _hoisted_19)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Tipo de página:",
     name: "type",
     options: [{
@@ -2787,24 +2803,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       text: 'Customizada'
     }],
     modelValue: $data.form.type,
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.form.type = $event;
     }),
     "error-message": $data.form.errors.type
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "checkbox",
     label: "Permitir indexação aos mecanismos de busca",
     name: "follow",
     modelValue: $data.form.follow,
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.form.follow = $event;
     }),
     "error-message": $data.form.errors.follow
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Salvar como:",
     options: [{
       value: 1,
@@ -2817,21 +2833,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       text: "".concat($props.terms.status['status_' + 3])
     }],
     modelValue: $data.form.status,
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.form.status = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["options", "modelValue"])]), $data.form.status == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["options", "modelValue"])]), $data.form.status == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Agendar para:",
     type: "date",
     modelValue: $data.form.schedule_to,
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $data.form.schedule_to = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     icon: "checkLg",
     variant: "primary",

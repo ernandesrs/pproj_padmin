@@ -44,9 +44,18 @@
                                 :alt="page.title">
                             <span v-else class="text-muted">Preview</span>
                         </div>
+                    </div>
 
-                        <ButtonUi variant="success" text="Inserir capa" icon="image"
-                            size="ms" />
+                    <div class="col-12 mb-4">
+                        <InputForm
+                            @update:modelValue="form.cover = $event.target.files[0]"
+                            label="Capa:" type="file" name="cover"
+                            :error-message="form.errors.cover" />
+
+                        <progress v-if="form.progress" :value="form.progress.percentage"
+                            max="100">
+                            {{ form.progress.percentage }}%
+                        </progress>
                     </div>
 
                     <div class="col-12 mb-4">
@@ -132,6 +141,7 @@ export default {
                 view_path: null,
                 status: 1,
                 schedule_to: null,
+                cover: null,
             })
         };
     },
@@ -142,7 +152,7 @@ export default {
 
     methods: {
         submit() {
-            console.log(this.form.content);
+            console.log(this.form.cover);
         },
 
         setPageContentOnForm() {

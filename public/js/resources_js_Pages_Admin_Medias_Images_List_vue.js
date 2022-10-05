@@ -1095,6 +1095,10 @@ __webpack_require__.r(__webpack_exports__);
     disableBackdropClick: {
       type: Boolean,
       "default": false
+    },
+    size: {
+      type: String,
+      "default": null
     }
   },
   data: function data() {
@@ -2304,9 +2308,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  "class": "p-3 modal-ui-inner"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_CardUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CardUi");
 
@@ -2325,10 +2326,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[0] || (_cache[0] = function () {
           return $options.backdropClick && $options.backdropClick.apply($options, arguments);
         }),
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['p-1 p-md-2 modal-ui', {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['p-1 p-md-2 p-lg-3 p-xl-4 modal-ui', {
           'top': $props.top
         }])
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['p-3 modal-ui-inner', {
+          'modal-ui-inner-full': $props.size == 'full',
+          'modal-ui-inner-md': $props.size == 'md',
+          'modal-ui-inner-lg': $props.size == 'lg'
+        }])
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, {
         noShadow: ""
       }, {
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -2337,7 +2344,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 3
         /* FORWARDED */
 
-      })])], 2
+      })], 2
+      /* CLASS */
+      )], 2
       /* CLASS */
       )], 2
       /* CLASS */
