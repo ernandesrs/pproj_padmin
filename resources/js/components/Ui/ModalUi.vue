@@ -3,8 +3,8 @@
     <Transition name="transition-fade" @after-enter="afterEnter"
         @before-leave="beforeLeave">
         <div v-if="visible" :class="['bkdrop', {'light': light}]">
-            <div @click="backdropClick" :class="['p-1 p-md-2 modal-ui', {'top': top}]">
-                <div class="p-3 modal-ui-inner">
+            <div @click="backdropClick" :class="['p-1 p-md-2 p-lg-3 p-xl-4 modal-ui', {'top': top}]">
+                <div :class="['p-3 modal-ui-inner', {'modal-ui-inner-full': size == 'full', 'modal-ui-inner-md': size == 'md', 'modal-ui-inner-lg': size == 'lg'}]">
                     <CardUi noShadow>
                         <template v-slot:content>
                             <slot />
@@ -27,7 +27,8 @@ export default {
         show: { type: Boolean, default: false },
         light: { type: Boolean, default: false },
         top: { type: Boolean, default: false },
-        disableBackdropClick: { type: Boolean, default: false }
+        disableBackdropClick: { type: Boolean, default: false },
+        size: { type: String, default: null },
     },
     data() {
         return {
