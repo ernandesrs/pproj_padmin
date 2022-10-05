@@ -25,6 +25,7 @@ class ImageResource extends JsonResource
             "tags" => $this->tags,
             "extension" => $this->extension,
             "url" => Storage::url($this->path),
+            "location" => Storage::url($this->path),
             "thumb_small" => Thumb::thumb($this->path, "cover.small"),
             "thumb_normal" => Thumb::thumb($this->path, "cover.normal"),
             "thumb_large" => Thumb::thumb($this->path, "cover.large"),

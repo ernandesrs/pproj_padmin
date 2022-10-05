@@ -72,10 +72,26 @@ class ImageController extends Controller
      */
     public function store(ImageRequest $request)
     {
+        $this->upload($request);
+
+        session()->flash("flash_alert", [
+            "variant" => "success",
+            "message" => "Nova imagem salva com sucesso!"
+        ]);
+
+        return redirect()->route("admin.medias.images.index");
+    }
+
+    /**
+     * @param ImageRequest $request
+     * @return void
+     */
+    public function upload(ImageRequest $request)
+    {
         $validated = $request->validated();
 
         $file = $validated["file"];
-        Image::create([
+        $image = Image::create([
             "user_id" => auth()->user()->id,
             "name" => $validated["name"] ?? $file->getClientOriginalName(),
             "tags" => $validated["tags"] ?? null,
@@ -84,12 +100,7 @@ class ImageController extends Controller
             "path" => $file->store($this->imagesDir, "public"),
         ]);
 
-        session()->flash("flash_alert", [
-            "variant" => "success",
-            "message" => "Nova imagem salva com sucesso!"
-        ]);
-
-        return redirect()->route("admin.medias.images.index");
+        return new ImageResource($image);
     }
 
     /**
