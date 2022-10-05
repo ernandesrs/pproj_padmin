@@ -48,6 +48,7 @@ class PageController extends Controller
     {
         return Inertia::render("Admin/Pages/Form", [
             "pageTitle" => "Nova página",
+            "terms" => __("terms.page"),
             "buttons" => [
                 "back" => [
                     "url" => route("admin.pages.index")

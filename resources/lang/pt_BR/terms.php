@@ -19,9 +19,9 @@ return [
     ],
     'page' => [
         'status' => [
-            Page::STATUS_DRAFT => 'Rascunho',
-            Page::STATUS_PUBLISHED => 'Publicado',
-            Page::STATUS_SCHEDULED => 'Agendado',
+            'status_' . Page::STATUS_DRAFT => 'Rascunho',
+            'status_' . Page::STATUS_SCHEDULED => 'Agendado',
+            'status_' . Page::STATUS_PUBLISHED => 'Publicado',
         ],
         'type' => [
             Page::CONTENT_TYPE_TEXT => 'Texto',
