@@ -679,6 +679,172 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/BadgeUi.vue?vue&type=script&lang=js":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/BadgeUi.vue?vue&type=script&lang=js ***!
+  \****************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _IconUi_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IconUi.vue */ "./resources/js/Components/Ui/IconUi.vue");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    text: {
+      type: String,
+      "default": null
+    },
+    icon: {
+      type: String,
+      "default": null
+    },
+    variant: {
+      type: String,
+      "default": "primary"
+    }
+  },
+  components: {
+    IconUi: _IconUi_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    ButtonUi: _ButtonUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    text: {
+      type: String,
+      "default": null
+    },
+    variant: {
+      type: String,
+      "default": null
+    },
+    icon: {
+      type: String,
+      "default": null
+    },
+    size: {
+      type: String,
+      "default": null
+    },
+    dataAction: {
+      type: String,
+      "default": null
+    },
+    confirmWithRequest: {
+      type: Boolean,
+      "default": false
+    },
+    position: {
+      type: String,
+      "default": 'right'
+    },
+    disabled: {
+      type: Boolean,
+      "default": false
+    },
+    outlined: {
+      type: Boolean,
+      "default": false
+    },
+    confirmText: {
+      type: String,
+      "default": 'Confirmar?'
+    }
+  },
+  data: function data() {
+    return {
+      showConfirmButtons: false,
+      waitRequest: false,
+      buttonConfirm: {
+        icon: 'checkLg',
+        disabled: false
+      },
+      buttonCancel: {
+        icon: 'xLg',
+        disabled: false
+      }
+    };
+  },
+  mounted: function mounted() {
+    document.addEventListener("click", this.clickOut);
+  },
+  methods: {
+    click: function click(e) {
+      this.$emit("hasClicked", e);
+      this.showConfirmButtons = true;
+    },
+    confirm: function confirm(e) {
+      if (!this.confirmWithRequest) {
+        this.$emit("hasConfirmed", e);
+        return;
+      }
+
+      this.request(e);
+    },
+    cancel: function cancel(e) {
+      this.$emit("hasCanceled", e);
+      this.close();
+    },
+    clickOut: function clickOut(e) {
+      if (this.waitRequest) return;
+      if (this.$el.contains(e.target)) return;
+      this.cancel(e);
+    },
+    close: function close() {
+      this.showConfirmButtons = false;
+    },
+    request: function request(e) {
+      var _this = this;
+
+      var action = e.target.getAttribute("data-action");
+      if (!action) return;
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(action, null, {
+        onStart: function onStart(visit) {
+          _this.waitRequest = true;
+          _this.buttonCancel.disabled = _this.buttonConfirm.disabled = true;
+          _this.buttonConfirm.icon = 'loading';
+        },
+        onFinish: function onFinish(visit) {
+          _this.waitRequest = false;
+          _this.buttonCancel.disabled = _this.buttonConfirm.disabled = false;
+          _this.buttonConfirm.icon = 'checkLg';
+
+          _this.close();
+        }
+      });
+    }
+  },
+  computed: {
+    animationName: function animationName() {
+      return "slide-fade-".concat(this.position);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonUi.vue?vue&type=script&lang=js":
 /*!*****************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonUi.vue?vue&type=script&lang=js ***!
@@ -1121,9 +1287,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_EmptyList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Components/EmptyList.vue */ "./resources/js/Components/EmptyList.vue");
 /* harmony import */ var _Components_ListItem_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Components/ListItem.vue */ "./resources/js/Components/ListItem.vue");
 /* harmony import */ var _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Components/PaginationUi.vue */ "./resources/js/Components/PaginationUi.vue");
+/* harmony import */ var _Components_Ui_BadgeUi_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Components/Ui/BadgeUi.vue */ "./resources/js/Components/Ui/BadgeUi.vue");
+/* harmony import */ var _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Components/Ui/ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
+/* harmony import */ var _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Components/Ui/ButtonConfirmationUi.vue */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue");
 var _layout$layout$compon;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -1138,7 +1310,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }, _defineProperty(_layout$layout$compon, "layout", _Layouts_Panel_vue__WEBPACK_IMPORTED_MODULE_0__["default"]), _defineProperty(_layout$layout$compon, "components", {
   ListItem: _Components_ListItem_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   PaginationUi: _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-  EmptyList: _Components_EmptyList_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  EmptyList: _Components_EmptyList_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+  BadgeUi: _Components_Ui_BadgeUi_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  ButtonUi: _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  ButtonConfirmationUi: _Components_Ui_ButtonConfirmationUi_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }), _defineProperty(_layout$layout$compon, "props", {
   pages: {
     type: Object,
@@ -1765,6 +1940,117 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["onAfterEnter", "onAfterLeave", "enter-from-class", "enter-to-class", "leave-from-class", "leave-to-class"]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/BadgeUi.vue?vue&type=template&id=c780f0f2":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/BadgeUi.vue?vue&type=template&id=c780f0f2 ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = ["innerHTML"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_IconUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("IconUi");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['badge bg-' + $props.variant])
+  }, [$props.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_IconUi, {
+    key: 0,
+    icon: $props.icon
+  }, null, 8
+  /* PROPS */
+  , ["icon"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'ms-1': $props.icon && $props.text
+    }),
+    innerHTML: $props.text
+  }, null, 10
+  /* CLASS, PROPS */
+  , _hoisted_1)], 2
+  /* CLASS */
+  );
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=template&id=5146028a":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=template&id=5146028a ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "position-relative"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" the button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+    onClick: $options.click,
+    type: "button",
+    text: $props.text,
+    icon: $props.icon,
+    variant: $props.variant,
+    size: $props.size,
+    outlined: $props.outlined
+  }, null, 8
+  /* PROPS */
+  , ["onClick", "text", "icon", "variant", "size", "outlined"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+    name: $options.animationName
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [$data.showConfirmButtons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        key: 0,
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["d-flex align-items-center bg-light shadow py-2 px-3 buttons", "".concat('position-' + $props.position)])
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['fs-6 fw-normal px-2 text-' + $props.variant])
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.confirmText), 3
+      /* TEXT, CLASS */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" confirm button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+        onClick: $options.confirm,
+        type: "button",
+        variant: "success",
+        size: $props.size,
+        "class": "ms-2",
+        "data-action": $props.dataAction,
+        icon: $data.buttonConfirm.icon,
+        disabled: $data.buttonConfirm.disabled
+      }, null, 8
+      /* PROPS */
+      , ["onClick", "size", "data-action", "icon", "disabled"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cancel button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+        onClick: $options.cancel,
+        type: "button",
+        variant: "danger",
+        size: $props.size,
+        "class": "ms-2",
+        icon: $data.buttonCancel.icon,
+        disabled: $data.buttonCancel.disabled
+      }, null, 8
+      /* PROPS */
+      , ["onClick", "size", "icon", "disabled"])], 2
+      /* CLASS */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["name"])]);
 }
 
 /***/ }),
@@ -2511,6 +2797,29 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.backdrop[data-v-7c32556c] {\r\n    
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.buttons {\r\n    position: absolute;\r\n    z-index: 100;\r\n    top: 50%;\n}\n.position-left {\r\n    left: 0;\r\n    transform: translate(0%, -50%) scale(1);\n}\n.position-center {\r\n    right: 50%;\r\n    transform: translate(50%, -50%) scale(1);\n}\n.position-right {\r\n    right: 0;\r\n    transform: translate(0%, -50%) scale(1);\n}\n.slide-fade-left-enter-from,\r\n.slide-fade-left-leave-to {\r\n    transform: translate(-100%, -50%) scale(0.75);\r\n    opacity: 0;\n}\n.slide-fade-center-enter-from,\r\n.slide-fade-center-leave-to {\r\n    transform: translate(50%, -50%) scale(0.75);\r\n    opacity: 0;\n}\n.slide-fade-right-enter-from,\r\n.slide-fade-right-leave-to {\r\n    transform: translate(100%, -50%) scale(0.75);\r\n    opacity: 0;\n}\n.slide-fade-right-enter-active,\r\n.slide-fade-left-enter-active,\r\n.slide-fade-center-enter-active {\r\n    transition: all 0.25s ease-out;\n}\n.slide-fade-right-leave-active,\r\n.slide-fade-left-leave-active,\r\n.slide-fade-center-leave-active {\r\n    transition: all 0.25s ease-in-out;\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/runtime/api.js":
 /*!*****************************************************!*\
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
@@ -2670,6 +2979,35 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BackdropUi_vue_vue_type_style_index_0_id_7c32556c_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_style_index_0_id_5146028a_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_style_index_0_id_5146028a_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_style_index_0_id_5146028a_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -3359,6 +3697,63 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/Components/Ui/BadgeUi.vue":
+/*!************************************************!*\
+  !*** ./resources/js/Components/Ui/BadgeUi.vue ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BadgeUi_vue_vue_type_template_id_c780f0f2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BadgeUi.vue?vue&type=template&id=c780f0f2 */ "./resources/js/Components/Ui/BadgeUi.vue?vue&type=template&id=c780f0f2");
+/* harmony import */ var _BadgeUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BadgeUi.vue?vue&type=script&lang=js */ "./resources/js/Components/Ui/BadgeUi.vue?vue&type=script&lang=js");
+/* harmony import */ var C_www_padmin_inertia_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_www_padmin_inertia_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BadgeUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BadgeUi_vue_vue_type_template_id_c780f0f2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Components/Ui/BadgeUi.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/Components/Ui/ButtonConfirmationUi.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/Components/Ui/ButtonConfirmationUi.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ButtonConfirmationUi_vue_vue_type_template_id_5146028a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonConfirmationUi.vue?vue&type=template&id=5146028a */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=template&id=5146028a");
+/* harmony import */ var _ButtonConfirmationUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ButtonConfirmationUi.vue?vue&type=script&lang=js */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=script&lang=js");
+/* harmony import */ var _ButtonConfirmationUi_vue_vue_type_style_index_0_id_5146028a_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css */ "./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css");
+/* harmony import */ var C_www_padmin_inertia_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+
+
+const __exports__ = /*#__PURE__*/(0,C_www_padmin_inertia_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_ButtonConfirmationUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ButtonConfirmationUi_vue_vue_type_template_id_5146028a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Components/Ui/ButtonConfirmationUi.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Ui/ButtonUi.vue":
 /*!*************************************************!*\
   !*** ./resources/js/Components/Ui/ButtonUi.vue ***!
@@ -3785,6 +4180,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Ui/BadgeUi.vue?vue&type=script&lang=js":
+/*!************************************************************************!*\
+  !*** ./resources/js/Components/Ui/BadgeUi.vue?vue&type=script&lang=js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BadgeUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BadgeUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BadgeUi.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/BadgeUi.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=script&lang=js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=script&lang=js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ButtonConfirmationUi.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Ui/ButtonUi.vue?vue&type=script&lang=js":
 /*!*************************************************************************!*\
   !*** ./resources/js/Components/Ui/ButtonUi.vue?vue&type=script&lang=js ***!
@@ -4115,6 +4540,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Ui/BadgeUi.vue?vue&type=template&id=c780f0f2":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Components/Ui/BadgeUi.vue?vue&type=template&id=c780f0f2 ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BadgeUi_vue_vue_type_template_id_c780f0f2__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BadgeUi_vue_vue_type_template_id_c780f0f2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BadgeUi.vue?vue&type=template&id=c780f0f2 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/BadgeUi.vue?vue&type=template&id=c780f0f2");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=template&id=5146028a":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=template&id=5146028a ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_template_id_5146028a__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_template_id_5146028a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ButtonConfirmationUi.vue?vue&type=template&id=5146028a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=template&id=5146028a");
+
+
+/***/ }),
+
 /***/ "./resources/js/Components/Ui/ButtonUi.vue?vue&type=template&id=73e56926":
 /*!*******************************************************************************!*\
   !*** ./resources/js/Components/Ui/ButtonUi.vue?vue&type=template&id=73e56926 ***!
@@ -4267,6 +4722,18 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BackdropUi_vue_vue_type_style_index_0_id_7c32556c_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BackdropUi.vue?vue&type=style&index=0&id=7c32556c&scoped=true&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/BackdropUi.vue?vue&type=style&index=0&id=7c32556c&scoped=true&lang=css");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ButtonConfirmationUi_vue_vue_type_style_index_0_id_5146028a_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Ui/ButtonConfirmationUi.vue?vue&type=style&index=0&id=5146028a&lang=css");
 
 
 /***/ })

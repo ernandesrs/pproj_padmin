@@ -34,11 +34,14 @@ import Layout from './../../../Layouts/Panel.vue';
 import EmptyList from '../../../Components/EmptyList.vue';
 import ListItem from '../../../Components/ListItem.vue';
 import PaginationUi from '../../../Components/PaginationUi.vue';
+import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
+import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
+import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { ListItem, PaginationUi, EmptyList },
+    components: { ListItem, PaginationUi, EmptyList, BadgeUi, ButtonUi, ButtonConfirmationUi },
     props: {
         pages: { type: Object, default: [] },
         terms: { type: Object, default: {} },
