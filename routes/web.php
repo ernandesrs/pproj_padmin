@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\ExampleController as AdminExampleController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -72,11 +71,4 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], fu
     Route::get("/pages/edit/{page}", [AdminPageController::class, "edit"])->name("admin.pages.edit");
     Route::post("/pages/update/{page}", [AdminPageController::class, "update"])->name("admin.pages.update");
     Route::post("/pages/destroy/{page}", [AdminPageController::class, "destroy"])->name("admin.pages.destroy");
-
-    Route::group(["prefix" => "example"], function () {
-        Route::get("/", [AdminExampleController::class, "example1"])->name("admin.example1");
-        Route::get("/example2", [AdminExampleController::class, "example2"])->name("admin.example2");
-        Route::get("/example3", [AdminExampleController::class, "example3"])->name("admin.example3");
-        Route::get("/example4", [AdminExampleController::class, "example4"])->name("admin.example4");
-    });
 });

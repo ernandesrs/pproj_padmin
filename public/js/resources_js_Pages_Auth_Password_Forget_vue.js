@@ -349,6 +349,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": null
     },
+    isActive: {
+      type: Boolean,
+      "default": false
+    },
     // 
     href: {
       type: String,
@@ -378,7 +382,7 @@ __webpack_require__.r(__webpack_exports__);
     style: function style() {
       if (this.customClass) return this.customClass;
       var bg = this.variant ? (this.outlined ? "btn-outline-" : "btn-") + this.variant : 'bg-transparent';
-      return "btn ".concat(this.size ? "btn-" + this.size : "", " ").concat(bg);
+      return "btn ".concat(this.size ? "btn-" + this.size : "", " ").concat(bg, " ").concat(this.isActive ? 'active' : false);
     },
     getHref: function getHref() {
       var _this$href, _this$to;
@@ -782,6 +786,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_IconUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("IconUi");
 
@@ -806,10 +811,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["icon"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
           'ms-2': $props.icon && $props.text
-        })
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.text), 3
-      /* TEXT, CLASS */
-      )], 64
+        }),
+        innerHTML: $props.text
+      }, null, 10
+      /* CLASS, PROPS */
+      , _hoisted_1)], 64
       /* STABLE_FRAGMENT */
       ))];
     }),
