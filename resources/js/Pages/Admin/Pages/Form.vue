@@ -15,12 +15,12 @@
                             :error-message="form.errors.description" />
                     </div>
 
-                    <div v-if="form.type == 'text'" class="col-12 mb-4">
+                    <div v-if="form.content_type == 1" class="col-12 mb-4">
                         <label class="mb-1">Conteúdo:</label>
                         <EditorTiny v-model="form.content" />
                     </div>
 
-                    <div v-else-if="form.type == 'view'" class="col-12 mb-4">
+                    <div v-else-if="form.content_type == 2" class="col-12 mb-4">
                         <InputForm label="Página customizada" name="view_path"
                             v-model="form.view_path"
                             :error-message="form.errors.view_path" />
@@ -61,14 +61,14 @@
                     <div class="col-12 mb-4">
                         <SelectForm label="Tipo de página:" name="type" :options="[
                             {
-                                value: 'text',
+                                value: 1,
                                 text: 'Texto'
                             },
                             {
-                                value: 'view',
+                                value: 2,
                                 text: 'Customizada'
                             }
-                        ]" v-model="form.type" :error-message="form.errors.type" />
+                        ]" v-model="form.content_type" :error-message="form.errors.content_type" />
                     </div>
 
                     <div class="col-12 mb-4 d-flex align-items-center">
@@ -97,12 +97,14 @@
 
                     <div v-if="form.status == 2" class="col-12 mb-4">
                         <InputForm label="Agendar para:" type="date"
-                            v-model="form.schedule_to" />
+                            v-model="form.schedule_to"
+                            :error-message="form.errors.schedule_to" />
                     </div>
 
                     <div class="col-12 mb-4 text-center">
                         <ButtonUi type="submit" icon="checkLg" variant="primary"
-                            :text="`${page?.id ? 'Atualizar' : 'Salvar'}`" />
+                            :text="`${page?.id ? 'Atualizar' : 'Salvar'}`"
+                            :disabled="form.processing" />
                     </div>
                 </div>
             </div>
@@ -135,7 +137,7 @@ export default {
                 id: null,
                 title: null,
                 description: null,
-                type: 'text',
+                content_type: 1,
                 follow: null,
                 content: '',
                 view_path: null,
@@ -152,7 +154,8 @@ export default {
 
     methods: {
         submit() {
-            console.log(this.form.cover);
+            let action = this.page?.id ? route("admin.pages.update", { page: this.page.id }) : route("admin.pages.store");
+            this.form.post(action)
         },
 
         setPageContentOnForm() {
@@ -161,7 +164,7 @@ export default {
             this.form.id = this.page.id;
             this.form.title = this.page.title;
             this.form.description = this.page.description;
-            this.form.type = this.page.type;
+            this.form.content_type = this.page.content_type;
             this.form.follow = this.page.follow;
             this.form.content = this.page.content;
             this.form.view_path = this.page.view_path;

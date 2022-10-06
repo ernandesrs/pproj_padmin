@@ -29,7 +29,7 @@ class CreatePagesTable extends Migration
 
             $table->integer("status")->nullable(false)->default(1);
             $table->timestamp("published_at")->nullable(true);
-            $table->timestamp("scheduled_to")->nullable(true);
+            $table->timestamp("schedule_to")->nullable(true);
 
             // FOREIGN KEYS
             $table->foreignId("user_id")->unsigned()->nullable(true);

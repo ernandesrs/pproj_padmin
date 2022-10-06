@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PageRequest;
+use App\Http\Services\ImageService;
 use App\Models\Page;
+use App\Models\Slug;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -60,12 +63,21 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PageRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        if ($cover = $validated["cover"] ?? null) {
+            $image = (new ImageService())->store($cover, "covers");
+            $validated["cover"] = $image->path;
+        }
+
+        $page = Page::create($validated);
+
+        return redirect()->route("admin.pages.edit", ["page" => $page->id]);
     }
 
     /**
@@ -88,7 +100,7 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         return Inertia::render("Admin/Pages/Form", [
-            "page" => null,
+            "page" => $page,
             "terms" => __("terms.page"),
             "pageTitle" => "Editar página",
             "buttons" => [

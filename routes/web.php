@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminController as AdminController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -9,14 +9,18 @@ use App\Http\Controllers\Auth\ForgetController;
 use App\Http\Controllers\Auth\VerifyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return "front: :D";
-})->name("front.index");
+// FRONT/SITE
+Route::group([], function () {
+    Route::get('/', function () {
+        return "front: :D";
+    })->name("front.index");
 
-Route::get('/mailable', function () {
-    // 
-})->name("front.mailable");
+    Route::get('/mailable', function () {
+        // 
+    })->name("front.mailable");
+});
 
+// AUTH
 Route::group(["prefix" => "auth"], function () {
     Route::group(["middleware" => ["guest"]], function () {
         Route::get("/login", [AuthController::class, "login"])->name("auth.login");
@@ -40,6 +44,7 @@ Route::group(["prefix" => "auth"], function () {
     });
 });
 
+// ADMIN
 Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
 
