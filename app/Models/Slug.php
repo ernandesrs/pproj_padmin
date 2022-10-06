@@ -25,4 +25,14 @@ class Slug extends Model
 
         return $slug;
     }
+
+    /**
+     * Return the all pages with references to this slug
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages()
+    {
+        return $this->hasMany(Page::class, "id", "slug_id");
+    }
 }

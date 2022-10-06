@@ -139,6 +139,21 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $this->authorize("delete", $page);
-        //
+
+        if ($page->protection == Page::PROTECTION_SYSTEM)
+            return back()->with("flash_alert", [
+                "variant" => "warning",
+                "message" => "Página protegida pelo sistema não pode ser excluída!"
+            ]);
+
+        $slugs = $page->slugs()->first();
+        $page->delete();
+        if ($slugs->pages()->count() == 0)
+            $slugs->delete();
+
+        return back()->with("flash_alert", [
+            "variant" => "warning",
+            "message" => "A página foi excluída definitivamente com sucesso!"
+        ]);
     }
 }
