@@ -50,14 +50,6 @@ export default {
     props: {
         modelValue: { type: String, default: null }
     },
-    watch: {
-        modelValue: {
-            immediate: true,
-            handler(nv) {
-                console.log("model value: ", nv);
-            }
-        }
-    },
     methods: {
         updateValue(event, editor) {
             this.$emit("update:modelValue", editor.getContent())

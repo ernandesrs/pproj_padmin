@@ -483,14 +483,6 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     }
   },
-  watch: {
-    modelValue: {
-      immediate: true,
-      handler: function handler(nv) {
-        console.log("model value: ", nv);
-      }
-    }
-  },
   methods: {
     updateValue: function updateValue(event, editor) {
       this.$emit("update:modelValue", editor.getContent());

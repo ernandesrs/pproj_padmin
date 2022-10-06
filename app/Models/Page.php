@@ -34,6 +34,8 @@ class Page extends Model
 
     public const PROTECTIONS = [self::PROTECTION_NONE, self::PROTECTION_AUTHOR, self::PROTECTION_SYSTEM];
 
+    protected $fillable = ["title", "description", "cover", "lang", "content_type", "content", "status", "published_at", "schedule_to", "follow"];
+
     /**
      * Create page
      *
@@ -55,7 +57,7 @@ class Page extends Model
         $page->status = $validatedData["status"];
         $page->content_type = $validatedData["content_type"];
 
-        $page->content = self::makeContent($validatedData);
+        $page->content = $page->makeContent($validatedData);
 
         switch ($page->status) {
             case self::STATUS_SCHEDULED:
@@ -72,12 +74,46 @@ class Page extends Model
     }
 
     /**
+     * The page update
+     * 
+     * @param array $attributes the validated data
+     * @param array $options
+     * @return boolean
+     */
+    public function update(array $attributes = [], array $options = [])
+    {
+        $attributes["content"] = $this->makeContent($attributes);
+
+        switch ($attributes["status"]) {
+            case self::STATUS_SCHEDULED:
+                $attributes["published_at"] = null;
+                break;
+            case self::STATUS_PUBLISHED:
+                $attributes["schedule_to"] = null;
+                $attributes["published_at"] = now();
+                break;
+            case $this::STATUS_DRAFT:
+                $attributes["schedule_to"] = null;
+                $attributes["published_at"] = null;
+                break;
+        }
+
+        if (!$attributes["cover"])
+            unset($attributes["cover"]);
+
+        unset($attributes["slug"]);
+        unset($attributes["view_path"]);
+
+        return parent::update($attributes, $options);
+    }
+
+    /**
      * Make the page content for view or text content type
      *
      * @param array $validatedData
      * @return string|null
      */
-    public static function makeContent(array $validatedData)
+    public function makeContent(array $validatedData)
     {
         $content = null;
         switch ($validatedData["content_type"]) {

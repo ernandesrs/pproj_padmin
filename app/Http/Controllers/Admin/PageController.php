@@ -120,14 +120,27 @@ class PageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PageRequest $request
      * @param  \App\Models\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $page)
+    public function update(PageRequest $request, Page $page)
     {
         $this->authorize("update", $page);
-        //
+
+        $validated = $request->validated();
+
+        if ($cover = $validated["cover"] ?? null) {
+            $image = (new ImageService())->store($cover, "covers");
+            $validated["cover"] = $image->path;
+        }
+
+        $page->update($validated);
+
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Os dados da página foram atualizados com sucesso!",
+        ]);
     }
 
     /**
