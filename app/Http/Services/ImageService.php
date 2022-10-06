@@ -22,9 +22,11 @@ class ImageService
      */
     public function store(\Illuminate\Http\UploadedFile $file, ?string $subdir = null)
     {
+        $fileName = str_replace("." . $file->getClientOriginalExtension(), "", $file->getClientOriginalName());
+
         $image = Image::create([
             "user_id" => auth()->user()->id,
-            "name" => $validated["name"] ?? $file->getClientOriginalName(),
+            "name" => $validated["name"] ?? $fileName,
             "tags" => $validated["tags"] ?? null,
             "extension" => $file->getClientOriginalExtension(),
             "size" => $file->getSize(),
