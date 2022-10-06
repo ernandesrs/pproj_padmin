@@ -30,7 +30,7 @@ class Builder extends Controller
             "first_name" => "Master",
             "last_name" => "Last Name",
             "username" => "Master",
-            "email" => env("MAIL_ADMIN_ADDRESS"),
+            "email" => env("MAIL_ADMIN_ADDRESS", "master@master.com"),
             "password" => Hash::make("password"),
             "level" => User::LEVEL_MASTER,
             "email_verified_at" => now()
