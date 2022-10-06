@@ -6,6 +6,7 @@ use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
 use App\Http\Resources\ImageResource;
+use App\Http\Services\ImageService;
 use App\Models\Media\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,11 +18,6 @@ class ImageController extends Controller
      * @var boolean
      */
     private bool $filtering = false;
-
-    /**
-     * @var string
-     */
-    private string $imagesDir = "images";
 
     /**
      * Display a listing of the resource.
@@ -72,11 +68,13 @@ class ImageController extends Controller
      */
     public function store(ImageRequest $request)
     {
-        $this->upload($request);
+        $validated = $request->validated();
+
+        $image = (new ImageService())->store($validated["file"]);
 
         session()->flash("flash_alert", [
             "variant" => "success",
-            "message" => "Nova imagem salva com sucesso!"
+            "message" => "Nova imagem '" . $image->name . "' salva com sucesso!"
         ]);
 
         return redirect()->route("admin.medias.images.index");
@@ -90,15 +88,7 @@ class ImageController extends Controller
     {
         $validated = $request->validated();
 
-        $file = $validated["file"];
-        $image = Image::create([
-            "user_id" => auth()->user()->id,
-            "name" => $validated["name"] ?? $file->getClientOriginalName(),
-            "tags" => $validated["tags"] ?? null,
-            "extension" => $file->getClientOriginalExtension(),
-            "size" => $file->getSize(),
-            "path" => $file->store($this->imagesDir, "public"),
-        ]);
+        $image = (new ImageService())->store($validated["file"]);
 
         return new ImageResource($image);
     }
@@ -200,6 +190,6 @@ class ImageController extends Controller
             $this->filtering = true;
         }
 
-        return $images->paginate(18);
+        return $images->paginate(20);
     }
 }
