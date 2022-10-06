@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Media;
 
-use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
 use App\Http\Resources\ImageResource;
 use App\Http\Services\ImageService;
 use App\Models\Media\Image;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ImageController extends Controller
@@ -159,9 +157,7 @@ class ImageController extends Controller
     {
         $this->authorize("delete", $image);
 
-        Thumb::clear($image->path);
-        Storage::delete("public/{$image->path}");
-        $image->delete();
+        (new ImageService())->delete($image);
 
         session()->flash("flash_alert", [
             "variant" => "info",

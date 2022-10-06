@@ -2,7 +2,9 @@
 
 namespace App\Http\Services;
 
+use App\Helpers\Thumb;
 use App\Models\Media\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
@@ -30,5 +32,19 @@ class ImageService
         ]);
 
         return $image;
+    }
+
+    /**
+     * Clear the generated thumbnails and delete image
+     *
+     * @param Image $image
+     * @return void
+     */
+    public function delete(Image $image)
+    {
+        Thumb::clear($image->path);
+        Storage::delete("public/{$image->path}");
+        $image->delete();
+        return;
     }
 }
