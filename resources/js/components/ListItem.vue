@@ -72,8 +72,9 @@ export default {
 }
 
 .list-item-cover>img.rectangle {
-    width: 100px;
-    height: 60px;
+    width: 100px!important;
+    height: 60px!important;
+    padding: 2px;
 }
 
 .list-item-info {

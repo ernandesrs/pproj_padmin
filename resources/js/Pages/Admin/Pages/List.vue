@@ -6,11 +6,18 @@
         cover: page.thumb_small,
         title: page.title,
         subtitle: page.description,
-        coverStyle: null
+        coverStyle: 'rectangle'
     }">
         <template v-slot:badges>
             <BadgeUi class="mb-1 me-1" :text="`Autor: ${page?.author?.first_name}`"
-                icon="user" />
+                variant="dark" />
+
+            <BadgeUi class="mb-1 me-1"
+                :text="`Status: ${terms.status[('status_' + page.status)]}`"
+                :variant="`${page.status == 1 ? 'secondary' : (page.status == 2 ? 'info' : 'success')}`" />
+
+            <BadgeUi class="mb-1 me-1"
+                :text="`Tipo: ${terms.type[('type_' + page.content_type)]}`" variant="secondary" />
         </template>
 
         <template v-slot:actions>

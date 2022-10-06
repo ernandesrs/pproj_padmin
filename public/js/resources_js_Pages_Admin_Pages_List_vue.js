@@ -2618,7 +2618,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         cover: page.thumb_small,
         title: page.title,
         subtitle: page.description,
-        coverStyle: null
+        coverStyle: 'rectangle'
       }
     }, {
       badges: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -2627,7 +2627,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1",
           text: "Autor: ".concat(page === null || page === void 0 ? void 0 : (_page$author = page.author) === null || _page$author === void 0 ? void 0 : _page$author.first_name),
-          icon: "user"
+          variant: "dark"
+        }, null, 8
+        /* PROPS */
+        , ["text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+          "class": "mb-1 me-1",
+          text: "Status: ".concat($props.terms.status['status_' + page.status]),
+          variant: "".concat(page.status == 1 ? 'secondary' : page.status == 2 ? 'info' : 'success')
+        }, null, 8
+        /* PROPS */
+        , ["text", "variant"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+          "class": "mb-1 me-1",
+          text: "Tipo: ".concat($props.terms.type['type_' + page.content_type]),
+          variant: "secondary"
         }, null, 8
         /* PROPS */
         , ["text"])];
@@ -2783,7 +2795,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-item {\r\n    background-color: transparent;\n}\n.list-item-cover {\r\n    overflow: hidden;\n}\n.list-item-cover>img.square {\r\n    width: 60px;\r\n    height: 60px;\n}\n.list-item-cover>img.circle {\r\n    width: 60px;\r\n    height: 60px;\r\n    border-radius: 50%;\n}\n.list-item-cover>img.rectangle {\r\n    width: 100px;\r\n    height: 60px;\n}\n.list-item-info {\r\n    background-color: transparent;\n}\n.list-item-actions {\r\n    background-color: transparent;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-item {\r\n    background-color: transparent;\n}\n.list-item-cover {\r\n    overflow: hidden;\n}\n.list-item-cover>img.square {\r\n    width: 60px;\r\n    height: 60px;\n}\n.list-item-cover>img.circle {\r\n    width: 60px;\r\n    height: 60px;\r\n    border-radius: 50%;\n}\n.list-item-cover>img.rectangle {\r\n    width: 100px!important;\r\n    height: 60px!important;\r\n    padding: 2px;\n}\n.list-item-info {\r\n    background-color: transparent;\n}\n.list-item-actions {\r\n    background-color: transparent;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

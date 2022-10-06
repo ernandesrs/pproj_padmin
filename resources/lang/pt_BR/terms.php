@@ -24,8 +24,8 @@ return [
             'status_' . Page::STATUS_PUBLISHED => 'Publicado',
         ],
         'type' => [
-            Page::CONTENT_TYPE_TEXT => 'Texto',
-            Page::CONTENT_TYPE_VIEW => 'Customizado',
+            'type_' . Page::CONTENT_TYPE_TEXT => 'Texto',
+            'type_' . Page::CONTENT_TYPE_VIEW => 'Customizado',
         ]
     ]
 ];
