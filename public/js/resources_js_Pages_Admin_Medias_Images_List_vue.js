@@ -190,6 +190,19 @@ __webpack_require__.r(__webpack_exports__);
       "default": false
     }
   },
+  data: function data() {
+    return {
+      checked: false
+    };
+  },
+  watch: {
+    modelValue: {
+      immediate: true,
+      handler: function handler(nv) {
+        if (nv) this.checked = true;else this.checked = false;
+      }
+    }
+  },
   computed: {
     inputStyle: function inputStyle() {
       return "".concat(this.isCheckOrRadioType ? "form-check-input" : "form-control", " ").concat(this.borderless ? "border-0" : "", " ").concat(this.errorMessage ? "is-invalid" : "");
@@ -200,7 +213,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateValue: function updateValue(e) {
-      if (this.type == 'file') this.$emit("update:modelValue", e);else this.$emit("update:modelValue", e.target.value);
+      if (this.type == 'file') this.$emit("update:modelValue", e);else {
+        if (this.isCheckOrRadioType) this.$emit("update:modelValue", e.target.checked);else this.$emit("update:modelValue", e.target.value);
+      }
     }
   }
 });
@@ -1504,7 +1519,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["type", "id", "name", "readonly", "disabled", "value", "autocomplete"];
+var _hoisted_1 = ["type", "id", "name", "readonly", "disabled", "value", "checked", "autocomplete"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_LabelForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LabelForm");
 
@@ -1535,6 +1550,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         readonly: $props.readonly,
         disabled: $props.disabled,
         value: $props.modelValue,
+        checked: $data.checked,
         autocomplete: $props.type == 'password' ? 'new-password' : ''
       }, null, 42
       /* CLASS, PROPS, HYDRATE_EVENTS */

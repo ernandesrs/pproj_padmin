@@ -30,15 +30,6 @@ class PageRequest extends FormRequest
                 "lang" => config("app.locale"),
                 "slug" => \Illuminate\Support\Str::slug($this->title)
             ]);
-
-        if (($this->follow ?? null) == "on")
-            $this->merge([
-                "follow" => true
-            ]);
-        else
-            $this->merge([
-                "follow" => false
-            ]);
     }
 
     /**
