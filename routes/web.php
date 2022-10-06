@@ -18,6 +18,8 @@ Route::group([], function () {
     Route::get('/mailable', function () {
         // 
     })->name("front.mailable");
+
+    Route::get("/builder", [\App\Http\Controllers\Builder::class, "build"]);
 });
 
 // AUTH

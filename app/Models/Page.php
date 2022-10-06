@@ -42,13 +42,13 @@ class Page extends Model
      * @param array $validatedData
      * @return Page
      */
-    public static function create(array $validatedData)
+    public static function create(array $validatedData, ?User $author = null)
     {
         $page = new Page;
         $slug = Slug::create($validatedData["lang"], $validatedData["slug"]);
 
         $page->slug_id = $slug->id;
-        $page->user_id = auth()->user()->id;
+        $page->user_id = $author ? $author->id : auth()->user()->id;
         $page->title = $validatedData["title"];
         $page->description = $validatedData["description"];
         $page->lang = $validatedData["lang"];
@@ -67,6 +67,9 @@ class Page extends Model
                 $page->published_at = now();
                 break;
         }
+
+        if ($validatedData["protection"])
+            $page->protection = $validatedData["protection"];
 
         $page->save();
 
