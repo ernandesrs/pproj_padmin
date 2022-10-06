@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\UserRegistered;
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserStoreUpdateRequest;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -66,10 +66,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserStoreUpdateRequest  $request
+     * @param  UserRequest  $request
      * @return RedirectResponse
      */
-    public function store(UserStoreUpdateRequest $request)
+    public function store(UserRequest $request)
     {
         $validated = $request->validated();
 
@@ -133,11 +133,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserStoreUpdateRequest  $request
+     * @param  UserRequest  $request
      * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserStoreUpdateRequest $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $this->authorize("update", $user);
 
