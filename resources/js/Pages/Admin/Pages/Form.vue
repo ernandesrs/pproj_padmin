@@ -23,7 +23,7 @@
                     <div v-else-if="form.content_type == 2" class="col-12 mb-4">
                         <InputForm label="Página customizada:" name="view_path"
                             v-model="form.view_path"
-                            :error-message="form.errors.view_path" />
+                            :error-message="form.errors.view_path" :disabled="page.protection == 9" />
                     </div>
 
                     <div v-else class="col-12 mb-4">
@@ -69,14 +69,14 @@
                                 text: 'Customizada'
                             }
                         ]" v-model="form.content_type"
-                            :error-message="form.errors.content_type" />
+                            :error-message="form.errors.content_type" :disabled="page.protection == 9" />
                     </div>
 
                     <div class="col-12 mb-4 d-flex align-items-center">
                         <InputForm type="checkbox"
                             label="Permitir indexação aos mecanismos de busca"
                             name="follow" v-model="form.follow"
-                            :error-message="form.errors.follow" />
+                            :error-message="form.errors.follow" :disabled="page.protection == 9" />
                     </div>
 
                     <div class="col-12 mb-4">
@@ -93,7 +93,7 @@
                                 value: 3,
                                 text: `${terms.status[('status_' + 3)]}`
                             }
-                        ]" v-model="form.status" />
+                        ]" v-model="form.status" :disabled="page.protection == 9" />
                     </div>
 
                     <div v-if="form.status == 2" class="col-12 mb-4">

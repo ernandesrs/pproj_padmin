@@ -58,11 +58,6 @@ class PageRequest extends FormRequest
 
             $rules["title"] = ["required", "unique:pages,title," . $this->page->id, "max:100"];
             $rules["slug"] = ["required", "unique:slugs,"  . $this->lang . ","  . $slug->id];
-
-            if ($this->page->protection == Page::PROTECTION_SYSTEM) {
-                unset($rules["content_type"]);
-                unset($rules["status"]);
-            }
         }
 
         return $rules;

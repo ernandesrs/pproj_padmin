@@ -68,7 +68,7 @@ class Page extends Model
                 break;
         }
 
-        if ($validatedData["protection"])
+        if ($validatedData["protection"] ?? null)
             $page->protection = $validatedData["protection"];
 
         $page->save();
@@ -93,7 +93,9 @@ class Page extends Model
                 break;
             case self::STATUS_PUBLISHED:
                 $attributes["schedule_to"] = null;
-                $attributes["published_at"] = now();
+
+                if ($this->status != self::STATUS_PUBLISHED)
+                    $attributes["published_at"] = now();
                 break;
             case $this::STATUS_DRAFT:
                 $attributes["schedule_to"] = null;
@@ -101,13 +103,32 @@ class Page extends Model
                 break;
         }
 
+        return parent::update($this->safeAttributes($attributes), $options);
+    }
+
+    /**
+     * Remove fields not needed on attributes array
+     * 
+     * @param array $attributes
+     * @return array
+     */
+    private function safeAttributes(array $attributes)
+    {
         if (!$attributes["cover"])
             unset($attributes["cover"]);
 
+        // no longer needed for the update
         unset($attributes["slug"]);
         unset($attributes["view_path"]);
 
-        return parent::update($attributes, $options);
+        if ($this->protection == Page::PROTECTION_SYSTEM) {
+            // not needed for system pages
+            unset($attributes["content_type"]);
+            unset($attributes["status"]);
+            unset($attributes["follow"]);
+        }
+
+        return $attributes;
     }
 
     /**
