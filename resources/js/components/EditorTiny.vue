@@ -48,7 +48,15 @@ import Editor from '@tinymce/tinymce-vue'
 export default {
     components: { Editor },
     props: {
-        modelValue: { type: String, default: '' }
+        modelValue: { type: String, default: null }
+    },
+    watch: {
+        modelValue: {
+            immediate: true,
+            handler(nv) {
+                console.log("model value: ", nv);
+            }
+        }
     },
     methods: {
         updateValue(event, editor) {

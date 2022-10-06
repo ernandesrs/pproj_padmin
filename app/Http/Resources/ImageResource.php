@@ -17,7 +17,7 @@ class ImageResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $arr = [
             "id" => $this->id,
             "name" => $this->name,
             "path" => $this->path,
@@ -34,5 +34,7 @@ class ImageResource extends JsonResource
                 "update" => (new ImagePolicy())->update(auth()->user(), $this->resource),
             ]
         ];
+
+        return $arr;
     }
 }

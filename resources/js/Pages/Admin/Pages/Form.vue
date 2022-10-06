@@ -102,7 +102,8 @@
                             :error-message="form.errors.schedule_to" />
                     </div>
 
-                    <div v-if="!page?.id || page?.id && page.can.update" class="col-12 mb-4 text-center">
+                    <div v-if="!page?.id || page?.id && page.can.update"
+                        class="col-12 mb-4 text-center">
                         <ButtonUi type="submit" icon="checkLg" variant="primary"
                             :text="`${page?.id ? 'Atualizar' : 'Salvar'}`"
                             :disabled="form.processing" />
@@ -140,7 +141,7 @@ export default {
                 description: null,
                 content_type: 1,
                 follow: false,
-                content: '',
+                content: null,
                 view_path: null,
                 status: 1,
                 schedule_to: null,
@@ -149,7 +150,7 @@ export default {
         };
     },
 
-    mounted() {
+    created() {
         this.setPageContentOnForm();
     },
 

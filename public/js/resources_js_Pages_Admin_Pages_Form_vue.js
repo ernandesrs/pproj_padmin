@@ -480,7 +480,15 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     modelValue: {
       type: String,
-      "default": ''
+      "default": null
+    }
+  },
+  watch: {
+    modelValue: {
+      immediate: true,
+      handler: function handler(nv) {
+        console.log("model value: ", nv);
+      }
     }
   },
   methods: {
@@ -1551,14 +1559,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       description: null,
       content_type: 1,
       follow: false,
-      content: '',
+      content: null,
       view_path: null,
       status: 1,
       schedule_to: null,
       cover: null
     })
   };
-}), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
+}), _defineProperty(_layout$layout$compon, "created", function created() {
   this.setPageContentOnForm();
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
