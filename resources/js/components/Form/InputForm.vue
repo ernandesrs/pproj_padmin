@@ -5,7 +5,7 @@
         :inline="inline">
         <input @input="updateValue" :class="inputStyle" :type="type" :id="name"
             :name="name" :readonly="readonly" :disabled="disabled" :value="modelValue"
-            :autocomplete="type=='password'?'new-password':''" />
+            :checked="checked" :autocomplete="type=='password'?'new-password':''" />
 
         <LabelForm v-if="label && isCheckOrRadioType" class="form-check-label"
             :label="label" :name="name" />
@@ -33,6 +33,20 @@ export default {
         disabled: { type: Boolean, default: false },
         inline: { type: Boolean, default: false },
     },
+    data() {
+        return {
+            checked: false
+        };
+    },
+    watch: {
+        modelValue: {
+            immediate: true,
+            handler(nv) {
+                if (nv) this.checked = true;
+                else this.checked = false;
+            }
+        }
+    },
     computed: {
         inputStyle() {
             return `${this.isCheckOrRadioType ? "form-check-input" : "form-control"} ${this.borderless ? "border-0" : ""} ${this.errorMessage ? "is-invalid" : ""}`;
@@ -45,8 +59,12 @@ export default {
         updateValue(e) {
             if (this.type == 'file')
                 this.$emit("update:modelValue", e);
-            else
-                this.$emit("update:modelValue", e.target.value);
+            else {
+                if (this.isCheckOrRadioType)
+                    this.$emit("update:modelValue", e.target.checked);
+                else
+                    this.$emit("update:modelValue", e.target.value);
+            }
         }
     },
 };
