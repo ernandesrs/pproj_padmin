@@ -93,10 +93,20 @@ class Page extends Model
     /**
      * Return the page slugs
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOn
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function slugs()
     {
         return $this->hasOne(Slug::class, "id", "slug_id");
+    }
+
+    /**
+     * Return the page author
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function author()
+    {
+        return $this->hasOne(User::class, "id", "user_id");
     }
 }
