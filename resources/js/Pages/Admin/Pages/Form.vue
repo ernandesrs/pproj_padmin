@@ -21,7 +21,7 @@
                     </div>
 
                     <div v-else-if="form.content_type == 2" class="col-12 mb-4">
-                        <InputForm label="Página customizada" name="view_path"
+                        <InputForm label="Página customizada:" name="view_path"
                             v-model="form.view_path"
                             :error-message="form.errors.view_path" />
                     </div>
@@ -68,7 +68,8 @@
                                 value: 2,
                                 text: 'Customizada'
                             }
-                        ]" v-model="form.content_type" :error-message="form.errors.content_type" />
+                        ]" v-model="form.content_type"
+                            :error-message="form.errors.content_type" />
                     </div>
 
                     <div class="col-12 mb-4 d-flex align-items-center">
@@ -101,7 +102,7 @@
                             :error-message="form.errors.schedule_to" />
                     </div>
 
-                    <div class="col-12 mb-4 text-center">
+                    <div v-if="page.can.update" class="col-12 mb-4 text-center">
                         <ButtonUi type="submit" icon="checkLg" variant="primary"
                             :text="`${page?.id ? 'Atualizar' : 'Salvar'}`"
                             :disabled="form.processing" />
@@ -169,7 +170,8 @@ export default {
             this.form.content = this.page.content;
             this.form.view_path = this.page.view_path;
             this.form.status = this.page.status;
-            this.form.schedule_to = this.page.schedule_to;
+
+            this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;
         }
     }
 };

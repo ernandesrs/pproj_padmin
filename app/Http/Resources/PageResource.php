@@ -24,6 +24,7 @@ class PageResource extends JsonResource
         $arr["slugs"] = $this->slugs()->first();
         $arr["title"] = $this->title;
         $arr["description"] = $this->description;
+        $arr["follow"] = $this->follow;
         $arr["cover"] = Thumb::thumb($this->cover);
         $arr["thumb_small"] = Thumb::thumb($this->cover, "cover.small");
         $arr["thumb_normal"] = Thumb::thumb($this->cover, "cover.normal");

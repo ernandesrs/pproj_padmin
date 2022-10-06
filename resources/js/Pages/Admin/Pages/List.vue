@@ -14,12 +14,12 @@
         </template>
 
         <template v-slot:actions>
-            <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.page.edit', {id:
+            <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.pages.edit', {page:
             page.id})" />
 
             <ButtonConfirmationUi v-if="page.can?.delete" confirm-text="Excluir?"
                 icon="trash" variant="danger" size="sm" class="ms-2" position="right"
-                :data-action="$route('admin.page.destroy',
+                :data-action="$route('admin.pages.destroy',
                 {page: page.id})" confirm-with-request />
         </template>
     </ListItem>

@@ -1566,7 +1566,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.form.content = this.page.content;
     this.form.view_path = this.page.view_path;
     this.form.status = this.page.status;
-    this.form.schedule_to = this.page.schedule_to;
+    this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;
   }
 }), _layout$layout$compon);
 
@@ -2719,6 +2719,7 @@ var _hoisted_23 = {
   "class": "col-12 mb-4"
 };
 var _hoisted_24 = {
+  key: 1,
   "class": "col-12 mb-4 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2766,7 +2767,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue"])])) : $data.form.content_type == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
-    label: "Página customizada",
+    label: "Página customizada:",
     name: "view_path",
     modelValue: $data.form.view_path,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
@@ -2853,7 +2854,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.schedule_to
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.page.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     icon: "checkLg",
     variant: "primary",
@@ -2861,7 +2862,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $data.form.processing
   }, null, 8
   /* PROPS */
-  , ["text", "disabled"])])])])])], 32
+  , ["text", "disabled"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])], 32
   /* HYDRATE_EVENTS */
   );
 }

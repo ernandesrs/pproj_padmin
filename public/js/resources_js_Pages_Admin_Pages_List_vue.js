@@ -2623,8 +2623,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           icon: "pencilSquare",
           variant: "primary",
           size: "sm",
-          to: _ctx.$route('admin.page.edit', {
-            id: page.id
+          to: _ctx.$route('admin.pages.edit', {
+            page: page.id
           })
         }, null, 8
         /* PROPS */
@@ -2636,7 +2636,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           size: "sm",
           "class": "ms-2",
           position: "right",
-          "data-action": _ctx.$route('admin.page.destroy', {
+          "data-action": _ctx.$route('admin.pages.destroy', {
             page: page.id
           }),
           "confirm-with-request": ""

@@ -53,6 +53,7 @@ class Page extends Model
         $page->cover = $validatedData["cover"];
         $page->follow = $validatedData["follow"];
         $page->status = $validatedData["status"];
+        $page->content_type = $validatedData["content_type"];
 
         $page->content = self::makeContent($validatedData);
 
