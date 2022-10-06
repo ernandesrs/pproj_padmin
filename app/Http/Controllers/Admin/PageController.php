@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
+use App\Http\Resources\PageResource;
 use App\Http\Services\ImageService;
 use App\Models\Page;
 use App\Models\Slug;
@@ -24,10 +25,10 @@ class PageController extends Controller
      */
     public function index()
     {
-        $results = null;
+        $results = Page::whereNotNull("id")->orderBy("protection", "DESC")->orderBy("created_at", "DESC")->paginate(18);
 
         return Inertia::render("Admin/Pages/List", [
-            "pages" => $results,
+            "pages" => PageResource::collection($results),
             "terms" => __("terms.page"),
             "filterAction" => route("admin.pages.index"),
             "isFiltering" => $this->filtering,
@@ -100,7 +101,7 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         return Inertia::render("Admin/Pages/Form", [
-            "page" => $page,
+            "page" => new PageResource($page),
             "terms" => __("terms.page"),
             "pageTitle" => "Editar página",
             "buttons" => [
@@ -125,6 +126,7 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
+        $this->authorize("update", $page);
         //
     }
 
@@ -136,6 +138,7 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
+        $this->authorize("delete", $page);
         //
     }
 }

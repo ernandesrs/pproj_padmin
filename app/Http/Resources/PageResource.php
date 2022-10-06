@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Helpers\Thumb;
 use App\Models\Page;
+use App\Policies\PagePolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PageResource extends JsonResource
@@ -39,6 +40,10 @@ class PageResource extends JsonResource
         if ($this->content_type == Page::CONTENT_TYPE_VIEW) $arr["view_path"] = $this->content;
         else $arr["content"] = $this->content;
 
+        $arr["can"] = [
+            "update" => (new PagePolicy())->update(auth()->user(), $this->resource),
+            "delete" => (new PagePolicy())->delete(auth()->user(), $this->resource)
+        ];
 
         return $arr;
     }
