@@ -7,8 +7,6 @@ use App\Http\Requests\PageRequest;
 use App\Http\Resources\PageResource;
 use App\Http\Services\ImageService;
 use App\Models\Page;
-use App\Models\Slug;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PageController extends Controller
