@@ -5,3 +5,37 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+$primary: #2D6F95;
+$secondary: #4a5860;
+$success: #368547;
+$info: #3192c2;
+$warning: #8b8448;
+$danger: #b05252;
+$light: #F7F7F7;
+
+$dark: #454545;
+$dark-light: #565656;
+$dark-dark: #313131;
+
+$theme-colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+
+    "dark": $dark,
+    "dark-light": $dark-light,
+    "dark-dark": $dark-dark
+);
+
+$colors: (
+  "blue":       $primary,
+  "red":        $danger,
+//   "orange":     $orange,
+//   "yellow":     $yellow,
+  "green":      $success,
+);

@@ -1,9 +1,10 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-5 col-xl-5 py-4 bg-primary"></div>
+            <div class="col-12 col-lg-5 col-xl-5 py-4"></div>
             <div class="col-12 col-lg-7 col-xl-7 py-4 px-5">
-                <div v-if="$page.component != 'Auth/Verification/Verify'" class="d-flex justify-content-end mb-4">
+                <div v-if="$page.component != 'Auth/Verification/Verify'"
+                    class="d-flex justify-content-end mb-4">
                     <a :class="['px-3 py-2 rounded me-auto', {'bg-primary text-light': $route().current() == 'front.index'}]"
                         :href="$route('front.index')">
                         Início
@@ -17,7 +18,7 @@
 
                 <AlertUi ref="alert" />
 
-                <div class="card card-body border-0">
+                <div class="card card-body border-0 inner px-4 py-3">
                     <slot />
                 </div>
             </div>

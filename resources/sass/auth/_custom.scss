@@ -9,8 +9,13 @@
         text-decoration: none;
     }
 
-    .auth-box {
-        width: 100%;
-        max-width: 575px;
+    .inner {
+        color: $dark;
+
+        .auth-box {
+            width: 100%;
+            max-width: 575px;
+        }
     }
+
 }

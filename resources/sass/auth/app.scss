@@ -1,9 +1,9 @@
 // Variables
-@import 'variables';
+@import './../panel/variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-@import "./alert";
+@import "./../alert";
 
 @import './custom';

@@ -23978,10 +23978,10 @@ module.exports = isEqual;
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
+/***/ "./resources/sass/auth/app.scss":
+/*!**************************************!*\
+  !*** ./resources/sass/auth/app.scss ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -26900,7 +26900,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			"/js/app": 0,
 /******/ 			"css/bootstrap-icons": 0,
 /******/ 			"css/panel/app": 0,
-/******/ 			"css/app": 0
+/******/ 			"css/auth/app": 0
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.j = (chunkId, promises) => {
@@ -26912,7 +26912,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
 /******/ 					} else {
-/******/ 						if(!/^css\/((|panel\/)app|bootstrap\-icons)$/.test(chunkId)) {
+/******/ 						if(!/^css\/((auth|panel)\/app|bootstrap\-icons)$/.test(chunkId)) {
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
 /******/ 							promises.push(installedChunkData[2] = promise);
@@ -26992,10 +26992,10 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./resources/sass/panel/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/app"], () => (__webpack_require__("./node_modules/bootstrap-icons/font/bootstrap-icons.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/sass/auth/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/sass/panel/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./node_modules/bootstrap-icons/font/bootstrap-icons.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

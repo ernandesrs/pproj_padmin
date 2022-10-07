@@ -906,7 +906,7 @@ var _hoisted_2 = {
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col-12 col-lg-5 col-xl-5 py-4 bg-primary"
+  "class": "col-12 col-lg-5 col-xl-5 py-4"
 }, null, -1
 /* HOISTED */
 );
@@ -920,7 +920,7 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = ["href"];
 var _hoisted_7 = {
-  "class": "card card-body border-0"
+  "class": "card card-body border-0 inner px-4 py-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
