@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
 use App\Http\Resources\PageResource;
-use App\Http\Services\ImageService;
 use App\Models\Media\Image;
 use App\Models\Page;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PageController extends Controller
@@ -18,13 +18,14 @@ class PageController extends Controller
     private bool $filtering = false;
 
     /**
-     * Display a listing of the resource.
+     * List pages.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = Page::whereNotNull("id")->orderBy("protection", "DESC")->orderBy("created_at", "DESC")->paginate(18);
+        $results = $this->filter($request);
 
         return Inertia::render("Admin/Pages/List", [
             "pages" => PageResource::collection($results),
@@ -144,6 +145,29 @@ class PageController extends Controller
             "variant" => "success",
             "message" => "Os dados da página foram atualizados com sucesso!",
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    public function filter(Request $request)
+    {
+        $filters = $this->validate($request, [
+            "filter" => ["nullable", "boolean"],
+            "search" => ["nullable", "string"],
+        ]);
+
+        $users = Page::whereNotNull("id")->orderBy("protection", "DESC")->orderBy("created_at", "DESC");
+
+        if ($filters["filter"] ?? null) {
+            if ($filters["search"] ?? null)
+                $users->whereRaw("MATCH(title,description) AGAINST('{$filters['search']}')");
+
+            $this->filtering = true;
+        }
+
+        return $users->paginate(20);
     }
 
     /**
