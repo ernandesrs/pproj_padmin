@@ -1,13 +1,52 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Admin\AdminController as AdminController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
+
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
 use App\Http\Controllers\Auth\VerifyController;
-use Illuminate\Support\Facades\Route;
+
+// ADMIN: SUBDOMAIN
+Route::group([
+    "domain" => "panel." . env("APP_URL"),
+    "middleware" => ["auth", "admin_access"]
+], function () {
+    Route::get("/", [AdminController::class, "index"])->name("admin.index");
+
+    Route::group(["prefix" => "users"], function () {
+        Route::get("/", [AdminUserController::class, "index"])->name("admin.users.index");
+        Route::get("/create", [AdminUserController::class, "create"])->name("admin.users.create");
+        Route::post("/create", [AdminUserController::class, "store"])->name("admin.users.store");
+        Route::get("/edit/{user}", [AdminUserController::class, "edit"])->name("admin.users.edit");
+        Route::post("/edit/{user}", [AdminUserController::class, "update"])->name("admin.users.update");
+        Route::post("/destroy/{user}", [AdminUserController::class, "destroy"])->name("admin.users.destroy");
+        Route::post("/promote/{user}", [AdminUserController::class, "promote"])->name("admin.users.promote");
+        Route::post("/demote/{user}", [AdminUserController::class, "demote"])->name("admin.users.demote");
+    });
+
+    Route::group(["prefix" => "medias"], function () {
+        Route::get("/images", [AdminImageController::class, "index"])->name("admin.medias.images.index");
+        Route::get("/images/show/{image}", [AdminImageController::class, "show"])->name("admin.medias.images.show");
+        Route::get("/images/create", [AdminImageController::class, "create"])->name("admin.medias.images.create");
+        Route::post("/images/store", [AdminImageController::class, "store"])->name("admin.medias.images.store");
+        Route::post("/images/upload", [AdminImageController::class, "upload"])->name("admin.medias.images.upload");
+        Route::get("/images/update/{image}", [AdminImageController::class, "edit"])->name("admin.medias.images.edit");
+        Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
+        Route::post("/images/delete/{image}", [AdminImageController::class, "destroy"])->name("admin.medias.images.destroy");
+    });
+
+    Route::get("/pages", [AdminPageController::class, "index"])->name("admin.pages.index");
+    Route::get("/pages/create", [AdminPageController::class, "create"])->name("admin.pages.create");
+    Route::post("/pages/store", [AdminPageController::class, "store"])->name("admin.pages.store");
+    Route::get("/pages/edit/{page}", [AdminPageController::class, "edit"])->name("admin.pages.edit");
+    Route::post("/pages/update/{page}", [AdminPageController::class, "update"])->name("admin.pages.update");
+    Route::post("/pages/destroy/{page}", [AdminPageController::class, "destroy"])->name("admin.pages.destroy");
+});
 
 // FRONT/SITE
 Route::group([], function () {
@@ -44,38 +83,4 @@ Route::group(["prefix" => "auth"], function () {
         Route::post("/verify-register", [VerifyController::class, "verifyRegister"])->name("auth.verifyRegister");
         Route::post("/verification-resend", [VerifyController::class, "verificationResend"])->name("auth.verificationResend");
     });
-});
-
-// ADMIN
-Route::group(["prefix" => "admin", "middleware" => ["auth", "admin_access"]], function () {
-    Route::get("/", [AdminController::class, "index"])->name("admin.index");
-
-    Route::group(["prefix" => "users"], function () {
-        Route::get("/", [AdminUserController::class, "index"])->name("admin.users.index");
-        Route::get("/create", [AdminUserController::class, "create"])->name("admin.users.create");
-        Route::post("/create", [AdminUserController::class, "store"])->name("admin.users.store");
-        Route::get("/edit/{user}", [AdminUserController::class, "edit"])->name("admin.users.edit");
-        Route::post("/edit/{user}", [AdminUserController::class, "update"])->name("admin.users.update");
-        Route::post("/destroy/{user}", [AdminUserController::class, "destroy"])->name("admin.users.destroy");
-        Route::post("/promote/{user}", [AdminUserController::class, "promote"])->name("admin.users.promote");
-        Route::post("/demote/{user}", [AdminUserController::class, "demote"])->name("admin.users.demote");
-    });
-
-    Route::group(["prefix" => "medias"], function () {
-        Route::get("/images", [AdminImageController::class, "index"])->name("admin.medias.images.index");
-        Route::get("/images/show/{image}", [AdminImageController::class, "show"])->name("admin.medias.images.show");
-        Route::get("/images/create", [AdminImageController::class, "create"])->name("admin.medias.images.create");
-        Route::post("/images/store", [AdminImageController::class, "store"])->name("admin.medias.images.store");
-        Route::post("/images/upload", [AdminImageController::class, "upload"])->name("admin.medias.images.upload");
-        Route::get("/images/update/{image}", [AdminImageController::class, "edit"])->name("admin.medias.images.edit");
-        Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
-        Route::post("/images/delete/{image}", [AdminImageController::class, "destroy"])->name("admin.medias.images.destroy");
-    });
-
-    Route::get("/pages", [AdminPageController::class, "index"])->name("admin.pages.index");
-    Route::get("/pages/create", [AdminPageController::class, "create"])->name("admin.pages.create");
-    Route::post("/pages/store", [AdminPageController::class, "store"])->name("admin.pages.store");
-    Route::get("/pages/edit/{page}", [AdminPageController::class, "edit"])->name("admin.pages.edit");
-    Route::post("/pages/update/{page}", [AdminPageController::class, "update"])->name("admin.pages.update");
-    Route::post("/pages/destroy/{page}", [AdminPageController::class, "destroy"])->name("admin.pages.destroy");
 });
