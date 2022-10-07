@@ -1124,6 +1124,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   userbox: {
     type: Object,
     "default": {}
+  },
+  pagebox: {
+    type: Object,
+    "default": {}
   }
 }), _layout$layout$compon);
 
@@ -2228,6 +2232,9 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "col-12 col-sm-6 col-lg-4"
 };
+var _hoisted_4 = {
+  "class": "col-12 col-sm-6 col-lg-4"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_BadgeUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BadgeUi");
 
@@ -2253,6 +2260,40 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
         text: "N\xE3o verificado: ".concat($props.userbox.unverified),
         variant: "info",
+        "class": "me-1"
+      }, null, 8
+      /* PROPS */
+      , ["text"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, {
+    title: "Páginas",
+    icon: "fileEarmark"
+  }, {
+    content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+        text: "Total: ".concat($props.pagebox.total),
+        variant: "primary",
+        "class": "me-1"
+      }, null, 8
+      /* PROPS */
+      , ["text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+        text: "Rascunho: ".concat($props.pagebox.draft),
+        variant: "secondary",
+        "class": "me-1"
+      }, null, 8
+      /* PROPS */
+      , ["text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+        text: "Agendado: ".concat($props.pagebox.scheduled),
+        variant: "info",
+        "class": "me-1"
+      }, null, 8
+      /* PROPS */
+      , ["text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+        text: "Publicado: ".concat($props.pagebox.published),
+        variant: "success",
         "class": "me-1"
       }, null, 8
       /* PROPS */

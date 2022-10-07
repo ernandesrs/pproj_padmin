@@ -6,9 +6,27 @@
                 <div class="col-12 col-sm-6 col-lg-4">
                     <CardUi title="Usuários" icon="users">
                         <template v-slot:content>
-                            <BadgeUi :text="`Total: ${userbox.total}`" variant="primary" class="me-1" />
-                            <BadgeUi :text="`Verificado: ${userbox.verified}`" variant="secondary" class="me-1" />
-                            <BadgeUi :text="`Não verificado: ${userbox.unverified}`" variant="info" class="me-1" />
+                            <BadgeUi :text="`Total: ${userbox.total}`" variant="primary"
+                                class="me-1" />
+                            <BadgeUi :text="`Verificado: ${userbox.verified}`"
+                                variant="secondary" class="me-1" />
+                            <BadgeUi :text="`Não verificado: ${userbox.unverified}`"
+                                variant="info" class="me-1" />
+                        </template>
+                    </CardUi>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <CardUi title="Páginas" icon="fileEarmark">
+                        <template v-slot:content>
+                            <BadgeUi :text="`Total: ${pagebox.total}`" variant="primary"
+                                class="me-1" />
+                            <BadgeUi :text="`Rascunho: ${pagebox.draft}`"
+                                variant="secondary" class="me-1" />
+                            <BadgeUi :text="`Agendado: ${pagebox.scheduled}`"
+                                variant="info" class="me-1" />
+                            <BadgeUi :text="`Publicado: ${pagebox.published}`"
+                                variant="success" class="me-1" />
                         </template>
                     </CardUi>
                 </div>
@@ -29,7 +47,8 @@ export default {
     layout: Layout,
     components: { CardUi, BadgeUi },
     props: {
-        userbox: { type: Object, default: {} }
+        userbox: { type: Object, default: {} },
+        pagebox: { type: Object, default: {} }
     }
 }
 </script>
