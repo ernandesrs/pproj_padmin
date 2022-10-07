@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
 use App\Http\Resources\PageResource;
 use App\Http\Services\ImageService;
+use App\Models\Media\Image;
 use App\Models\Page;
 use Inertia\Inertia;
 
@@ -70,9 +71,10 @@ class PageController extends Controller
     {
         $validated = $request->validated();
 
-        if ($cover = $validated["cover"] ?? null) {
-            $image = (new ImageService())->store($cover, "covers");
-            $validated["cover"] = $image->path;
+        if ($coverId = $validated["cover"] ?? null) {
+            $image = Image::where("id", $coverId)->first();
+            if ($image)
+                $validated["cover"] = $image->path;
         }
 
         $page = Page::create($validated);
@@ -130,9 +132,10 @@ class PageController extends Controller
 
         $validated = $request->validated();
 
-        if ($cover = $validated["cover"] ?? null) {
-            $image = (new ImageService())->store($cover, "covers");
-            $validated["cover"] = $image->path;
+        if ($coverId = $validated["cover"] ?? null) {
+            $image = Image::where("id", $coverId)->first();
+            if ($image)
+                $validated["cover"] = $image->path;
         }
 
         $page->update($validated);

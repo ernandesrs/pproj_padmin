@@ -42,7 +42,7 @@ class PageRequest extends FormRequest
         $rules = [
             "title" => ["required", "unique:pages,title", "max:100"],
             "description" => ["required", "max:160"],
-            "cover" => ["nullable", "mimes:png,jpg,webp", "max:2500"],
+            "cover" => ["nullable", "numeric"],
             "lang" => [Rule::in(config("app.locales"))],
             "content_type" => ["required", Rule::in(Page::CONTENT_TYPES)],
             "content" => ["nullable"],
