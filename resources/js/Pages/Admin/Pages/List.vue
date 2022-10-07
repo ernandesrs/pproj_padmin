@@ -9,7 +9,7 @@
         coverStyle: 'rectangle'
     }">
         <template v-slot:badges>
-            <BadgeUi class="mb-1 me-1" :text="`${page?.author?.first_name}`" icon="user"
+            <BadgeUi class="mb-1 me-1" :text="`${ $helpers.string.substr(page?.author?.first_name, 8) }`" icon="user"
                 variant="dark" />
 
             <BadgeUi class="mb-1 me-1"

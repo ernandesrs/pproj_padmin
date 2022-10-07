@@ -18,8 +18,7 @@
                             <h2 class="fs-6 fw-semibold text-muted mb-0">
                                 <a :href="image.url" target="_blank"
                                     title="Visualizar original">
-                                    {{ `${ image.name.substring(0, 15) }
-                                    ${image.name.length > 15 ? '...' : ''}` }}
+                                    {{ `${ $helpers.string.substr(image.name, 15) }` }}
                                 </a>
                             </h2>
                             <small class="text-muted">

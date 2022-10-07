@@ -2736,7 +2736,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           href: image.url,
           target: "_blank",
           title: "Visualizar original"
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)("".concat(image.name.substring(0, 15), "\n                                    ").concat(image.name.length > 15 ? '...' : '')), 9
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)("".concat(_ctx.$helpers.string.substr(image.name, 15))), 9
         /* TEXT, PROPS */
         , _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, [_hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((image.size / 1000000).toFixed(3)) + " Mb", 1
         /* TEXT */

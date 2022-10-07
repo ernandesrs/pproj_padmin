@@ -2630,7 +2630,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1",
-          text: "".concat(page === null || page === void 0 ? void 0 : (_page$author = page.author) === null || _page$author === void 0 ? void 0 : _page$author.first_name),
+          text: "".concat(_ctx.$helpers.string.substr(page === null || page === void 0 ? void 0 : (_page$author = page.author) === null || _page$author === void 0 ? void 0 : _page$author.first_name, 8)),
           icon: "user",
           variant: "dark"
         }, null, 8

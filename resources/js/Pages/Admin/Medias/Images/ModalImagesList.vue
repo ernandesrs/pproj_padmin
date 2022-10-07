@@ -27,9 +27,9 @@
                 class="col-6 col-sm-4 col-md-3 col-xl-2 text-center mb-4">
                 <a :href="image.url" title="Ver imagem original" target="_blank">
                     <img class="img-fluid" :src="image.thumb_small" :alt="image.name">
-                    <p class="mb-0 fs-6 fw-semibold text-muted text-center py-1">{{
-                    (image.name.substring(0, 10)) + (image.name.length > 10
-                    ? '...' : '') }}</p>
+                    <p class="mb-0 fs-6 fw-semibold text-muted text-center py-1">
+                        {{ $helpers.string.substr(image.name, 10) }}
+                    </p>
                 </a>
                 <ButtonUi @click="insertImage" variant="dark" icon="checkLg"
                     text="Inserir" size="sm" :data-info="`${JSON.stringify({

@@ -1171,7 +1171,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           alt: image.name
         }, null, 8
         /* PROPS */
-        , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(image.name.substring(0, 10) + (image.name.length > 10 ? '...' : '')), 1
+        , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$helpers.string.substr(image.name, 10)), 1
         /* TEXT */
         )], 8
         /* PROPS */
