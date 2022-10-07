@@ -23,14 +23,20 @@
                 </div>
             </div>
 
-            <div v-else @click="insertImage" v-for="image in images?.data" :key="image.id"
-                class="col-6 col-sm-4 col-md-3 col-xl-2">
-                <img class="img-fluid" :src="image.thumb_small" :alt="image.name"
-                    :data-info="`${JSON.stringify({
+            <div v-else v-for="image in images?.data" :key="image.id"
+                class="col-6 col-sm-4 col-md-3 col-xl-2 text-center mb-4">
+                <a :href="image.url" title="Ver imagem original" target="_blank">
+                    <img class="img-fluid" :src="image.thumb_small" :alt="image.name">
+                    <p class="mb-0 fs-6 fw-semibold text-muted text-center py-1">{{
+                    (image.name.substring(0, 10)) + (image.name.length > 10
+                    ? '...' : '') }}</p>
+                </a>
+                <ButtonUi @click="insertImage" variant="dark" icon="checkLg"
+                    text="Inserir" size="sm" :data-info="`${JSON.stringify({
                         id: image.id,
                         url: image.url,
                         thumb_small: image.thumb_small
-                    })}`">
+                    })}`" />
             </div>
         </div>
     </ModalUi>
@@ -92,7 +98,9 @@ export default {
         },
         insertImage(event) {
             let data = JSON.parse(event.target.getAttribute("data-info"));
-            console.log(data);
+            if (!data?.id) return;
+
+            this.$emit("imageInsert", data);
         }
     },
 };
