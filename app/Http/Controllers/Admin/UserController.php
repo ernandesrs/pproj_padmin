@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\UserRegistered;
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
+use App\Http\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -73,20 +72,7 @@ class UserController extends Controller
     {
         $validated = $request->validated();
 
-        $validated["password"] = Hash::make($validated["password"]);
-
-        /** User $user */
-        $user = new User();
-        $user->first_name = $validated["first_name"];
-        $user->last_name = $validated["last_name"];
-        $user->username = $validated["username"];
-        $user->gender = $validated["gender"];
-        $user->email = $validated["email"];
-        $user->password = $validated["password"];
-        $user->confirmation_token = Str::random(20);
-        $user->save();
-
-        event(new UserRegistered($user));
+        $user = (new UserService())->store($validated);
 
         session()->flash("flash_alert", [
             "variant" => "success",
@@ -143,22 +129,7 @@ class UserController extends Controller
 
         $validated = $request->validated();
 
-        if ($photo = $validated["photo"]) {
-            if ($user->photo)
-                Storage::delete("public/{$user->photo}");
-
-            $user->photo = $photo->store("avatars", "public");
-        }
-
-        $user->first_name = $validated["first_name"];
-        $user->last_name = $validated["last_name"];
-        $user->username = $validated["username"];
-        $user->gender = $validated["gender"];
-
-        if ($pass = $validated["password"] ?? null)
-            $user->password = Hash::make($pass);
-
-        $user->save();
+        (new UserService())->update($validated, $user);
 
         Session::flash("flash_alert", [
             "message" => "Os dados de " . $user->first_name . " foram atualizados com sucesso!",
