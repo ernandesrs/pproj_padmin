@@ -38,6 +38,9 @@
                         thumb_small: image.thumb_small
                     })}`" />
             </div>
+
+            <PaginationUi v-if="images?.data" :pages="images?.meta?.links"
+                url-params="onlyList=1" />
         </div>
     </ModalUi>
 
@@ -51,9 +54,10 @@ import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 import BackdropUi from '../../../../Components/Ui/BackdropUi.vue';
+import PaginationUi from '../../../../Components/PaginationUi.vue';
 
 export default {
-    components: { ModalUi, InputForm, ButtonUi, BackdropUi },
+    components: { ModalUi, InputForm, ButtonUi, BackdropUi, PaginationUi },
     props: {
         show: { type: Boolean, default: false },
     },
@@ -93,7 +97,6 @@ export default {
             Inertia.get(route("admin.medias.images.index", { onlyList: 1 }));
         },
         search() {
-            if (!this.searchForm.search) return;
             this.searchForm.get(route("admin.medias.images.index"));
         },
         insertImage(event) {

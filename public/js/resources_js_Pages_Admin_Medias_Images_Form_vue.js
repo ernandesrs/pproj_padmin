@@ -417,6 +417,10 @@ __webpack_require__.r(__webpack_exports__);
     pages: {
       type: Array,
       defualt: []
+    },
+    urlParams: {
+      type: String,
+      "default": null
     }
   }
 });
@@ -1474,7 +1478,7 @@ var _hoisted_2 = {
   "class": "pagination justify-content-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return $props.pages ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", {
+  return $props.pages && $props.pages.length > 3 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", {
     key: 0,
     "aria-label": $props.label
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.pages, function (page, key) {
@@ -1487,7 +1491,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }])
     }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)("".concat(!page.url || page.active ? 'span' : 'Link')), {
       "class": "page-link",
-      href: (_page$url = page.url) !== null && _page$url !== void 0 ? _page$url : null
+      href: "".concat((_page$url = page.url) !== null && _page$url !== void 0 ? _page$url : null).concat($props.urlParams ? '&' + $props.urlParams : '')
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(page.label), 1
