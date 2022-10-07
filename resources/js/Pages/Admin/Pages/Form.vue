@@ -1,5 +1,7 @@
 <template>
 
+    <ModalImagesList :show="showImagesModalList" @modalClose="modalImagesListClose" />
+
     <form @submit.prevent="submit">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 mb-4">
@@ -49,7 +51,7 @@
                 <div class="row">
                     <div
                         class="col-12 mb-4 d-flex flex-column justify-content-center align-items-center">
-                        <div class="border d-flex justify-content-center align-items-center mb-3"
+                        <div class="border d-flex justify-content-center align-items-center mb-1"
                             style="width:100%;max-width:200px;height:100px;">
                             <img v-if="page.cover" :src="page.thumb_small"
                                 :alt="page.title">
@@ -58,19 +60,9 @@
                     </div>
 
                     <!-- cover upload -->
-                    <div class="col-12 mb-4">
-                        <ButtonUi @click="getImagesList" text="Inserir capa" icon="image"
-                            variant="success" size="sm" />
-
-                        <InputForm
-                            @update:modelValue="form.cover = $event.target.files[0]"
-                            label="Capa:" type="file" name="cover"
-                            :error-message="form.errors.cover" />
-
-                        <progress v-if="form.progress" :value="form.progress.percentage"
-                            max="100">
-                            {{ form.progress.percentage }}%
-                        </progress>
+                    <div class="col-12 text-center mb-4">
+                        <ButtonUi @click="modalImagesListShow" text="Inserir capa"
+                            icon="image" variant="success" size="sm" />
                     </div>
 
                     <div class="col-12 mb-4">
@@ -140,16 +132,15 @@ import { useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import EditorTiny from '../../../Components/EditorTiny.vue';
-import { Inertia } from '@inertiajs/inertia';
+import ModalImagesList from '../Medias/Images/ModalImagesList.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, SelectForm, EditorTiny },
+    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList },
     props: {
         page: { type: Object, default: {} },
         terms: { type: Object, default: {} },
-        images: { type: [Object], default: {} }
     },
 
     data() {
@@ -165,24 +156,13 @@ export default {
                 status: 1,
                 schedule_to: null,
                 cover: null,
-            })
+            }),
+            showImagesModalList: false
         };
     },
-
-    watch: {
-        images: {
-            immediate: true,
-            handler(nv) {
-                if (nv?.data)
-                    console.log(nv.data);
-            }
-        }
-    },
-
     created() {
         this.setPageContentOnForm();
     },
-
     methods: {
         submit() {
             let action = this.page?.id ? route("admin.pages.update", { page: this.page.id }) : route("admin.pages.store");
@@ -204,8 +184,12 @@ export default {
             this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;
         },
 
-        getImagesList() {
-            Inertia.get(route("admin.medias.images.index", { onlyList: 1 }));
+        modalImagesListShow() {
+            this.showImagesModalList = true;
+        },
+
+        modalImagesListClose() {
+            this.showImagesModalList = false;
         }
     }
 };
