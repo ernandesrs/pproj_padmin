@@ -72,7 +72,7 @@ class ImageController extends Controller
     {
         $validated = $request->validated();
 
-        $image = (new ImageService())->store($validated["file"]);
+        $image = (new ImageService())->store($validated);
 
         session()->flash("flash_alert", [
             "variant" => "success",
@@ -90,7 +90,7 @@ class ImageController extends Controller
     {
         $validated = $request->validated();
 
-        $image = (new ImageService())->store($validated["file"]);
+        $image = (new ImageService())->store($validated);
 
         return new ImageResource($image);
     }

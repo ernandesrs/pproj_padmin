@@ -16,12 +16,13 @@ class ImageService
     /**
      * Store the uploaded image
      *
-     * @param \Illuminate\Http\UploadedFile $file the uploaded file
+     * @param array $validated the validated uploaded file
      * @param string|null $subdir the subdirectory in images dir
      * @return Image
      */
-    public function store(\Illuminate\Http\UploadedFile $file, ?string $subdir = null)
+    public function store(array $validated, ?string $subdir = null)
     {
+        $file = $validated["file"];
         $fileName = str_replace("." . $file->getClientOriginalExtension(), "", $file->getClientOriginalName());
 
         $image = Image::create([
