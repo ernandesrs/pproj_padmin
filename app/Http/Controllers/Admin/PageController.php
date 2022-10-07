@@ -102,6 +102,7 @@ class PageController extends Controller
             "page" => new PageResource($page),
             "terms" => __("terms.page"),
             "pageTitle" => "Editar página",
+            "images" => session()->get("images", null),
             "buttons" => [
                 "back" => [
                     "url" => route("admin.pages.index")

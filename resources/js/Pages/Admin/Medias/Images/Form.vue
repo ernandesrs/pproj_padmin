@@ -26,7 +26,8 @@
                 </div>
                 <div class="col-12 text-center">
                     <ButtonUi type="submit" variant="primary"
-                        :text="`${image?.id?'Atualizar':'Enviar'}`" />
+                        :text="`${image?.id?'Atualizar':'Enviar'}`"
+                        :disabled="form.processing" />
                 </div>
             </div>
         </div>

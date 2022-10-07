@@ -2237,10 +2237,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     variant: "primary",
-    text: "".concat((_$props$image3 = $props.image) !== null && _$props$image3 !== void 0 && _$props$image3.id ? 'Atualizar' : 'Enviar')
+    text: "".concat((_$props$image3 = $props.image) !== null && _$props$image3 !== void 0 && _$props$image3.id ? 'Atualizar' : 'Enviar'),
+    disabled: $data.form.processing
   }, null, 8
   /* PROPS */
-  , ["text"])])])])], 32
+  , ["text", "disabled"])])])])], 32
   /* HYDRATE_EVENTS */
   );
 }

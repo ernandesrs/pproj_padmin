@@ -25,7 +25,11 @@ class ImageController extends Controller
      */
     public function index(Request $request)
     {
+        $onlyList = $request->get("onlyList", false);
         $images = $this->filter($request);
+        if ($onlyList)
+            return back()->with("images", ImageResource::collection($images));
+
         return Inertia::render("Admin/Medias/Images/List", [
             "images" => ImageResource::collection($images),
             "filterAction" => route("admin.medias.images.index"),

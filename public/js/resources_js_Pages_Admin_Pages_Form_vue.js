@@ -1513,9 +1513,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Components/Ui/ButtonUi.vue */ "./resources/js/Components/Ui/ButtonUi.vue");
 /* harmony import */ var _Components_Form_SelectForm_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Components/Form/SelectForm.vue */ "./resources/js/Components/Form/SelectForm.vue");
 /* harmony import */ var _Components_EditorTiny_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Components/EditorTiny.vue */ "./resources/js/Components/EditorTiny.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 var _layout$layout$compon;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1542,6 +1544,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   terms: {
     type: Object,
     "default": {}
+  },
+  images: {
+    type: [Object],
+    "default": {}
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
   return {
@@ -1558,6 +1564,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       cover: null
     })
   };
+}), _defineProperty(_layout$layout$compon, "watch", {
+  images: {
+    immediate: true,
+    handler: function handler(nv) {
+      if (nv !== null && nv !== void 0 && nv.data) console.log(nv.data);
+    }
+  }
 }), _defineProperty(_layout$layout$compon, "created", function created() {
   this.setPageContentOnForm();
 }), _defineProperty(_layout$layout$compon, "methods", {
@@ -1582,6 +1595,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.form.view_path = this.page.view_path;
     this.form.status = this.page.status;
     this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;
+  },
+  getImagesList: function getImagesList() {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.get(route("admin.medias.images.index", {
+      onlyList: 1
+    }));
   }
 }), _layout$layout$compon);
 
@@ -2757,9 +2775,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_EditorTiny = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditorTiny");
 
-  var _component_SelectForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SelectForm");
-
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
+
+  var _component_SelectForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SelectForm");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
@@ -2811,7 +2829,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     alt: $props.page.title
   }, null, 8
   /* PROPS */
-  , _hoisted_19)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_20, "Preview"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , _hoisted_19)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_20, "Preview"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cover upload "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+    onClick: $options.getImagesList,
+    text: "Inserir capa",
+    icon: "image",
+    variant: "success",
+    size: "sm"
+  }, null, 8
+  /* PROPS */
+  , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.form.cover = $event.target.files[0];
     }),

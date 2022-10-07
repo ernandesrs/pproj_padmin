@@ -28,9 +28,11 @@
                         <div v-if="page?.id && page.content_type == 1 && form.content_type == 2"
                             class="mt-2">
                             <p class="mb-0 alert alert-warning text-center">
-                                <small><b>Atenção:</b> ao atualizar você perderá completamente o conteúdo
+                                <small><b>Atenção:</b> ao atualizar você perderá
+                                    completamente o conteúdo
                                     da página, tenha certeza de que é isso que você
-                                    quer. Ou volte o 'tipo de página' para 'texto' antes de atualizar para manter o conteúdo.</small>
+                                    quer. Ou volte o 'tipo de página' para 'texto' antes
+                                    de atualizar para manter o conteúdo.</small>
                             </p>
                         </div>
                     </div>
@@ -55,7 +57,11 @@
                         </div>
                     </div>
 
+                    <!-- cover upload -->
                     <div class="col-12 mb-4">
+                        <ButtonUi @click="getImagesList" text="Inserir capa" icon="image"
+                            variant="success" size="sm" />
+
                         <InputForm
                             @update:modelValue="form.cover = $event.target.files[0]"
                             label="Capa:" type="file" name="cover"
@@ -134,6 +140,7 @@ import { useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import EditorTiny from '../../../Components/EditorTiny.vue';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
@@ -142,6 +149,7 @@ export default {
     props: {
         page: { type: Object, default: {} },
         terms: { type: Object, default: {} },
+        images: { type: [Object], default: {} }
     },
 
     data() {
@@ -159,6 +167,16 @@ export default {
                 cover: null,
             })
         };
+    },
+
+    watch: {
+        images: {
+            immediate: true,
+            handler(nv) {
+                if (nv?.data)
+                    console.log(nv.data);
+            }
+        }
     },
 
     created() {
@@ -184,6 +202,10 @@ export default {
             this.form.status = this.page.status;
 
             this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;
+        },
+
+        getImagesList() {
+            Inertia.get(route("admin.medias.images.index", { onlyList: 1 }));
         }
     }
 };
