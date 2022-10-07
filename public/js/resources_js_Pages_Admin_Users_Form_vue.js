@@ -2216,7 +2216,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownUi, {
     icon: "userCircle",
-    text: "".concat($props.auth.full_name.substring(0, 10) + ($props.auth.full_name.length > 10 ? '...' : ''))
+    text: "".concat(_ctx.$helpers.string.substr($props.auth.full_name, 8))
   }, {
     dropdownMenu: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {

@@ -54,7 +54,7 @@
 
                     <span class="ms-auto"></span>
                     <DropdownUi icon="userCircle"
-                        :text="`${auth.full_name.substring(0, 10) + (auth.full_name.length > 10 ? '...' : '')}`">
+                        :text="`${$helpers.string.substr(auth.full_name, 8)}`">
                         <template v-slot:dropdownMenu>
                             <div
                                 class="d-flex flex-column justify-content-center align-items-center">

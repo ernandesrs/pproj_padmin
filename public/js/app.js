@@ -19550,6 +19550,30 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Utils/string.js":
+/*!**************************************!*\
+  !*** ./resources/js/Utils/string.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var substr = function substr(string, size) {
+  var indicator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '...';
+  var theString = new String(string);
+  var cropped = theString.substring(0, size);
+  return "".concat(cropped + (theString.length > size && indicator ? indicator : ''));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  substr: substr
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -19561,6 +19585,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/progress */ "./node_modules/@inertiajs/progress/dist/index.js");
+/* harmony import */ var _Utils_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Utils/string */ "./resources/js/Utils/string.js");
+
 
 
 
@@ -19580,6 +19606,9 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init();
       }
     });
     vueApp.config.globalProperties.$route = route;
+    vueApp.config.globalProperties.$helpers = {
+      string: _Utils_string__WEBPACK_IMPORTED_MODULE_3__["default"]
+    };
     vueApp.use(plugin).mount(el);
   }
 });
