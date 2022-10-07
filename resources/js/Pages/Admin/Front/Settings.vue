@@ -91,7 +91,7 @@ export default {
 
     methods: {
         submit() {
-            console.log(this.form);
+            this.form.post(route("admin.settings.update"));
         },
 
         modalImagesListShow(event) {

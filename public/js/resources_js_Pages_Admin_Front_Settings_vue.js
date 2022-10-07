@@ -1256,7 +1256,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   };
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
-    console.log(this.form);
+    this.form.post(route("admin.settings.update"));
   },
   modalImagesListShow: function modalImagesListShow(event) {
     this.showImagesModalListTo = event.target.getAttribute("data-to");

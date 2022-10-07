@@ -46,22 +46,25 @@ class SettingController extends Controller
         $validated = $this->validated($request);
 
         $settings = Content::where("name", "front_settings")->first();
-        $settings->title = $validated["title"];
-        $settings->description = $validated["description"];
-        $settings->follow = $validated["follow"];
+
+        $content = json_decode($settings->content);
+        $content->title = $validated["title"];
+        $content->description = $validated["description"];
+        $content->follow = $validated["follow"];
 
         if ($faviconId = $validated["favicon"]) {
             $favicon = Image::where("id", $faviconId)->first();
             if ($favicon)
-                $settings->favicon = $favicon->path;
+                $content->favicon = $favicon->path;
         }
 
         if ($logoId = $validated["logo"]) {
             $logo = Image::where("id", $logoId)->first();
             if ($logo)
-                $settings->logo = $logo->path;
+                $content->logo = $logo->path;
         }
 
+        $settings->content = json_encode($content);
         $settings->save();
 
         return back()->with("flash_alert", [
