@@ -1704,7 +1704,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     insertImage: function insertImage(event) {
       var data = JSON.parse(event.target.getAttribute("data-info"));
-      console.log(data);
+      if (!(data !== null && data !== void 0 && data.id)) return;
+      this.$emit("imageInsert", data);
+      this.showModal = false;
     }
   }
 });
@@ -1774,7 +1776,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       schedule_to: null,
       cover: null
     }),
-    showImagesModalList: false
+    showImagesModalList: false,
+    coverPreview: null
   };
 }), _defineProperty(_layout$layout$compon, "created", function created() {
   this.setPageContentOnForm();
@@ -1791,6 +1794,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this$page2;
 
     if (!((_this$page2 = this.page) !== null && _this$page2 !== void 0 && _this$page2.id)) return;
+    if (this.page.cover) this.coverPreview = this.page.thumb_small;
     this.form.id = this.page.id;
     this.form.title = this.page.title;
     this.form.description = this.page.description;
@@ -1806,6 +1810,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   modalImagesListClose: function modalImagesListClose() {
     this.showImagesModalList = false;
+  },
+  insertImage: function insertImage(data) {
+    this.coverPreview = data.thumb_small;
+    this.form.cover = data.id;
   }
 }), _layout$layout$compon);
 
@@ -3026,7 +3034,11 @@ var _hoisted_6 = {
 var _hoisted_7 = {
   "class": "card card-body position-relative"
 };
-var _hoisted_8 = ["src", "alt", "data-info"];
+var _hoisted_8 = ["href"];
+var _hoisted_9 = ["src", "alt"];
+var _hoisted_10 = {
+  "class": "mb-0 fs-6 fw-semibold text-muted text-center py-1"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
@@ -3037,7 +3049,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ModalUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalUi");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ModalUi, {
-    onModalClose: _cache[3] || (_cache[3] = function ($event) {
+    onModalClose: _cache[2] || (_cache[2] = function ($event) {
       return $data.showModal = false;
     }),
     show: $data.showModal,
@@ -3072,15 +3084,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         key: 1
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$data$images2 = $data.images) === null || _$data$images2 === void 0 ? void 0 : _$data$images2.data, function (image) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-          onClick: _cache[2] || (_cache[2] = function () {
-            return $options.insertImage && $options.insertImage.apply($options, arguments);
-          }),
           key: image.id,
-          "class": "col-6 col-sm-4 col-md-3 col-xl-2"
+          "class": "col-6 col-sm-4 col-md-3 col-xl-2 text-center mb-4"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+          href: image.url,
+          title: "Ver imagem original",
+          target: "_blank"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           "class": "img-fluid",
           src: image.thumb_small,
-          alt: image.name,
+          alt: image.name
+        }, null, 8
+        /* PROPS */
+        , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(image.name.substring(0, 10) + (image.name.length > 10 ? '...' : '')), 1
+        /* TEXT */
+        )], 8
+        /* PROPS */
+        , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+          onClick: $options.insertImage,
+          variant: "dark",
+          icon: "checkLg",
+          text: "Inserir",
+          size: "sm",
           "data-info": "".concat(JSON.stringify({
             id: image.id,
             url: image.url,
@@ -3088,7 +3113,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }))
         }, null, 8
         /* PROPS */
-        , _hoisted_8)]);
+        , ["onClick", "data-info"])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])];
@@ -3178,36 +3203,28 @@ var _hoisted_16 = {
 var _hoisted_17 = {
   "class": "col-12 mb-4 d-flex flex-column justify-content-center align-items-center"
 };
-var _hoisted_18 = {
-  "class": "border d-flex justify-content-center align-items-center mb-1",
-  style: {
-    "width": "100%",
-    "max-width": "200px",
-    "height": "100px"
-  }
-};
-var _hoisted_19 = ["src", "alt"];
-var _hoisted_20 = {
+var _hoisted_18 = ["src", "alt"];
+var _hoisted_19 = {
   key: 1,
   "class": "text-muted"
 };
-var _hoisted_21 = {
+var _hoisted_20 = {
   "class": "col-12 text-center mb-4"
 };
-var _hoisted_22 = {
+var _hoisted_21 = {
   "class": "col-12 mb-4"
 };
-var _hoisted_23 = {
+var _hoisted_22 = {
   "class": "col-12 mb-4 d-flex align-items-center"
 };
-var _hoisted_24 = {
+var _hoisted_23 = {
   "class": "col-12 mb-4"
 };
-var _hoisted_25 = {
+var _hoisted_24 = {
   key: 0,
   "class": "col-12 mb-4"
 };
-var _hoisted_26 = {
+var _hoisted_25 = {
   key: 1,
   "class": "col-12 mb-4 text-center"
 };
@@ -3226,10 +3243,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalImagesList, {
     show: $data.showImagesModalList,
-    onModalClose: $options.modalImagesListClose
+    onModalClose: $options.modalImagesListClose,
+    onImageInsert: $options.insertImage
   }, null, 8
   /* PROPS */
-  , ["show", "onModalClose"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  , ["show", "onModalClose", "onImageInsert"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
@@ -3273,13 +3291,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message", "disabled"]), (_$props$page = $props.page) !== null && _$props$page !== void 0 && _$props$page.id && $props.page.content_type == 1 && $data.form.content_type == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, _hoisted_14))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [$props.page.cover ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+  , ["modelValue", "error-message", "disabled"]), (_$props$page = $props.page) !== null && _$props$page !== void 0 && _$props$page.id && $props.page.content_type == 1 && $data.form.content_type == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, _hoisted_14))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+      'border': !$data.coverPreview
+    }, 'd-flex justify-content-center align-items-center mb-1']),
+    style: {
+      "width": "100%",
+      "max-width": "200px",
+      "height": "100px"
+    }
+  }, [$data.coverPreview ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
-    src: $props.page.thumb_small,
+    src: $data.coverPreview,
     alt: $props.page.title
   }, null, 8
   /* PROPS */
-  , _hoisted_19)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_20, "Preview"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cover upload "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , _hoisted_18)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_19, "Preview"))], 2
+  /* CLASS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cover upload "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.modalImagesListShow,
     text: "Inserir capa",
     icon: "image",
@@ -3287,7 +3316,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     size: "sm"
   }, null, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Tipo de página:",
     name: "type",
     options: [{
@@ -3305,7 +3334,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "checkbox",
     label: "Permitir indexação aos mecanismos de busca",
     name: "follow",
@@ -3317,7 +3346,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Salvar como:",
     options: [{
       value: 1,
@@ -3336,7 +3365,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["options", "modelValue", "disabled"])]), $data.form.status == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["options", "modelValue", "disabled"])]), $data.form.status == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Agendar para:",
     type: "date",
     modelValue: $data.form.schedule_to,
@@ -3346,7 +3375,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.schedule_to
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !((_$props$page2 = $props.page) !== null && _$props$page2 !== void 0 && _$props$page2.id) || (_$props$page3 = $props.page) !== null && _$props$page3 !== void 0 && _$props$page3.id && $props.page.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !((_$props$page2 = $props.page) !== null && _$props$page2 !== void 0 && _$props$page2.id) || (_$props$page3 = $props.page) !== null && _$props$page3 !== void 0 && _$props$page3.id && $props.page.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     icon: "checkLg",
     variant: "primary",

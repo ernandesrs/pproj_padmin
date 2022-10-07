@@ -101,6 +101,8 @@ export default {
             if (!data?.id) return;
 
             this.$emit("imageInsert", data);
+
+            this.showModal = false;
         }
     },
 };

@@ -1,6 +1,7 @@
 <template>
 
-    <ModalImagesList :show="showImagesModalList" @modalClose="modalImagesListClose" />
+    <ModalImagesList :show="showImagesModalList" @modalClose="modalImagesListClose"
+        @imageInsert="insertImage" />
 
     <form @submit.prevent="submit">
         <div class="row justify-content-center">
@@ -51,9 +52,9 @@
                 <div class="row">
                     <div
                         class="col-12 mb-4 d-flex flex-column justify-content-center align-items-center">
-                        <div class="border d-flex justify-content-center align-items-center mb-1"
+                        <div :class="[{'border': !coverPreview}, 'd-flex justify-content-center align-items-center mb-1']"
                             style="width:100%;max-width:200px;height:100px;">
-                            <img v-if="page.cover" :src="page.thumb_small"
+                            <img v-if="coverPreview" :src="coverPreview"
                                 :alt="page.title">
                             <span v-else class="text-muted">Preview</span>
                         </div>
@@ -157,7 +158,8 @@ export default {
                 schedule_to: null,
                 cover: null,
             }),
-            showImagesModalList: false
+            showImagesModalList: false,
+            coverPreview: null
         };
     },
     created() {
@@ -171,6 +173,9 @@ export default {
 
         setPageContentOnForm() {
             if (!this.page?.id) return;
+
+            if (this.page.cover)
+                this.coverPreview = this.page.thumb_small;
 
             this.form.id = this.page.id;
             this.form.title = this.page.title;
@@ -190,6 +195,11 @@ export default {
 
         modalImagesListClose() {
             this.showImagesModalList = false;
+        },
+
+        insertImage(data) {
+            this.coverPreview = data.thumb_small;
+            this.form.cover = data.id;
         }
     }
 };

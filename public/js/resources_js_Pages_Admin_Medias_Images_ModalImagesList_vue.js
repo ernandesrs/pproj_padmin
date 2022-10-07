@@ -570,7 +570,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     insertImage: function insertImage(event) {
       var data = JSON.parse(event.target.getAttribute("data-info"));
-      console.log(data);
+      if (!(data !== null && data !== void 0 && data.id)) return;
+      this.$emit("imageInsert", data);
+      this.showModal = false;
     }
   }
 });
@@ -1015,7 +1017,11 @@ var _hoisted_6 = {
 var _hoisted_7 = {
   "class": "card card-body position-relative"
 };
-var _hoisted_8 = ["src", "alt", "data-info"];
+var _hoisted_8 = ["href"];
+var _hoisted_9 = ["src", "alt"];
+var _hoisted_10 = {
+  "class": "mb-0 fs-6 fw-semibold text-muted text-center py-1"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
@@ -1026,7 +1032,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ModalUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalUi");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ModalUi, {
-    onModalClose: _cache[3] || (_cache[3] = function ($event) {
+    onModalClose: _cache[2] || (_cache[2] = function ($event) {
       return $data.showModal = false;
     }),
     show: $data.showModal,
@@ -1061,15 +1067,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         key: 1
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$data$images2 = $data.images) === null || _$data$images2 === void 0 ? void 0 : _$data$images2.data, function (image) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-          onClick: _cache[2] || (_cache[2] = function () {
-            return $options.insertImage && $options.insertImage.apply($options, arguments);
-          }),
           key: image.id,
-          "class": "col-6 col-sm-4 col-md-3 col-xl-2"
+          "class": "col-6 col-sm-4 col-md-3 col-xl-2 text-center mb-4"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+          href: image.url,
+          title: "Ver imagem original",
+          target: "_blank"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           "class": "img-fluid",
           src: image.thumb_small,
-          alt: image.name,
+          alt: image.name
+        }, null, 8
+        /* PROPS */
+        , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(image.name.substring(0, 10) + (image.name.length > 10 ? '...' : '')), 1
+        /* TEXT */
+        )], 8
+        /* PROPS */
+        , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+          onClick: $options.insertImage,
+          variant: "dark",
+          icon: "checkLg",
+          text: "Inserir",
+          size: "sm",
           "data-info": "".concat(JSON.stringify({
             id: image.id,
             url: image.url,
@@ -1077,7 +1096,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }))
         }, null, 8
         /* PROPS */
-        , _hoisted_8)]);
+        , ["onClick", "data-info"])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])];
