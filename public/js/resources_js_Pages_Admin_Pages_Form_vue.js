@@ -2684,27 +2684,39 @@ var _hoisted_8 = {
   "class": "col-12 mb-4"
 };
 var _hoisted_9 = {
-  key: 2,
-  "class": "col-12 mb-4"
+  key: 0,
+  "class": "mt-2"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "border px-5 py-2 text-center"
-}, " Escolha um tipo de conteúdo. ", -1
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mb-0 alert alert-warning text-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Atenção:"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ao atualizar você perderá completamente o conteúdo da página, tenha certeza de que é isso que você quer. Ou volte o 'tipo de página' para 'texto' antes de atualizar para manter o conteúdo.")])], -1
 /* HOISTED */
 );
 
 var _hoisted_11 = [_hoisted_10];
 var _hoisted_12 = {
+  key: 2,
+  "class": "col-12 mb-4"
+};
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "border px-5 py-2 text-center"
+}, " Escolha um tipo de conteúdo. ", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = [_hoisted_13];
+var _hoisted_15 = {
   "class": "col-12 col-lg-4 mb-4"
 };
-var _hoisted_13 = {
+var _hoisted_16 = {
   "class": "row"
 };
-var _hoisted_14 = {
+var _hoisted_17 = {
   "class": "col-12 mb-4 d-flex flex-column justify-content-center align-items-center"
 };
-var _hoisted_15 = {
+var _hoisted_18 = {
   "class": "border d-flex justify-content-center align-items-center mb-3",
   style: {
     "width": "100%",
@@ -2712,34 +2724,34 @@ var _hoisted_15 = {
     "height": "100px"
   }
 };
-var _hoisted_16 = ["src", "alt"];
-var _hoisted_17 = {
+var _hoisted_19 = ["src", "alt"];
+var _hoisted_20 = {
   key: 1,
   "class": "text-muted"
 };
-var _hoisted_18 = {
-  "class": "col-12 mb-4"
-};
-var _hoisted_19 = ["value"];
-var _hoisted_20 = {
-  "class": "col-12 mb-4"
-};
 var _hoisted_21 = {
-  "class": "col-12 mb-4 d-flex align-items-center"
-};
-var _hoisted_22 = {
   "class": "col-12 mb-4"
 };
+var _hoisted_22 = ["value"];
 var _hoisted_23 = {
-  key: 0,
   "class": "col-12 mb-4"
 };
 var _hoisted_24 = {
+  "class": "col-12 mb-4 d-flex align-items-center"
+};
+var _hoisted_25 = {
+  "class": "col-12 mb-4"
+};
+var _hoisted_26 = {
+  key: 0,
+  "class": "col-12 mb-4"
+};
+var _hoisted_27 = {
   key: 1,
   "class": "col-12 mb-4 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$props$page, _$props$page2, _$props$page3;
+  var _$props$page, _$props$page2, _$props$page3, _$props$page4;
 
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
@@ -2793,13 +2805,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message", "disabled"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, _hoisted_11))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [$props.page.cover ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+  , ["modelValue", "error-message", "disabled"]), (_$props$page = $props.page) !== null && _$props$page !== void 0 && _$props$page.id && $props.page.content_type == 1 && $data.form.content_type == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, _hoisted_14))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [$props.page.cover ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
     src: $props.page.thumb_small,
     alt: $props.page.title
   }, null, 8
   /* PROPS */
-  , _hoisted_16)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_17, "Preview"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , _hoisted_19)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_20, "Preview"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.form.cover = $event.target.files[0];
     }),
@@ -2815,7 +2827,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     max: "100"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.progress.percentage) + "% ", 9
   /* TEXT, PROPS */
-  , _hoisted_19)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , _hoisted_22)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Tipo de página:",
     name: "type",
     options: [{
@@ -2833,7 +2845,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "checkbox",
     label: "Permitir indexação aos mecanismos de busca",
     name: "follow",
@@ -2845,7 +2857,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Salvar como:",
     options: [{
       value: 1,
@@ -2864,7 +2876,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $props.page.protection == 9
   }, null, 8
   /* PROPS */
-  , ["options", "modelValue", "disabled"])]), $data.form.status == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["options", "modelValue", "disabled"])]), $data.form.status == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Agendar para:",
     type: "date",
     modelValue: $data.form.schedule_to,
@@ -2874,11 +2886,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.schedule_to
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !((_$props$page = $props.page) !== null && _$props$page !== void 0 && _$props$page.id) || (_$props$page2 = $props.page) !== null && _$props$page2 !== void 0 && _$props$page2.id && $props.page.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !((_$props$page2 = $props.page) !== null && _$props$page2 !== void 0 && _$props$page2.id) || (_$props$page3 = $props.page) !== null && _$props$page3 !== void 0 && _$props$page3.id && $props.page.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     icon: "checkLg",
     variant: "primary",
-    text: "".concat((_$props$page3 = $props.page) !== null && _$props$page3 !== void 0 && _$props$page3.id ? 'Atualizar' : 'Salvar'),
+    text: "".concat((_$props$page4 = $props.page) !== null && _$props$page4 !== void 0 && _$props$page4.id ? 'Atualizar' : 'Salvar'),
     disabled: $data.form.processing
   }, null, 8
   /* PROPS */

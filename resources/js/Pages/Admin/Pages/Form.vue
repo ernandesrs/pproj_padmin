@@ -23,7 +23,16 @@
                     <div v-else-if="form.content_type == 2" class="col-12 mb-4">
                         <InputForm label="Página customizada:" name="view_path"
                             v-model="form.view_path"
-                            :error-message="form.errors.view_path" :disabled="page.protection == 9" />
+                            :error-message="form.errors.view_path"
+                            :disabled="page.protection == 9" />
+                        <div v-if="page?.id && page.content_type == 1 && form.content_type == 2"
+                            class="mt-2">
+                            <p class="mb-0 alert alert-warning text-center">
+                                <small><b>Atenção:</b> ao atualizar você perderá completamente o conteúdo
+                                    da página, tenha certeza de que é isso que você
+                                    quer. Ou volte o 'tipo de página' para 'texto' antes de atualizar para manter o conteúdo.</small>
+                            </p>
+                        </div>
                     </div>
 
                     <div v-else class="col-12 mb-4">
@@ -69,14 +78,16 @@
                                 text: 'Customizada'
                             }
                         ]" v-model="form.content_type"
-                            :error-message="form.errors.content_type" :disabled="page.protection == 9" />
+                            :error-message="form.errors.content_type"
+                            :disabled="page.protection == 9" />
                     </div>
 
                     <div class="col-12 mb-4 d-flex align-items-center">
                         <InputForm type="checkbox"
                             label="Permitir indexação aos mecanismos de busca"
                             name="follow" v-model="form.follow"
-                            :error-message="form.errors.follow" :disabled="page.protection == 9" />
+                            :error-message="form.errors.follow"
+                            :disabled="page.protection == 9" />
                     </div>
 
                     <div class="col-12 mb-4">
