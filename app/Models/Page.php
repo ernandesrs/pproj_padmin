@@ -85,8 +85,6 @@ class Page extends Model
      */
     public function update(array $attributes = [], array $options = [])
     {
-        $attributes["content"] = $this->makeContent($attributes);
-
         switch ($attributes["status"]) {
             case self::STATUS_SCHEDULED:
                 $attributes["published_at"] = null;
@@ -114,19 +112,21 @@ class Page extends Model
      */
     private function safeAttributes(array $attributes)
     {
-        if (!$attributes["cover"])
-            unset($attributes["cover"]);
-
-        // no longer needed for the update
-        unset($attributes["slug"]);
-        unset($attributes["view_path"]);
-
         if ($this->protection == Page::PROTECTION_SYSTEM) {
             // not needed for system pages
             unset($attributes["content_type"]);
             unset($attributes["status"]);
             unset($attributes["follow"]);
         }
+
+        $attributes["content"] = $this->makeContent($attributes);
+
+        if (!$attributes["cover"])
+            unset($attributes["cover"]);
+
+        // no longer needed for the update
+        unset($attributes["slug"]);
+        unset($attributes["view_path"]);
 
         return $attributes;
     }
@@ -140,13 +140,21 @@ class Page extends Model
     public function makeContent(array $validatedData)
     {
         $content = null;
-        switch ($validatedData["content_type"]) {
-            case self::CONTENT_TYPE_TEXT:
+
+        if ($this->protection == self::PROTECTION_SYSTEM) {
+            if ($this->content_type == self::CONTENT_TYPE_VIEW)
+                $content = $this->content;
+            else
                 $content = $validatedData["content"];
-                break;
-            case self::CONTENT_TYPE_VIEW:
-                $content = $validatedData["view_path"];
-                break;
+        } else {
+            switch ($validatedData["content_type"]) {
+                case self::CONTENT_TYPE_TEXT:
+                    $content = $validatedData["content"];
+                    break;
+                case self::CONTENT_TYPE_VIEW:
+                    $content = $validatedData["view_path"];
+                    break;
+            }
         }
         return $content;
     }
