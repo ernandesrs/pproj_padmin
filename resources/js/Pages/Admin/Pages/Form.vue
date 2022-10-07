@@ -62,7 +62,7 @@
 
                     <!-- cover upload -->
                     <div class="col-12 text-center mb-4">
-                        <ButtonUi @click="modalImagesListShow" text="Inserir capa"
+                        <ButtonUi @click="modalImagesListShow" :text="`${coverPreview ? 'Atualizar capa' : 'Inserir capa'}`"
                             icon="image" variant="success" size="sm" />
                     </div>
 

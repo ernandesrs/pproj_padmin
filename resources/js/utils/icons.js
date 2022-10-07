@@ -4,6 +4,8 @@ const icons = {
     arrowLeft: 'bi bi-arrow-left',
     arrowRight: 'bi bi-arrow-right',
 
+    calendarCheck: 'bi bi-calendar2-check',
+    calendarDate: 'bi bi-calendar2-date',
     check: 'bi bi-check',
     checkLg: 'bi bi-check-lg',
     checkCircleFill: 'bi bi-check-circle-fill',
@@ -38,6 +40,9 @@ const icons = {
     search: 'bi bi-search',
 
     trash: 'bi bi-trash',
+    textLeft: 'bi bi-text-left',
+    textRight: 'bi bi-text-right',
+    textCenter: 'bi bi-text-center',
 
     video: 'bi bi-play-btn',
 

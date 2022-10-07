@@ -2630,23 +2630,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1",
-          text: "Autor: ".concat(page === null || page === void 0 ? void 0 : (_page$author = page.author) === null || _page$author === void 0 ? void 0 : _page$author.first_name),
+          text: "".concat(page === null || page === void 0 ? void 0 : (_page$author = page.author) === null || _page$author === void 0 ? void 0 : _page$author.first_name),
+          icon: "user",
           variant: "dark"
         }, null, 8
         /* PROPS */
         , ["text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1",
-          text: "Status: ".concat($props.terms.status['status_' + page.status]),
+          text: "".concat($props.terms.status['status_' + page.status]),
+          icon: page.status == 1 ? 'fileEarmarkText' : page.status == 2 ? 'calendarDate' : 'calendarCheck',
           variant: "".concat(page.status == 1 ? 'secondary' : page.status == 2 ? 'info' : 'success')
         }, null, 8
         /* PROPS */
-        , ["text", "variant"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+        , ["text", "icon", "variant"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1",
-          text: "Tipo: ".concat($props.terms.type['type_' + page.content_type]),
+          text: "".concat($props.terms.type['type_' + page.content_type]),
+          icon: page.content_type == 1 ? 'textLeft' : 'app',
           variant: "secondary"
         }, null, 8
         /* PROPS */
-        , ["text"])];
+        , ["text", "icon"])];
       }),
       actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         var _page$can;
@@ -2715,6 +2718,8 @@ var icons = (_icons = {
   appIndicator: 'bi bi-app-indicator',
   arrowLeft: 'bi bi-arrow-left',
   arrowRight: 'bi bi-arrow-right',
+  calendarCheck: 'bi bi-calendar2-check',
+  calendarDate: 'bi bi-calendar2-date',
   check: 'bi bi-check',
   checkLg: 'bi bi-check-lg',
   checkCircleFill: 'bi bi-check-circle-fill',
@@ -2741,6 +2746,9 @@ var icons = (_icons = {
   plusLg: 'bi bi-plus-lg',
   search: 'bi bi-search',
   trash: 'bi bi-trash',
+  textLeft: 'bi bi-text-left',
+  textRight: 'bi bi-text-right',
+  textCenter: 'bi bi-text-center',
   video: 'bi bi-play-btn',
   user: 'bi bi-person',
   users: 'bi bi-people',

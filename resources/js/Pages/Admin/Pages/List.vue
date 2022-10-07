@@ -9,15 +9,17 @@
         coverStyle: 'rectangle'
     }">
         <template v-slot:badges>
-            <BadgeUi class="mb-1 me-1" :text="`Autor: ${page?.author?.first_name}`"
+            <BadgeUi class="mb-1 me-1" :text="`${page?.author?.first_name}`" icon="user"
                 variant="dark" />
 
             <BadgeUi class="mb-1 me-1"
-                :text="`Status: ${terms.status[('status_' + page.status)]}`"
+                :text="`${terms.status[('status_' + page.status)]}`"
+                :icon="page.status == 1 ? 'fileEarmarkText' : (page.status == 2 ? 'calendarDate' : 'calendarCheck')"
                 :variant="`${page.status == 1 ? 'secondary' : (page.status == 2 ? 'info' : 'success')}`" />
 
             <BadgeUi class="mb-1 me-1"
-                :text="`Tipo: ${terms.type[('type_' + page.content_type)]}`" variant="secondary" />
+                :text="`${terms.type[('type_' + page.content_type)]}`"
+                :icon="page.content_type == 1 ? 'textLeft' : 'app'" variant="secondary" />
         </template>
 
         <template v-slot:actions>

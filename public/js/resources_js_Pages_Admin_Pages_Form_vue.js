@@ -3408,13 +3408,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cover upload "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.modalImagesListShow,
-    text: "Inserir capa",
+    text: "".concat($data.coverPreview ? 'Atualizar capa' : 'Inserir capa'),
     icon: "image",
     variant: "success",
     size: "sm"
   }, null, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["onClick", "text"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Tipo de página:",
     name: "type",
     options: [{
@@ -3509,6 +3509,8 @@ var icons = (_icons = {
   appIndicator: 'bi bi-app-indicator',
   arrowLeft: 'bi bi-arrow-left',
   arrowRight: 'bi bi-arrow-right',
+  calendarCheck: 'bi bi-calendar2-check',
+  calendarDate: 'bi bi-calendar2-date',
   check: 'bi bi-check',
   checkLg: 'bi bi-check-lg',
   checkCircleFill: 'bi bi-check-circle-fill',
@@ -3535,6 +3537,9 @@ var icons = (_icons = {
   plusLg: 'bi bi-plus-lg',
   search: 'bi bi-search',
   trash: 'bi bi-trash',
+  textLeft: 'bi bi-text-left',
+  textRight: 'bi bi-text-right',
+  textCenter: 'bi bi-text-center',
   video: 'bi bi-play-btn',
   user: 'bi bi-person',
   users: 'bi bi-people',
