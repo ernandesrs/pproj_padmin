@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use App\Models\Page;
+use App\Models\Slug;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,6 +21,7 @@ class Builder extends Controller
         $this->homePage($user);
         $this->privacyTermsPage($user);
         $this->useTermsPage($user);
+        $this->frontSettings();
     }
 
     /**
@@ -26,11 +29,17 @@ class Builder extends Controller
      */
     private function userMaster()
     {
+        $mail = env("MAIL_ADMIN_ADDRESS", "master@master.com");
+        if (User::where("email", $mail)->first()) {
+            echo "master user exists<br>";
+            return;
+        }
+
         $user = User::create([
             "first_name" => "Master",
             "last_name" => "Last Name",
             "username" => "Master",
-            "email" => env("MAIL_ADMIN_ADDRESS", "master@master.com"),
+            "email" => $mail,
             "password" => Hash::make("password"),
             "level" => User::LEVEL_MASTER,
             "email_verified_at" => now()
@@ -47,6 +56,11 @@ class Builder extends Controller
      */
     private function homePage($author)
     {
+        if (Slug::where(config("app.locale"), "inicio")->first()) {
+            echo "home page exists<br>";
+            return;
+        }
+
         $page = Page::create([
             "slug" => "inicio",
             "lang" => config("app.locale"),
@@ -69,6 +83,11 @@ class Builder extends Controller
      */
     private function privacyTermsPage($author)
     {
+        if (Slug::where(config("app.locale"), "termos-de-privacidade")->first()) {
+            echo "privacy terms page exists<br>";
+            return;
+        }
+
         $page = Page::create([
             "slug" => "termos-de-privacidade",
             "lang" => config("app.locale"),
@@ -91,6 +110,11 @@ class Builder extends Controller
      */
     private function useTermsPage($author)
     {
+        if (Slug::where(config("app.locale"), "termos-de-uso")->first()) {
+            echo "use terms page exists<br>";
+            return;
+        }
+
         $page = Page::create([
             "slug" => "termos-de-uso",
             "lang" => config("app.locale"),
@@ -106,5 +130,36 @@ class Builder extends Controller
 
         if (!$page) echo "fail on use terms page create<br>";
         else echo "success on use terms page create<br>";
+    }
+
+    /**
+     * @return void
+     */
+    private function frontSettings()
+    {
+        if (Content::where("name", "front_settings")->first()) {
+            echo "front settings exists<br>";
+            return;
+        }
+
+        $content = [
+            "name" => config("app.name"),
+            "title" => "Your website title",
+            "description" => "Your website description for the search mechanisms(Google, Bing, etc)",
+            "follow" => false,
+            "favicon" => null,
+            "logo" => null,
+            "locale" => config("app.locale")
+        ];
+
+        $settings = Content::create([
+            "name" => "front_settings",
+            "content" => json_encode($content)
+        ]);
+
+        if (!$settings) echo "default front settings create fail<br>";
+        else echo "default front settings created<br>";
+
+        return $settings;
     }
 }

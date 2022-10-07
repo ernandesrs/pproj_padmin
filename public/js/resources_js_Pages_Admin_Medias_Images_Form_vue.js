@@ -952,12 +952,12 @@ var WIDTH_MOBILE = 768;
           text: 'Mídias',
           href: '#',
           icon: 'collection',
-          activeIn: ['Admin/Medias/Images/List'],
+          activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form'],
           items: [{
             text: 'Imagens',
             to: this.$route('admin.medias.images.index'),
             icon: 'images',
-            activeIn: ['Admin/Medias/Images/List']
+            activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form']
           }, {
             text: 'Vídeos',
             to: '#',
@@ -968,17 +968,17 @@ var WIDTH_MOBILE = 768;
           text: 'Gerenciar site',
           to: '#',
           icon: 'layoutWtf',
-          activeIn: ['Admin/Pages/List', 'Admin/Pages/Form'],
+          activeIn: ['Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Settings'],
           items: [{
             text: 'Páginas',
             to: this.$route("admin.pages.index"),
             icon: 'fileEarmarkText',
             activeIn: ['Admin/Pages/List', 'Admin/Pages/Form']
           }, {
-            text: 'Navitem #2',
-            to: '#2',
-            icon: 'app',
-            activeIn: []
+            text: 'Configurações',
+            to: this.$route("admin.settings.edit"),
+            icon: 'cog',
+            activeIn: ['Admin/Front/Settings']
           }]
         }]
       }
@@ -2278,6 +2278,8 @@ var icons = (_icons = {
   checkCircleFill: 'bi bi-check-circle-fill',
   collection: 'bi bi-collection',
   collectionPlay: 'bi bi-collection-play',
+  cog: 'bi bi-gear',
+  cogFill: 'bi bi-gear-fill',
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
   fileEarmark: 'bi bi-file-earmark',
   fileEarmarkText: 'bi bi-file-earmark-text',
@@ -2298,6 +2300,9 @@ var icons = (_icons = {
   plus: 'bi bi-plus',
   plusLg: 'bi bi-plus-lg',
   search: 'bi bi-search',
+  sliders: 'bi bi-sliders',
+  sliders2: 'bi bi-sliders2',
+  sliders2Vertical: 'bi bi-sliders2-vertical',
   trash: 'bi bi-trash',
   textLeft: 'bi bi-text-left',
   textRight: 'bi bi-text-right',

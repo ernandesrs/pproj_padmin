@@ -161,13 +161,13 @@ export default {
                         text: 'Mídias',
                         href: '#',
                         icon: 'collection',
-                        activeIn: ['Admin/Medias/Images/List'],
+                        activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form'],
                         items: [
                             {
                                 text: 'Imagens',
                                 to: this.$route('admin.medias.images.index'),
                                 icon: 'images',
-                                activeIn: ['Admin/Medias/Images/List']
+                                activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form']
                             },
                             {
                                 text: 'Vídeos',
@@ -181,7 +181,7 @@ export default {
                         text: 'Gerenciar site',
                         to: '#',
                         icon: 'layoutWtf',
-                        activeIn: ['Admin/Pages/List', 'Admin/Pages/Form'],
+                        activeIn: ['Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Settings'],
                         items: [
                             {
                                 text: 'Páginas',
@@ -190,10 +190,10 @@ export default {
                                 activeIn: ['Admin/Pages/List', 'Admin/Pages/Form']
                             },
                             {
-                                text: 'Navitem #2',
-                                to: '#2',
-                                icon: 'app',
-                                activeIn: []
+                                text: 'Configurações',
+                                to: this.$route("admin.settings.edit"),
+                                icon: 'cog',
+                                activeIn: ['Admin/Front/Settings']
                             }
                         ]
                     }

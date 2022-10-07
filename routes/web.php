@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AdminController as AdminController;
+use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
@@ -46,6 +47,10 @@ Route::group([
     Route::get("/pages/edit/{page}", [AdminPageController::class, "edit"])->name("admin.pages.edit");
     Route::post("/pages/update/{page}", [AdminPageController::class, "update"])->name("admin.pages.update");
     Route::post("/pages/destroy/{page}", [AdminPageController::class, "destroy"])->name("admin.pages.destroy");
+
+    // FRONT SETTINGS
+    Route::get("/settings", [SettingController::class, "edit"])->name("admin.settings.edit");
+    Route::post("/settings", [SettingController::class, "update"])->name("admin.settings.update");
 });
 
 // FRONT/SITE

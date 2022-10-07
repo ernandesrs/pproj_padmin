@@ -11,6 +11,8 @@ const icons = {
     checkCircleFill: 'bi bi-check-circle-fill',
     collection: 'bi bi-collection',
     collectionPlay: 'bi bi-collection-play',
+    cog: 'bi bi-gear',
+    cogFill: 'bi bi-gear-fill',
 
     exclamationCircleFill: 'bi bi-exclamation-circle-fill',
 
@@ -38,6 +40,9 @@ const icons = {
     plusLg: 'bi bi-plus-lg',
 
     search: 'bi bi-search',
+    sliders: 'bi bi-sliders',
+    sliders2: 'bi bi-sliders2',
+    sliders2Vertical: 'bi bi-sliders2-vertical',
 
     trash: 'bi bi-trash',
     textLeft: 'bi bi-text-left',
