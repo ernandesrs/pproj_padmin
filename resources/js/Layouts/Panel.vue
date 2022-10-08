@@ -8,7 +8,7 @@
         <BackdropUi @click="sidebarToggle" v-if="inMobile" v-show="sidebar.visible"
             fixed />
 
-        <aside v-if="sidebar.visible" class="container-fluid sidebar">
+        <aside v-if="sidebar.visible" class="container-fluid sidebar alt-sidebar">
             <div class="sidebar-inner">
                 <header class="header">
                     <div class="container-fluid py-3">
@@ -104,7 +104,7 @@
 
                 <AlertUi ref="alert" />
 
-                <div class="mt-4 py-3 px-4 content-inner">
+                <div class="mt-4 py-4 px-4 content-inner">
                     <slot />
                 </div>
 

@@ -1960,7 +1960,7 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = {
   key: 1,
-  "class": "container-fluid sidebar"
+  "class": "container-fluid sidebar alt-sidebar"
 };
 var _hoisted_3 = {
   "class": "sidebar-inner"
@@ -2032,7 +2032,7 @@ var _hoisted_23 = {
   "class": "ms-auto"
 };
 var _hoisted_24 = {
-  "class": "mt-4 py-3 px-4 content-inner"
+  "class": "mt-4 py-4 px-4 content-inner"
 };
 
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", {
