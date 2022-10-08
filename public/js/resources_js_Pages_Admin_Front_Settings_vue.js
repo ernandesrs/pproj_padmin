@@ -1295,6 +1295,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var _Components_Ui_BackdropUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../Components/Ui/BackdropUi.vue */ "./resources/js/Components/Ui/BackdropUi.vue");
 /* harmony import */ var _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../Components/PaginationUi.vue */ "./resources/js/Components/PaginationUi.vue");
+/* harmony import */ var _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../Components/Ui/ImagePreviewUi.vue */ "./resources/js/Components/Ui/ImagePreviewUi.vue");
+
 
 
 
@@ -1308,7 +1310,8 @@ __webpack_require__.r(__webpack_exports__);
     InputForm: _Components_Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     ButtonUi: _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     BackdropUi: _Components_Ui_BackdropUi_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    PaginationUi: _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    PaginationUi: _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ImagePreviewUi: _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: {
     show: {
@@ -2759,8 +2762,7 @@ var _hoisted_7 = {
   "class": "card card-body position-relative"
 };
 var _hoisted_8 = ["href"];
-var _hoisted_9 = ["src", "alt"];
-var _hoisted_10 = {
+var _hoisted_9 = {
   "class": "mb-0 fs-6 fw-semibold text-muted text-center py-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2769,6 +2771,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
 
   var _component_BackdropUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BackdropUi");
+
+  var _component_ImagePreviewUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ImagePreviewUi");
 
   var _component_PaginationUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PaginationUi");
 
@@ -2816,13 +2820,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           href: image.url,
           title: "Ver imagem original",
           target: "_blank"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-          "class": "img-fluid",
-          src: image.thumb_small,
-          alt: image.name
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
+          "preview-url": image.thumb_small,
+          "preview-alt": image.name,
+          borderless: ""
         }, null, 8
         /* PROPS */
-        , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$helpers.string.substr(image.name, 10)), 1
+        , ["preview-url", "preview-alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$helpers.string.substr(image.name, 10)), 1
         /* TEXT */
         )], 8
         /* PROPS */

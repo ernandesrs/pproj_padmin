@@ -52,17 +52,14 @@
                 <div class="row">
                     <div
                         class="col-12 mb-4 d-flex flex-column justify-content-center align-items-center">
-                        <div :class="[{'border': !coverPreview}, 'd-flex justify-content-center align-items-center mb-1']"
-                            style="width:100%;max-width:200px;height:100px;">
-                            <img v-if="coverPreview" :src="coverPreview"
-                                :alt="page.title">
-                            <span v-else class="text-muted">Preview</span>
-                        </div>
+                        <ImagePreviewUi :preview-url="coverPreview"
+                            :borderless="coverPreview ? true : false" />
                     </div>
 
                     <!-- cover upload -->
                     <div class="col-12 text-center mb-4">
-                        <ButtonUi @click="modalImagesListShow" :text="`${coverPreview ? 'Atualizar capa' : 'Inserir capa'}`"
+                        <ButtonUi @click="modalImagesListShow"
+                            :text="`${coverPreview ? 'Atualizar capa' : 'Inserir capa'}`"
                             icon="image" variant="success" size="sm" />
                     </div>
 
@@ -134,11 +131,12 @@ import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import EditorTiny from '../../../Components/EditorTiny.vue';
 import ModalImagesList from '../Medias/Images/ModalImagesList.vue';
+import ImagePreviewUi from '../../../Components/Ui/ImagePreviewUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList },
+    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi },
     props: {
         page: { type: Object, default: {} },
         terms: { type: Object, default: {} },

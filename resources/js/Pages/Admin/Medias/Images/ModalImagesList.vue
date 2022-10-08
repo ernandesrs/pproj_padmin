@@ -26,7 +26,9 @@
             <div v-else v-for="image in images?.data" :key="image.id"
                 class="col-6 col-sm-4 col-md-3 col-xl-2 text-center mb-4">
                 <a :href="image.url" title="Ver imagem original" target="_blank">
-                    <img class="img-fluid" :src="image.thumb_small" :alt="image.name">
+                    <ImagePreviewUi :preview-url="image.thumb_small"
+                        :preview-alt="image.name" borderless />
+
                     <p class="mb-0 fs-6 fw-semibold text-muted text-center py-1">
                         {{ $helpers.string.substr(image.name, 10) }}
                     </p>
@@ -55,9 +57,10 @@ import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 import BackdropUi from '../../../../Components/Ui/BackdropUi.vue';
 import PaginationUi from '../../../../Components/PaginationUi.vue';
+import ImagePreviewUi from '../../../../Components/Ui/ImagePreviewUi.vue';
 
 export default {
-    components: { ModalUi, InputForm, ButtonUi, BackdropUi, PaginationUi },
+    components: { ModalUi, InputForm, ButtonUi, BackdropUi, PaginationUi, ImagePreviewUi },
     props: {
         show: { type: Boolean, default: false },
     },

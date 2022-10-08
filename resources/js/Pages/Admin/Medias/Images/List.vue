@@ -9,11 +9,8 @@
                 <template v-slot:content>
                     <div
                         class="d-flex flex-column justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center align-items-center"
-                            style="width: 100%; max-width: 200px; min-height: 100px; ">
-                            <img class="img-fluid" :src="image.thumb_small"
-                                :alt="image.name">
-                        </div>
+                        <ImagePreviewUi :preview-url="image.thumb_small"
+                            :preview-alt="image.name" borderless />
                         <div class="text-center pt-2">
                             <h2 class="fs-6 fw-semibold text-muted mb-0">
                                 <a :href="image.url" target="_blank"
@@ -58,11 +55,12 @@ import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../../Components/Ui/ButtonConfirmationUi.vue';
 import InputForm from '../../../../Components/Form/InputForm.vue';
 import ModalUi from '../../../../Components/Ui/ModalUi.vue';
+import ImagePreviewUi from '../../../../Components/Ui/ImagePreviewUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { PaginationUi, EmptyList, CardUi, ButtonUi, ButtonConfirmationUi, InputForm, ModalUi },
+    components: { PaginationUi, EmptyList, CardUi, ButtonUi, ButtonConfirmationUi, InputForm, ModalUi, ImagePreviewUi },
 
     props: {
         images: { type: Object, default: [] },
