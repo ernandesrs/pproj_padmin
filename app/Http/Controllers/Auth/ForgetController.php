@@ -26,6 +26,8 @@ class ForgetController extends Controller
     }
 
     /**
+     * Send the recovery link
+     * 
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -53,6 +55,8 @@ class ForgetController extends Controller
     }
 
     /**
+     * Render the password update view
+     * 
      * @param string $token
      * @return \Illuminate\Http\RedirectResponse|\Inertia\Response
      */
@@ -79,6 +83,8 @@ class ForgetController extends Controller
     }
 
     /**
+     * Store the updated password
+     * 
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
