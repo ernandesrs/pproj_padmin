@@ -12,7 +12,10 @@ $success: #368547;
 $info: #0d86c3;
 $warning: #8b8448;
 $danger: #b05252;
-$light: #F7F7F7;
+
+$light: #ececec;
+$light-light: #F7F7F7;
+$light-dark: #e6e6e6;
 
 $dark: #454545;
 $dark-light: #565656;
@@ -25,7 +28,10 @@ $theme-colors: (
     "info": $info,
     "warning": $warning,
     "danger": $danger,
+
     "light": $light,
+    "light-light": $light-light,
+    "light-dark": $light-dark,
 
     "dark": $dark,
     "dark-light": $dark-light,

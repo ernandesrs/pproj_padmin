@@ -1,7 +1,5 @@
 <template>
 
-    <Head title='Esquecia minha senha' />
-
     <div v-if="hasSent" class="text-center text-success">
         <h1>Link de recuperação enviado!</h1>
         <p>
@@ -17,7 +15,7 @@
             </div>
 
             <div
-                class="col-12 col-md-10 col-lg-8 mb-4 d-flex align-items-center justify-content-center">
+                class="col-12 col-md-10 col-lg-8 d-flex align-items-center justify-content-center">
                 <ButtonUi text="Solicitar link" type="submit" variant="primary"
                     icon="checkLg" :disabled="form.processing" />
             </div>
@@ -30,14 +28,14 @@
 <script>
 
 import Layout from './../../../Layouts/Auth.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { Head, useForm, ButtonUi, InputForm },
+    components: { useForm, ButtonUi, InputForm },
     props: {
         hasSent: false
     },

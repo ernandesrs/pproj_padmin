@@ -44,8 +44,8 @@
                     :error-message="form.errors.password_confirmation" />
             </div>
 
-            <div class="col-12 text-center mb-4">
-                <ButtonUi text="Cadastrar" type="submit" variant="primary" icon="login"
+            <div class="col-12 text-center">
+                <ButtonUi text="Cadastrar" type="submit" variant="primary" icon="checkLg"
                     :disabled="form.processing" />
             </div>
         </div>

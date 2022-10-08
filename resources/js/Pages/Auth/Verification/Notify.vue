@@ -1,7 +1,5 @@
 <template>
 
-    <Head title='Verifique sua conta' />
-
     <div v-if="hasSent" class="text-center text-success">
         <h1>Link de verificação reenviado!</h1>
         <p>
@@ -24,13 +22,12 @@
 <script>
 
 import Layout from './../../../Layouts/Auth.vue';
-import { Head } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { Head },
+    components: {},
     props: {
         hasSent: false
     },

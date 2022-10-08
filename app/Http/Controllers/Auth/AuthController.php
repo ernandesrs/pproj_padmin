@@ -18,7 +18,9 @@ class AuthController extends Controller
      */
     public function login()
     {
-        return Inertia::render('Auth/Login');
+        return Inertia::render('Auth/Login', [
+            "pageTitle" => "Login"
+        ]);
     }
 
     /**
@@ -55,7 +57,9 @@ class AuthController extends Controller
      */
     public function register()
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/Register', [
+            "pageTitle" => "Cadastrar conta"
+        ]);
     }
 
     /**

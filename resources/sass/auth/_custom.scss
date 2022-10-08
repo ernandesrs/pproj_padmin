@@ -4,18 +4,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(-135deg, $light-light 0%, $light 35%, $light-dark 100%);
+    color: $dark-light;
 
     a {
         text-decoration: none;
     }
 
-    .inner {
+    h1 {
         color: $dark;
+    }
 
-        .auth-box {
-            width: 100%;
-            max-width: 575px;
-        }
+    .app-inner {
+        background-color: rgb($white, 0.5);
+        padding: $spacer * 2 $spacer * 3;
     }
 
 }

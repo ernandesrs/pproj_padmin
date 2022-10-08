@@ -1,7 +1,5 @@
 <template>
 
-    <Head title='Acessar conta' />
-
     <form @submit.prevent="submit">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8 mb-4">
@@ -14,18 +12,14 @@
                     :error-message="form.errors.password" v-model="form.password" />
             </div>
 
-            <div class="col-12 col-md-10 col-lg-8 mb-4 d-flex align-items-center">
+            <div class="col-12 col-md-10 col-lg-8 d-flex align-items-center">
                 <InputForm label="Lembre-se de mim" type="checkbox" name="remember_me"
                     :error-message="form.errors.remember_me" v-model="form.remember_me"
                     inline />
 
                 <span class="ms-auto"></span>
-                <ButtonUi text="Login" type="submit" variant="primary" icon="checkLg"
+                <ButtonUi text="Login" type="submit" variant="primary" icon="login"
                     :disabled="form.processing" />
-            </div>
-
-            <div class="col-12 text-center">
-                <Link :href="$route('auth.forget')">Esquecia minha senha</Link>
             </div>
         </div>
 
@@ -36,12 +30,12 @@
 <script>
 
 import Layout from './../../Layouts/Auth.vue';
-import { Head, useForm, Link } from '@inertiajs/inertia-vue3';
+import { useForm, Link } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../Components/Ui/ButtonUi.vue';
 import InputForm from '../../Components/Form/InputForm.vue';
 
 export default {
-    components: { Head, useForm, ButtonUi, InputForm, Link },
+    components: { useForm, ButtonUi, InputForm, Link },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
 

@@ -18,7 +18,8 @@ class VerifyController extends Controller
     public function notify()
     {
         return Inertia::render("Auth/Verification/Notify", [
-            "hasSent" => session()->get("hasSent", false)
+            "hasSent" => session()->get("hasSent", false),
+            'pageTitle' => 'Verifique seu email'
         ]);
     }
 
@@ -52,6 +53,7 @@ class VerifyController extends Controller
     public function verify(string $token)
     {
         return Inertia::render("Auth/Verification/Verify", [
+            'pageTitle' => 'Verificando email',
             "token" => $token,
             "hasError" => session()->get("hasError", false),
             "hasVerified" => session()->get("hasVerified", false),

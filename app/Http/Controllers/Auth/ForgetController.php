@@ -20,7 +20,8 @@ class ForgetController extends Controller
     public function forget()
     {
         return Inertia::render('Auth/Password/Forget', [
-            'hasSent' => session()->get('hasSent', false)
+            'hasSent' => session()->get('hasSent', false),
+            'pageTitle' => 'Esquecia a senha'
         ]);
     }
 
@@ -72,7 +73,8 @@ class ForgetController extends Controller
 
         return Inertia::render("Auth/Password/Reset", [
             "email" => $email,
-            "token" => $_token
+            "token" => $_token,
+            'pageTitle' => 'Atualizar senha'
         ]);
     }
 

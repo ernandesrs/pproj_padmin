@@ -1,7 +1,5 @@
 <template>
 
-    <Head title='Recuperar minha senha' />
-
     <form @submit.prevent="submit">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8 mb-4">
@@ -21,7 +19,6 @@
                     icon="checkLg" :disabled="form.processing" />
             </div>
         </div>
-
     </form>
 
 </template>
@@ -29,14 +26,14 @@
 <script>
 
 import Layout from './../../../Layouts/Auth.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { Head, useForm, ButtonUi, InputForm },
+    components: { useForm, ButtonUi, InputForm },
     props: {
         email: { type: String, default: null },
         token: { type: String, default: null }

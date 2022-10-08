@@ -1,7 +1,5 @@
 <template>
 
-    <Head title='Verificando registro' />
-
     <div v-if="!auth?.id" class="text-center text-muted">
         <h1 class="fs-4 fw-semibold">Não verificado!</h1>
         <p class="fs-6">
@@ -43,14 +41,14 @@
 <script>
 
 import Layout from './../../../Layouts/Auth.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 import BackdropUi from '../../../Components/Ui/BackdropUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { Head, Link, BackdropUi },
+    components: { Link, BackdropUi },
     props: {
         token: '',
         auth: { type: Object, default: {} },

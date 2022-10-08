@@ -1,25 +1,37 @@
 <template>
+
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-5 col-xl-5 py-4"></div>
-            <div class="col-12 col-lg-7 col-xl-7 py-4 px-5">
-                <div v-if="$page.component != 'Auth/Verification/Verify'"
-                    class="d-flex justify-content-end mb-4">
-                    <a :class="['px-3 py-2 rounded me-auto', {'bg-primary text-light': $route().current() == 'front.index'}]"
-                        :href="$route('front.index')">
-                        Início
-                    </a>
-                    <Link v-if="!auth" v-for="nav in navs" v-bind:key="nav.url"
-                        :class="['px-3 py-2 rounded', {'bg-primary text-light': nav.activeIn.includes($route().current())}]"
-                        :href="nav.url">
-                    {{ nav.text }}
-                    </Link>
-                </div>
-
+            <div class="col-12 col-lg-5 col-xl-5"></div>
+            <div class="col-12 col-lg-7 col-xl-7">
                 <AlertUi ref="alert" />
 
-                <div class="card card-body border-0 inner px-4 py-3">
+                <h1 v-if="$page.props.pageTitle"
+                    class="fs-4 fw-semibold text-center pt-1 pb-2">
+                    {{ $page.props.pageTitle }}
+                </h1>
+
+                <div class="card card-body border-0 app-inner">
                     <slot />
+                </div>
+
+                <div class="text-center pt-3 pb-2">
+                    <p v-if="['Auth/Register'].includes($page.component)" class="mb-0">
+                        Caso possua uma conta,
+                        <Link :href="$route('auth.login')">clique aqui para fazer
+                        login</Link>.
+                    </p>
+                    <p v-if="['Auth/Login'].includes($page.component)" class="mb-0">
+                        <Link :href="$route('auth.register')">Criar uma conta</Link>
+                        ou
+                        <Link :href="$route('auth.forget')">recuperar senha</Link>.
+                    </p>
+                    <p v-if="['Auth/Password/Forget'].includes($page.component)"
+                        class="mb-0">
+                        <Link :href="$route('auth.login')">Fazer login</Link>
+                        ou
+                        <Link :href="$route('auth.register')">criar conta</Link>.
+                    </p>
                 </div>
             </div>
         </div>
@@ -32,27 +44,12 @@ import { Link } from '@inertiajs/inertia-vue3'
 import AlertUi from '../Components/Ui/AlertUi.vue';
 
 export default {
-    components: {
-        Link,
-        AlertUi
-    },
+    components: { Link, AlertUi },
     props: {
         auth: {}
     },
     data() {
         return {
-            navs: [
-                {
-                    text: 'Login',
-                    url: this.$route("auth.login"),
-                    activeIn: ['auth.login']
-                },
-                {
-                    text: 'Cadastro',
-                    url: this.$route("auth.register"),
-                    activeIn: ['auth.register']
-                },
-            ],
         };
     },
 
