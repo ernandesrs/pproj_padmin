@@ -1,10 +1,4 @@
-// Body
-$body-bg: #f8fafc;
-
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$topbar-height: 50px;
 
 $primary: #2D6F95;
 $secondary: #4a5860;
@@ -21,27 +15,42 @@ $dark: #454545;
 $dark-light: #565656;
 $dark-dark: #313131;
 
+$black: #000 !default;
+
 $theme-colors: (
-    "primary": $primary,
-    "secondary": $secondary,
-    "success": $success,
-    "info": $info,
-    "warning": $warning,
-    "danger": $danger,
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
 
-    "light": $light,
-    "light-light": $light-light,
-    "light-dark": $light-dark,
+  "light": $light,
+  "light-light": $light-light,
+  "light-dark": $light-dark,
 
-    "dark": $dark,
-    "dark-light": $dark-light,
-    "dark-dark": $dark-dark
+  "dark": $dark,
+  "dark-light": $dark-light,
+  "dark-dark": $dark-dark
 );
 
 $colors: (
-  "blue":       $primary,
-  "red":        $danger,
-//   "orange":     $orange,
-//   "yellow":     $yellow,
-  "green":      $success,
+  "blue": $primary,
+  "red": $danger,
+  "green": $success,
 );
+
+$border-radius: .25rem !default;
+$border-radius-sm: .125rem !default;
+$border-radius-lg: .325rem !default;
+$border-radius-xl: .5rem !default;
+$border-radius-2xl: 1rem !default;
+$border-radius-pill: 50rem !default;
+
+$box-shadow: 0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow-sm: 0 .125rem .25rem rgba($black, .075) !default;
+$box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
+$box-shadow-inset: inset 0 1px 2px rgba($black, .075) !default;
+
+$transition-base: all .2s ease-in-out !default;
+$transition-fade: opacity .15s linear !default;

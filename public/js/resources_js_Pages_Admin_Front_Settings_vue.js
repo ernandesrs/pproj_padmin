@@ -2382,7 +2382,7 @@ var _hoisted_18 = {
 };
 var _hoisted_19 = {
   key: 0,
-  "class": "py-2 d-flex align-items-center"
+  "class": "mt-4 d-flex align-items-center"
 };
 var _hoisted_20 = {
   "class": "fs-5 fw-semibold mb-0"
@@ -2402,8 +2402,23 @@ var _hoisted_23 = {
   "class": "ms-auto"
 };
 var _hoisted_24 = {
-  "class": "py-4"
+  "class": "mt-4 py-3 px-4 content-inner"
 };
+
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", {
+  "class": "py-2 footer"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", {
+  "class": "text-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mb-0"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Criado por "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "https://www.github.com/ernandesrs",
+  target: "_blank",
+  title: "Github"
+}, "Ernandes")])])], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _ctx$$page$props, _$props$buttons, _$props$buttons$back$, _$props$buttons$back$2, _$props$buttons$back, _$props$buttons$new$t, _$props$buttons$new$i, _ctx$$page$props2;
 
@@ -2572,7 +2587,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ref: "alert"
   }, null, 512
   /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])], 2
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]), _hoisted_25])], 2
   /* CLASS */
   )])], 64
   /* STABLE_FRAGMENT */
@@ -2883,6 +2898,8 @@ var icons = (_icons = {
   appIndicator: 'bi bi-app-indicator',
   arrowLeft: 'bi bi-arrow-left',
   arrowRight: 'bi bi-arrow-right',
+  arrowUp: 'bi bi-arrow-up',
+  arrowDown: 'bi bi-arrow-down',
   calendarCheck: 'bi bi-calendar2-check',
   calendarDate: 'bi bi-calendar2-date',
   check: 'bi bi-check',

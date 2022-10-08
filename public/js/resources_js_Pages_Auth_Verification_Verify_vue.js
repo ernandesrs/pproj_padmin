@@ -952,6 +952,8 @@ var icons = (_icons = {
   appIndicator: 'bi bi-app-indicator',
   arrowLeft: 'bi bi-arrow-left',
   arrowRight: 'bi bi-arrow-right',
+  arrowUp: 'bi bi-arrow-up',
+  arrowDown: 'bi bi-arrow-down',
   calendarCheck: 'bi bi-calendar2-check',
   calendarDate: 'bi bi-calendar2-date',
   check: 'bi bi-check',

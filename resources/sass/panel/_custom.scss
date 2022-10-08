@@ -26,6 +26,7 @@ button>span {
         z-index: 900;
         height: 100%;
         overflow: hidden;
+        box-shadow: -4px 0 12px 6px rgb($dark, .25);
 
         .sidebar-inner {
             height: calc(100vh - $spacer);
@@ -98,9 +99,11 @@ button>span {
         width: 100%;
 
         .topbar {
+            background-color: rgb($light-light, 0.125);
             display: flex;
             align-items: center;
-            height: 40px;
+            height: $topbar-height;
+            border-bottom: 1px solid rgb($light-dark, 0.75);
 
             .sidebar-toggler {
                 display: flex;
@@ -119,10 +122,21 @@ button>span {
         }
 
         .content {
+            display: flex;
+            flex-direction: column;
             background-color: transparent;
-            height: calc(100vh - 40px);
+            height: calc(100vh - $topbar-height);
             overflow-x: hidden;
             overflow-y: auto;
+
+            .content-inner {
+                background-color: $white;
+                border: 1px solid rgb($light-dark, 0.75);
+            }
+
+            .footer {
+                margin-top: auto;
+            }
         }
     }
 }

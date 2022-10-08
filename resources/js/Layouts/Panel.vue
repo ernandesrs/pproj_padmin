@@ -81,7 +81,7 @@
 
             <main class="container-fluid content">
                 <div v-if="$page.component != 'Admin/Index'"
-                    class="py-2 d-flex align-items-center">
+                    class="mt-4 d-flex align-items-center">
 
                     <h1 class="fs-5 fw-semibold mb-0">{{ $page.props.pageTitle }}</h1>
 
@@ -104,9 +104,18 @@
 
                 <AlertUi ref="alert" />
 
-                <div class="py-4">
+                <div class="mt-4 py-3 px-4 content-inner">
                     <slot />
                 </div>
+
+                <footer class="py-2 footer">
+                    <small class="text-center">
+                        <p class="mb-0">
+                            Criado por <a href="https://www.github.com/ernandesrs" target="_blank"
+                                title="Github">Ernandes</a>
+                        </p>
+                    </small>
+                </footer>
             </main>
         </div>
 
