@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Services\UserService;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
     /**
+     * Render the login view
+     * 
      * @return \Inertia\Response
      */
     public function login()
@@ -24,6 +23,8 @@ class AuthController extends Controller
     }
 
     /**
+     * Authenticate user
+     * 
      * @param LoginRequest $request
      * @return void
      */
@@ -46,13 +47,15 @@ class AuthController extends Controller
             return Inertia::location(route("admin.index"));
         }
 
-        session()->flash("flash_alert", [
+        return back()->with("flash_alert", [
             "message" => "Email e/ou senha inválido(s).",
             "variant" => "danger"
         ]);
     }
 
     /**
+     * Render user register view
+     * 
      * @return \Inertia\Response
      */
     public function register()
@@ -63,6 +66,8 @@ class AuthController extends Controller
     }
 
     /**
+     * Store user
+     * 
      * @param RegisterRequest $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -70,20 +75,7 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
 
-        $validated["password"] = Hash::make($validated["password"]);
-
-        /** User $user */
-        $user = new User();
-        $user->first_name = $validated["first_name"];
-        $user->last_name = $validated["last_name"];
-        $user->username = $validated["username"];
-        $user->gender = $validated["gender"];
-        $user->email = $validated["email"];
-        $user->password = $validated["password"];
-        $user->confirmation_token = Str::random(20);
-        $user->save();
-
-        event(new UserRegistered($user));
+        $user = (new UserService())->store($validated);
 
         auth()->loginUsingId($user->id);
 
@@ -96,7 +88,9 @@ class AuthController extends Controller
     }
 
     /**
-     * @return void
+     * Logout
+     * 
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function logout()
     {
