@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
 use App\Http\Resources\PageResource;
@@ -150,6 +151,11 @@ class PageController extends Controller
         }
 
         $page->update($validated);
+        (new SettingController())->updateSettings([
+            "title" => $page->title,
+            "description" => $page->description,
+            "follow" => $page->follow,
+        ]);
 
         return back()->with("flash_alert", [
             "variant" => "success",

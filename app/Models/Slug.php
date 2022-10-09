@@ -33,6 +33,6 @@ class Slug extends Model
      */
     public function pages()
     {
-        return $this->hasMany(Page::class, "id", "slug_id");
+        return $this->hasMany(Page::class, "slug_id", "id");
     }
 }

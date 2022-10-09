@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Content;
 use App\Models\Media\Image;
+use App\Models\Page;
+use App\Models\Slug;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -45,20 +47,45 @@ class SettingController extends Controller
     {
         $validated = $this->validated($request);
 
+        $this->updateSettings($validated);
+
+        $slug = Slug::where(config("app.locale"), "inicio")->first();
+        $page = $slug->pages()->where("lang", config("app.locale"))->first();
+        $page->update([
+            "title" => $validated["title"],
+            "description" => $validated["description"],
+            "follow" => $validated["follow"],
+            "status" => $page->status,
+            "cover" => null
+        ]);
+
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "As configurações do site foram atualizados com sucesso."
+        ]);
+    }
+
+    /**
+     * @param array $validated
+     * @return null|Content
+     */
+    public function updateSettings(array $validated)
+    {
         $settings = Content::where("name", "front_settings")->first();
+        if (!$settings) return null;
 
         $content = json_decode($settings->content);
         $content->title = $validated["title"];
         $content->description = $validated["description"];
         $content->follow = $validated["follow"];
 
-        if ($faviconId = $validated["favicon"]) {
+        if ($faviconId = $validated["favicon"] ?? null) {
             $favicon = Image::where("id", $faviconId)->first();
             if ($favicon)
                 $content->favicon = $favicon->path;
         }
 
-        if ($logoId = $validated["logo"]) {
+        if ($logoId = $validated["logo"] ?? null) {
             $logo = Image::where("id", $logoId)->first();
             if ($logo)
                 $content->logo = $logo->path;
@@ -67,10 +94,7 @@ class SettingController extends Controller
         $settings->content = json_encode($content);
         $settings->save();
 
-        return back()->with("flash_alert", [
-            "variant" => "success",
-            "message" => "As configurações do site foram atualizados com sucesso."
-        ]);
+        return $settings;
     }
 
     /**
