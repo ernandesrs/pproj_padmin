@@ -54,6 +54,7 @@ button>span {
 
             .sidebar-elements {
                 .sidebar-element {
+                    padding: 0 $spacer / 2;
 
                     .nav,
                     .subnav {
@@ -73,7 +74,7 @@ button>span {
                     .nav {
                         .nav-link {
                             &.active {
-                                background-color: rgb($light, 0.125);
+                                background-color: rgb($primary, 1);
                                 border-radius: $border-radius;
                             }
                         }
@@ -82,7 +83,7 @@ button>span {
                             .nav-link {
                                 &.active {
                                     background-color: rgb($light, 0);
-                                    border-left: 3px solid rgb($primary, 0.25);
+                                    border-left: 3px solid rgb($primary, 1);
                                     border-radius: $border-radius / 4;
                                 }
                             }
@@ -99,7 +100,7 @@ button>span {
         width: 100%;
 
         .topbar {
-            background-color: rgb($light-light, 0.125);
+            background-color: $light-light;
             display: flex;
             align-items: center;
             height: $topbar-height;
@@ -118,6 +119,10 @@ button>span {
                 &::before {
                     line-height: 0;
                 }
+
+                &.close-mode {
+                    color: $light;
+                }
             }
         }
 
@@ -130,8 +135,8 @@ button>span {
             overflow-y: auto;
 
             .content-inner {
-                background-color: $white;
-                border: 1px solid rgb($light-dark, 0.75);
+                background-color: $light-light;
+                border: 1px solid rgb($light-dark, 1);
             }
 
             .footer {

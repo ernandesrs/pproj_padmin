@@ -76,7 +76,7 @@
                 </div>
 
                 <ButtonUi @click="sidebarToggle" :icon="sidebar.togglerIcon"
-                    class="sidebar-toggler order-md-first" />
+                    :class="['sidebar-toggler order-md-first', {'close-mode': sidebar.visible && inMobile}]" />
             </div>
 
             <main class="container-fluid content">
@@ -111,8 +111,8 @@
                 <footer class="py-2 footer">
                     <small class="text-center">
                         <p class="mb-0">
-                            Criado por <a href="https://www.github.com/ernandesrs" target="_blank"
-                                title="Github">Ernandes</a>
+                            Criado por <a href="https://www.github.com/ernandesrs"
+                                target="_blank" title="Github">Ernandes</a>
                         </p>
                     </small>
                 </footer>

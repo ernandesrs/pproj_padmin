@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex flex-column flex-sm-row mb-2 list-item">
-        <div class="d-flex py-2">
+        <div class="d-flex align-items-center py-2 b w-100">
             <div v-if="theCover" class="d-none d-sm-block list-item-cover">
                 <img :class="theCoverStyle" :src="theCover" :alt="theTitle">
             </div>
@@ -79,6 +79,8 @@ export default {
 
 .list-item-info {
     background-color: transparent;
+    width: 100%;
+    max-width: 475px;
 }
 
 .list-item-actions {

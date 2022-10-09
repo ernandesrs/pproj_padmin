@@ -11322,6 +11322,9 @@ button > span {
   font-weight: 600;
   margin-bottom: 0;
 }
+.wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element {
+  padding: 0 0.5rem;
+}
 .wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .nav .nav-link,
 .wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .subnav .nav-link {
   display: flex;
@@ -11335,12 +11338,12 @@ button > span {
   font-size: 1.2rem;
 }
 .wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .nav .nav-link.active {
-  background-color: rgba(247, 247, 247, 0.125);
+  background-color: #2d6f95;
   border-radius: 0.25rem;
 }
 .wrapp .sidebar .sidebar-inner .sidebar-elements .sidebar-element .nav.subnav .nav-link.active {
   background-color: rgba(247, 247, 247, 0);
-  border-left: 3px solid rgba(45, 111, 149, 0.25);
+  border-left: 3px solid #2d6f95;
   border-radius: 0.0625rem;
 }
 .wrapp .main {
@@ -11348,7 +11351,7 @@ button > span {
   width: 100%;
 }
 .wrapp .main .topbar {
-  background-color: rgba(254, 254, 254, 0.125);
+  background-color: #fefefe;
   display: flex;
   align-items: center;
   height: 50px;
@@ -11367,6 +11370,9 @@ button > span {
 .wrapp .main .topbar .sidebar-toggler::before {
   line-height: 0;
 }
+.wrapp .main .topbar .sidebar-toggler.close-mode {
+  color: #f7f7f7;
+}
 .wrapp .main .content {
   display: flex;
   flex-direction: column;
@@ -11376,8 +11382,8 @@ button > span {
   overflow-y: auto;
 }
 .wrapp .main .content .content-inner {
-  background-color: #fff;
-  border: 1px solid rgba(230, 230, 230, 0.75);
+  background-color: #fefefe;
+  border: 1px solid #e6e6e6;
 }
 .wrapp .main .content .footer {
   margin-top: auto;

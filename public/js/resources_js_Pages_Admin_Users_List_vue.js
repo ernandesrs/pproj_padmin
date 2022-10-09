@@ -1680,7 +1680,7 @@ var _hoisted_1 = {
   "class": "d-flex flex-column flex-sm-row mb-2 list-item"
 };
 var _hoisted_2 = {
-  "class": "d-flex py-2"
+  "class": "d-flex align-items-center py-2 b w-100"
 };
 var _hoisted_3 = {
   key: 0,
@@ -2564,10 +2564,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["text"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.sidebarToggle,
     icon: $data.sidebar.togglerIcon,
-    "class": "sidebar-toggler order-md-first"
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['sidebar-toggler order-md-first', {
+      'close-mode': $data.sidebar.visible && $data.inMobile
+    }])
   }, null, 8
   /* PROPS */
-  , ["onClick", "icon"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_18, [_ctx.$page.component != 'Admin/Index' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
+  , ["onClick", "icon", "class"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_18, [_ctx.$page.component != 'Admin/Index' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
   /* TEXT */
   ), $props.buttons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(_$props$buttons = $props.buttons) !== null && _$props$buttons !== void 0 && _$props$buttons.back ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
     key: 0,
@@ -2821,7 +2823,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-item {\r\n    background-color: transparent;\n}\n.list-item-cover {\r\n    overflow: hidden;\n}\n.list-item-cover>img.square {\r\n    width: 60px;\r\n    height: 60px;\n}\n.list-item-cover>img.circle {\r\n    width: 60px;\r\n    height: 60px;\r\n    border-radius: 50%;\n}\n.list-item-cover>img.rectangle {\r\n    width: 100px!important;\r\n    height: 60px!important;\r\n    padding: 2px;\n}\n.list-item-info {\r\n    background-color: transparent;\n}\n.list-item-actions {\r\n    background-color: transparent;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-item {\r\n    background-color: transparent;\n}\n.list-item-cover {\r\n    overflow: hidden;\n}\n.list-item-cover>img.square {\r\n    width: 60px;\r\n    height: 60px;\n}\n.list-item-cover>img.circle {\r\n    width: 60px;\r\n    height: 60px;\r\n    border-radius: 50%;\n}\n.list-item-cover>img.rectangle {\r\n    width: 100px!important;\r\n    height: 60px!important;\r\n    padding: 2px;\n}\n.list-item-info {\r\n    background-color: transparent;\r\n    width: 100%;\r\n    max-width: 475px;\n}\n.list-item-actions {\r\n    background-color: transparent;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

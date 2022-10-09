@@ -26,7 +26,7 @@
                             </small>
                         </div>
                         <div class="d-flex justify-content-center pt-1">
-                            <ButtonUi v-if="image.can.update" size="sm" variant="info"
+                            <ButtonUi v-if="image.can.update" size="sm" variant="primary"
                                 icon="pencilSquare" class="mx-1 my-1"
                                 :to="$route('admin.medias.images.edit', {image: image.id})" />
                             <ButtonConfirmationUi v-if="image.can.delete"

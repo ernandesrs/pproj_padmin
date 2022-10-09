@@ -2709,10 +2709,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["text"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.sidebarToggle,
     icon: $data.sidebar.togglerIcon,
-    "class": "sidebar-toggler order-md-first"
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['sidebar-toggler order-md-first', {
+      'close-mode': $data.sidebar.visible && $data.inMobile
+    }])
   }, null, 8
   /* PROPS */
-  , ["onClick", "icon"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_18, [_ctx.$page.component != 'Admin/Index' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
+  , ["onClick", "icon", "class"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_18, [_ctx.$page.component != 'Admin/Index' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
   /* TEXT */
   ), $props.buttons ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(_$props$buttons = $props.buttons) !== null && _$props$buttons !== void 0 && _$props$buttons.back ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
     key: 0,
@@ -2829,7 +2831,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [image.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
           key: 0,
           size: "sm",
-          variant: "info",
+          variant: "primary",
           icon: "pencilSquare",
           "class": "mx-1 my-1",
           to: _ctx.$route('admin.medias.images.edit', {
