@@ -41,6 +41,8 @@ class HandleInertiaRequests extends Middleware
         $auth = auth()->user();
         $flash = $request->session()->get('flash_alert');
 
+        session()->flash("mk_thumb", ["small"]);
+
         return array_merge(parent::share($request), [
             'flash' => $flash,
             'auth' => $auth ? new UserResource($auth) : null,

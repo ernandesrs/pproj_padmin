@@ -18,7 +18,7 @@ class AdminAcess
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!in_array($request->user()->level, [User::LEVEL_8, User::LEVEL_MASTER]))
+        if (!in_array($request->user()->level, [User::LEVEL_2, User::LEVEL_8, User::LEVEL_MASTER]))
             return Inertia::location(route("front.index"));
 
         Inertia::setRootView("panel");
