@@ -958,11 +958,6 @@ var WIDTH_MOBILE = 768;
             to: this.$route('admin.medias.images.index'),
             icon: 'images',
             activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form']
-          }, {
-            text: 'Vídeos',
-            to: '#',
-            icon: 'collectionPlay',
-            activeIn: ['']
           }]
         }, {
           text: 'Gerenciar site',

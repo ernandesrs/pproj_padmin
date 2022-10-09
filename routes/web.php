@@ -12,9 +12,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
 use App\Http\Controllers\Auth\VerifyController;
 
-// ADMIN: SUBDOMAIN
+// ADMIN
 Route::group([
-    "domain" => "panel." . env("APP_URL"),
+    "prefix" => "admin",
     "middleware" => ["auth", "admin_access"]
 ], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
