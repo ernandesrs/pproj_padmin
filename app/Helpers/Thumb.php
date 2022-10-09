@@ -5,8 +5,6 @@ namespace App\Helpers;
 use CoffeeCode\Cropper\Cropper;
 use Illuminate\Support\Facades\Storage;
 
-use function PHPUnit\Framework\returnSelf;
-
 class Thumb
 {
     public const allowedExtensions = ["jpg", "jpeg", "png"];
@@ -15,7 +13,7 @@ class Thumb
         "default" =>  "img/default-image.png",
         "notfound" =>  "img/notfound-image.png",
 
-        "user" => [
+        "square" => [
             "default" => "img/default-user-light.png",
             "notfound" =>  "img/notfound-image.png",
             "sizes" => [
@@ -25,7 +23,7 @@ class Thumb
             ]
         ],
 
-        "cover" => [
+        "rectangle" => [
             "sizes" => [
                 "small" => [200, 100],
                 "normal" => [800, 600],

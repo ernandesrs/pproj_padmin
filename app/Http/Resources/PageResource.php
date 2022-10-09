@@ -9,6 +9,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PageResource extends JsonResource
 {
+    use ResourceTrait;
+
     /**
      * Transform the resource into an array.
      *
@@ -25,10 +27,6 @@ class PageResource extends JsonResource
         $arr["title"] = $this->title;
         $arr["description"] = $this->description;
         $arr["follow"] = $this->follow;
-        $arr["cover"] = Thumb::thumb($this->cover);
-        $arr["thumb_small"] = Thumb::thumb($this->cover, "cover.small");
-        $arr["thumb_normal"] = Thumb::thumb($this->cover, "cover.normal");
-        $arr["thumb_large"] = Thumb::thumb($this->cover, "cover.large");
         $arr["lang"] = $this->lang;
         $arr["content_type"] = $this->content_type;
         $arr["protection"] = $this->protection;
@@ -45,6 +43,8 @@ class PageResource extends JsonResource
             "update" => (new PagePolicy())->update(auth()->user(), $this->resource),
             "delete" => (new PagePolicy())->delete(auth()->user(), $this->resource)
         ];
+
+        $arr = $this->thumbs("cover", $arr);
 
         return $arr;
     }

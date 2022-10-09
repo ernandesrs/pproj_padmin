@@ -27,6 +27,11 @@ class PageController extends Controller
     {
         $results = $this->filter($request);
 
+        /**
+         * flag to page resource(make only small thumbnail)
+         */
+        session()->flash("mk_thumb", ["small"]);
+
         return Inertia::render("Admin/Pages/List", [
             "pages" => PageResource::collection($results),
             "terms" => __("terms.page"),
@@ -102,6 +107,11 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
+        /**
+         * flag to page resource(make only small thumbnail)
+         */
+        session()->flash("mk_thumb", ["small"]);
+
         return Inertia::render("Admin/Pages/Form", [
             "page" => new PageResource($page),
             "terms" => __("terms.page"),

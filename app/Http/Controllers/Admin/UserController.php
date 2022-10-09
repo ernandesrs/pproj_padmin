@@ -30,6 +30,11 @@ class UserController extends Controller
     {
         $results = $this->filter($request);
 
+        /**
+         * flag to user resource(make only small thumbnail)
+         */
+        session()->flash("mk_thumb", ["small"]);
+
         return Inertia::render("Admin/Users/List", [
             "users" => UserResource::collection($results),
             "terms" => __("terms.user"),
@@ -100,6 +105,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        /**
+         * flag to page resource(make only small normal)
+         */
+        session()->flash("mk_thumb", ["normal"]);
+
         return Inertia::render("Admin/Users/Form", [
             "user" => new UserResource($user),
             "terms" => __("terms.user"),

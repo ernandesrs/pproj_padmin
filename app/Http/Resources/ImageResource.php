@@ -2,13 +2,13 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\Thumb;
 use App\Policies\ImagePolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class ImageResource extends JsonResource
 {
+    use ResourceTrait;
+
     /**
      * Transform the resource into an array.
      *
@@ -24,16 +24,13 @@ class ImageResource extends JsonResource
             "size" => $this->size,
             "tags" => $this->tags,
             "extension" => $this->extension,
-            "url" => Storage::url($this->path),
-            "location" => Storage::url($this->path),
-            "thumb_small" => Thumb::thumb($this->path, "cover.small"),
-            "thumb_normal" => Thumb::thumb($this->path, "cover.normal"),
-            "thumb_large" => Thumb::thumb($this->path, "cover.large"),
             "can" => [
                 "delete" => (new ImagePolicy())->delete(auth()->user(), $this->resource),
                 "update" => (new ImagePolicy())->update(auth()->user(), $this->resource),
             ]
         ];
+
+        $arr = $this->thumbs("path", $arr);
 
         return $arr;
     }

@@ -27,6 +27,12 @@ class ImageController extends Controller
     {
         $onlyList = $request->get("onlyList", false);
         $images = $this->filter($request);
+
+        /**
+         * flag to image resource(to make only the small thumbnail)
+         */
+        session()->flash("mk_thumb", ["small"]);
+
         if ($onlyList)
             return back()->with("images", ImageResource::collection($images));
 
@@ -83,8 +89,10 @@ class ImageController extends Controller
     }
 
     /**
+     * Store new image and return a image resource
+     * 
      * @param ImageRequest $request
-     * @return void
+     * @return ImageResource
      */
     public function upload(ImageRequest $request)
     {
@@ -114,6 +122,11 @@ class ImageController extends Controller
      */
     public function edit(Image $image)
     {
+        /**
+         * flag to image resource(to make only the normal size thumbnail)
+         */
+        session()->flash("mk_thumb", ["small"]);
+
         return Inertia::render("Admin/Medias/Images/Form", [
             "pageTitle" => "Editar imagem",
             "image" => new ImageResource($image),
@@ -171,6 +184,8 @@ class ImageController extends Controller
     }
 
     /**
+     * Get and/or filter images
+     * 
      * @param Request $request
      * @return void
      */

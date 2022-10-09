@@ -2,13 +2,13 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\Thumb;
 use App\Policies\UserPolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class UserResource extends JsonResource
 {
+    use ResourceTrait;
+
     /**
      * Transform the resource into an array.
      *
@@ -30,11 +30,6 @@ class UserResource extends JsonResource
             'level' => (int) $this->level,
         ];
 
-        // make thumb
-        $arr['photo'] = $this->photo ? Storage::url($this->photo) : Thumb::thumb(null, "user.large");
-        $arr['thumb_small'] = Thumb::thumb($this->photo, "user.small");
-        $arr['thumb_normal'] = Thumb::thumb($this->photo, "user.normal");
-        $arr['thumb_large'] = Thumb::thumb($this->photo, "user.large");
         $arr['can'] = [
             'delete' => (new UserPolicy())->delete(auth()->user(), $this->resource),
             'update' => (new UserPolicy())->update(auth()->user(), $this->resource),
@@ -43,6 +38,8 @@ class UserResource extends JsonResource
         ];
         $arr['next_level'] = $this->resource->nextLevel();
         $arr['previous_level'] = $this->resource->previousLevel();
+
+        $arr = $this->thumbs("photo", $arr, "square");
 
         return $arr;
     }
