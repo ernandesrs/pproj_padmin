@@ -43,7 +43,8 @@ class HandleInertiaRequests extends Middleware
 
         return array_merge(parent::share($request), [
             'flash' => $flash,
-            'auth' => $auth ? new UserResource($auth) : null
+            'auth' => $auth ? new UserResource($auth) : null,
+            'appName' => config("app.name")
         ]);
     }
 }

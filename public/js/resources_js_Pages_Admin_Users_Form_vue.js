@@ -1027,6 +1027,14 @@ var WIDTH_MOBILE = 768;
     buttons: {
       type: Object,
       "default": {}
+    },
+    appName: {
+      type: String,
+      "default": null
+    },
+    pageTitle: {
+      type: String,
+      "default": null
     }
   },
   data: function data() {
@@ -2121,7 +2129,7 @@ var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _ctx$$page$props, _$props$buttons, _$props$buttons$back$, _$props$buttons$back$2, _$props$buttons$back, _$props$buttons$new$t, _$props$buttons$new$i, _ctx$$page$props2;
+  var _$props$buttons, _$props$buttons$back$, _$props$buttons$back$2, _$props$buttons$back, _$props$buttons$new$t, _$props$buttons$new$i, _ctx$$page$props;
 
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -2146,7 +2154,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AlertUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AlertUi");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
-    title: (_ctx$$page$props = _ctx.$page.props) !== null && _ctx$$page$props !== void 0 && _ctx$$page$props.pageTitle ? "PADMIN - ".concat(_ctx.$page.props.pageTitle) : 'PADMIN - Painel administrativo em Laravel e Vue com Inertia JS'
+    title: "[".concat($props.appName, " Admin] \xBB ").concat($props.pageTitle)
   }, null, 8
   /* PROPS */
   , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$data.inMobile ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BackdropUi, {
@@ -2284,7 +2292,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: $props.buttons["new"].url
   }, null, 8
   /* PROPS */
-  , ["text", "icon", "to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(_ctx$$page$props2 = _ctx.$page.props) !== null && _ctx$$page$props2 !== void 0 && _ctx$$page$props2.filterAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Filter, {
+  , ["text", "icon", "to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(_ctx$$page$props = _ctx.$page.props) !== null && _ctx$$page$props !== void 0 && _ctx$$page$props.filterAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Filter, {
     key: 0
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
     ref: "alert"
@@ -2384,7 +2392,7 @@ var _hoisted_24 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$data$form, _$data$form2, _$props$user, _$props$user2;
+  var _$data$form, _$data$form2, _$props$user, _$props$user2, _$props$user3;
 
   var _component_ButtonConfirmationUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonConfirmationUi");
 
@@ -2538,14 +2546,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue", "error-message"])]), (_$props$user = $props.user) !== null && _$props$user !== void 0 && _$props$user.id && $props.user.can.update || !((_$props$user2 = $props.user) !== null && _$props$user2 !== void 0 && _$props$user2.id) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
-    text: "Cadastrar",
+    text: (_$props$user3 = $props.user) !== null && _$props$user3 !== void 0 && _$props$user3.id ? 'Atualizar' : 'Cadastrar',
     type: "submit",
     variant: "primary",
     icon: "checkLg",
     disabled: $data.form.processing
   }, null, 8
   /* PROPS */
-  , ["disabled"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32
+  , ["text", "disabled"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32
   /* HYDRATE_EVENTS */
   )])]);
 }

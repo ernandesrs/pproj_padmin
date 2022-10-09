@@ -1,7 +1,6 @@
 <template>
 
-    <Head
-        :title="$page.props?.pageTitle ? `PADMIN - ${$page.props.pageTitle}` : 'PADMIN - Painel administrativo em Laravel e Vue com Inertia JS'" />
+    <Head :title="`[${appName} Admin] &raquo; ${pageTitle}`" />
 
     <div class="wrapp">
 
@@ -144,6 +143,8 @@ export default {
     props: {
         auth: { type: Object, default: {} },
         buttons: { type: Object, default: {} },
+        appName: { type: String, default: null },
+        pageTitle: { type: String, default: null },
     },
 
     data() {
