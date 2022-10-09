@@ -70,12 +70,12 @@ Route::group([], function () {
 Route::group(["prefix" => "auth"], function () {
     Route::group(["middleware" => ["guest"]], function () {
         Route::get("/login", [AuthController::class, "login"])->name("auth.login");
-        Route::post("/login", [AuthController::class, "authenticate"])->name("auth.authenticate");
+        Route::post("/login", [AuthController::class, "authenticate"])->name("auth.authenticate")->middleware("throttle:auth_attempts");
         Route::get("/register", [AuthController::class, "register"])->name("auth.register");
         Route::post("/register", [AuthController::class, "store"])->name("auth.store");
 
         Route::get("/forget-password", [ForgetController::class, "forget"])->name("auth.forget");
-        Route::post("/forget-password", [ForgetController::class, "sendRecoveryLink"])->name("auth.sendRecoveryLink");
+        Route::post("/forget-password", [ForgetController::class, "sendRecoveryLink"])->name("auth.sendRecoveryLink")->middleware("throttle:auth_attempts");
         Route::get("/reset-password/{token}", [ForgetController::class, "reset"])->name("auth.reset");
         Route::post("/reset-password", [ForgetController::class, "resetPassword"])->name("auth.resetPassword");
     });
