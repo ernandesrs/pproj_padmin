@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Media\Image;
+use App\Models\Page;
 use App\Models\User;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -16,7 +18,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        User::class => UserPolicy::class
+        User::class => UserPolicy::class,
+        Image::class => ImagePolicy::class,
+        Page::class => PagePolicy::class,
     ];
 
     /**
@@ -28,6 +32,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('update_settings', function (User $user) {
+            return $user->level >= User::LEVEL_8;
+        });
     }
 }

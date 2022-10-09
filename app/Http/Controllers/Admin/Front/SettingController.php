@@ -8,6 +8,7 @@ use App\Models\Media\Image;
 use App\Models\Page;
 use App\Models\Slug;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class SettingController extends Controller
@@ -71,6 +72,10 @@ class SettingController extends Controller
      */
     public function updateSettings(array $validated)
     {
+        if (!Gate::allows("update_settings")) {
+            abort(403);
+        }
+
         $settings = Content::where("name", "front_settings")->first();
         if (!$settings) return null;
 
