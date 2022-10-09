@@ -172,8 +172,7 @@ export default {
         setPageContentOnForm() {
             if (!this.page?.id) return;
 
-            if (this.page.cover)
-                this.coverPreview = this.page.thumb_small;
+            this.coverPreview = this.page?.thumb_small;
 
             this.form.id = this.page.id;
             this.form.title = this.page.title;

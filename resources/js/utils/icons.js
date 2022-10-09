@@ -17,6 +17,7 @@ const icons = {
     cogFill: 'bi bi-gear-fill',
 
     exclamationCircleFill: 'bi bi-exclamation-circle-fill',
+    eye: 'bi bi-eye',
 
     fileEarmark: 'bi bi-file-earmark',
     fileEarmarkText: 'bi bi-file-earmark-text',

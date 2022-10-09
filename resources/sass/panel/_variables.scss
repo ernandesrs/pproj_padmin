@@ -3,7 +3,7 @@ $topbar-height: 50px;
 $primary: #2D6F95;
 $secondary: #4a5860;
 $success: #368547;
-$info: #0d86c3;
+$info: #1875a4;
 $warning: #8b8448;
 $danger: #b05252;
 
@@ -38,6 +38,7 @@ $colors: (
   "blue": $primary,
   "red": $danger,
   "green": $success,
+  "cian": $info
 );
 
 $border-radius: .25rem !default;

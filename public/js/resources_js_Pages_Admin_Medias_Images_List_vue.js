@@ -2824,14 +2824,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, null, 8
         /* PROPS */
         , ["preview-url", "preview-alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-          href: image.url,
+          href: image.path_url,
           target: "_blank",
           title: "Visualizar original"
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)("".concat(_ctx.$helpers.string.substr(image.name, 15))), 9
         /* TEXT, PROPS */
         , _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((image.size / 1000000).toFixed(3)) + " Mb", 1
         /* TEXT */
-        )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [image.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
+        )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+          size: "sm",
+          variant: "info",
+          icon: "eye",
+          "class": "mx-1 my-1",
+          href: image.path_url,
+          target: "_blank"
+        }, null, 8
+        /* PROPS */
+        , ["href"]), image.can.update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
           key: 0,
           size: "sm",
           variant: "primary",
@@ -2910,6 +2919,7 @@ var icons = (_icons = {
   cog: 'bi bi-gear',
   cogFill: 'bi bi-gear-fill',
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
+  eye: 'bi bi-eye',
   fileEarmark: 'bi bi-file-earmark',
   fileEarmarkText: 'bi bi-file-earmark-text',
   fileEarmarkPlus: 'bt bi-file-earmark-plus',

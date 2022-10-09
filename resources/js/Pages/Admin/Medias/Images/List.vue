@@ -13,7 +13,7 @@
                             :preview-alt="image.name" borderless />
                         <div class="text-center pt-2">
                             <h2 class="fs-6 fw-semibold text-muted mb-0">
-                                <a :href="image.url" target="_blank"
+                                <a :href="image.path_url" target="_blank"
                                     title="Visualizar original">
                                     {{ `${ $helpers.string.substr(image.name, 15) }` }}
                                 </a>
@@ -26,6 +26,9 @@
                             </small>
                         </div>
                         <div class="d-flex justify-content-center pt-1">
+                            <ButtonUi size="sm" variant="info"
+                                icon="eye" class="mx-1 my-1"
+                                :href="image.path_url" target="_blank" />
                             <ButtonUi v-if="image.can.update" size="sm" variant="primary"
                                 icon="pencilSquare" class="mx-1 my-1"
                                 :to="$route('admin.medias.images.edit', {image: image.id})" />

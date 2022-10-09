@@ -2742,6 +2742,7 @@ var icons = (_icons = {
   cog: 'bi bi-gear',
   cogFill: 'bi bi-gear-fill',
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
+  eye: 'bi bi-eye',
   fileEarmark: 'bi bi-file-earmark',
   fileEarmarkText: 'bi bi-file-earmark-text',
   fileEarmarkPlus: 'bt bi-file-earmark-plus',

@@ -1865,10 +1865,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.form.post(action);
   },
   setPageContentOnForm: function setPageContentOnForm() {
-    var _this$page2;
+    var _this$page2, _this$page3;
 
     if (!((_this$page2 = this.page) !== null && _this$page2 !== void 0 && _this$page2.id)) return;
-    if (this.page.cover) this.coverPreview = this.page.thumb_small;
+    this.coverPreview = (_this$page3 = this.page) === null || _this$page3 === void 0 ? void 0 : _this$page3.thumb_small;
     this.form.id = this.page.id;
     this.form.title = this.page.title;
     this.form.description = this.page.description;
@@ -3610,6 +3610,7 @@ var icons = (_icons = {
   cog: 'bi bi-gear',
   cogFill: 'bi bi-gear-fill',
   exclamationCircleFill: 'bi bi-exclamation-circle-fill',
+  eye: 'bi bi-eye',
   fileEarmark: 'bi bi-file-earmark',
   fileEarmarkText: 'bi bi-file-earmark-text',
   fileEarmarkPlus: 'bt bi-file-earmark-plus',
