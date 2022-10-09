@@ -13,7 +13,8 @@
                     <div class="container-fluid py-3">
                         <a :href="$route('admin.index')" title="Dashboard">
                             <h1 class="logo-text text-center">
-                                ADMIN PANEL
+                                <p class="fs-4 fw-semibold text-white mb-0">{{ appName.toUpperCase() }}</p>
+                                <p class="fs-6 fw-semibold text-light-dark mb-0">ADMIN</p>
                             </h1>
                         </a>
                     </div>

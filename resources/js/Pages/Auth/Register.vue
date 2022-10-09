@@ -1,7 +1,5 @@
 <template>
 
-    <Head title='Criar uma conta' />
-
     <form @submit.prevent="submit">
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
@@ -24,8 +22,7 @@
                     {text: 'Não definir', value: 0},
                     {text: 'Masculino', value: 1},
                     {text: 'Feminino', value: 2},
-                ]" v-model="form.gender"
-                    :error-message="form.errors.gender" />
+                ]" v-model="form.gender" :error-message="form.errors.gender" />
             </div>
 
             <div class="col-12 mb-4">
@@ -78,15 +75,7 @@ export default {
         });
 
         function submit() {
-            console.log(this.form);
-            form.post("/auth/register", {
-                onError: () => {
-                    console.log("Erro!");
-                },
-                onSuccess: () => {
-                    console.log("Sucesso!");
-                }
-            });
+            form.post("/auth/register");
         }
 
         return { form, submit };

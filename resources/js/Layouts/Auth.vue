@@ -1,5 +1,7 @@
 <template>
 
+    <Head :title="`${appName} - ${pageTitle}`" />
+
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-5 col-xl-5"></div>
@@ -40,13 +42,15 @@
   
 <script>
 
-import { Link } from '@inertiajs/inertia-vue3'
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import AlertUi from '../Components/Ui/AlertUi.vue';
 
 export default {
-    components: { Link, AlertUi },
+    components: { Head, Link, AlertUi },
     props: {
-        auth: {}
+        auth: {},
+        appName: { type: String, default: null },
+        pageTitle: { type: String, default: null },
     },
     data() {
         return {

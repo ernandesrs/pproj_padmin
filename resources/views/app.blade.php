@@ -9,7 +9,6 @@
     @routes
     <script src="{{ asset('/js/app.js') }}" defer></script>
     @inertiaHead
-    <title>{{ config('app.name') }} - {{ $page['props']['pageTitle'] }}</title>
 </head>
 
 <body>
