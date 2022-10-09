@@ -7,7 +7,6 @@
         </p>
     </div>
     <div v-else class="text-left text-muted">
-        <h1 class="fs-3">Verifique seu e-mail!</h1>
         <h2 class="fs-5">Precisamos que você confirme a criação da sua conta!</h2>
         <p>
             Foi enviado um link de verificação para o e-mail informado

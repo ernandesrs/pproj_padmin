@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Services\DemoAppService;
 use App\Http\Services\UserService;
 use Inertia\Inertia;
 
@@ -73,6 +74,8 @@ class AuthController extends Controller
      */
     public function store(RegisterRequest $request)
     {
+        if ($demo = (new DemoAppService())->isDemo()) return back()->with($demo->demoAlert());
+
         $validated = $request->validated();
 
         $user = (new UserService())->store($validated);

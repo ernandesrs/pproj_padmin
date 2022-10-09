@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\ForgetPassword;
 use App\Http\Controllers\Controller;
+use App\Http\Services\DemoAppService;
 use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,6 +34,8 @@ class ForgetController extends Controller
      */
     public function sendRecoveryLink(Request $request)
     {
+        if ($demo = (new DemoAppService())->isDemo()) return back()->with($demo->demoAlert());
+
         $validated = $this->validate($request, ['email' => ['required', 'email']]);
 
         $user = User::where("email", $validated["email"])->first();

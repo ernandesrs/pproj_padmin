@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
+use App\Http\Services\DemoAppService;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -30,6 +31,8 @@ class VerifyController extends Controller
      */
     public function verificationResend()
     {
+        if ($demo = (new DemoAppService())->isDemo()) return back()->with($demo->demoAlert());
+
         $user = auth()->user();
         if ($user->email_verified_at) {
             session()->flash("flash_alert", [
@@ -69,6 +72,8 @@ class VerifyController extends Controller
      */
     public function verifyRegister(Request $request)
     {
+        if ($demo = (new DemoAppService())->isDemo()) return back()->with($demo->demoAlert());
+
         $validated = $request->validate(["token" => ["required", "string"]]);
 
         $token = (explode("|", base64_decode($validated["token"])))[0] ?? null;
