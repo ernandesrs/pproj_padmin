@@ -76,6 +76,8 @@ class ImageController extends Controller
      */
     public function store(ImageRequest $request)
     {
+        $this->authorize("create");
+
         $validated = $request->validated();
 
         $image = (new ImageService())->store($validated);
@@ -96,6 +98,8 @@ class ImageController extends Controller
      */
     public function upload(ImageRequest $request)
     {
+        $this->authorize("create", new Image());
+
         $validated = $request->validated();
 
         $image = (new ImageService())->store($validated);

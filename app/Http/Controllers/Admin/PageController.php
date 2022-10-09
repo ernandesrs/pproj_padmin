@@ -76,6 +76,8 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
+        $this->authorize("create");
+
         $validated = $request->validated();
 
         if ($coverId = $validated["cover"] ?? null) {

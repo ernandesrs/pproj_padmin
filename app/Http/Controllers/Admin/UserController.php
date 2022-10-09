@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Services\UserService;
+use App\Models\Media\Image;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -74,6 +75,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $this->authorize("create");
+
         $validated = $request->validated();
 
         $user = (new UserService())->store($validated);

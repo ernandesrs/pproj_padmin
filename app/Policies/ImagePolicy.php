@@ -11,6 +11,17 @@ class ImagePolicy
     use HandlesAuthorization;
 
     /**
+     * Undocumented function
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function create(User $user)
+    {
+        return $user->level >= User::LEVEL_8;
+    }
+
+    /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
@@ -23,7 +34,7 @@ class ImagePolicy
 
         $author = $image->user();
 
-        return ($user->id == $author->id) || ($user->level > $author->level);
+        return $user->level >= User::LEVEL_8 && (($user->id == $author->id) || ($user->level > $author->level));
     }
 
     /**
@@ -39,6 +50,6 @@ class ImagePolicy
 
         $author = $image->user();
 
-        return ($user->id == $author->id) || ($user->level > $author->level);
+        return $user->level >= User::LEVEL_8 && (($user->id == $author->id) || ($user->level > $author->level));
     }
 }

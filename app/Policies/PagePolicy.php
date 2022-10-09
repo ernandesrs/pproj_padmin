@@ -18,7 +18,7 @@ class PagePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->level >= User::LEVEL_8;
     }
 
     /**
@@ -32,7 +32,7 @@ class PagePolicy
     {
         $author = $page->author()->first();
 
-        return ($author->id == $user->id) || ($user->level > $author->level);
+        return $user->level >= User::LEVEL_8 && (($author->id == $user->id) || ($user->level > $author->level));
     }
 
     /**
@@ -46,6 +46,6 @@ class PagePolicy
     {
         $author = $page->author()->first();
 
-        return ($author->id == $user->id) || ($user->level > $author->level);
+        return $user->level >= User::LEVEL_8 && (($author->id == $user->id) || ($user->level > $author->level));
     }
 }
