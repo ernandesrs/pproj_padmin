@@ -15,7 +15,7 @@ use App\Http\Controllers\Auth\VerifyController;
 // ADMIN
 Route::group([
     "prefix" => "admin",
-    "middleware" => ["auth", "admin_access"]
+    "middleware" => ["auth", "admin_access", "throttle:admin_visitor_limits"]
 ], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
 
