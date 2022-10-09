@@ -36,7 +36,7 @@
                 <ButtonUi @click="insertImage" variant="dark" icon="checkLg"
                     text="Inserir" size="sm" :data-info="`${JSON.stringify({
                         id: image.id,
-                        url: image.url,
+                        url: image.path_url,
                         thumb_small: image.thumb_small
                     })}`" />
             </div>

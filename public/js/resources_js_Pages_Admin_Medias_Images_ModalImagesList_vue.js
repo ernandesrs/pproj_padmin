@@ -1264,7 +1264,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           size: "sm",
           "data-info": "".concat(JSON.stringify({
             id: image.id,
-            url: image.url,
+            url: image.path_url,
             thumb_small: image.thumb_small
           }))
         }, null, 8
