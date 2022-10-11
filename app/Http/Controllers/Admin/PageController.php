@@ -76,7 +76,7 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-        $this->authorize("create");
+        $this->authorize("create", new Page());
 
         $validated = $request->validated();
 
@@ -88,7 +88,10 @@ class PageController extends Controller
 
         $page = Page::create($validated);
 
-        return redirect()->route("admin.pages.edit", ["page" => $page->id]);
+        return redirect()->route("admin.pages.edit", ["page" => $page->id])->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Uma nova página foi criada com sucesso!"
+        ]);
     }
 
     /**

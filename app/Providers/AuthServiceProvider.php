@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Media\Image;
 use App\Models\Page;
 use App\Models\User;
+use App\Policies\ImagePolicy;
+use App\Policies\PagePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;

@@ -14,9 +14,10 @@ class PagePolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
+     * @param  Page  $page
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Page $page)
     {
         return $user->level >= User::LEVEL_8;
     }

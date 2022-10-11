@@ -14,9 +14,10 @@ class ImagePolicy
      * Undocumented function
      *
      * @param User $user
+     * @param Image $image
      * @return bool
      */
-    public function create(User $user)
+    public function create(User $user, Image $image)
     {
         return $user->level >= User::LEVEL_8;
     }

@@ -76,7 +76,7 @@ class ImageController extends Controller
      */
     public function store(ImageRequest $request)
     {
-        $this->authorize("create");
+        $this->authorize("create", new Image());
 
         $validated = $request->validated();
 
