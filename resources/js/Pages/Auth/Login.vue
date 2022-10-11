@@ -38,6 +38,10 @@ export default {
     components: { useForm, ButtonUi, InputForm, Link },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
+    props: {
+        user: Object,
+        guest: Object
+    },
 
     setup() {
         const form = useForm({
@@ -53,8 +57,11 @@ export default {
         return { form, submit };
     },
 
-    props: {
-        user: Object,
+    created() {
+        if (this.guest) {
+            this.form.email = this.guest.email;
+            this.form.password = this.guest.password;
+        }
     },
 
 }

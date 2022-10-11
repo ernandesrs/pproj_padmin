@@ -19,7 +19,11 @@ class AuthController extends Controller
     public function login()
     {
         return Inertia::render('Auth/Login', [
-            "pageTitle" => "Login"
+            "pageTitle" => "Login",
+            "guest" => config("app.demo", false) ? [
+                "email" => "guest@guest.mail",
+                "password" => "password",
+            ] : null
         ]);
     }
 
