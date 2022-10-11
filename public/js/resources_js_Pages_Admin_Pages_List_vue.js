@@ -1695,7 +1695,7 @@ var _hoisted_6 = {
   "class": "mb-0 fs-6 fw-semibold"
 };
 var _hoisted_7 = {
-  "class": "mb-0 text-muted"
+  "class": "mb-2 text-muted"
 };
 var _hoisted_8 = {
   "class": "d-flex flex-wrap"

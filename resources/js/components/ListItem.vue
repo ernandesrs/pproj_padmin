@@ -6,7 +6,7 @@
             </div>
             <div class="d-flex flex-column ms-2 list-item-info">
                 <h5 class="mb-0 fs-6 fw-semibold">{{ theTitle }}</h5>
-                <p class="mb-0 text-muted">{{ theSubtitle }}</p>
+                <p class="mb-2 text-muted">{{ theSubtitle }}</p>
                 <div class="d-flex flex-wrap">
                     <slot name="badges" />
                 </div>
