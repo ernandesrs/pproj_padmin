@@ -24,7 +24,7 @@
                         <a href="{{ route('admin.index') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">Acessar
                             painel</a>
                     @endguest
-                    <a href="https://github.com/ernandesrs/pprop_padmin" target="_blank"
+                    <a href="https://github.com/ernandesrs/pproj_padmin" target="_blank"
                         class="btn btn-lg btn-link px-4 me-md-2 fw-semibold border-0">Ver no github</a>
                 </div>
             </div>
