@@ -1,40 +1,32 @@
 @extends('layouts.front')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8 col-xl-7">
-                <div class="d-flex justify-content-center flex-column align-items-center text-center h-100">
-                    <a href="{{ route('front.index') }}">
-                        <img src="{{ asset('assets/img/padmin_demo_logo.svg') }}" alt="">
-                    </a>
-                    <h1 class="fs-4 fw-semibold text-dark mb-0 py-3">
-                        Bem vindo ao live preview do PADMIN
-                    </h1>
-                    <div class="fs-6 fw-semibold text-dark-light">
-                        <p>
-                            PADMIN é um painel administrativo construído utilizando Vue JS 3 com
-                            Inertia JS. Ele possui toda a parte de autenticação, cadastro e gerenciamento
-                            de usuário, páginas e imagens.
-                        </p>
-                        <p>
-                            Você pode acessar e navegar pelas páginas do painel como um visitante,
-                            para isso clique no botão <span class="text-primary">Fazer login</span> abaixo e faça login com
-                            as
-                            credenciais pré-inseridas no formulário de login.
-                        </p>
-                    </div>
-
+    <div class="container-fluid">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                <h1 class="display-4 fw-semibold lh-1 mb-4 text-dark-dark">
+                    Bem vindo ao live preview do PADMIN!
+                </h1>
+                <p class="lead text-dark-light fw-normal">
+                    PADMIN é um painel administrativo construído utilizando Vue JS 3 com
+                    Inertia JS. Ele possui toda a parte de autenticação, cadastro e gerenciamento
+                    de usuário, páginas e imagens.
+                </p>
+                <p class="lead text-dark-light fw-normal">
+                    Você pode acessar e navegar pelas páginas do painel como um visitante,
+                    para isso clique no botão <span class="text-primary">Fazer login</span> abaixo e faça login com as
+                    credenciais pré-inseridas no formulário de login.
+                </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                     @guest
-                        <a class="btn btn-primary" href="{{ route('auth.login') }}" title="Fazer login">
-                            Fazer login
-                        </a>
+                        <a href="{{ route('auth.login') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Login</a>
                     @else
-                        <a class="btn btn-primary" href="{{ route('admin.index') }}" title="Acessar o painel">
-                            Acessar o painel
-                        </a>
+                        <a href="{{ route('admin.index') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Painel</a>
                     @endguest
                 </div>
+            </div>
+            <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden">
+                <img class="rounded-lg-3" src="{{ asset('assets/img/padmin_preview.png') }}" width="525" alt="">
             </div>
         </div>
     </div>
