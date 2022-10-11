@@ -12,7 +12,8 @@
                 </h1>
                 <p class="lead text-dark-light fw-normal pb-3">
                     PADMIN é um painel administrativo construído utilizando Vue JS 3 com
-                    Inertia JS. Ele possui toda a parte de autenticação, cadastro e gerenciamento
+                    Inertia JS e Bootstrap 5 com SASS no front; e Laravel 8 no backend. Ele possui toda a parte de
+                    autenticação, cadastro e gerenciamento
                     de usuário, páginas e imagens.
                 </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
@@ -23,6 +24,8 @@
                         <a href="{{ route('admin.index') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">Acessar
                             painel</a>
                     @endguest
+                    <a href="https://github.com/ernandesrs/pprop_padmin" target="_blank"
+                        class="btn btn-lg btn-link px-4 me-md-2 fw-semibold border-0">Ver no github</a>
                 </div>
             </div>
             <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden">
