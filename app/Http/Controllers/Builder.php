@@ -18,6 +18,7 @@ class Builder extends Controller
         if (config("app.env") == "production") return;
 
         $user = $this->userMaster();
+        $visitor = $this->userVisitor();
         $this->homePage($user);
         $this->privacyTermsPage($user);
         $this->useTermsPage($user);
@@ -47,6 +48,33 @@ class Builder extends Controller
 
         if (!$user) echo "fail on create the master user<br>";
         else echo "the master user has been created<br>";
+
+        return $user;
+    }
+
+    /**
+     * Create the visitor user
+     */
+    private function userVisitor()
+    {
+        $mail = "guest@guest.mail";
+        if (User::where("email", $mail)->first()) {
+            echo "guest user exists<br>";
+            return;
+        }
+
+        $user = User::create([
+            "first_name" => "Visitante",
+            "last_name" => "Last Name",
+            "username" => "Visitante",
+            "email" => $mail,
+            "password" => Hash::make("password"),
+            "level" => User::LEVEL_2,
+            "email_verified_at" => now()
+        ]);
+
+        if (!$user) echo "fail on create the guest user<br>";
+        else echo "the guest user has been created<br>";
 
         return $user;
     }
