@@ -7,21 +7,16 @@
                 <h1 class="display-4 fw-semibold lh-1 mb-4 text-dark-dark">
                     Bem vindo ao live preview do PADMIN!
                 </h1>
-                <p class="lead text-dark-light fw-normal">
+                <p class="lead text-dark-light fw-normal pb-3">
                     PADMIN é um painel administrativo construído utilizando Vue JS 3 com
                     Inertia JS. Ele possui toda a parte de autenticação, cadastro e gerenciamento
                     de usuário, páginas e imagens.
                 </p>
-                <p class="lead text-dark-light fw-normal">
-                    Você pode acessar e navegar pelas páginas do painel como um visitante,
-                    para isso clique no botão <span class="text-primary">Fazer login</span> abaixo e faça login com as
-                    credenciais pré-inseridas no formulário de login.
-                </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                     @guest
-                        <a href="{{ route('auth.login') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Login</a>
+                        <a href="{{ route('auth.login') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">Acessar painel</a>
                     @else
-                        <a href="{{ route('admin.index') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Painel</a>
+                        <a href="{{ route('admin.index') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">Acessar painel</a>
                     @endguest
                 </div>
             </div>
