@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
 use App\Http\Controllers\Auth\VerifyController;
+use App\Http\Controllers\Front\FrontController;
 
 // ADMIN
 Route::group([
@@ -55,9 +56,7 @@ Route::group([
 
 // FRONT/SITE
 Route::group([], function () {
-    Route::get('/', function () {
-        return "front: :D";
-    })->name("front.index");
+    Route::get('/', [FrontController::class, "index"])->name("front.index");
 
     Route::get('/mailable', function () {
         // 

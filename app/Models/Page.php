@@ -160,6 +160,19 @@ class Page extends Model
     }
 
     /**
+     * Find page by slug
+     *
+     * @param string $slug the page slug
+     * @param string|null $lang the page language
+     * @return null|Builder
+     */
+    public static function findBySlug(string $slug, ?string $lang = null)
+    {
+        $slug = Slug::where($lang ?? config("app.name"), $slug)->first();
+        return $slug ? $slug->pages() : null;
+    }
+
+    /**
      * Return the page slugs
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

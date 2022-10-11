@@ -24004,6 +24004,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/front/app.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/front/app.scss ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap-icons/font/bootstrap-icons.css":
 /*!***************************************************************!*\
   !*** ./node_modules/bootstrap-icons/font/bootstrap-icons.css ***!
@@ -26907,6 +26920,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
 /******/ 			"css/bootstrap-icons": 0,
+/******/ 			"css/front/app": 0,
 /******/ 			"css/panel/app": 0,
 /******/ 			"css/auth/app": 0
 /******/ 		};
@@ -26920,7 +26934,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
 /******/ 					} else {
-/******/ 						if(!/^css\/((auth|panel)\/app|bootstrap\-icons)$/.test(chunkId)) {
+/******/ 						if(!/^css\/((auth|front|panel)\/app|bootstrap\-icons)$/.test(chunkId)) {
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
 /******/ 							promises.push(installedChunkData[2] = promise);
@@ -27000,10 +27014,11 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/sass/auth/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/sass/panel/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/bootstrap-icons","css/panel/app","css/auth/app"], () => (__webpack_require__("./node_modules/bootstrap-icons/font/bootstrap-icons.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/front/app","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/front/app","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/sass/auth/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/front/app","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/sass/panel/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/bootstrap-icons","css/front/app","css/panel/app","css/auth/app"], () => (__webpack_require__("./resources/sass/front/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/bootstrap-icons","css/front/app","css/panel/app","css/auth/app"], () => (__webpack_require__("./node_modules/bootstrap-icons/font/bootstrap-icons.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
