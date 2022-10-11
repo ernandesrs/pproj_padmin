@@ -11177,11 +11177,3 @@ body {
   width: 100%;
   min-height: 100vh;
 }
-body .images {
-  position: relative;
-}
-body .images .img-fluid {
-  width: 100%;
-  max-width: 575px;
-  box-shadow: -6px 0 18px -2px rgba(69, 69, 69, 0.25);
-}

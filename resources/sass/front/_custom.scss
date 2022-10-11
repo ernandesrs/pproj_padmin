@@ -4,14 +4,4 @@ body {
     align-items: center;
     width: 100%;
     min-height: 100vh;
-
-    .images {
-        position: relative;
-
-        .img-fluid {
-            width: 100%;
-            max-width: 575px;
-            box-shadow: -6px 0 18px -2px rgb($dark, 0.25);
-        }
-    }
 }
