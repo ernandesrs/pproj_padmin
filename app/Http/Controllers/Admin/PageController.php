@@ -156,11 +156,17 @@ class PageController extends Controller
         }
 
         $page->update($validated);
-        (new SettingController())->updateSettings([
-            "title" => $page->title,
-            "description" => $page->description,
-            "follow" => $page->follow,
-        ]);
+        $slugs = $page->slugs()->first();
+        if ($slugs) {
+            $lang = config("app.locale");
+            if (in_array($slugs->$lang, ["inicio", "home"])) {
+                (new SettingController())->updateSettings([
+                    "title" => $page->title,
+                    "description" => $page->description,
+                    "follow" => $page->follow,
+                ]);
+            }
+        }
 
         return back()->with("flash_alert", [
             "variant" => "success",
