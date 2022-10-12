@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\Icons;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -46,7 +47,8 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'flash' => $flash,
             'auth' => $auth ? new UserResource($auth) : null,
-            'appName' => config("app.name")
+            'appName' => config("app.name"),
+            'icons' => Icons::toObject()
         ]);
     }
 }
