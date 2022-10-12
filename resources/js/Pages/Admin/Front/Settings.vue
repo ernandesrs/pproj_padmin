@@ -6,6 +6,10 @@
 
     <section class="">
         <form @submit.prevent="submit">
+            <h1 class="fs-5 fw-semibold">
+                Configurações do site
+            </h1>
+            <hr>
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-7 col-xl-8 mb-4">
                     <div class="col-12 mb-4">
@@ -45,7 +49,35 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <h1 class="fs-5 fw-semibold">
+                Google Recaptcha
+            </h1>
+            <hr>
+            <div class="row">
+                <div class="col-12 col-lg-7 col-xl-8 mb-4">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <InputForm label="Chave pública:" name="public_key"
+                                v-model="form.public_key"
+                                :error-message="form.errors.public_key" />
+                        </div>
+                        <div class="col-12 mb-4">
+                            <InputForm label="Chave privada:" name="private_key"
+                                v-model="form.private_key"
+                                :error-message="form.errors.private_key" />
+                        </div>
+                        <div class="col-12 mb-4">
+                            <InputForm type="checkbox"
+                                label="Ativar uso do Google Recaptcha" name="enabled"
+                                v-model="form.enabled"
+                                :error-message="form.errors.enabled" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
                 <div class="col-12 text-center">
                     <ButtonUi text="Atualizar" icon="checkLg" type="submit"
                         variant="primary" />
@@ -83,6 +115,10 @@ export default {
                 follow: this.settings?.content?.follow,
                 favicon: null,
                 logo: null,
+
+                public_key: this.settings?.content?.grecaptcha?.public_key ?? null,
+                private_key: this.settings?.content?.grecaptcha?.private_key ?? null,
+                enabled: this.settings?.content?.grecaptcha?.enabled ?? false,
             }),
             showImagesModalList: false,
             showImagesModalListTo: null
