@@ -4,16 +4,20 @@
 
 <script>
 
-import icons from './../../utils/icons';
-
 export default {
     props: {
-        icon: { type: String, default: 'app' }
+        icon: { type: String, default: 'app' },
     },
 
     computed: {
         theIcon() {
-            return `icon ${icons.get(this.icon)}`;
+            return `icon ${this.getIcon(this.icon)}`;
+        }
+    },
+
+    methods: {
+        getIcon(iconName) {
+            return this.$icons[iconName];
         }
     },
 };

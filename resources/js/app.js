@@ -10,6 +10,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const vueApp = createApp({ render: () => h(App, props) });
 
+        vueApp.config.globalProperties.$icons = props.initialPage.props?.icons ?? {};
         vueApp.config.globalProperties.$route = route;
         vueApp.config.globalProperties.$helpers = {
             string: Str
