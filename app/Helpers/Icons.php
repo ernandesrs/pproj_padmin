@@ -5,6 +5,19 @@ namespace App\Helpers;
 class Icons
 {
     /**
+     * Render a icon element
+     *
+     * @param string $name
+     * @param string $tag
+     * @return void
+     */
+    public static function render(string $name, string $tag = "i")
+    {
+        echo self::elem($name, $tag);
+        return;
+    }
+
+    /**
      * Get a element icon
      *
      * @param string $name

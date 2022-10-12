@@ -18,14 +18,18 @@
                 </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                     @guest
-                        <a href="{{ route('auth.login') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">Acessar
-                            painel</a>
+                        <a href="{{ route('auth.login') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">
+                            {{ Icons::render('login') }} Acessar painel
+                        </a>
                     @else
-                        <a href="{{ route('admin.index') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">Acessar
-                            painel</a>
+                        <a href="{{ route('admin.index') }}" class="btn btn-outline-primary btn-lg px-4 me-md-2 fw-bold">
+                            {{ Icons::render('pieChart') }} Acessar painel
+                        </a>
                     @endguest
                     <a href="https://github.com/ernandesrs/pproj_padmin" target="_blank"
-                        class="btn btn-lg btn-link px-4 me-md-2 fw-semibold border-0">Ver no github</a>
+                        class="btn btn-lg btn-link px-4 me-md-2 fw-semibold border-0 text-decoration-none">
+                        Ver no github {{ Icons::render('arrowRight') }}
+                    </a>
                 </div>
             </div>
             <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden">
