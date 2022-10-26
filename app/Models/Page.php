@@ -164,7 +164,7 @@ class Page extends Model
      *
      * @param string $slug the page slug
      * @param string|null $lang the page language
-     * @return null|Builder
+     * @return null|\Illuminate\Database\Eloquent\Builder
      */
     public static function findBySlug(string $slug, ?string $lang = null)
     {

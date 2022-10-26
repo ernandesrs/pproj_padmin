@@ -27,7 +27,7 @@ class VerifyController extends Controller
     /**
      * Verification link resend
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response|\Illuminate\Http\RedirectResponse
      */
     public function verificationResend()
     {
@@ -51,7 +51,7 @@ class VerifyController extends Controller
     /**
      * Render the verification view
      *
-     * @return void
+     * @return \Inertia\Response
      */
     public function verify(string $token)
     {
@@ -68,7 +68,7 @@ class VerifyController extends Controller
      * Register verify
      * 
      * @param string $token
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function verifyRegister(Request $request)
     {

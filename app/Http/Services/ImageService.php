@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class ImageService
 {
     /**
-     * @var strign
+     * @var string
      */
     private $imagesDir = "images";
 

@@ -16,13 +16,13 @@ class PageController extends Controller
     /**
      * @var boolean
      */
-    private bool $filtering = false;
+    private $filtering = false;
 
     /**
      * List pages.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index(Request $request)
     {
@@ -52,7 +52,7 @@ class PageController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -72,7 +72,7 @@ class PageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param PageRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PageRequest $request)
     {
@@ -98,18 +98,18 @@ class PageController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show(Page $page)
     {
-        //
+        return back();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit(Page $page)
     {
@@ -141,7 +141,7 @@ class PageController extends Controller
      *
      * @param PageRequest $request
      * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(PageRequest $request, Page $page)
     {
@@ -176,7 +176,7 @@ class PageController extends Controller
 
     /**
      * @param Request $request
-     * @return void
+     * @return
      */
     public function filter(Request $request)
     {
@@ -201,7 +201,7 @@ class PageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Page $page)
     {

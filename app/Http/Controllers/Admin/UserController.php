@@ -7,9 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Services\UserService;
-use App\Models\Media\Image;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -20,7 +18,7 @@ class UserController extends Controller
     /**
      * @var boolean
      */
-    private bool $filtering = false;
+    private $filtering = false;
 
     /**
      * Display a listing of the resource.
@@ -71,7 +69,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  UserRequest  $request
-     * @return RedirectResponse
+     * @return
      */
     public function store(UserRequest $request)
     {
@@ -93,11 +91,11 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show(User $user)
     {
-        //
+        return back();
     }
 
     /**
@@ -133,7 +131,7 @@ class UserController extends Controller
      *
      * @param  UserRequest  $request
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserRequest $request, User $user)
     {
@@ -147,6 +145,8 @@ class UserController extends Controller
             "message" => "Os dados de " . $user->first_name . " foram atualizados com sucesso!",
             "variant" => "success"
         ]);
+
+        return back();
     }
 
     /**
@@ -223,7 +223,7 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return void
+     * @return 
      */
     public function filter(Request $request)
     {

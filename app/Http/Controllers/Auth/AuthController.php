@@ -31,7 +31,7 @@ class AuthController extends Controller
      * Authenticate user
      * 
      * @param LoginRequest $request
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response|\Illuminate\Http\RedirectResponse
      */
     public function authenticate(LoginRequest $request)
     {

@@ -15,13 +15,13 @@ class ImageController extends Controller
     /**
      * @var boolean
      */
-    private bool $filtering = false;
+    private $filtering = false;
 
     /**
      * Display a listing of the resource.
      *
      * Request $request
-     * @return \Inertia\Response
+     * @return \Illuminate\Http\RedirectResponse|\Inertia\Response
      */
     public function index(Request $request)
     {
@@ -111,7 +111,7 @@ class ImageController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Media\Image  $image
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show(Image $image)
     {
@@ -172,7 +172,7 @@ class ImageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Media\Image  $image
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Image $image)
     {
@@ -191,7 +191,7 @@ class ImageController extends Controller
      * Get and/or filter images
      * 
      * @param Request $request
-     * @return void
+     * @return
      */
     private function filter(Request $request)
     {

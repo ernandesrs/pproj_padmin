@@ -62,7 +62,6 @@ return [
     'userCheck' => 'bi bi-person-check',
     'userPlus' => 'bi bi-person-plus',
     'userCircle' => 'bi bi-person-circle',
-    'userPlus' => 'bi bi-person-plus',
     'userMinus' => 'bi bi-person-dash',
 
     'x' => 'bi bi-x',
