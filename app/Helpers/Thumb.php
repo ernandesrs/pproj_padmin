@@ -36,8 +36,8 @@ class Thumb
 
     /**
      * @param null|string $path
-     * @param null|string $presetPath String contendo o caminho para o array de presets,
-     * ex.: user.small ou user.normal ou user.large. When null return the origin image
+     * @param null|string $presetPath the path to presets array,
+     * ex.: user.small or user.normal or user.large. When null return the original image
      * 
      * @return string
      */
@@ -59,14 +59,14 @@ class Thumb
     }
 
     /**
-     * @param string $imagePath caminho completo até à imagem
+     * @param string $imagePath full path to image
      * @param integer $width
      * @param integer|null $height
      * @return string|null
      */
     public static function make(string $imagePath, int $width, ?int $height = null): ?string
     {
-        $cropper = new \CoffeeCode\Cropper\Cropper(Storage::path(self::path));
+        $cropper = new Cropper(Storage::path(self::path));
 
         $thumbPath = $cropper->make($imagePath, $width, $height);
         if ($thumbPath)
