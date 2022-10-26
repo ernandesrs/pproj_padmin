@@ -301,16 +301,6 @@ __webpack_require__.r(__webpack_exports__);
     IconUi: _IconUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     FadeTransition: _FadeTransition_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  data: function data() {
-    return {
-      theMessage: null,
-      theVariant: null,
-      time: null,
-      timeStatus: 0,
-      timerHandler: null,
-      intervalHandler: null
-    };
-  },
   props: {
     variant: {
       type: String,
@@ -333,19 +323,18 @@ __webpack_require__.r(__webpack_exports__);
       "default": 'top'
     }
   },
-  watch: {
-    message: {
-      immediate: true,
-      handler: function handler(nv) {
-        this.theMessage = nv;
-      }
-    },
-    variant: {
-      immediate: true,
-      handler: function handler(nv) {
-        this.theVariant = nv;
-      }
-    }
+  data: function data() {
+    return {
+      theMessage: null,
+      theVariant: null,
+      time: null,
+      timeStatus: 0,
+      timerHandler: null,
+      intervalHandler: null
+    };
+  },
+  updated: function updated() {
+    this.add(this.message, this.variant);
   },
   computed: {
     alertStyle: function alertStyle() {
@@ -562,27 +551,14 @@ __webpack_require__.r(__webpack_exports__);
     pageTitle: {
       type: String,
       "default": null
+    },
+    flash: {
+      type: Object,
+      "default": null
     }
   },
   data: function data() {
     return {};
-  },
-  mounted: function mounted() {
-    this.showFlashMessage();
-  },
-  updated: function updated() {
-    this.showFlashMessage();
-  },
-  methods: {
-    showFlashMessage: function showFlashMessage() {
-      var flash = this.$page.props.flash;
-
-      if (flash) {
-        this.$refs.alert.add(flash.message, flash.variant);
-      } else {
-        this.$refs.alert.clear();
-      }
-    }
   }
 });
 
@@ -1111,6 +1087,8 @@ var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(". ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _$props$flash, _$props$flash2;
+
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
   var _component_AlertUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AlertUi");
@@ -1122,10 +1100,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
-    ref: "alert"
-  }, null, 512
-  /* NEED_PATCH */
-  ), _ctx.$page.props.pageTitle ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
+    variant: (_$props$flash = $props.flash) === null || _$props$flash === void 0 ? void 0 : _$props$flash.variant,
+    message: (_$props$flash2 = $props.flash) === null || _$props$flash2 === void 0 ? void 0 : _$props$flash2.message
+  }, null, 8
+  /* PROPS */
+  , ["variant", "message"]), _ctx.$page.props.pageTitle ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.pageTitle), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [['Auth/Register'].includes(_ctx.$page.component) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: _ctx.$route('auth.login')

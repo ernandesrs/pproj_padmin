@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12 col-lg-5 col-xl-5"></div>
             <div class="col-12 col-lg-7 col-xl-7">
-                <AlertUi ref="alert" />
+                <AlertUi :variant="flash?.variant" :message="flash?.message" />
 
                 <h1 v-if="$page.props.pageTitle"
                     class="fs-4 fw-semibold text-center pt-1 pb-2">
@@ -47,35 +47,18 @@ import AlertUi from '../Components/Ui/AlertUi.vue';
 
 export default {
     components: { Head, Link, AlertUi },
+
     props: {
         auth: {},
         appName: { type: String, default: null },
         pageTitle: { type: String, default: null },
+        flash: { type: Object, default: null }
     },
+
     data() {
         return {
         };
     },
-
-    mounted() {
-        this.showFlashMessage();
-    },
-
-    updated() {
-        this.showFlashMessage();
-    },
-
-    methods: {
-        showFlashMessage() {
-            let flash = this.$page.props.flash;
-
-            if (flash) {
-                this.$refs.alert.add(flash.message, flash.variant);
-            } else {
-                this.$refs.alert.clear();
-            }
-        },
-    }
 }
 
 </script>

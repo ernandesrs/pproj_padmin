@@ -13,7 +13,9 @@
                     <div class="container-fluid py-3">
                         <a :href="$route('admin.index')" title="Dashboard">
                             <h1 class="logo-text text-center">
-                                <p class="fs-4 fw-semibold text-white mb-0">{{ appName.toUpperCase() }}</p>
+                                <p class="fs-4 fw-semibold text-white mb-0">{{
+                                        appName.toUpperCase()
+                                }}</p>
                                 <p class="fs-6 fw-semibold text-light-dark mb-0">ADMIN</p>
                             </h1>
                         </a>
@@ -31,7 +33,7 @@
                                         data-bs-toggle="collapse"
                                         :href="('#subnav' + key)" />
 
-                                    <div :class="['collapse', {'show': nav.activeIn.includes($page.component)}]"
+                                    <div :class="['collapse', { 'show': nav.activeIn.includes($page.component) }]"
                                         :id="('subnav' + key)">
                                         <NavUi subnav>
                                             <template v-for="subnav in nav.items"
@@ -48,7 +50,7 @@
             </div>
         </aside>
 
-        <div class="main" :class="{'main-full': !inMobile && !sidebar.visible}">
+        <div class="main" :class="{ 'main-full': !inMobile && !sidebar.visible }">
             <div class="container-fluid topbar">
                 <div class="d-flex me-auto w-100">
 
@@ -76,7 +78,7 @@
                 </div>
 
                 <ButtonUi @click="sidebarToggle" :icon="sidebar.togglerIcon"
-                    :class="['sidebar-toggler order-md-first', {'close-mode': sidebar.visible && inMobile}]" />
+                    :class="['sidebar-toggler order-md-first', { 'close-mode': sidebar.visible && inMobile }]" />
             </div>
 
             <main class="container-fluid content">
@@ -102,7 +104,7 @@
                     </div>
                 </div>
 
-                <AlertUi ref="alert" />
+                <AlertUi :variant="flash?.variant" :message="flash?.message" />
 
                 <div class="mt-4 py-4 px-4 content-inner">
                     <slot />
@@ -146,6 +148,7 @@ export default {
         buttons: { type: Object, default: {} },
         appName: { type: String, default: null },
         pageTitle: { type: String, default: null },
+        flash: { type: Object, default: null }
     },
 
     data() {
@@ -209,11 +212,6 @@ export default {
 
     mounted() {
         this.windowResizeMonitor();
-        this.showFlashMessage();
-    },
-
-    updated() {
-        this.showFlashMessage();
     },
 
     watch: {
@@ -238,20 +236,7 @@ export default {
         }
     },
 
-    computed: {
-    },
-
     methods: {
-        showFlashMessage() {
-            let flash = this.$page.props.flash;
-
-            if (flash) {
-                this.$refs.alert.add(flash.message, flash.variant);
-            } else {
-                this.$refs.alert.clear();
-            }
-        },
-
         sidebarToggle() {
             this.sidebar.visible = !this.sidebar.visible;
         },

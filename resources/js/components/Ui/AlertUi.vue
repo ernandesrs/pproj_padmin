@@ -21,6 +21,15 @@ import FadeTransition from '../FadeTransition.vue';
 
 export default {
     components: { ButtonUi, IconUi, FadeTransition },
+
+    props: {
+        variant: { type: String, default: "default" },
+        message: { type: String, default: null },
+        fixed: { type: Boolean, default: false },
+        noAutoClose: { type: Boolean, default: false },
+        position: { type: String, default: 'top' },
+    },
+
     data() {
         return {
             theMessage: null,
@@ -31,27 +40,11 @@ export default {
             intervalHandler: null,
         };
     },
-    props: {
-        variant: { type: String, default: "default" },
-        message: { type: String, default: null },
-        fixed: { type: Boolean, default: false },
-        noAutoClose: { type: Boolean, default: false },
-        position: { type: String, default: 'top' },
+
+    updated() {
+        this.add(this.message, this.variant);
     },
-    watch: {
-        message: {
-            immediate: true,
-            handler(nv) {
-                this.theMessage = nv;
-            }
-        },
-        variant: {
-            immediate: true,
-            handler(nv) {
-                this.theVariant = nv;
-            }
-        }
-    },
+
     computed: {
         alertStyle() {
             let position = this.position == 'top' ? 'alert-float-top' : 'alert-float-bottom';
@@ -69,6 +62,7 @@ export default {
             return `${alertIcons[this.theVariant]}`;
         },
     },
+
     methods: {
         add(message, variant) {
             this.theMessage = message;
@@ -82,6 +76,7 @@ export default {
                 this.timer();
             }
         },
+
         clear() {
             this.theMessage = null;
             this.theVariant = null;
@@ -89,6 +84,7 @@ export default {
                 this.timerReset();
             }
         },
+
         timer() {
             this.timerHandler = setTimeout(() => {
                 this.clear();
@@ -98,6 +94,7 @@ export default {
                 this.timeStatus++;
             }, 100);
         },
+
         timerReset() {
             clearTimeout(this.timerHandler);
             clearInterval(this.intervalHandler);
