@@ -11,18 +11,18 @@ PADMIN é um painel administrativo criado com o intuito de colocar em prática c
 
 ### Painel administrativo
 1. Gerenciamento de usuários
- - Listagem e filtragem de usuários
- - Criação de usuários
- - Atualização de usuários
- - Exclusão de usuários
- - Promoção e rebaixamento de nível de usuário
+   - Listagem e filtragem de usuários
+   - Criação de usuários
+   - Atualização de usuários
+   - Exclusão de usuários
+   - Promoção e rebaixamento de nível de usuário
 2. Gerenciamento de imagens
- - Listagem e filtragem de imagens
- - Upload de imagens
- - Atualização de dados das imagens
- - Exclusão de imagens
+   - Listagem e filtragem de imagens
+   - Upload de imagens
+   - Atualização de dados das imagens
+   - Exclusão de imagens
 3. Gerenciamento de páginas
- - Listagem e filtragem de páginas
- - Cadastro de novas páginas
- - Atualização de páginas
- - Exclusão de páginas
+   - Listagem e filtragem de páginas
+   - Cadastro de novas páginas
+   - Atualização de páginas
+   - Exclusão de páginas
