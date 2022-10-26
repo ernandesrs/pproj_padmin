@@ -550,7 +550,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     form: form,
     submit: submit
   };
-}), _defineProperty(_components$layout$la, "created", function created() {
+}), _defineProperty(_components$layout$la, "mounted", function mounted() {
   if (this.guest) {
     this.form.email = this.guest.email;
     this.form.password = this.guest.password;

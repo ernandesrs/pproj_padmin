@@ -40,7 +40,7 @@ export default {
     layout: Layout,
     props: {
         user: Object,
-        guest: Object
+        guest: Object,
     },
 
     setup() {
@@ -48,6 +48,7 @@ export default {
             email: null,
             password: null,
             remember_me: null,
+
         });
 
         function submit() {
@@ -57,12 +58,11 @@ export default {
         return { form, submit };
     },
 
-    created() {
+    mounted() {
         if (this.guest) {
             this.form.email = this.guest.email;
             this.form.password = this.guest.password;
         }
     },
-
 }
 </script>
