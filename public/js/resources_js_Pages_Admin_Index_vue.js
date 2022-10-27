@@ -1007,12 +1007,17 @@ var WIDTH_MOBILE = 768;
           text: 'Mídias',
           href: '#',
           icon: 'collection',
-          activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form'],
+          activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form', 'Admin/Medias/Videos/List', 'Admin/Medias/Videos/Form'],
           items: [{
             text: 'Imagens',
             to: this.$route('admin.medias.images.index'),
             icon: 'images',
             activeIn: ['Admin/Medias/Images/List', 'Admin/Medias/Images/Form']
+          }, {
+            text: 'Vídeos',
+            to: this.$route('admin.medias.videos.index'),
+            icon: 'collectionPlay',
+            activeIn: ['Admin/Medias/Videos/List', 'Admin/Medias/Videos/Form']
           }]
         }, {
           text: 'Gerenciar site',

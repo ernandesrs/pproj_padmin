@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController as AdminController;
 use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
+use App\Http\Controllers\Admin\Media\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 
 use App\Http\Controllers\Auth\AuthController;
@@ -40,6 +41,15 @@ Route::group([
         Route::get("/images/update/{image}", [AdminImageController::class, "edit"])->name("admin.medias.images.edit");
         Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
         Route::post("/images/delete/{image}", [AdminImageController::class, "destroy"])->name("admin.medias.images.destroy");
+        
+        Route::get("/videos", [AdminVideoController::class, "index"])->name("admin.medias.videos.index");
+        Route::get("/videos/show/{video}", [AdminVideoController::class, "show"])->name("admin.medias.videos.show");
+        Route::get("/videos/create", [AdminVideoController::class, "create"])->name("admin.medias.videos.create");
+        Route::post("/videos/store", [AdminVideoController::class, "store"])->name("admin.medias.videos.store");
+        Route::post("/videos/upload", [AdminVideoController::class, "upload"])->name("admin.medias.videos.upload");
+        Route::get("/videos/update/{video}", [AdminVideoController::class, "edit"])->name("admin.medias.videos.edit");
+        Route::post("/videos/update/{video}", [AdminVideoController::class, "update"])->name("admin.medias.videos.update");
+        Route::post("/videos/delete/{video}", [AdminVideoController::class, "destroy"])->name("admin.medias.videos.destroy");
     });
 
     Route::get("/pages", [AdminPageController::class, "index"])->name("admin.pages.index");

@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Media\Image;
+use App\Models\Media\Video;
 use App\Models\Page;
 use App\Models\User;
 use App\Policies\ImagePolicy;
+use App\Policies\VideoPolicy;
 use App\Policies\PagePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         User::class => UserPolicy::class,
         Image::class => ImagePolicy::class,
+        Video::class => VideoPolicy::class,
         Page::class => PagePolicy::class,
     ];
 
