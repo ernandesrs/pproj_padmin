@@ -61,7 +61,7 @@
                             <div
                                 class="d-flex flex-column justify-content-center align-items-center">
                                 <img class="img-fluid img-thumbnail rounded-circle"
-                                    :src="auth.thumb_small" :alt="auth.full_name"
+                                    :src="(auth.thumb_small ?? auth.thumb_normal)" :alt="auth.full_name"
                                     style="width:60px;height:60px;">
                                 <h6 class="fw-semibold pt-2 text-muted text-center">
                                     {{ auth.full_name }}
@@ -69,7 +69,7 @@
                             </div>
                             <DropdownDivider />
                             <DropdownHeader text="Menu" />
-                            <DropdownItem text="Perfil" icon="userCircle" to="#" />
+                            <DropdownItem text="Perfil" icon="userCircle" :to="$route('admin.users.edit', {user: auth.id})" />
                             <DropdownItem text="Logout" icon="logout"
                                 :to="$route('auth.logout')" />
                         </template>

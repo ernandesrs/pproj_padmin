@@ -2667,9 +2667,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     text: "".concat(_ctx.$helpers.string.substr($props.auth.full_name, 8))
   }, {
     dropdownMenu: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      var _$props$auth$thumb_sm;
+
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
         "class": "img-fluid img-thumbnail rounded-circle",
-        src: $props.auth.thumb_small,
+        src: (_$props$auth$thumb_sm = $props.auth.thumb_small) !== null && _$props$auth$thumb_sm !== void 0 ? _$props$auth$thumb_sm : $props.auth.thumb_normal,
         alt: $props.auth.full_name,
         style: {
           "width": "60px",
@@ -2684,8 +2686,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownItem, {
         text: "Perfil",
         icon: "userCircle",
-        to: "#"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownItem, {
+        to: _ctx.$route('admin.users.edit', {
+          user: $props.auth.id
+        })
+      }, null, 8
+      /* PROPS */
+      , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownItem, {
         text: "Logout",
         icon: "logout",
         to: _ctx.$route('auth.logout')
