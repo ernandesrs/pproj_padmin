@@ -1536,6 +1536,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
+    fullHeight: {
+      type: Boolean,
+      "default": false
+    },
     disableBackdropClick: {
       type: Boolean,
       "default": false
@@ -1760,6 +1764,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_BackdropUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../Components/Ui/BackdropUi.vue */ "./resources/js/Components/Ui/BackdropUi.vue");
 /* harmony import */ var _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../Components/PaginationUi.vue */ "./resources/js/Components/PaginationUi.vue");
 /* harmony import */ var _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../Components/Ui/ImagePreviewUi.vue */ "./resources/js/Components/Ui/ImagePreviewUi.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -1785,12 +1792,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      uploadForm: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.useForm)({
+        name: null,
+        tags: null,
+        file: null
+      }),
       searchForm: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.useForm)({
         search: null,
         filter: 1,
         onlyList: 1
       }),
       showModal: false,
+      showImagesListTab: true,
+      showNewUploadTab: false,
       images: {}
     };
   },
@@ -1817,7 +1831,8 @@ __webpack_require__.r(__webpack_exports__);
     getImages: function getImages() {
       var _this$images;
 
-      if ((_this$images = this.images) !== null && _this$images !== void 0 && _this$images.data) return;
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      if ((_this$images = this.images) !== null && _this$images !== void 0 && _this$images.data && !force) return;
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("admin.medias.images.index", {
         onlyList: 1
       }));
@@ -1830,6 +1845,26 @@ __webpack_require__.r(__webpack_exports__);
       if (!(data !== null && data !== void 0 && data.id)) return;
       this.$emit("imageInsert", data);
       this.showModal = false;
+    },
+    uploadImage: function uploadImage() {
+      var _this = this;
+
+      var action = this.$route('admin.medias.images.upload');
+      this.uploadForm.post(action, {
+        onSuccess: function onSuccess(r) {
+          _this.showImagesList();
+
+          _this.getImages(true);
+        }
+      });
+    },
+    showImagesList: function showImagesList() {
+      this.showImagesListTab = true;
+      this.showNewUploadTab = false;
+    },
+    showNewUpload: function showNewUpload() {
+      this.showNewUploadTab = true;
+      this.showImagesListTab = false;
     }
   }
 });
@@ -2986,7 +3021,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['p-3 modal-ui-inner', {
           'modal-ui-inner-full': $props.size == 'full',
           'modal-ui-inner-md': $props.size == 'md',
-          'modal-ui-inner-lg': $props.size == 'lg'
+          'modal-ui-inner-lg': $props.size == 'lg',
+          'h-100': $props.fullHeight
         }])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, {
         noShadow: ""
@@ -3327,41 +3363,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "row pb-4"
+  "class": "d-flex mb-3"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col-12 col-sm-7 col-lg-8"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-  "class": "fw-semibold fs-5 text-muted"
-}, "Imagens")], -1
-/* HOISTED */
-);
-
+var _hoisted_2 = {
+  key: 0,
+  "class": "row"
+};
 var _hoisted_3 = {
-  "class": "col-12 col-sm-5 col-lg-4"
+  "class": "col-12 mb-3"
 };
 var _hoisted_4 = {
   "class": "d-flex align-items-center"
 };
 var _hoisted_5 = {
-  "class": "row py-2"
-};
-var _hoisted_6 = {
   key: 0,
   "class": "col-12"
 };
-var _hoisted_7 = {
+var _hoisted_6 = {
   "class": "card card-body position-relative"
 };
-var _hoisted_8 = ["href"];
-var _hoisted_9 = {
+var _hoisted_7 = ["href"];
+var _hoisted_8 = {
   "class": "mb-0 fs-6 fw-semibold text-muted text-center py-1"
 };
+var _hoisted_9 = {
+  key: 1
+};
+var _hoisted_10 = {
+  "class": "card card-body border-0"
+};
+var _hoisted_11 = {
+  "class": "row justify-content-center px-lg-5"
+};
+var _hoisted_12 = {
+  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
+};
+var _hoisted_13 = {
+  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
+};
+var _hoisted_14 = {
+  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
+};
+var _hoisted_15 = ["value"];
+var _hoisted_16 = {
+  "class": "col-12 text-center"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
-
   var _component_ButtonUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonUi");
+
+  var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
   var _component_BackdropUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BackdropUi");
 
@@ -3372,17 +3422,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ModalUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalUi");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ModalUi, {
-    onModalClose: _cache[2] || (_cache[2] = function ($event) {
+    onModalClose: _cache[6] || (_cache[6] = function ($event) {
       return $data.showModal = false;
     }),
     show: $data.showModal,
     size: "lg",
-    top: ""
+    top: "",
+    "full-height": ""
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       var _$data$images, _$data$images2, _$data$images3, _$data$images4, _$data$images4$meta;
 
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+        onClick: $options.showImagesList,
+        text: "Lista de imagens",
+        variant: "".concat($data.showImagesListTab ? 'primary' : null),
+        isActive: $data.showImagesListTab
+      }, null, 8
+      /* PROPS */
+      , ["onClick", "variant", "isActive"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+        onClick: $options.showNewUpload,
+        text: "Novo upload",
+        variant: "".concat($data.showNewUploadTab ? 'primary' : null),
+        isActive: $data.showNewUploadTab
+      }, null, 8
+      /* PROPS */
+      , ["onClick", "variant", "isActive"])]), $data.showImagesListTab ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.search && $options.search.apply($options, arguments);
         }, ["prevent"]))
@@ -3399,7 +3464,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         icon: "search"
       })])], 32
       /* HYDRATE_EVENTS */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!((_$data$images = $data.images) !== null && _$data$images !== void 0 && _$data$images.data) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BackdropUi, {
+      )]), !((_$data$images = $data.images) !== null && _$data$images !== void 0 && _$data$images.data) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BackdropUi, {
         "text-loading": "Carregando imagens...",
         loading: "",
         light: ""
@@ -3408,7 +3473,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$data$images2 = $data.images) === null || _$data$images2 === void 0 ? void 0 : _$data$images2.data, function (image) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: image.id,
-          "class": "col-6 col-sm-4 col-md-3 col-xl-2 text-center mb-4"
+          "class": "col-6 col-sm-4 col-md-3 text-center mb-4"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
           href: image.url,
           title: "Ver imagem original",
@@ -3419,11 +3484,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           borderless: ""
         }, null, 8
         /* PROPS */
-        , ["preview-url", "preview-alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$helpers.string.substr(image.name, 10)), 1
+        , ["preview-url", "preview-alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$helpers.string.substr(image.name, 10)), 1
         /* TEXT */
         )], 8
         /* PROPS */
-        , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+        , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
           onClick: $options.insertImage,
           variant: "dark",
           icon: "checkLg",
@@ -3445,7 +3510,59 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "url-params": "onlyList=1"
       }, null, 8
       /* PROPS */
-      , ["pages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+      , ["pages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $options.uploadImage && $options.uploadImage.apply($options, arguments);
+        }, ["prevent"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+        type: "text",
+        name: "name",
+        modelValue: $data.uploadForm.name,
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.uploadForm.name = $event;
+        }),
+        label: "Nome:",
+        "error-message": $data.uploadForm.errors.name
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+        type: "text",
+        name: "tags",
+        modelValue: $data.uploadForm.tags,
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return $data.uploadForm.tags = $event;
+        }),
+        label: "Tags:",
+        "error-message": $data.uploadForm.errors.tags
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.uploadForm.file = $event.target.files[0];
+        }),
+        label: "Imagem:",
+        type: "file",
+        name: "file",
+        "error-message": $data.uploadForm.errors.file
+      }, null, 8
+      /* PROPS */
+      , ["error-message"]), $data.uploadForm.progress ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("progress", {
+        key: 0,
+        value: $data.uploadForm.progress.percentage,
+        max: "100"
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.uploadForm.progress.percentage) + "% ", 9
+      /* TEXT, PROPS */
+      , _hoisted_15)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+        type: "submit",
+        variant: "primary",
+        text: "Enviar",
+        icon: "arrowUp",
+        disabled: $data.uploadForm.processing
+      }, null, 8
+      /* PROPS */
+      , ["disabled"])])])])], 32
+      /* HYDRATE_EVENTS */
+      )]))];
     }),
     _: 1
     /* STABLE */

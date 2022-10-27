@@ -28,8 +28,10 @@
         width: 100%;
         max-width: 425px;
         background-color: $light;
+        max-height: calc(100vh - ($spacer / 2));
+        overflow-y: auto;
 
-        &.modal-ui-inner-md {
+        over &.modal-ui-inner-md {
             max-width: 675px;
         }
 

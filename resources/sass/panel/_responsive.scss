@@ -12,4 +12,26 @@
             }
         }
     }
+
+    .modal-ui {
+        .modal-ui-inner {
+            max-height: calc(100vh - ($spacer));
+        }
+    }
+}
+
+@media(min-width: 992px) {
+    .modal-ui {
+        .modal-ui-inner {
+            max-height: calc(100vh - ($spacer * 2));
+        }
+    }
+}
+
+@media(min-width: 1200px) {
+    .modal-ui {
+        .modal-ui-inner {
+            max-height: calc(100vh - ($spacer * 3));
+        }
+    }
 }

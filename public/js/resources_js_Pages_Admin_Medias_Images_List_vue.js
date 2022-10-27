@@ -1132,6 +1132,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
+    fullHeight: {
+      type: Boolean,
+      "default": false
+    },
     disableBackdropClick: {
       type: Boolean,
       "default": false
@@ -2418,7 +2422,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['p-3 modal-ui-inner', {
           'modal-ui-inner-full': $props.size == 'full',
           'modal-ui-inner-md': $props.size == 'md',
-          'modal-ui-inner-lg': $props.size == 'lg'
+          'modal-ui-inner-lg': $props.size == 'lg',
+          'h-100': $props.fullHeight
         }])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, {
         noShadow: ""

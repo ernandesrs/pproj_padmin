@@ -94,7 +94,7 @@ class ImageController extends Controller
      * Store new image and return a image resource
      * 
      * @param ImageRequest $request
-     * @return ImageResource
+     * @return ImageResource|\Illuminate\Http\RedirectResponse
      */
     public function upload(ImageRequest $request)
     {
@@ -103,6 +103,13 @@ class ImageController extends Controller
         $validated = $request->validated();
 
         $image = (new ImageService())->store($validated);
+
+        if ($request->header("x-inertia", false)) {
+            return back()->with("flash_alert", [
+                "variant" => "success",
+                "message" => "Imagem enviada com sucesso!"
+            ]);
+        }
 
         return new ImageResource($image);
     }
