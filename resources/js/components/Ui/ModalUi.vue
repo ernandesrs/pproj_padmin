@@ -25,6 +25,7 @@ import CardUi from './CardUi.vue';
 
 export default {
     components: { CardUi },
+
     props: {
         show: { type: Boolean, default: false },
         light: { type: Boolean, default: false },
@@ -33,12 +34,14 @@ export default {
         disableBackdropClick: { type: Boolean, default: false },
         size: { type: String, default: null },
     },
+
     data() {
         return {
             visible: false,
             showed: false
         };
     },
+
     watch: {
         show: {
             immediate: true,
@@ -48,22 +51,27 @@ export default {
             }
         }
     },
+
     methods: {
         showModal() {
             this.visible = true;
             this.$emit("modalShow");
         },
+
         closeModal() {
             this.visible = false;
             this.$emit("modalClose");
         },
+
         backdropClick(e) {
             if (this.disableBackdropClick || !e.target.classList.contains("modal-ui")) return;
             this.closeModal();
         },
+
         afterEnter() {
             this.showed = true;
         },
+
         beforeLeave() {
             this.showed = false;
         }

@@ -2358,7 +2358,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'border': !$props.borderless
-    }, 'd-flex justify-content-center align-items-center mb-1']),
+    }, 'd-flex justify-content-center align-items-center mb-1 pe-none']),
     style: {
       "width": "100%",
       "max-width": "200px",
@@ -2367,7 +2367,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
   }, [$props.previewUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
-    "class": "img-fluid",
+    "class": "img-fluid pe-none",
     src: $props.previewUrl,
     alt: $props.previewAlt
   }, null, 8

@@ -9,6 +9,7 @@
                 :variant="`${showNewUploadTab ? 'primary' : null}`"
                 :isActive="showNewUploadTab" />
         </div>
+
         <div v-if="showImagesListTab" class="row">
             <div class="col-12 mb-3">
                 <form @submit.prevent="search">
@@ -27,20 +28,21 @@
 
             <div v-else v-for="image in images?.data" :key="image.id"
                 class="col-6 col-sm-4 col-md-3 text-center mb-4">
-                <a :href="image.url" title="Ver imagem original" target="_blank">
-                    <ImagePreviewUi :preview-url="image.thumb_small"
-                        :preview-alt="image.name" borderless />
+                <CardUi>
+                    <template v-slot:content>
+                        <ImagePreviewUi :preview-url="image.thumb_small"
+                            :preview-alt="image.name" borderless @click="insertImage"
+                            :data-info="`${JSON.stringify({
+                                id: image.id,
+                                url: image.path_url,
+                                thumb_small: image.thumb_small
+                            })}`" style="cursor:pointer;" />
 
-                    <p class="mb-0 fs-6 fw-semibold text-muted text-center py-1">
-                        {{ $helpers.string.substr(image.name, 10) }}
-                    </p>
-                </a>
-                <ButtonUi @click="insertImage" variant="dark" icon="checkLg"
-                    text="Inserir" size="sm" :data-info="`${JSON.stringify({
-                        id: image.id,
-                        url: image.path_url,
-                        thumb_small: image.thumb_small
-                    })}`" />
+                        <p class="mb-0 fs-6 fw-semibold text-muted text-center py-1">
+                            {{ $helpers.string.substr(image.name, 10) }}
+                        </p>
+                    </template>
+                </CardUi>
             </div>
 
             <PaginationUi v-if="images?.data" :pages="images?.meta?.links"
@@ -91,10 +93,10 @@ import { Inertia } from '@inertiajs/inertia';
 import BackdropUi from '../../../../Components/Ui/BackdropUi.vue';
 import PaginationUi from '../../../../Components/PaginationUi.vue';
 import ImagePreviewUi from '../../../../Components/Ui/ImagePreviewUi.vue';
-import axios from 'axios';
+import CardUi from '../../../../Components/Ui/CardUi.vue';
 
 export default {
-    components: { ModalUi, InputForm, ButtonUi, BackdropUi, PaginationUi, ImagePreviewUi },
+    components: { ModalUi, InputForm, ButtonUi, BackdropUi, PaginationUi, ImagePreviewUi, CardUi },
 
     props: {
         show: { type: Boolean, default: false },
@@ -152,6 +154,8 @@ export default {
 
         insertImage(event) {
             let data = JSON.parse(event.target.getAttribute("data-info"));
+            console.log(event, data);
+
             if (!data?.id) return;
 
             this.$emit("imageInsert", data);

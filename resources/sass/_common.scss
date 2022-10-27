@@ -31,7 +31,7 @@
         max-height: calc(100vh - ($spacer / 2));
         overflow-y: auto;
 
-        over &.modal-ui-inner-md {
+        &.modal-ui-inner-md {
             max-width: 675px;
         }
 

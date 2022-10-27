@@ -1764,8 +1764,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_BackdropUi_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../Components/Ui/BackdropUi.vue */ "./resources/js/Components/Ui/BackdropUi.vue");
 /* harmony import */ var _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../Components/PaginationUi.vue */ "./resources/js/Components/PaginationUi.vue");
 /* harmony import */ var _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../Components/Ui/ImagePreviewUi.vue */ "./resources/js/Components/Ui/ImagePreviewUi.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Components_Ui_CardUi_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../Components/Ui/CardUi.vue */ "./resources/js/Components/Ui/CardUi.vue");
 
 
 
@@ -1782,7 +1781,8 @@ __webpack_require__.r(__webpack_exports__);
     ButtonUi: _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     BackdropUi: _Components_Ui_BackdropUi_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     PaginationUi: _Components_PaginationUi_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    ImagePreviewUi: _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    ImagePreviewUi: _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    CardUi: _Components_Ui_CardUi_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
   props: {
     show: {
@@ -1842,6 +1842,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     insertImage: function insertImage(event) {
       var data = JSON.parse(event.target.getAttribute("data-info"));
+      console.log(event, data);
       if (!(data !== null && data !== void 0 && data.id)) return;
       this.$emit("imageInsert", data);
       this.showModal = false;
@@ -2957,7 +2958,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'border': !$props.borderless
-    }, 'd-flex justify-content-center align-items-center mb-1']),
+    }, 'd-flex justify-content-center align-items-center mb-1 pe-none']),
     style: {
       "width": "100%",
       "max-width": "200px",
@@ -2966,7 +2967,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
   }, [$props.previewUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
-    "class": "img-fluid",
+    "class": "img-fluid pe-none",
     src: $props.previewUrl,
     alt: $props.previewAlt
   }, null, 8
@@ -3382,18 +3383,20 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "card card-body position-relative"
 };
-var _hoisted_7 = ["href"];
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "mb-0 fs-6 fw-semibold text-muted text-center py-1"
 };
-var _hoisted_9 = {
+var _hoisted_8 = {
   key: 1
 };
-var _hoisted_10 = {
+var _hoisted_9 = {
   "class": "card card-body border-0"
 };
-var _hoisted_11 = {
+var _hoisted_10 = {
   "class": "row justify-content-center px-lg-5"
+};
+var _hoisted_11 = {
+  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
 };
 var _hoisted_12 = {
   "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
@@ -3401,11 +3404,8 @@ var _hoisted_12 = {
 var _hoisted_13 = {
   "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
 };
-var _hoisted_14 = {
-  "class": "col-12 col-md-10 col-lg-8 col-xl-7 mb-4"
-};
-var _hoisted_15 = ["value"];
-var _hoisted_16 = {
+var _hoisted_14 = ["value"];
+var _hoisted_15 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -3416,6 +3416,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_BackdropUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BackdropUi");
 
   var _component_ImagePreviewUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ImagePreviewUi");
+
+  var _component_CardUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CardUi");
 
   var _component_PaginationUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PaginationUi");
 
@@ -3474,34 +3476,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: image.id,
           "class": "col-6 col-sm-4 col-md-3 text-center mb-4"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-          href: image.url,
-          title: "Ver imagem original",
-          target: "_blank"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
-          "preview-url": image.thumb_small,
-          "preview-alt": image.name,
-          borderless: ""
-        }, null, 8
-        /* PROPS */
-        , ["preview-url", "preview-alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$helpers.string.substr(image.name, 10)), 1
-        /* TEXT */
-        )], 8
-        /* PROPS */
-        , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
-          onClick: $options.insertImage,
-          variant: "dark",
-          icon: "checkLg",
-          text: "Inserir",
-          size: "sm",
-          "data-info": "".concat(JSON.stringify({
-            id: image.id,
-            url: image.path_url,
-            thumb_small: image.thumb_small
-          }))
-        }, null, 8
-        /* PROPS */
-        , ["onClick", "data-info"])]);
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, null, {
+          content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
+              "preview-url": image.thumb_small,
+              "preview-alt": image.name,
+              borderless: "",
+              onClick: $options.insertImage,
+              "data-info": "".concat(JSON.stringify({
+                id: image.id,
+                url: image.path_url,
+                thumb_small: image.thumb_small
+              })),
+              style: {
+                "cursor": "pointer"
+              }
+            }, null, 8
+            /* PROPS */
+            , ["preview-url", "preview-alt", "onClick", "data-info"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$helpers.string.substr(image.name, 10)), 1
+            /* TEXT */
+            )];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1024
+        /* DYNAMIC_SLOTS */
+        )]);
       }), 128
       /* KEYED_FRAGMENT */
       )), (_$data$images3 = $data.images) !== null && _$data$images3 !== void 0 && _$data$images3.data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PaginationUi, {
@@ -3510,11 +3511,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "url-params": "onlyList=1"
       }, null, 8
       /* PROPS */
-      , ["pages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+      , ["pages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.uploadImage && $options.uploadImage.apply($options, arguments);
         }, ["prevent"]))
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
         type: "text",
         name: "name",
         modelValue: $data.uploadForm.name,
@@ -3525,7 +3526,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "error-message": $data.uploadForm.errors.name
       }, null, 8
       /* PROPS */
-      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
         type: "text",
         name: "tags",
         modelValue: $data.uploadForm.tags,
@@ -3536,7 +3537,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "error-message": $data.uploadForm.errors.tags
       }, null, 8
       /* PROPS */
-      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+      , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $data.uploadForm.file = $event.target.files[0];
         }),
@@ -3552,7 +3553,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         max: "100"
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.uploadForm.progress.percentage) + "% ", 9
       /* TEXT, PROPS */
-      , _hoisted_15)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+      , _hoisted_14)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         type: "submit",
         variant: "primary",
         text: "Enviar",

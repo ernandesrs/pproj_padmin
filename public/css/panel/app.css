@@ -11231,7 +11231,7 @@ textarea.form-control-lg {
   max-height: calc(100vh - 0.5rem);
   overflow-y: auto;
 }
-over .modal-ui .modal-ui-inner.modal-ui-inner-md {
+.modal-ui .modal-ui-inner.modal-ui-inner-md {
   max-width: 675px;
 }
 .modal-ui .modal-ui-inner.modal-ui-inner-lg {
