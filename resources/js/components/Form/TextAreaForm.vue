@@ -25,7 +25,7 @@ export default {
         borderless: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
-        rows: { type: Number, default: 2 }
+        rows: { type: [String, Number], default: 2 }
     },
     computed: {
         inputStyle() {

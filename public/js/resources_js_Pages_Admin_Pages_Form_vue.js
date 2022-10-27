@@ -876,7 +876,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": false
     },
     rows: {
-      type: Number,
+      type: [String, Number],
       "default": 2
     }
   },
