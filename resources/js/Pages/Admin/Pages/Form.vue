@@ -13,9 +13,9 @@
                     </div>
 
                     <div class="col-12 mb-4">
-                        <InputForm type="text" label="Descrição:" name="description"
+                        <TextAreaForm type="text" label="Descrição:" name="description"
                             v-model="form.description"
-                            :error-message="form.errors.description" />
+                            :error-message="form.errors.description" rows="3" />
                     </div>
 
                     <div v-if="form.content_type == 1" class="col-12 mb-4">
@@ -132,11 +132,12 @@ import SelectForm from '../../../Components/Form/SelectForm.vue';
 import EditorTiny from '../../../Components/EditorTiny.vue';
 import ModalImagesList from '../Medias/Images/ModalImagesList.vue';
 import ImagePreviewUi from '../../../Components/Ui/ImagePreviewUi.vue';
+import TextAreaForm from '../../../Components/Form/TextAreaForm.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi },
+    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi,TextAreaForm },
     props: {
         page: { type: Object, default: {} },
         terms: { type: Object, default: {} },

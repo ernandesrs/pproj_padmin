@@ -17,9 +17,9 @@
                             v-model="form.title" :error-message="form.errors.title" />
                     </div>
                     <div class="col-12 mb-4">
-                        <InputForm label="Descrição do site:" name="description"
+                        <TextAreaForm label="Descrição do site:" name="description"
                             v-model="form.description"
-                            :error-message="form.errors.description" />
+                            :error-message="form.errors.description" rows="3" />
                     </div>
                     <div class="col-12 mb-4">
                         <InputForm label="Permitir indexação aos mecanismos de buscas"
@@ -96,11 +96,12 @@ import InputForm from '../../../Components/Form/InputForm.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import ImagePreviewUi from '../../../Components/Ui/ImagePreviewUi.vue';
 import ModalImagesList from '../Medias/Images/ModalImagesList.vue';
+import TextAreaForm from '../../../Components/Form/TextAreaForm.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ImagePreviewUi, ModalImagesList },
+    components: { InputForm, ButtonUi, ImagePreviewUi, ModalImagesList, TextAreaForm },
     props: {
         settings: { type: Object, default: {} }
     },
