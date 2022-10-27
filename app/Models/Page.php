@@ -116,7 +116,6 @@ class Page extends Model
             // not needed for system pages
             unset($attributes["content_type"]);
             unset($attributes["status"]);
-            unset($attributes["follow"]);
         }
 
         $attributes["content"] = $this->makeContent($attributes);
