@@ -2228,7 +2228,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.form.name = $event;
     }),
-    label: "Nome",
+    label: "Nome:",
     "error-message": $data.form.errors.name
   }, null, 8
   /* PROPS */
@@ -2239,7 +2239,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.form.tags = $event;
     }),
-    label: "Tags",
+    label: "Tags:",
     "error-message": $data.form.errors.tags
   }, null, 8
   /* PROPS */
@@ -2247,7 +2247,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.form.file = $event.target.files[0];
     }),
-    label: "Image",
+    label: "Imagem:",
     type: "file",
     name: "file",
     "error-message": $data.form.errors.file

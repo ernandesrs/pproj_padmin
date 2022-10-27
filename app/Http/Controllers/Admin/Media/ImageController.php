@@ -59,7 +59,7 @@ class ImageController extends Controller
     public function create()
     {
         return Inertia::render("Admin/Medias/Images/Form", [
-            "pageTitle" => "Novo upload",
+            "pageTitle" => "Nova imagem",
             "buttons" => [
                 "back" => [
                     "url" => route("admin.medias.images.index")

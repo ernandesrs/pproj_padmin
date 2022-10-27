@@ -10,16 +10,16 @@
                         target="_blank" />
                 </div>
                 <div class="col-12 col-md-10 col-lg-8 col-xl-7 mb-4">
-                    <InputForm type="text" name="name" v-model="form.name" label="Nome"
+                    <InputForm type="text" name="name" v-model="form.name" label="Nome:"
                         :error-message="form.errors.name" />
                 </div>
                 <div class="col-12 col-md-10 col-lg-8 col-xl-7 mb-4">
-                    <InputForm type="text" name="tags" v-model="form.tags" label="Tags"
+                    <InputForm type="text" name="tags" v-model="form.tags" label="Tags:"
                         :error-message="form.errors.tags" />
                 </div>
                 <div v-if="!video?.id" class="col-12 col-md-10 col-lg-8 col-xl-7 mb-4">
                     <InputForm @update:modelValue="form.file = $event.target.files[0]"
-                        label="Vídeo" type="file" name="file"
+                        label="Vídeo:" type="file" name="file"
                         :error-message="form.errors.file" />
                     <progress v-if="form.progress" :value="form.progress.percentage"
                         max="100">

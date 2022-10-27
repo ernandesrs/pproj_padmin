@@ -50,7 +50,7 @@ class VideoController extends Controller
     public function create()
     {
         return Inertia::render("Admin/Medias/Videos/Form", [
-            "pageTitle" => "Novo upload",
+            "pageTitle" => "Novo vídeo",
             "buttons" => [
                 "back" => [
                     "url" => route("admin.medias.videos.index")
