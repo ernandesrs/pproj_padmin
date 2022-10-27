@@ -407,12 +407,16 @@ __webpack_require__.r(__webpack_exports__);
     theTitle: function theTitle() {
       var _this$item$title, _this$item3;
 
-      return (_this$item$title = (_this$item3 = this.item) === null || _this$item3 === void 0 ? void 0 : _this$item3.title) !== null && _this$item$title !== void 0 ? _this$item$title : this.title;
+      var limit = 60;
+      var tt = (_this$item$title = (_this$item3 = this.item) === null || _this$item3 === void 0 ? void 0 : _this$item3.title) !== null && _this$item$title !== void 0 ? _this$item$title : this.title;
+      return tt.substr(0, limit) + (tt.length > limit ? '...' : '');
     },
     theSubtitle: function theSubtitle() {
       var _this$item$subtitle, _this$item4;
 
-      return (_this$item$subtitle = (_this$item4 = this.item) === null || _this$item4 === void 0 ? void 0 : _this$item4.subtitle) !== null && _this$item$subtitle !== void 0 ? _this$item$subtitle : this.subtitle;
+      var limit = 125;
+      var ts = (_this$item$subtitle = (_this$item4 = this.item) === null || _this$item4 === void 0 ? void 0 : _this$item4.subtitle) !== null && _this$item$subtitle !== void 0 ? _this$item$subtitle : this.subtitle;
+      return ts.substr(0, limit) + (ts.length > limit ? '...' : '');
     }
   }
 });
@@ -2754,7 +2758,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-item {\r\n    background-color: transparent;\n}\n.list-item-cover {\r\n    overflow: hidden;\n}\n.list-item-cover>img.square {\r\n    width: 60px;\r\n    height: 60px;\n}\n.list-item-cover>img.circle {\r\n    width: 60px;\r\n    height: 60px;\r\n    border-radius: 50%;\n}\n.list-item-cover>img.rectangle {\r\n    width: 100px!important;\r\n    height: 60px!important;\r\n    padding: 2px;\n}\n.list-item-info {\r\n    background-color: transparent;\r\n    width: 100%;\r\n    max-width: 475px;\n}\n.list-item-actions {\r\n    background-color: transparent;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-item {\r\n    background-color: transparent;\n}\n.list-item-cover {\r\n    overflow: hidden;\n}\n.list-item-cover>img.square {\r\n    width: 60px;\r\n    height: 60px;\n}\n.list-item-cover>img.circle {\r\n    width: 60px;\r\n    height: 60px;\r\n    border-radius: 50%;\n}\n.list-item-cover>img.rectangle {\r\n    width: 100px !important;\r\n    height: 60px !important;\r\n    padding: 2px;\n}\n.list-item-info {\r\n    background-color: transparent;\r\n    width: 100%;\r\n    max-width: 475px;\n}\n.list-item-actions {\r\n    background-color: transparent;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -42,10 +42,14 @@ export default {
             return this.item?.cover ?? this.cover;
         },
         theTitle() {
-            return this.item?.title ?? this.title;
+            let limit = 60;
+            let tt = this.item?.title ?? this.title;
+            return tt.substr(0, limit) + (tt.length > limit ? '...' : '');
         },
         theSubtitle() {
-            return this.item?.subtitle ?? this.subtitle;
+            let limit = 125;
+            let ts = this.item?.subtitle ?? this.subtitle;
+            return ts.substr(0, limit) + (ts.length > limit ? '...' : '');
         },
     }
 };
@@ -72,8 +76,8 @@ export default {
 }
 
 .list-item-cover>img.rectangle {
-    width: 100px!important;
-    height: 60px!important;
+    width: 100px !important;
+    height: 60px !important;
     padding: 2px;
 }
 
