@@ -58,6 +58,8 @@ class ImageController extends Controller
      */
     public function create()
     {
+        $this->authorize("create", new Image());
+
         return Inertia::render("Admin/Medias/Images/Form", [
             "pageTitle" => "Nova imagem",
             "buttons" => [
