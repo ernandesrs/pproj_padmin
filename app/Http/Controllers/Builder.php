@@ -41,7 +41,7 @@ class Builder extends Controller
             "last_name" => "Last Name",
             "username" => "Master",
             "email" => $mail,
-            "password" => Hash::make("password"),
+            "password" => Hash::make("v&ryhardpassword"),
             "level" => User::LEVEL_MASTER,
             "email_verified_at" => now()
         ]);
