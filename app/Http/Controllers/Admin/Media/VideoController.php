@@ -49,6 +49,8 @@ class VideoController extends Controller
      */
     public function create()
     {
+        $this->authorize("create", new Video());
+
         return Inertia::render("Admin/Medias/Videos/Form", [
             "pageTitle" => "Novo vídeo",
             "buttons" => [
