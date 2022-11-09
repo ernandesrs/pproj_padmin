@@ -16,10 +16,10 @@ mix.vue()
 
     .js('resources/js/app.js', 'public/js')
 
-    .sass("resources/sass/auth/app.scss", "public/css/auth")
+    .css("resources/css/auth/app.css", "public/css/auth")
 
-    .sass("resources/sass/panel/app.scss", "public/css/panel")
+    .css("resources/css/panel/app.css", "public/css/panel")
     .scripts(["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"], "public/js/panel/bootstrap.js")
     
-    .sass("resources/sass/front/app.scss", "public/css/front")
+    .css("resources/css/front/app.css", "public/css/front")
     ;
