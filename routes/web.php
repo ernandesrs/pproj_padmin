@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\Media\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
+use App\Http\Controllers\Admin\Front\MenuController as AdminMenuController;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
@@ -41,7 +42,7 @@ Route::group([
         Route::get("/images/update/{image}", [AdminImageController::class, "edit"])->name("admin.medias.images.edit");
         Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
         Route::post("/images/delete/{image}", [AdminImageController::class, "destroy"])->name("admin.medias.images.destroy");
-        
+
         Route::get("/videos", [AdminVideoController::class, "index"])->name("admin.medias.videos.index");
         Route::get("/videos/show/{video}", [AdminVideoController::class, "show"])->name("admin.medias.videos.show");
         Route::get("/videos/create", [AdminVideoController::class, "create"])->name("admin.medias.videos.create");
@@ -58,6 +59,13 @@ Route::group([
     Route::get("/pages/edit/{page}", [AdminPageController::class, "edit"])->name("admin.pages.edit");
     Route::post("/pages/update/{page}", [AdminPageController::class, "update"])->name("admin.pages.update");
     Route::post("/pages/destroy/{page}", [AdminPageController::class, "destroy"])->name("admin.pages.destroy");
+
+    Route::get("/menus", [AdminMenuController::class, "index"])->name("admin.menus.index");
+    Route::get("/menus/create", [AdminMenuController::class, "create"])->name("admin.menus.create");
+    Route::post("/menus/store", [AdminMenuController::class, "store"])->name("admin.menus.store");
+    Route::get("/menus/edit/{menu}", [AdminMenuController::class, "edit"])->name("admin.menus.edit");
+    Route::post("/menus/update/{menu}", [AdminMenuController::class, "update"])->name("admin.menus.update");
+    Route::post("/menus/destroy/{menu}", [AdminMenuController::class, "destroy"])->name("admin.menus.destroy");
 
     // FRONT SETTINGS
     Route::get("/settings", [SettingController::class, "edit"])->name("admin.settings.edit");

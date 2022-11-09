@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Admin\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MenuController extends Controller
 {
+    /**
+     * @var boolean
+     */
+    private $filtering = false;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,22 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $results = [];
+
+        return Inertia::render("Admin/Front/Menus/List", [
+            "menus" => $results,
+            "terms" => __("terms.menu"),
+            "filterAction" => route("admin.menus.index"),
+            "isFiltering" => $this->filtering,
+            "pageTitle" => "Menus",
+            "buttons" => [
+                "new" => [
+                    "icon" => "plusLg",
+                    "text" => "Novo menu",
+                    "url" => route("admin.menus.create")
+                ]
+            ]
+        ]);
     }
 
     /**

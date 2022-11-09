@@ -61,15 +61,16 @@
                             <div
                                 class="d-flex flex-column justify-content-center align-items-center">
                                 <img class="img-fluid img-thumbnail rounded-circle"
-                                    :src="(auth.thumb_small ?? auth.thumb_normal)" :alt="auth.full_name"
-                                    style="width:60px;height:60px;">
+                                    :src="(auth.thumb_small ?? auth.thumb_normal)"
+                                    :alt="auth.full_name" style="width:60px;height:60px;">
                                 <h6 class="fw-semibold pt-2 text-muted text-center">
                                     {{ auth.full_name }}
                                 </h6>
                             </div>
                             <DropdownDivider />
                             <DropdownHeader text="Menu" />
-                            <DropdownItem text="Perfil" icon="userCircle" :to="$route('admin.users.edit', {user: auth.id})" />
+                            <DropdownItem text="Perfil" icon="userCircle"
+                                :to="$route('admin.users.edit', { user: auth.id })" />
                             <DropdownItem text="Logout" icon="logout"
                                 :to="$route('auth.logout')" />
                         </template>
@@ -202,6 +203,12 @@ export default {
                                 to: this.$route("admin.pages.index"),
                                 icon: 'fileEarmarkText',
                                 activeIn: ['Admin/Pages/List', 'Admin/Pages/Form']
+                            },
+                            {
+                                text: 'Menus',
+                                to: this.$route("admin.menus.index"),
+                                icon: 'listLeft',
+                                activeIn: ['Admin/Front/Menus/List', 'Admin/Front/Menus/Form']
                             },
                             {
                                 text: 'Configurações',

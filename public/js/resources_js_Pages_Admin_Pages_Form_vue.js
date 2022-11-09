@@ -1700,6 +1700,11 @@ var WIDTH_MOBILE = 768;
             icon: 'fileEarmarkText',
             activeIn: ['Admin/Pages/List', 'Admin/Pages/Form']
           }, {
+            text: 'Menus',
+            to: this.$route("admin.menus.index"),
+            icon: 'listLeft',
+            activeIn: ['Admin/Front/Menus/List', 'Admin/Front/Menus/Form']
+          }, {
             text: 'Configurações',
             to: this.$route("admin.settings.edit"),
             icon: 'cog',
