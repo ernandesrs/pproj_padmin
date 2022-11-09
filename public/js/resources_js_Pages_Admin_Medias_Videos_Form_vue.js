@@ -969,7 +969,7 @@ var WIDTH_MOBILE = 768;
             activeIn: ['Admin/Medias/Videos/List', 'Admin/Medias/Videos/Form']
           }]
         }, {
-          text: 'Gerenciar site',
+          text: 'Gerenciar ' + this.appName,
           to: '#',
           icon: 'layoutWtf',
           activeIn: ['Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Settings'],
