@@ -11,11 +11,6 @@ use Inertia\Inertia;
 class MenuController extends Controller
 {
     /**
-     * @var boolean
-     */
-    private $filtering = false;
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Inertia\Response
@@ -63,6 +58,8 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
+        $this->authorize("create", (new Menu()));
+
         $validated = $request->validated();
 
         $menu = new Menu();
@@ -120,6 +117,8 @@ class MenuController extends Controller
      */
     public function update(MenuRequest $request, Menu $menu)
     {
+        $this->authorize("update", $menu);
+
         $validated = $request->validated();
 
         $menu->name = $validated["name"];
@@ -130,6 +129,7 @@ class MenuController extends Controller
             "variant" => "success",
             "message" => "Menu foi atualizado com sucesso!"
         ]);
+
         return redirect()->route("admin.menus.index");
     }
 
@@ -141,6 +141,8 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
+        $this->authorize("delete", $menu);
+
         $menu->delete();
 
         return back()->with("flash_alert", [

@@ -18,8 +18,9 @@
                     menu: menu.id
                 })" />
 
-                <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
-                    variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.menus.destroy',
+                <ButtonConfirmationUi v-if="menu.can.delete" confirm-text="Excluir?"
+                    icon="trash" variant="danger" size="sm" class="ms-2" position="right"
+                    :data-action="$route('admin.menus.destroy',
                     { menu: menu.id })" confirm-with-request />
             </template>
         </ListItem>

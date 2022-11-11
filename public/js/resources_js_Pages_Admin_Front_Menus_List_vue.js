@@ -2802,7 +2802,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })
         }, null, 8
         /* PROPS */
-        , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+        , ["to"]), menu.can["delete"] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
+          key: 0,
           "confirm-text": "Excluir?",
           icon: "trash",
           variant: "danger",
@@ -2815,7 +2816,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "confirm-with-request": ""
         }, null, 8
         /* PROPS */
-        , ["data-action"])];
+        , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
       }),
       _: 2
       /* DYNAMIC */
