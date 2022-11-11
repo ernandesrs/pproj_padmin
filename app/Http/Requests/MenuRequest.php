@@ -46,4 +46,21 @@ class MenuRequest extends FormRequest
             "items.*.url" => ["required", "string", "max:255"],
         ];
     }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($validator->errors()->count())
+                session()->flash("flash_alert", [
+                    "message" => "Erro na validação dos dados, verifique os dados e tente de novo.",
+                    "variant" => "danger"
+                ]);
+        });
+    }
 }

@@ -20,13 +20,16 @@
                             <div :class="['card card-body']">
                                 <div class="row">
                                     <div class="col-12 col-md-6 mb-3">
-                                        <InputForm label="Texto:" v-model="item.text" />
+                                        <InputForm label="Texto:" v-model="item.text"
+                                            :error-message="form.errors[`items.${key}.text`]" />
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <InputForm label="Título:" v-model="item.title" />
+                                        <InputForm label="Título:" v-model="item.title"
+                                            :error-message="form.errors[`items.${key}.title`]" />
                                     </div>
                                     <div class="col-12 col-md-5 mb-3">
-                                        <InputForm label="URL:" v-model="item.url" />
+                                        <InputForm label="URL:" v-model="item.url"
+                                            :error-message="form.errors[`items.${key}.url`]" />
                                     </div>
                                     <div class="col-12 col-md-4 mb-3">
                                         <SelectForm label="Abrir na:" :options="[
@@ -38,7 +41,8 @@
                                                 value: '_blank',
                                                 text: 'Outra aba'
                                             }
-                                        ]" v-model="item.target" />
+                                        ]" v-model="item.target"
+                                            :error-message="form.errors[`items.${key}.target`]" />
                                     </div>
                                     <div class="col-12 col-md-3 mb-3">
                                         <SelectForm @hasChange="changeOrder"
@@ -160,6 +164,11 @@ export default {
                 item.order = index;
                 return item;
             });
+        },
+
+        getFormError(field, key) {
+            let k = `items.${key}.${field}`;
+            return this.form.errors[k];
         }
     },
 

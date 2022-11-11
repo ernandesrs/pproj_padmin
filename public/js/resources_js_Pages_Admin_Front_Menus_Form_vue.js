@@ -1256,6 +1256,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       item.order = index;
       return item;
     });
+  },
+  getFormError: function getFormError(field, key) {
+    var k = "items.".concat(key, ".").concat(field);
+    return this.form.errors[k];
   }
 }), _defineProperty(_layout$layout$compon, "computed", {
   options: function options() {
@@ -2465,26 +2469,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       modelValue: item.text,
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return item.text = $event;
-      }
+      },
+      "error-message": $data.form.errors["items.".concat(key, ".text")]
     }, null, 8
     /* PROPS */
-    , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+    , ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
       label: "Título:",
       modelValue: item.title,
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return item.title = $event;
-      }
+      },
+      "error-message": $data.form.errors["items.".concat(key, ".title")]
     }, null, 8
     /* PROPS */
-    , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+    , ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
       label: "URL:",
       modelValue: item.url,
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return item.url = $event;
-      }
+      },
+      "error-message": $data.form.errors["items.".concat(key, ".url")]
     }, null, 8
     /* PROPS */
-    , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+    , ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
       label: "Abrir na:",
       options: [{
         value: '_self',
@@ -2496,10 +2503,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       modelValue: item.target,
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return item.target = $event;
-      }
+      },
+      "error-message": $data.form.errors["items.".concat(key, ".target")]
     }, null, 8
     /* PROPS */
-    , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+    , ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
       onHasChange: $options.changeOrder,
       label: "Ordem:",
       modelValue: item.order,
