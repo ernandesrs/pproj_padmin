@@ -9,8 +9,8 @@
             coverStyle: 'rectangle'
         }">
             <template v-slot:badges>
-                <BadgeUi class="mb-1 me-1 fw-light" :text="`${(JSON.parse(menu.items)).length} itens no menu`"
-                    variant="info" />
+                <BadgeUi class="mb-1 me-1 fw-light"
+                    :text="`${menu.items.length} itens no menu`" variant="info" />
             </template>
 
             <template v-slot:actions>
@@ -53,6 +53,9 @@ export default {
     data() {
         return {
         };
+    },
+
+    mounted() {
     },
 
     methods: {

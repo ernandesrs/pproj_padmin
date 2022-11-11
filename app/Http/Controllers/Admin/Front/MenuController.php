@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuRequest;
+use App\Http\Resources\MenuResource;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,7 +23,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $results = Menu::paginate(28);
+        $results = MenuResource::collection(Menu::whereNotNull("id")->orderBy("created_at", "DESC")->paginate(20));
 
         return Inertia::render("Admin/Front/Menus/List", [
             "menus" => $results,
@@ -99,19 +100,40 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        //
+        return Inertia::render("Admin/Front/Menus/Form", [
+            "pageTitle" => "Editar menu",
+            "menu" => new MenuResource($menu),
+            "buttons" => [
+                "back" => [
+                    "url" => route("admin.menus.index")
+                ],
+                "new" => [
+                    "url" => route("admin.menus.create")
+                ]
+            ]
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
+     * @param MenuRequest $request
+     * @param \App\Models\Menu $menu
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Menu $menu)
+    public function update(MenuRequest $request, Menu $menu)
     {
-        //
+        $validated = $request->validated();
+
+        $menu->name = $validated["name"];
+        $menu->items = json_encode($validated["items"]);
+        $menu->save();
+
+        session()->flash("flash_alert", [
+            "variant" => "success",
+            "message" => "Menu foi atualizado com sucesso!"
+        ]);
+        return redirect()->route("admin.menus.index");
     }
 
     /**

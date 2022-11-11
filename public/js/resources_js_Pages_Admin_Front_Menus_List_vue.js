@@ -1397,7 +1397,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
   return {};
-}), _defineProperty(_layout$layout$compon, "methods", {}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
+}), _defineProperty(_layout$layout$compon, "mounted", function mounted() {}), _defineProperty(_layout$layout$compon, "methods", {}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
 
 /***/ }),
 
@@ -2768,7 +2768,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       badges: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1 fw-light",
-          text: "".concat(JSON.parse(menu.items).length, " itens no menu"),
+          text: "".concat(menu.items.length, " itens no menu"),
           variant: "info"
         }, null, 8
         /* PROPS */
