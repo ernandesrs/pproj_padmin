@@ -27,8 +27,6 @@ class MenuController extends Controller
         return Inertia::render("Admin/Front/Menus/List", [
             "menus" => $results,
             "terms" => __("terms.menu"),
-            "filterAction" => route("admin.menus.index"),
-            "isFiltering" => $this->filtering,
             "pageTitle" => "Menus",
             "buttons" => [
                 "new" => [
