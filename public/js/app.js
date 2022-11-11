@@ -26541,6 +26541,14 @@ function compileToFunction(template, options) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Admin/Front/Menus/Form": [
+		"./resources/js/Pages/Admin/Front/Menus/Form.vue",
+		"resources_js_Pages_Admin_Front_Menus_Form_vue"
+	],
+	"./Admin/Front/Menus/Form.vue": [
+		"./resources/js/Pages/Admin/Front/Menus/Form.vue",
+		"resources_js_Pages_Admin_Front_Menus_Form_vue"
+	],
 	"./Admin/Front/Menus/List": [
 		"./resources/js/Pages/Admin/Front/Menus/List.vue",
 		"resources_js_Pages_Admin_Front_Menus_List_vue"
@@ -26834,7 +26842,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Admin_Front_Menus_List_vue":1,"resources_js_Pages_Admin_Front_Settings_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Medias_Images_Form_vue":1,"resources_js_Pages_Admin_Medias_Images_List_vue":1,"resources_js_Pages_Admin_Medias_Images_ModalImagesList_vue":1,"resources_js_Pages_Admin_Medias_Videos_Form_vue":1,"resources_js_Pages_Admin_Medias_Videos_List_vue":1,"resources_js_Pages_Admin_Pages_Form_vue":1,"resources_js_Pages_Admin_Pages_List_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Password_Forget_vue":1,"resources_js_Pages_Auth_Password_Reset_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_Verification_Notify_vue":1,"resources_js_Pages_Auth_Verification_Verify_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Admin_Front_Menus_Form_vue":1,"resources_js_Pages_Admin_Front_Menus_List_vue":1,"resources_js_Pages_Admin_Front_Settings_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Medias_Images_Form_vue":1,"resources_js_Pages_Admin_Medias_Images_List_vue":1,"resources_js_Pages_Admin_Medias_Images_ModalImagesList_vue":1,"resources_js_Pages_Admin_Medias_Videos_Form_vue":1,"resources_js_Pages_Admin_Medias_Videos_List_vue":1,"resources_js_Pages_Admin_Pages_Form_vue":1,"resources_js_Pages_Admin_Pages_List_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Password_Forget_vue":1,"resources_js_Pages_Auth_Password_Reset_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_Verification_Notify_vue":1,"resources_js_Pages_Auth_Verification_Verify_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
