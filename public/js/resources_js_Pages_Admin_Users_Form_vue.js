@@ -1070,7 +1070,7 @@ var WIDTH_MOBILE = 768;
           text: 'Gerenciar ' + this.appName,
           to: '#',
           icon: 'layoutWtf',
-          activeIn: ['Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Settings'],
+          activeIn: ['Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Menus/List', 'Admin/Front/Menus/Form', 'Admin/Front/Settings'],
           items: [{
             text: 'Páginas',
             to: this.$route("admin.pages.index"),
