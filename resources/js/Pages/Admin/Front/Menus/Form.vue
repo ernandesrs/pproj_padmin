@@ -165,11 +165,6 @@ export default {
                 return item;
             });
         },
-
-        getFormError(field, key) {
-            let k = `items.${key}.${field}`;
-            return this.form.errors[k];
-        }
     },
 
     computed: {

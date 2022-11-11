@@ -1256,10 +1256,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       item.order = index;
       return item;
     });
-  },
-  getFormError: function getFormError(field, key) {
-    var k = "items.".concat(key, ".").concat(field);
-    return this.form.errors[k];
   }
 }), _defineProperty(_layout$layout$compon, "computed", {
   options: function options() {
