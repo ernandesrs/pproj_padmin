@@ -32,23 +32,33 @@ export default {
 
         readonly: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
+        onlyValues: { type: Boolean, default: false },
+    },
+    emits: {
+        'hasChange': null,
+        'update:modelValue': null
     },
     computed: {
         selectStyle() {
             return `form-select ${this.errorMessage ? "is-invalid" : ""}`;
         },
         theOptions() {
-            return [
-                {
-                    text: this.text ?? "Selecione um",
-                    value: "none",
-                },
-                ...this.options,
-            ];
+            if (!this.onlyValues) {
+                return [
+                    {
+                        text: this.text ?? "Selecione um",
+                        value: "none",
+                    },
+                    ...this.options,
+                ];
+            }
+
+            return this.options;
         }
     },
     methods: {
         updateValue(e) {
+            this.$emit("hasChange", e);
             this.$emit("update:modelValue", e.target.value);
         }
     },

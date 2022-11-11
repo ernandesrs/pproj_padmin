@@ -111,6 +111,9 @@ __webpack_require__.r(__webpack_exports__);
       "default": false
     }
   },
+  emits: {
+    hasChange: null
+  },
   data: function data() {
     return {
       checked: false
@@ -134,6 +137,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateValue: function updateValue(e) {
+      this.$emit("hasChange", e);
       if (this.type == 'file') this.$emit("update:modelValue", e);else {
         if (this.isCheckOrRadioType) this.$emit("update:modelValue", e.target.checked);else this.$emit("update:modelValue", e.target.value);
       }

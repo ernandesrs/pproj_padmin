@@ -5,7 +5,7 @@
         :inline="inline">
         <input @input="updateValue" :class="inputStyle" :type="type" :id="name"
             :name="name" :readonly="readonly" :disabled="disabled" :value="modelValue"
-            :checked="checked" :autocomplete="type=='password'?'new-password':''" />
+            :checked="checked" :autocomplete="type == 'password' ? 'new-password' : ''" />
 
         <LabelForm v-if="label && isCheckOrRadioType" class="form-check-label"
             :label="label" :name="name" />
@@ -33,6 +33,7 @@ export default {
         disabled: { type: Boolean, default: false },
         inline: { type: Boolean, default: false },
     },
+    emits: { hasChange: null },
     data() {
         return {
             checked: false
@@ -57,6 +58,8 @@ export default {
     },
     methods: {
         updateValue(e) {
+            this.$emit("hasChange", e);
+
             if (this.type == 'file')
                 this.$emit("update:modelValue", e);
             else {

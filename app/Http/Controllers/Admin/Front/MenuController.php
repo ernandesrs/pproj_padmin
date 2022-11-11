@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuRequest;
 use App\Http\Resources\MenuResource;
 use App\Models\Menu;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MenuController extends Controller

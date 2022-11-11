@@ -165,6 +165,9 @@ __webpack_require__.r(__webpack_exports__);
       "default": false
     }
   },
+  emits: {
+    hasChange: null
+  },
   data: function data() {
     return {
       checked: false
@@ -188,6 +191,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateValue: function updateValue(e) {
+      this.$emit("hasChange", e);
       if (this.type == 'file') this.$emit("update:modelValue", e);else {
         if (this.isCheckOrRadioType) this.$emit("update:modelValue", e.target.checked);else this.$emit("update:modelValue", e.target.value);
       }
@@ -309,23 +313,36 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     disabled: {
       type: Boolean,
       "default": false
+    },
+    onlyValues: {
+      type: Boolean,
+      "default": false
     }
+  },
+  emits: {
+    'hasChange': null,
+    'update:modelValue': null
   },
   computed: {
     selectStyle: function selectStyle() {
       return "form-select ".concat(this.errorMessage ? "is-invalid" : "");
     },
     theOptions: function theOptions() {
-      var _this$text;
+      if (!this.onlyValues) {
+        var _this$text;
 
-      return [{
-        text: (_this$text = this.text) !== null && _this$text !== void 0 ? _this$text : "Selecione um",
-        value: "none"
-      }].concat(_toConsumableArray(this.options));
+        return [{
+          text: (_this$text = this.text) !== null && _this$text !== void 0 ? _this$text : "Selecione um",
+          value: "none"
+        }].concat(_toConsumableArray(this.options));
+      }
+
+      return this.options;
     }
   },
   methods: {
     updateValue: function updateValue(e) {
+      this.$emit("hasChange", e);
       this.$emit("update:modelValue", e.target.value);
     }
   }

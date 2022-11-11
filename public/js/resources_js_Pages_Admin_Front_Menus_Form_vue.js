@@ -165,6 +165,9 @@ __webpack_require__.r(__webpack_exports__);
       "default": false
     }
   },
+  emits: {
+    hasChange: null
+  },
   data: function data() {
     return {
       checked: false
@@ -188,6 +191,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateValue: function updateValue(e) {
+      this.$emit("hasChange", e);
       if (this.type == 'file') this.$emit("update:modelValue", e);else {
         if (this.isCheckOrRadioType) this.$emit("update:modelValue", e.target.checked);else this.$emit("update:modelValue", e.target.value);
       }
@@ -309,23 +313,36 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     disabled: {
       type: Boolean,
       "default": false
+    },
+    onlyValues: {
+      type: Boolean,
+      "default": false
     }
+  },
+  emits: {
+    'hasChange': null,
+    'update:modelValue': null
   },
   computed: {
     selectStyle: function selectStyle() {
       return "form-select ".concat(this.errorMessage ? "is-invalid" : "");
     },
     theOptions: function theOptions() {
-      var _this$text;
+      if (!this.onlyValues) {
+        var _this$text;
 
-      return [{
-        text: (_this$text = this.text) !== null && _this$text !== void 0 ? _this$text : "Selecione um",
-        value: "none"
-      }].concat(_toConsumableArray(this.options));
+        return [{
+          text: (_this$text = this.text) !== null && _this$text !== void 0 ? _this$text : "Selecione um",
+          value: "none"
+        }].concat(_toConsumableArray(this.options));
+      }
+
+      return this.options;
     }
   },
   methods: {
     updateValue: function updateValue(e) {
+      this.$emit("hasChange", e);
       this.$emit("update:modelValue", e.target.value);
     }
   }
@@ -1191,6 +1208,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   this.form.id = this.menu.id;
   this.form.name = this.menu.name;
   this.items = this.menu.items;
+  this.items = this.items.map(function (item, index) {
+    item.order = index;
+    return item;
+  });
+  console.log(this.items);
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
     var _this$form;
@@ -1203,7 +1225,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.form.post(action);
   },
   addMenuItem: function addMenuItem() {
-    this.items.unshift({
+    this.items.push({
       text: "Menu item text",
       url: "https://example.com",
       target: "_self",
@@ -1214,6 +1236,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var item = event.path[2].getAttribute("data-item");
     if (!item) return;
     this.items.splice(item, 1);
+  },
+  changeOrder: function changeOrder(event) {
+    var max = this.items.length;
+    var oldOrder = event.target._value;
+    var newOrder = event.target.value;
+
+    if (newOrder < 0 || newOrder > max) {
+      this.items[oldOrder].order = oldOrder;
+      return;
+    }
+
+    this.items[newOrder].order = oldOrder;
+    this.items[oldOrder].order = newOrder;
+    var bkp = this.items[newOrder];
+    this.items[newOrder] = this.items[oldOrder];
+    this.items[oldOrder] = bkp;
+    console.log(this.items);
+  }
+}), _defineProperty(_layout$layout$compon, "computed", {
+  options: function options() {
+    var numbers = Object.keys(new Array(this.items.length).fill(null)).map(Number);
+    var options = numbers.map(function (item) {
+      return {
+        text: item + 1,
+        value: item
+      };
+    });
+    return options;
   }
 }), _layout$layout$compon);
 
@@ -2362,9 +2412,12 @@ var _hoisted_13 = {
   "class": "col-12 col-md-4 mb-3"
 };
 var _hoisted_14 = {
-  "class": "col-12 text-center"
+  "class": "col-12 col-md-3 mb-3"
 };
 var _hoisted_15 = {
+  "class": "col-12 text-center"
+};
+var _hoisted_16 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2443,7 +2496,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, null, 8
     /* PROPS */
-    , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+    , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+      onHasChange: $options.changeOrder,
+      label: "Ordem:",
+      modelValue: item.order,
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return item.order = $event;
+      },
+      options: $options.options,
+      "only-values": ""
+    }, null, 8
+    /* PROPS */
+    , ["onHasChange", "modelValue", "onUpdate:modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
       onHasConfirmed: $options.removeItem,
       onHasCanceled: _cache[1] || (_cache[1] = function () {}),
       icon: "trash",
@@ -2456,7 +2520,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onHasConfirmed", "data-item"])])])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     variant: "primary",
     text: "".concat($props.menu.id ? 'Atualizar menu' : 'Salvar menu'),

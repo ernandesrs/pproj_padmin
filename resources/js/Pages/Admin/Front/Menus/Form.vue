@@ -40,6 +40,11 @@
                                             }
                                         ]" v-model="item.target" />
                                     </div>
+                                    <div class="col-12 col-md-3 mb-3">
+                                        <SelectForm @hasChange="changeOrder"
+                                            label="Ordem:" v-model="item.order"
+                                            :options="options" only-values />
+                                    </div>
                                     <div class="col-12 text-center">
                                         <ButtonConfirmationUi @hasConfirmed="removeItem"
                                             @hasCanceled="" icon="trash" variant="danger"
@@ -85,7 +90,7 @@ export default {
             form: useForm({
                 id: null,
                 name: null,
-                items: null,
+                items: null
             }),
             items: []
         };
@@ -97,6 +102,12 @@ export default {
         this.form.id = this.menu.id;
         this.form.name = this.menu.name;
         this.items = this.menu.items;
+        this.items = this.items.map((item, index) => {
+            item.order = index;
+            return item;
+        });
+
+        console.log(this.items);
     },
 
     methods: {
@@ -112,7 +123,7 @@ export default {
         },
 
         addMenuItem() {
-            this.items.unshift({
+            this.items.push({
                 text: "Menu item text",
                 url: "https://example.com",
                 target: "_self",
@@ -126,6 +137,39 @@ export default {
             if (!item) return;
 
             this.items.splice(item, 1);
+        },
+
+        changeOrder(event) {
+            let max = this.items.length;
+            let oldOrder = event.target._value;
+            let newOrder = event.target.value;
+
+            if (newOrder < 0 || newOrder > max) {
+                this.items[oldOrder].order = oldOrder;
+                return;
+            }
+
+            this.items[newOrder].order = oldOrder;
+            this.items[oldOrder].order = newOrder;
+
+            let bkp = this.items[newOrder];
+            this.items[newOrder] = this.items[oldOrder];
+            this.items[oldOrder] = bkp;
+
+            console.log(this.items);
+        }
+    },
+
+    computed: {
+        options() {
+            let numbers = Object.keys(new Array(this.items.length).fill(null)).map(Number);
+            let options = numbers.map((item) => {
+                return {
+                    text: item + 1,
+                    value: item
+                };
+            });
+            return options;
         }
     }
 }
