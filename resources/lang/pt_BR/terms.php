@@ -27,5 +27,6 @@ return [
             'type_' . Page::CONTENT_TYPE_TEXT => 'Texto',
             'type_' . Page::CONTENT_TYPE_VIEW => 'Customizado',
         ]
-    ]
+    ],
+    'menu' => []
 ];

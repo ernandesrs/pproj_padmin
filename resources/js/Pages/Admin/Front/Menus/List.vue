@@ -1,24 +1,28 @@
 <template>
+    <EmptyList :show="!menus?.data?.length" :is-filter="isFiltering" />
 
-    <div class="row">
-        <div class="col-lg-8">
-            <EmptyList :show="!menus?.data?.length" :is-filter="isFiltering" />
+    <div class="row justify-content-center">
+        <ListItem v-for="menu in menus?.data" :key="menu.id" :item="{
+            cover: null,
+            title: menu.name,
+            subtitle: '',
+            coverStyle: 'rectangle'
+        }">
+            <template v-slot:badges>
+                <BadgeUi class="mb-1 me-1 fw-light" :text="`${(JSON.parse(menu.items)).length} itens no menu`"
+                    variant="info" />
+            </template>
 
-            <div class="row justify-content-center">
-                <div v-for="menu in menus?.data" :key="menu.id"
-                    class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <template v-slot:actions>
+                <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.menus.edit', {
+                    menu: menu.id
+                })" />
 
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="d-flex justify-content-center py-4 align-items-center">
-                <p class="mb-0">
-                    Escolha um para editar
-                </p>
-            </div>
-        </div>
+                <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
+                    variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.menus.destroy',
+                    { menu: menu.id })" confirm-with-request />
+            </template>
+        </ListItem>
     </div>
 
     <PaginationUi label="Paginação de menus" :pages="menus?.meta?.links" />
@@ -28,18 +32,21 @@
 <script>
 
 import EmptyList from '../../../../Components/EmptyList.vue';
+import ListItem from './../../../../Components/ListItem.vue';
 import PaginationUi from '../../../../Components/PaginationUi.vue';
 import CardUi from '../../../../Components/Ui/CardUi.vue';
 import Layout from './../../../../Layouts/Panel.vue';
+import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
+import ButtonConfirmationUi from '../../../../Components/Ui/ButtonConfirmationUi.vue';
+import BadgeUi from '../../../../Components/Ui/BadgeUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { EmptyList, PaginationUi, CardUi },
+    components: { EmptyList, ListItem, PaginationUi, CardUi, ButtonUi, ButtonConfirmationUi, BadgeUi },
 
     props: {
         menus: { type: Object, default: [] },
-        terms: { type: Object, default: {} },
         isFiltering: { type: Boolean, default: false },
     },
 

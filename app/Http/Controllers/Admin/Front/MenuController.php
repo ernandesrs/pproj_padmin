@@ -22,7 +22,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $results = [];
+        $results = Menu::paginate(28);
 
         return Inertia::render("Admin/Front/Menus/List", [
             "menus" => $results,
@@ -118,10 +118,15 @@ class MenuController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "O menu foi excluído com sucesso!"
+        ]);
     }
 }
