@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class MenuRequest extends FormRequest
 {
@@ -38,7 +40,10 @@ class MenuRequest extends FormRequest
     {
         return [
             "name" => ["required", "max:25", "unique:menus,name" . ($this->menu ? "," . $this->menu->id : "")],
-            "items" => ["nullable"]
+            "items.*.text" => ["required", "max:30", "string"],
+            "items.*.title" => ["nullable", "max:50", "string"],
+            "items.*.target" => ["required", Rule::in(["_self", "_blank"])],
+            "items.*.url" => ["required", "string", "max:255"],
         ];
     }
 }
