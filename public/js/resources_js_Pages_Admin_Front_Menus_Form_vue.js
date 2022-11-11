@@ -166,7 +166,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   emits: {
-    hasChange: null
+    'update:modelValue': null,
+    'hasChange': null
   },
   data: function data() {
     return {
@@ -1208,11 +1209,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   this.form.id = this.menu.id;
   this.form.name = this.menu.name;
   this.items = this.menu.items;
-  this.items = this.items.map(function (item, index) {
-    item.order = index;
-    return item;
-  });
-  console.log(this.items);
+  this.updateItemsOrder();
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
     var _this$form;
@@ -1225,17 +1222,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.form.post(action);
   },
   addMenuItem: function addMenuItem() {
-    this.items.push({
+    this.items.unshift({
       text: "Menu item text",
       url: "https://example.com",
       target: "_self",
       title: "Menu item title"
     });
+    this.updateItemsOrder();
   },
   removeItem: function removeItem(event) {
     var item = event.path[2].getAttribute("data-item");
     if (!item) return;
     this.items.splice(item, 1);
+    this.updateItemsOrder();
   },
   changeOrder: function changeOrder(event) {
     var max = this.items.length;
@@ -1247,12 +1246,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return;
     }
 
-    this.items[newOrder].order = oldOrder;
-    this.items[oldOrder].order = newOrder;
     var bkp = this.items[newOrder];
     this.items[newOrder] = this.items[oldOrder];
     this.items[oldOrder] = bkp;
-    console.log(this.items);
+    this.updateItemsOrder();
+  },
+  updateItemsOrder: function updateItemsOrder() {
+    this.items = this.items.map(function (item, index) {
+      item.order = index;
+      return item;
+    });
   }
 }), _defineProperty(_layout$layout$compon, "computed", {
   options: function options() {

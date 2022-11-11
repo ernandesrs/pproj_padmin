@@ -33,7 +33,7 @@ export default {
         disabled: { type: Boolean, default: false },
         inline: { type: Boolean, default: false },
     },
-    emits: { hasChange: null },
+    emits: { 'update:modelValue': null, 'hasChange': null },
     data() {
         return {
             checked: false

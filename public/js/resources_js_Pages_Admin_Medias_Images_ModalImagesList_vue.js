@@ -96,7 +96,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   emits: {
-    hasChange: null
+    'update:modelValue': null,
+    'hasChange': null
   },
   data: function data() {
     return {

@@ -102,12 +102,8 @@ export default {
         this.form.id = this.menu.id;
         this.form.name = this.menu.name;
         this.items = this.menu.items;
-        this.items = this.items.map((item, index) => {
-            item.order = index;
-            return item;
-        });
 
-        console.log(this.items);
+        this.updateItemsOrder();
     },
 
     methods: {
@@ -123,12 +119,14 @@ export default {
         },
 
         addMenuItem() {
-            this.items.push({
+            this.items.unshift({
                 text: "Menu item text",
                 url: "https://example.com",
                 target: "_self",
                 title: "Menu item title"
             });
+
+            this.updateItemsOrder();
         },
 
         removeItem(event) {
@@ -137,6 +135,7 @@ export default {
             if (!item) return;
 
             this.items.splice(item, 1);
+            this.updateItemsOrder();
         },
 
         changeOrder(event) {
@@ -149,14 +148,18 @@ export default {
                 return;
             }
 
-            this.items[newOrder].order = oldOrder;
-            this.items[oldOrder].order = newOrder;
-
             let bkp = this.items[newOrder];
             this.items[newOrder] = this.items[oldOrder];
             this.items[oldOrder] = bkp;
 
-            console.log(this.items);
+            this.updateItemsOrder();
+        },
+
+        updateItemsOrder() {
+            this.items = this.items.map((item, index) => {
+                item.order = index;
+                return item;
+            });
         }
     },
 
