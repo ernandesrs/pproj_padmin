@@ -1300,9 +1300,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Components/Ui/ImagePreviewUi.vue */ "./resources/js/Components/Ui/ImagePreviewUi.vue");
 /* harmony import */ var _Medias_Images_ModalImagesList_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Medias/Images/ModalImagesList.vue */ "./resources/js/Pages/Admin/Medias/Images/ModalImagesList.vue");
 /* harmony import */ var _Components_Form_TextAreaForm_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Components/Form/TextAreaForm.vue */ "./resources/js/Components/Form/TextAreaForm.vue");
+/* harmony import */ var _Components_Form_SelectForm_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../Components/Form/SelectForm.vue */ "./resources/js/Components/Form/SelectForm.vue");
 var _layout$layout$compon;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1322,14 +1324,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   ButtonUi: _Components_Ui_ButtonUi_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   ImagePreviewUi: _Components_Ui_ImagePreviewUi_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   ModalImagesList: _Medias_Images_ModalImagesList_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-  TextAreaForm: _Components_Form_TextAreaForm_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  TextAreaForm: _Components_Form_TextAreaForm_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+  SelectForm: _Components_Form_SelectForm_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
 }), _defineProperty(_layout$layout$compon, "props", {
   settings: {
     type: Object,
     "default": {}
+  },
+  menus: {
+    type: Object,
+    "default": {}
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
-  var _this$settings$favico, _this$settings, _this$settings$logo_u, _this$settings2, _this$settings3, _this$settings3$conte, _this$settings4, _this$settings4$conte, _this$settings5, _this$settings5$conte, _this$settings$conten, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings$conten2, _this$settings7, _this$settings7$conte, _this$settings7$conte2, _this$settings$conten3, _this$settings8, _this$settings8$conte, _this$settings8$conte2;
+  var _this$settings$favico, _this$settings, _this$settings$logo_u, _this$settings2, _this$settings3, _this$settings3$conte, _this$settings4, _this$settings4$conte, _this$settings5, _this$settings5$conte, _this$settings$conten, _this$settings6, _this$settings6$conte, _this$settings$conten2, _this$settings7, _this$settings7$conte, _this$settings7$conte2, _this$settings$conten3, _this$settings8, _this$settings8$conte, _this$settings8$conte2, _this$settings$conten4, _this$settings9, _this$settings9$conte, _this$settings9$conte2;
 
   return {
     faviconPreview: (_this$settings$favico = (_this$settings = this.settings) === null || _this$settings === void 0 ? void 0 : _this$settings.favicon_url) !== null && _this$settings$favico !== void 0 ? _this$settings$favico : null,
@@ -1340,9 +1347,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       follow: (_this$settings5 = this.settings) === null || _this$settings5 === void 0 ? void 0 : (_this$settings5$conte = _this$settings5.content) === null || _this$settings5$conte === void 0 ? void 0 : _this$settings5$conte.follow,
       favicon: null,
       logo: null,
-      public_key: (_this$settings$conten = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.grecaptcha) === null || _this$settings6$conte2 === void 0 ? void 0 : _this$settings6$conte2.public_key) !== null && _this$settings$conten !== void 0 ? _this$settings$conten : null,
-      private_key: (_this$settings$conten2 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.grecaptcha) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.private_key) !== null && _this$settings$conten2 !== void 0 ? _this$settings$conten2 : null,
-      enabled: (_this$settings$conten3 = (_this$settings8 = this.settings) === null || _this$settings8 === void 0 ? void 0 : (_this$settings8$conte = _this$settings8.content) === null || _this$settings8$conte === void 0 ? void 0 : (_this$settings8$conte2 = _this$settings8$conte.grecaptcha) === null || _this$settings8$conte2 === void 0 ? void 0 : _this$settings8$conte2.enabled) !== null && _this$settings$conten3 !== void 0 ? _this$settings$conten3 : false
+      menu_main: (_this$settings$conten = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : _this$settings6$conte.menu_main) !== null && _this$settings$conten !== void 0 ? _this$settings$conten : null,
+      public_key: (_this$settings$conten2 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.grecaptcha) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.public_key) !== null && _this$settings$conten2 !== void 0 ? _this$settings$conten2 : null,
+      private_key: (_this$settings$conten3 = (_this$settings8 = this.settings) === null || _this$settings8 === void 0 ? void 0 : (_this$settings8$conte = _this$settings8.content) === null || _this$settings8$conte === void 0 ? void 0 : (_this$settings8$conte2 = _this$settings8$conte.grecaptcha) === null || _this$settings8$conte2 === void 0 ? void 0 : _this$settings8$conte2.private_key) !== null && _this$settings$conten3 !== void 0 ? _this$settings$conten3 : null,
+      enabled: (_this$settings$conten4 = (_this$settings9 = this.settings) === null || _this$settings9 === void 0 ? void 0 : (_this$settings9$conte = _this$settings9.content) === null || _this$settings9$conte === void 0 ? void 0 : (_this$settings9$conte2 = _this$settings9$conte.grecaptcha) === null || _this$settings9$conte2 === void 0 ? void 0 : _this$settings9$conte2.enabled) !== null && _this$settings$conten4 !== void 0 ? _this$settings$conten4 : false
     }),
     showImagesModalList: false,
     showImagesModalListTo: null
@@ -2838,39 +2846,39 @@ var _hoisted_8 = {
   "class": "col-12 mb-4"
 };
 var _hoisted_9 = {
-  "class": "col-12 col-lg-5 col-xl-4 mb-4"
+  "class": "col-12 mb-4"
 };
 var _hoisted_10 = {
-  "class": "row"
+  "class": "col-12 col-lg-5 col-xl-4 mb-4"
 };
 var _hoisted_11 = {
-  "class": "col-6 text-center"
+  "class": "row"
 };
 var _hoisted_12 = {
   "class": "col-6 text-center"
 };
+var _hoisted_13 = {
+  "class": "col-6 text-center"
+};
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
   "class": "fs-5 fw-semibold"
 }, " Google Recaptcha ", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_15 = {
-  "class": "row"
-};
 var _hoisted_16 = {
-  "class": "col-12 col-lg-7 col-xl-8 mb-4"
+  "class": "row"
 };
 var _hoisted_17 = {
-  "class": "row"
+  "class": "col-12 col-lg-7 col-xl-8 mb-4"
 };
 var _hoisted_18 = {
-  "class": "col-12 mb-4"
+  "class": "row"
 };
 var _hoisted_19 = {
   "class": "col-12 mb-4"
@@ -2879,9 +2887,12 @@ var _hoisted_20 = {
   "class": "col-12 mb-4"
 };
 var _hoisted_21 = {
-  "class": "row justify-content-center"
+  "class": "col-12 mb-4"
 };
 var _hoisted_22 = {
+  "class": "row justify-content-center"
+};
+var _hoisted_23 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2890,6 +2901,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
   var _component_TextAreaForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TextAreaForm");
+
+  var _component_SelectForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SelectForm");
 
   var _component_ImagePreviewUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ImagePreviewUi");
 
@@ -2902,7 +2915,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["show", "onModalClose", "onImageInsert"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
   }, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
@@ -2936,7 +2949,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+    label: "Menu principal:",
+    type: "checkbox",
+    name: "menu_main",
+    modelValue: $data.form.menu_main,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.form.menu_main = $event;
+    }),
+    options: $props.menus.map(function (menu) {
+      return {
+        text: menu.name,
+        value: menu.id
+      };
+    })
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "options"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
     "preview-url": $data.faviconPreview,
     "preview-alt": "Favicon preview",
     borderless: $data.faviconPreview ? true : false,
@@ -2952,7 +2981,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "data-to": "favicon"
   }, null, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
     "preview-url": $data.logoPreview,
     "preview-alt": "Logo preview",
     borderless: $data.logoPreview ? true : false,
@@ -2968,38 +2997,38 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "data-to": "logo"
   }, null, 8
   /* PROPS */
-  , ["onClick"])])])])]), _hoisted_13, _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["onClick"])])])])]), _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Chave pública:",
     name: "public_key",
     modelValue: $data.form.public_key,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.form.public_key = $event;
     }),
     "error-message": $data.form.errors.public_key
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Chave privada:",
     name: "private_key",
     modelValue: $data.form.private_key,
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.form.private_key = $event;
     }),
     "error-message": $data.form.errors.private_key
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "checkbox",
     label: "Ativar uso do Google Recaptcha",
     name: "enabled",
     modelValue: $data.form.enabled,
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.form.enabled = $event;
     }),
     "error-message": $data.form.errors.enabled
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "error-message"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     text: "Atualizar",
     icon: "checkLg",
     type: "submit",

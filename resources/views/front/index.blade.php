@@ -4,9 +4,23 @@
     <div class="container-fluid">
         <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
             <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                <a class="d-block py-3" href="">
-                    <img class="img-fluid" src="{{ asset('assets/img/padmin_demo_logo.svg') }}" alt="">
-                </a>
+                <div class="d-flex align-items-center">
+                    <a class="d-block py-3" href="">
+                        <img class="img-fluid" src="{{ asset('assets/img/padmin_demo_logo.svg') }}" alt="">
+                    </a>
+
+                    @if ($menu_main)
+                        <nav class="ms-auto nav">
+                            @php
+                                $menuItems = json_decode($menu_main->items);
+                            @endphp
+                            @foreach ($menuItems as $menuItem)
+                                <a href="{{ $menuItem->url }}" target="{{ $menuItem->target }}"
+                                    title="{{ $menuItem->title }}" class="nav-link">{{ $menuItem->text }}</a>
+                            @endforeach
+                        </nav>
+                    @endif
+                </div>
                 <h1 class="display-4 fw-semibold lh-1 mb-4 text-dark-dark">
                     Bem vindo ao live preview do PADMIN!
                 </h1>

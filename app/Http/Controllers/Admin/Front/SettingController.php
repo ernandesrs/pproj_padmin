@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MenuResource;
 use App\Models\Content;
 use App\Models\Media\Image;
-use App\Models\Page;
+use App\Models\Menu;
 use App\Models\Slug;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +25,8 @@ class SettingController extends Controller
         $settings = Content::where("name", "front_settings")->first();
         $settings->content = json_decode($settings->content);
 
+        $menus = MenuResource::collection(Menu::all());
+
         if ($favicon = $settings->content->favicon)
             $settings->favicon_url =  \Illuminate\Support\Facades\Storage::url($favicon);
         else $settings->favicon_url = null;
@@ -34,6 +37,7 @@ class SettingController extends Controller
 
         return Inertia::render("Admin/Front/Settings", [
             "settings" => $settings,
+            "menus" => $menus,
             "images" => session()->get("images", null),
             "pageTitle" => "Configurações de: " . config("app.name")
         ]);
@@ -58,7 +62,7 @@ class SettingController extends Controller
             "description" => $validated["description"],
             "follow" => $validated["follow"],
             "status" => $page->status,
-            "cover" => null
+            "cover" => null,
         ]);
 
         return back()->with("flash_alert", [
@@ -84,6 +88,7 @@ class SettingController extends Controller
         $content->title = $validated["title"];
         $content->description = $validated["description"];
         $content->follow = $validated["follow"];
+        $content->menu_main = $validated["menu_main"] ?? null;
 
         if (empty($content->grecaptcha))
             $content->grecaptcha = new stdClass;
@@ -124,6 +129,8 @@ class SettingController extends Controller
             "follow" => ["required", "boolean"],
             "favicon" => ["nullable", "numeric"],
             "logo" => ["nullable", "numeric"],
+
+            "menu_main" => ["nullable", "numeric"],
 
             "private_key" => ["nullable", "required_if:enabled,true", "string"],
             "public_key" => ["nullable", "required_if:enabled,true", "string"],

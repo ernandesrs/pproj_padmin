@@ -25,6 +25,15 @@
                         <InputForm label="Permitir indexação aos mecanismos de buscas"
                             type="checkbox" name="follow" v-model="form.follow" />
                     </div>
+                    <div class="col-12 mb-4">
+                        <SelectForm label="Menu principal:" type="checkbox"
+                            name="menu_main" v-model="form.menu_main" :options="menus.map((menu) => {
+                                return {
+                                    text: menu.name,
+                                    value: menu.id
+                                };
+                            })" />
+                    </div>
                 </div>
 
                 <div class="col-12 col-lg-5 col-xl-4 mb-4">
@@ -97,13 +106,15 @@ import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import ImagePreviewUi from '../../../Components/Ui/ImagePreviewUi.vue';
 import ModalImagesList from '../Medias/Images/ModalImagesList.vue';
 import TextAreaForm from '../../../Components/Form/TextAreaForm.vue';
+import SelectForm from '../../../Components/Form/SelectForm.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ImagePreviewUi, ModalImagesList, TextAreaForm },
+    components: { InputForm, ButtonUi, ImagePreviewUi, ModalImagesList, TextAreaForm, SelectForm },
     props: {
-        settings: { type: Object, default: {} }
+        settings: { type: Object, default: {} },
+        menus: { type: Object, default: {} },
     },
 
     data() {
@@ -116,6 +127,8 @@ export default {
                 follow: this.settings?.content?.follow,
                 favicon: null,
                 logo: null,
+
+                menu_main: this.settings?.content?.menu_main ?? null,
 
                 public_key: this.settings?.content?.grecaptcha?.public_key ?? null,
                 private_key: this.settings?.content?.grecaptcha?.private_key ?? null,
