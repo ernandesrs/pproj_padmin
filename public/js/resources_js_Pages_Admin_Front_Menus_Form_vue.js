@@ -2382,7 +2382,7 @@ var _hoisted_2 = {
   "class": "row justify-content-center"
 };
 var _hoisted_3 = {
-  "class": "col-12 col-md-10 col-lg-6 mb-4"
+  "class": "col-12 col-md-10 col-lg-5 mb-4"
 };
 var _hoisted_4 = {
   "class": "mb-4"
@@ -2391,7 +2391,7 @@ var _hoisted_5 = {
   "class": "text-center"
 };
 var _hoisted_6 = {
-  "class": "col-12 col-md-10 col-lg-6 mb-4"
+  "class": "col-12 col-md-10 col-lg-7 mb-4"
 };
 var _hoisted_7 = {
   "class": "row"
@@ -2403,19 +2403,19 @@ var _hoisted_9 = {
   "class": "row"
 };
 var _hoisted_10 = {
-  "class": "col-12 col-md-6 mb-3"
+  "class": "col-12 col-sm-6 mb-3"
 };
 var _hoisted_11 = {
-  "class": "col-12 col-md-6 mb-3"
+  "class": "col-12 col-sm-6 mb-3"
 };
 var _hoisted_12 = {
-  "class": "col-12 col-md-5 mb-3"
+  "class": "col-12 col-lg-6 mb-3"
 };
 var _hoisted_13 = {
-  "class": "col-12 col-md-4 mb-3"
+  "class": "col-6 col-lg-3 mb-3"
 };
 var _hoisted_14 = {
-  "class": "col-12 col-md-3 mb-3"
+  "class": "col-6 col-lg-3 mb-3"
 };
 var _hoisted_15 = {
   "class": "col-12 text-center"

@@ -3,7 +3,7 @@
     <form @submit.prevent="submit">
         <div class="card card-body border-0">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-6 mb-4">
+                <div class="col-12 col-md-10 col-lg-5 mb-4">
                     <div class="mb-4">
                         <InputForm type="text" name="name" v-model="form.name"
                             label="Nome do menu:" :error-message="form.errors.name" />
@@ -14,24 +14,24 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-10 col-lg-6 mb-4">
+                <div class="col-12 col-md-10 col-lg-7 mb-4">
                     <div class="row">
                         <div v-for="item, key in items" :key="key" class="col-12 mb-2">
                             <div :class="['card card-body']">
                                 <div class="row">
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-sm-6 mb-3">
                                         <InputForm label="Texto:" v-model="item.text"
                                             :error-message="form.errors[`items.${key}.text`]" />
                                     </div>
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-sm-6 mb-3">
                                         <InputForm label="Título:" v-model="item.title"
                                             :error-message="form.errors[`items.${key}.title`]" />
                                     </div>
-                                    <div class="col-12 col-md-5 mb-3">
+                                    <div class="col-12 col-lg-6 mb-3">
                                         <InputForm label="URL:" v-model="item.url"
                                             :error-message="form.errors[`items.${key}.url`]" />
                                     </div>
-                                    <div class="col-12 col-md-4 mb-3">
+                                    <div class="col-6 col-lg-3 mb-3">
                                         <SelectForm label="Abrir na:" :options="[
                                             {
                                                 value: '_self',
@@ -44,7 +44,7 @@
                                         ]" v-model="item.target"
                                             :error-message="form.errors[`items.${key}.target`]" />
                                     </div>
-                                    <div class="col-12 col-md-3 mb-3">
+                                    <div class="col-6 col-lg-3 mb-3">
                                         <SelectForm @hasChange="changeOrder"
                                             label="Ordem:" v-model="item.order"
                                             :options="options" only-values />
