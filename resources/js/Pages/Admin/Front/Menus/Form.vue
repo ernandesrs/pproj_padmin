@@ -15,50 +15,48 @@
                 </div>
 
                 <div class="col-12 col-md-10 col-lg-7 mb-4">
-                    <div class="row">
-                        <div v-for="item, key in items" :key="key" class="col-12 mb-2">
-                            <div :class="['card card-body']">
-                                <div class="row">
-                                    <div class="col-12 col-sm-6 mb-3">
-                                        <InputForm label="Texto:" v-model="item.text"
-                                            :error-message="form.errors[`items.${key}.text`]" />
-                                    </div>
-                                    <div class="col-12 col-sm-6 mb-3">
-                                        <InputForm label="Título:" v-model="item.title"
-                                            :error-message="form.errors[`items.${key}.title`]" />
-                                    </div>
-                                    <div class="col-12 col-lg-6 mb-3">
-                                        <InputForm label="URL:" v-model="item.url"
-                                            :error-message="form.errors[`items.${key}.url`]" />
-                                    </div>
-                                    <div class="col-6 col-lg-3 mb-3">
-                                        <SelectForm label="Abrir na:" :options="[
-                                            {
-                                                value: '_self',
-                                                text: 'Aba atual'
-                                            },
-                                            {
-                                                value: '_blank',
-                                                text: 'Outra aba'
-                                            }
-                                        ]" v-model="item.target"
-                                            :error-message="form.errors[`items.${key}.target`]" />
-                                    </div>
-                                    <div class="col-6 col-lg-3 mb-3">
-                                        <SelectForm @hasChange="changeOrder"
-                                            label="Ordem:" v-model="item.order"
-                                            :options="options" only-values />
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <ButtonConfirmationUi @hasConfirmed="removeItem"
-                                            @hasCanceled="" icon="trash" variant="danger"
-                                            size="sm" position="center"
-                                            :data-item="key" />
-                                    </div>
+                    <AccordionGroup>
+                        <AccordionItem v-for="item, key in items" :key="key" :id="key"
+                            :header-text="item.text">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 mb-3">
+                                    <InputForm label="Texto:" v-model="item.text"
+                                        :error-message="form.errors[`items.${key}.text`]" />
+                                </div>
+                                <div class="col-12 col-sm-6 mb-3">
+                                    <InputForm label="Título:" v-model="item.title"
+                                        :error-message="form.errors[`items.${key}.title`]" />
+                                </div>
+                                <div class="col-12 col-lg-6 mb-3">
+                                    <InputForm label="URL:" v-model="item.url"
+                                        :error-message="form.errors[`items.${key}.url`]" />
+                                </div>
+                                <div class="col-6 col-lg-3 mb-3">
+                                    <SelectForm label="Abrir na:" :options="[
+                                        {
+                                            value: '_self',
+                                            text: 'Aba atual'
+                                        },
+                                        {
+                                            value: '_blank',
+                                            text: 'Outra aba'
+                                        }
+                                    ]" v-model="item.target"
+                                        :error-message="form.errors[`items.${key}.target`]" />
+                                </div>
+                                <div class="col-6 col-lg-3 mb-3">
+                                    <SelectForm @hasChange="changeOrder" label="Ordem:"
+                                        v-model="item.order" :options="options"
+                                        only-values />
+                                </div>
+                                <div class="col-12 text-center">
+                                    <ButtonConfirmationUi @hasConfirmed="removeItem"
+                                        @hasCanceled="" icon="trash" variant="danger"
+                                        size="sm" position="center" :data-item="key" />
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </AccordionItem>
+                    </AccordionGroup>
                 </div>
 
                 <div class="col-12 text-center">
@@ -80,11 +78,13 @@ import InputForm from '../../../../Components/Form/InputForm.vue';
 import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../../Components/Ui/ButtonConfirmationUi.vue';
 import SelectForm from '../../../../Components/Form/SelectForm.vue';
+import AccordionGroup from '../../../../Components/Ui/Accordion/AccordionGroup.vue';
+import AccordionItem from '../../../../Components/Ui/Accordion/AccordionItem.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm },
+    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, AccordionGroup, AccordionItem },
     props: {
         menu: { type: Object, default: {} }
     },
