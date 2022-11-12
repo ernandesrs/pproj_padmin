@@ -79,6 +79,7 @@ export default {
 
         confirm(e) {
             if (!this.confirmWithRequest) {
+                this.close();
                 this.$emit("hasConfirmed", e);
                 return;
             }

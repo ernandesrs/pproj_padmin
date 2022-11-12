@@ -827,6 +827,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     confirm: function confirm(e) {
       if (!this.confirmWithRequest) {
+        this.close();
         this.$emit("hasConfirmed", e);
         return;
       }
