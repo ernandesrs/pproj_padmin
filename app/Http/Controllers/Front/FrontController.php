@@ -21,11 +21,16 @@ class FrontController extends Controller
         $settings = Content::where("name", "front_settings")->first();
         $settings->content = json_decode($settings->content);
 
+        if ($settings->content->header->menu_main ?? null) {
+            $menu_main = Menu::where("id", $settings->content->header->menu_main ?? 0)->first();
+            $menu_main->items = json_decode($menu_main->items);
+        }
+
         $page = Page::findBySlug("inicio", config("app.locale"))->first();
         return view("front.index", [
             "pageTitle" => $page->title,
             "settings" => $settings,
-            "menu_main" => Menu::where("id", $settings->content->menu_main ?? 0)->first(),
+            "menu_main" => $menu_main ?? null,
         ]);
     }
 }

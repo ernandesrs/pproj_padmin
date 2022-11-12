@@ -6,15 +6,16 @@
             <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
                 <div class="d-flex align-items-center">
                     <a class="d-block py-3" href="">
-                        <img class="img-fluid" src="{{ asset('assets/img/padmin_demo_logo.svg') }}" alt="">
+                        @if ($settings->content->header->logo ?? null)
+                            <img class="img-fluid" src="{{ Storage::url($settings->content->header->logo) }}" alt="">
+                        @else
+                            {{ config('app.name') }}
+                        @endif
                     </a>
 
                     @if ($menu_main)
                         <nav class="ms-auto nav">
-                            @php
-                                $menuItems = json_decode($menu_main->items);
-                            @endphp
-                            @foreach ($menuItems as $menuItem)
+                            @foreach ($menu_main->items as $menuItem)
                                 <a href="{{ $menuItem->url }}" target="{{ $menuItem->target }}"
                                     title="{{ $menuItem->title }}" class="nav-link">{{ $menuItem->text }}</a>
                             @endforeach
