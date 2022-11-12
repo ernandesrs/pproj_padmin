@@ -17,7 +17,9 @@
                         <nav class="ms-auto nav">
                             @foreach ($menu_main->items as $menuItem)
                                 <a href="{{ $menuItem->url }}" target="{{ $menuItem->target }}"
-                                    title="{{ $menuItem->title }}" class="nav-link">{{ $menuItem->text }}</a>
+                                    title="{{ $menuItem->title }}" class="nav-link">
+                                    {!! $menuItem->icon !!} {{ $menuItem->text }}
+                                </a>
                             @endforeach
                         </nav>
                     @endif

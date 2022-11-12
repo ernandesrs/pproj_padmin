@@ -44,6 +44,7 @@ class MenuRequest extends FormRequest
             "items.*.title" => ["nullable", "max:50", "string"],
             "items.*.target" => ["required", Rule::in(["_self", "_blank"])],
             "items.*.url" => ["required", "string", "max:255"],
+            "items.*.icon" => ["nullable", "string", "max:50"],
         ];
     }
 

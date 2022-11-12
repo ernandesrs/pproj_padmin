@@ -7,7 +7,6 @@ use App\Models\Content;
 use App\Models\Menu;
 use App\Models\Page;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -23,7 +22,8 @@ class FrontController extends Controller
 
         if ($settings->content->header->menu_main ?? null) {
             $menu_main = Menu::where("id", $settings->content->header->menu_main ?? 0)->first();
-            $menu_main->items = json_decode($menu_main->items);
+            if ($menu_main)
+                $menu_main->items = json_decode($menu_main->items);
         }
 
         $page = Page::findBySlug("inicio", config("app.locale"))->first();
