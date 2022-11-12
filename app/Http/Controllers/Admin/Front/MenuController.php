@@ -64,7 +64,7 @@ class MenuController extends Controller
 
         $menu = new Menu();
         $menu->name = $validated["name"];
-        $menu->items = json_encode($validated["items"]);
+        $menu->items = json_encode($validated["items"] ?? []);
         $menu->save();
 
         session()->flash("flash_alert", [
@@ -122,7 +122,7 @@ class MenuController extends Controller
         $validated = $request->validated();
 
         $menu->name = $validated["name"];
-        $menu->items = json_encode($validated["items"]);
+        $menu->items = json_encode($validated["items"] ?? []);
         $menu->save();
 
         session()->flash("flash_alert", [
@@ -130,7 +130,7 @@ class MenuController extends Controller
             "message" => "Menu foi atualizado com sucesso!"
         ]);
 
-        return redirect()->route("admin.menus.index");
+        return back();
     }
 
     /**
