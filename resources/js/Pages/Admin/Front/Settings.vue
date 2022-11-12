@@ -1,44 +1,36 @@
 <template>
 
-
     <ModalImagesList :show="showImagesModalList" @modalClose="modalImagesListClose"
         @imageInsert="insertImage" />
 
-    <section class="">
-        <form @submit.prevent="submit">
-            <h1 class="fs-5 fw-semibold">
-                Configurações do site
-            </h1>
-            <hr>
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-7 col-xl-8 mb-4">
-                    <div class="col-12 mb-4">
-                        <InputForm label="Título do site:" name="title"
-                            v-model="form.title" :error-message="form.errors.title" />
-                    </div>
-                    <div class="col-12 mb-4">
-                        <TextAreaForm label="Descrição do site:" name="description"
-                            v-model="form.description"
-                            :error-message="form.errors.description" rows="3" />
-                    </div>
-                    <div class="col-12 mb-4">
-                        <InputForm label="Permitir indexação aos mecanismos de buscas"
-                            type="checkbox" name="follow" v-model="form.follow" />
-                    </div>
-                    <div class="col-12 mb-4">
-                        <SelectForm label="Menu principal:" type="checkbox"
-                            name="menu_main" v-model="form.menu_main" :options="menus.map((menu) => {
-                                return {
-                                    text: menu.name,
-                                    value: menu.id
-                                };
-                            })" />
+    <form @submit.prevent="submit">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="card card-body mb-4">
+                    <h2 class="fs-5 fw-semibold">Geral</h2>
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <InputForm label="Título do site:" name="title"
+                                v-model="form.title" :error-message="form.errors.title" />
+                        </div>
+                        <div class="col-12 mb-4">
+                            <TextAreaForm label="Descrição do site:" name="description"
+                                v-model="form.description"
+                                :error-message="form.errors.description" rows="3" />
+                        </div>
+                        <div class="col-12">
+                            <InputForm label="Permitir indexação aos mecanismos de buscas"
+                                type="checkbox" name="follow" v-model="form.follow" />
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 col-lg-5 col-xl-4 mb-4">
-                    <div class="row">
-                        <div class="col-6 text-center">
+            <div class="col-12 col-lg-6">
+                <div class="card card-body mb-4">
+                    <h2 class="fs-5 fw-semibold">Cabeçalho</h2>
+                    <div class="row mb-4">
+                        <div class="col-6 mb-4 text-center">
                             <ImagePreviewUi :preview-url="faviconPreview"
                                 preview-alt="Favicon preview"
                                 :borderless="faviconPreview ? true : false"
@@ -48,7 +40,8 @@
                                 icon="image" variant="success" size="sm"
                                 data-to="favicon" />
                         </div>
-                        <div class="col-6 text-center">
+
+                        <div class="col-6 mb-4 text-center">
                             <ImagePreviewUi :preview-url="logoPreview"
                                 preview-alt="Logo preview"
                                 :borderless="logoPreview ? true : false" class="mb-2" />
@@ -56,44 +49,47 @@
                             <ButtonUi @click="modalImagesListShow" text="Novo logo"
                                 icon="image" variant="success" size="sm" data-to="logo" />
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <h1 class="fs-5 fw-semibold">
-                Google Recaptcha
-            </h1>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-lg-7 col-xl-8 mb-4">
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            <InputForm label="Chave pública:" name="public_key"
-                                v-model="form.public_key"
-                                :error-message="form.errors.public_key" />
+                        <div class="col-12">
+                            <SelectForm label="Menu principal:" name="menu_main"
+                                v-model="form.menu_main" :options="menus.map((menu) => {
+                                    return {
+                                        text: menu.name,
+                                        value: menu.id
+                                    };
+                                })" />
                         </div>
-                        <div class="col-12 mb-4">
-                            <InputForm label="Chave privada:" name="private_key"
-                                v-model="form.private_key"
-                                :error-message="form.errors.private_key" />
+                    </div>
+                </div>
+
+                <div class="card card-body mb-4">
+                    <h2 class="fs-5 fw-semibold">Rodapé</h2>
+                    <div class="row mb-4">
+                        <div class="col-6 mb-4 text-center">
+
                         </div>
-                        <div class="col-12 mb-4">
-                            <InputForm type="checkbox"
-                                label="Ativar uso do Google Recaptcha" name="enabled"
-                                v-model="form.enabled"
-                                :error-message="form.errors.enabled" />
+
+                        <div class="col-12">
+                            <SelectForm label="Menu rodapé:" name="menu_footer"
+                                v-model="form.menu_footer" :options="menus.map((menu) => {
+                                    return {
+                                        text: menu.name,
+                                        value: menu.id
+                                    };
+                                })" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-12 text-center">
-                    <ButtonUi text="Atualizar" icon="checkLg" type="submit"
-                        variant="primary" />
-                </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <ButtonUi text="Atualizar" icon="checkLg" type="submit"
+                    variant="primary" />
             </div>
-        </form>
-    </section>
+        </div>
+    </form>
 
 </template>
 
@@ -129,10 +125,7 @@ export default {
                 logo: null,
 
                 menu_main: this.settings?.content?.menu_main ?? null,
-
-                public_key: this.settings?.content?.grecaptcha?.public_key ?? null,
-                private_key: this.settings?.content?.grecaptcha?.private_key ?? null,
-                enabled: this.settings?.content?.grecaptcha?.enabled ?? false,
+                menu_footer: this.settings?.content?.menu_footer ?? null,
             }),
             showImagesModalList: false,
             showImagesModalListTo: null

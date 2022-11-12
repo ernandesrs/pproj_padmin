@@ -90,13 +90,6 @@ class SettingController extends Controller
         $content->follow = $validated["follow"];
         $content->menu_main = $validated["menu_main"] ?? null;
 
-        if (empty($content->grecaptcha))
-            $content->grecaptcha = new stdClass;
-
-        $content->grecaptcha->private_key = $validated["private_key"] ?? null;
-        $content->grecaptcha->public_key = $validated["public_key"] ?? null;
-        $content->grecaptcha->enabled = $validated["enabled"] ?? false;
-
         if ($faviconId = $validated["favicon"] ?? null) {
             $favicon = Image::where("id", $faviconId)->first();
             if ($favicon)
@@ -131,10 +124,6 @@ class SettingController extends Controller
             "logo" => ["nullable", "numeric"],
 
             "menu_main" => ["nullable", "numeric"],
-
-            "private_key" => ["nullable", "required_if:enabled,true", "string"],
-            "public_key" => ["nullable", "required_if:enabled,true", "string"],
-            "enabled" => ["required", "boolean"],
         ]);
     }
 }
