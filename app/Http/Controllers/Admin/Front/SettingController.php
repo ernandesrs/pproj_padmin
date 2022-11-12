@@ -27,13 +27,15 @@ class SettingController extends Controller
 
         $menus = MenuResource::collection(Menu::all());
 
-        if ($favicon = $settings->content->favicon)
-            $settings->favicon_url =  \Illuminate\Support\Facades\Storage::url($favicon);
-        else $settings->favicon_url = null;
+        if ($favicon = $settings->content->header->favicon)
+            $settings->content->header->favicon_url = \Illuminate\Support\Facades\Storage::url($favicon);
+        else
+            $settings->content->header->favicon_url = null;
 
-        if ($logo = $settings->content->logo)
-            $settings->logo_url =  \Illuminate\Support\Facades\Storage::url($logo);
-        else $settings->logo_url = null;
+        if ($logo = $settings->content->header->logo)
+            $settings->content->header->logo_url = \Illuminate\Support\Facades\Storage::url($logo);
+        else
+            $settings->content->header->logo_url = null;
 
         return Inertia::render("Admin/Front/Settings", [
             "settings" => $settings,
@@ -88,18 +90,20 @@ class SettingController extends Controller
         $content->title = $validated["title"];
         $content->description = $validated["description"];
         $content->follow = $validated["follow"];
-        $content->menu_main = $validated["menu_main"] ?? null;
 
-        if ($faviconId = $validated["favicon"] ?? null) {
+        $content->header->menu_main = $validated["header"]["menu_main"] ?? null;
+        $content->footer->menu_main = $validated["footer"]["menu_main"] ?? null;
+
+        if ($faviconId = $validated["header"]["favicon"] ?? null) {
             $favicon = Image::where("id", $faviconId)->first();
             if ($favicon)
-                $content->favicon = $favicon->path;
+                $content->header->favicon = $favicon->path;
         }
 
-        if ($logoId = $validated["logo"] ?? null) {
+        if ($logoId = $validated["header"]["logo"] ?? null) {
             $logo = Image::where("id", $logoId)->first();
             if ($logo)
-                $content->logo = $logo->path;
+                $content->header->logo = $logo->path;
         }
 
         $settings->content = json_encode($content);
@@ -120,10 +124,12 @@ class SettingController extends Controller
             "title" => ["required", "string", "max:60"],
             "description" => ["required", "string", "max:160"],
             "follow" => ["required", "boolean"],
-            "favicon" => ["nullable", "numeric"],
-            "logo" => ["nullable", "numeric"],
 
-            "menu_main" => ["nullable", "numeric"],
+            "header.favicon" => ["nullable", "numeric", "exists:images,id"],
+            "header.logo" => ["nullable", "numeric", "exists:images,id"],
+
+            "header.menu_main" => ["nullable", "numeric", "exists:menus,id"],
+            "footer.menu_main" => ["nullable", "numeric", "exists:menus,id"],
         ]);
     }
 }

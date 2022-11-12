@@ -1336,25 +1336,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     "default": {}
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
-  var _this$settings$favico, _this$settings, _this$settings$logo_u, _this$settings2, _this$settings3, _this$settings3$conte, _this$settings4, _this$settings4$conte, _this$settings5, _this$settings5$conte, _this$settings$conten, _this$settings6, _this$settings6$conte, _this$settings$conten2, _this$settings7, _this$settings7$conte;
+  var _this$settings$conten, _this$settings, _this$settings$conten2, _this$settings$conten3, _this$settings$conten4, _this$settings2, _this$settings2$conte, _this$settings2$conte2, _this$settings3, _this$settings3$conte, _this$settings4, _this$settings4$conte, _this$settings5, _this$settings5$conte, _this$settings$conten5, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings$conten6, _this$settings7, _this$settings7$conte, _this$settings7$conte2;
 
   return {
-    faviconPreview: (_this$settings$favico = (_this$settings = this.settings) === null || _this$settings === void 0 ? void 0 : _this$settings.favicon_url) !== null && _this$settings$favico !== void 0 ? _this$settings$favico : null,
-    logoPreview: (_this$settings$logo_u = (_this$settings2 = this.settings) === null || _this$settings2 === void 0 ? void 0 : _this$settings2.logo_url) !== null && _this$settings$logo_u !== void 0 ? _this$settings$logo_u : null,
+    faviconPreview: (_this$settings$conten = (_this$settings = this.settings) === null || _this$settings === void 0 ? void 0 : (_this$settings$conten2 = _this$settings.content) === null || _this$settings$conten2 === void 0 ? void 0 : (_this$settings$conten3 = _this$settings$conten2.header) === null || _this$settings$conten3 === void 0 ? void 0 : _this$settings$conten3.favicon_url) !== null && _this$settings$conten !== void 0 ? _this$settings$conten : null,
+    logoPreview: (_this$settings$conten4 = (_this$settings2 = this.settings) === null || _this$settings2 === void 0 ? void 0 : (_this$settings2$conte = _this$settings2.content) === null || _this$settings2$conte === void 0 ? void 0 : (_this$settings2$conte2 = _this$settings2$conte.header) === null || _this$settings2$conte2 === void 0 ? void 0 : _this$settings2$conte2.logo_url) !== null && _this$settings$conten4 !== void 0 ? _this$settings$conten4 : null,
     form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
       title: (_this$settings3 = this.settings) === null || _this$settings3 === void 0 ? void 0 : (_this$settings3$conte = _this$settings3.content) === null || _this$settings3$conte === void 0 ? void 0 : _this$settings3$conte.title,
       description: (_this$settings4 = this.settings) === null || _this$settings4 === void 0 ? void 0 : (_this$settings4$conte = _this$settings4.content) === null || _this$settings4$conte === void 0 ? void 0 : _this$settings4$conte.description,
       follow: (_this$settings5 = this.settings) === null || _this$settings5 === void 0 ? void 0 : (_this$settings5$conte = _this$settings5.content) === null || _this$settings5$conte === void 0 ? void 0 : _this$settings5$conte.follow,
-      favicon: null,
-      logo: null,
-      menu_main: (_this$settings$conten = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : _this$settings6$conte.menu_main) !== null && _this$settings$conten !== void 0 ? _this$settings$conten : null,
-      menu_footer: (_this$settings$conten2 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : _this$settings7$conte.menu_footer) !== null && _this$settings$conten2 !== void 0 ? _this$settings$conten2 : null
+      header: {
+        favicon: null,
+        logo: null,
+        menu_main: (_this$settings$conten5 = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.header) === null || _this$settings6$conte2 === void 0 ? void 0 : _this$settings6$conte2.menu_main) !== null && _this$settings$conten5 !== void 0 ? _this$settings$conten5 : null
+      },
+      footer: {
+        menu_main: (_this$settings$conten6 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.footer) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.menu_main) !== null && _this$settings$conten6 !== void 0 ? _this$settings$conten6 : null
+      }
     }),
     showImagesModalList: false,
     showImagesModalListTo: null
   };
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
+    if (this.form.header.menu_main == "none") this.form.header.menu_main = null;
+    if (this.form.footer.menu_main == "none") this.form.footer.menu_main = null;
     this.form.post(route("admin.settings.update"));
   },
   modalImagesListShow: function modalImagesListShow(event) {
@@ -1367,10 +1373,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   insertImage: function insertImage(data) {
     if (this.showImagesModalListTo == 'favicon') {
       this.faviconPreview = data.url;
-      this.form.favicon = data.id;
+      this.form.header.favicon = data.id;
     } else {
       this.logoPreview = data.url;
-      this.form.logo = data.id;
+      this.form.header.logo = data.id;
     }
   }
 }), _layout$layout$compon);
@@ -2985,34 +2991,36 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Menu principal:",
     name: "menu_main",
-    modelValue: $data.form.menu_main,
+    modelValue: $data.form.header.menu_main,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.form.menu_main = $event;
+      return $data.form.header.menu_main = $event;
     }),
     options: $props.menus.map(function (menu) {
       return {
         text: menu.name,
         value: menu.id
       };
-    })
+    }),
+    "error-message": $data.form.errors['header.menu_main']
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["modelValue", "options", "error-message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Menu rodapé:",
-    name: "menu_footer",
-    modelValue: $data.form.menu_footer,
+    name: "menu_main",
+    modelValue: $data.form.footer.menu_main,
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.form.menu_footer = $event;
+      return $data.form.footer.menu_main = $event;
     }),
     options: $props.menus.map(function (menu) {
       return {
         text: menu.name,
         value: menu.id
       };
-    })
+    }),
+    "error-message": $data.form.errors['footer.menu_main']
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options"])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "options", "error-message"])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     text: "Atualizar",
     icon: "checkLg",
     type: "submit",

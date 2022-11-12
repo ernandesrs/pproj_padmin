@@ -175,9 +175,15 @@ class Builder extends Controller
             "title" => "Your website title",
             "description" => "Your website description for the search mechanisms(Google, Bing, etc)",
             "follow" => false,
-            "favicon" => null,
-            "logo" => null,
-            "locale" => config("app.locale")
+            "locale" => config("app.locale"),
+            "header" => [
+                "favicon" => null,
+                "logo" => null,
+                "menu_main" => null,
+            ],
+            "footer" => [
+                "menu_footer" => null,
+            ]
         ];
 
         $settings = Content::create([

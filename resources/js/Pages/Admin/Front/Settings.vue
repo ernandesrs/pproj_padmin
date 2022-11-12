@@ -52,12 +52,12 @@
 
                         <div class="col-12">
                             <SelectForm label="Menu principal:" name="menu_main"
-                                v-model="form.menu_main" :options="menus.map((menu) => {
+                                v-model="form.header.menu_main" :options="menus.map((menu) => {
                                     return {
                                         text: menu.name,
                                         value: menu.id
                                     };
-                                })" />
+                                })" :error-message="form.errors['header.menu_main']" />
                         </div>
                     </div>
                 </div>
@@ -70,13 +70,13 @@
                         </div>
 
                         <div class="col-12">
-                            <SelectForm label="Menu rodapé:" name="menu_footer"
-                                v-model="form.menu_footer" :options="menus.map((menu) => {
+                            <SelectForm label="Menu rodapé:" name="menu_main"
+                                v-model="form.footer.menu_main" :options="menus.map((menu) => {
                                     return {
                                         text: menu.name,
                                         value: menu.id
                                     };
-                                })" />
+                                })" :error-message="form.errors['footer.menu_main']" />
                         </div>
                     </div>
                 </div>
@@ -115,17 +115,21 @@ export default {
 
     data() {
         return {
-            faviconPreview: this.settings?.favicon_url ?? null,
-            logoPreview: this.settings?.logo_url ?? null,
+            faviconPreview: this.settings?.content?.header?.favicon_url ?? null,
+            logoPreview: this.settings?.content?.header?.logo_url ?? null,
             form: useForm({
                 title: this.settings?.content?.title,
                 description: this.settings?.content?.description,
                 follow: this.settings?.content?.follow,
-                favicon: null,
-                logo: null,
+                header: {
+                    favicon: null,
+                    logo: null,
+                    menu_main: this.settings?.content?.header?.menu_main ?? null,
+                },
+                footer: {
+                    menu_main: this.settings?.content?.footer?.menu_main ?? null,
+                }
 
-                menu_main: this.settings?.content?.menu_main ?? null,
-                menu_footer: this.settings?.content?.menu_footer ?? null,
             }),
             showImagesModalList: false,
             showImagesModalListTo: null
@@ -134,6 +138,12 @@ export default {
 
     methods: {
         submit() {
+            if (this.form.header.menu_main == "none")
+                this.form.header.menu_main = null;
+
+            if (this.form.footer.menu_main == "none")
+                this.form.footer.menu_main = null;
+
             this.form.post(route("admin.settings.update"));
         },
 
@@ -149,10 +159,10 @@ export default {
         insertImage(data) {
             if (this.showImagesModalListTo == 'favicon') {
                 this.faviconPreview = data.url;
-                this.form.favicon = data.id;
+                this.form.header.favicon = data.id;
             } else {
                 this.logoPreview = data.url;
-                this.form.logo = data.id;
+                this.form.header.logo = data.id;
             }
         },
     }
