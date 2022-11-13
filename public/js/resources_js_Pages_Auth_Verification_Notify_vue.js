@@ -11,23 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      isShowed: false
-    };
-  },
-  methods: {
-    bounceAfterShow: function bounceAfterShow() {
-      var _this = this;
-
-      this.isShowed = true;
-      setTimeout(function () {
-        _this.isShowed = false;
-      }, 500);
-    }
-  }
-});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
 
@@ -364,16 +348,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    onAfterEnter: $options.bounceAfterShow,
-    "enter-from-class": "enter-from",
-    "enter-active-class": "enter-active",
-    "enter-to-class": "enter-to",
-    "leave-from-class": "leave-from",
-    "leave-active-class": "leave-active",
-    "leave-to-class": "leave-to",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-      'bounce': $data.isShowed
-    })
+    name: "bounce"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")];
@@ -381,9 +356,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
     /* FORWARDED */
 
-  }, 8
-  /* PROPS */
-  , ["onAfterEnter", "class"]);
+  });
 }
 
 /***/ }),
@@ -758,7 +731,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.enter-from {\r\n    opacity: 0;\r\n    transform: scale(1.25);\n}\n.leave-to {\r\n    opacity: 0;\r\n    transform: scale(.5) translateY(-50%);\n}\n.enter-active {\r\n    transition-duration: 0.25s;\r\n    transition-timing-function: ease-in-out;\n}\n.leave-active {\r\n    transition-duration: 0.25s;\r\n    transition-timing-function: ease-out;\n}\n.enter-to {\r\n    opacity: 1;\r\n    transform: scale(1);\n}\n.leave-from {\r\n    opacity: 1;\r\n    transform: scale(1.25);\n}\n.bounce {\r\n    animation: bounce 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;\r\n    transform: translate3d(0, 0, 0);\n}\n@keyframes bounce {\n10%,\r\n    90% {\r\n        transform: translate3d(0, -1px, 0);\n}\n20%,\r\n    80% {\r\n        transform: translate3d(0, 2px, 0);\n}\n30%,\r\n    50%,\r\n    70% {\r\n        transform: translate3d(0, -4px, 0);\n}\n40%,\r\n    60% {\r\n        transform: translate3d(0, 4px, 0);\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bounce-enter-active {\r\n    animation: bounce-in ease-out .75s;\n}\n.bounce-leave-active {\r\n    animation: bounce-in ease-in-out .75s reverse;\n}\n@keyframes bounce-in {\n0% {\r\n        opacity: 0;\r\n        transform: scale(.5);\n}\n35% {\r\n        transform: scale(1.1);\n}\n50% {\r\n        opacity: 1;\r\n        transform: scale(1);\n}\n55%,\r\n    65%,\r\n    75%,\r\n    85% {\r\n        transform: translate3d(0, -8px, 0);\n}\n57.5%,\r\n    67.5%,\r\n    77.5%,\r\n    87.5% {\r\n        transform: translate3d(0, 2px, 0);\n}\n60%,\r\n    70%,\r\n    80%,\r\n    90% {\r\n        transform: translate3d(0, 8px, 0);\n}\n62.5%,\r\n    72.5%,\r\n    82.5%,\r\n    92.5% {\r\n        transform: translate3d(0, -2px, 0);\n}\n100% {\r\n        transform: translate3d(0, 0, 0);\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

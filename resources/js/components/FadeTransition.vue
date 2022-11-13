@@ -1,87 +1,69 @@
 <template>
-    <Transition @after-enter="bounceAfterShow" enter-from-class="enter-from"
-        enter-active-class="enter-active" enter-to-class="enter-to"
-        leave-from-class="leave-from" leave-active-class="leave-active"
-        leave-to-class="leave-to" :class="{'bounce': isShowed}">
+    <Transition name="bounce">
         <slot />
     </Transition>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            isShowed: false,
-        };
-    },
-    methods: {
-        bounceAfterShow() {
-            this.isShowed = true;
-            setTimeout(() => {
-                this.isShowed = false;
-            }, 500);
-        },
-    }
 };
 </script>
 
 <style>
-.enter-from {
-    opacity: 0;
-    transform: scale(1.25);
+.bounce-enter-active {
+    animation: bounce-in ease-out .75s;
 }
 
-.leave-to {
-    opacity: 0;
-    transform: scale(.5) translateY(-50%);
+.bounce-leave-active {
+    animation: bounce-in ease-in-out .75s reverse;
 }
 
-.enter-active {
-    transition-duration: 0.25s;
-    transition-timing-function: ease-in-out;
-}
+@keyframes bounce-in {
 
-.leave-active {
-    transition-duration: 0.25s;
-    transition-timing-function: ease-out;
-}
-
-.enter-to {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.leave-from {
-    opacity: 1;
-    transform: scale(1.25);
-}
-
-.bounce {
-    animation: bounce 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-    transform: translate3d(0, 0, 0);
-}
-
-@keyframes bounce {
-
-    10%,
-    90% {
-        transform: translate3d(0, -1px, 0);
+    0% {
+        opacity: 0;
+        transform: scale(.5);
     }
 
-    20%,
-    80% {
+    35% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    55%,
+    65%,
+    75%,
+    85% {
+        transform: translate3d(0, -8px, 0);
+    }
+
+    57.5%,
+    67.5%,
+    77.5%,
+    87.5% {
         transform: translate3d(0, 2px, 0);
     }
 
-    30%,
-    50%,
-    70% {
-        transform: translate3d(0, -4px, 0);
+    60%,
+    70%,
+    80%,
+    90% {
+        transform: translate3d(0, 8px, 0);
     }
 
-    40%,
-    60% {
-        transform: translate3d(0, 4px, 0);
+    62.5%,
+    72.5%,
+    82.5%,
+    92.5% {
+        transform: translate3d(0, -2px, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
     }
 }
 </style>
