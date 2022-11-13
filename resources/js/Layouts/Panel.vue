@@ -106,7 +106,7 @@
                     </div>
                 </div>
 
-                <AlertUi :variant="flash?.variant" :message="flash?.message" />
+                <AlertUi :flash="flash" />
 
                 <div class="mt-4 py-4 px-4 content-inner">
                     <slot />

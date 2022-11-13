@@ -481,6 +481,16 @@ __webpack_require__.r(__webpack_exports__);
     IconUi: _IconUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     FadeTransition: _FadeTransition_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  data: function data() {
+    return {
+      theMessage: null,
+      theVariant: null,
+      time: null,
+      timeStatus: 0,
+      timerHandler: null,
+      intervalHandler: null
+    };
+  },
   props: {
     variant: {
       type: String,
@@ -501,20 +511,26 @@ __webpack_require__.r(__webpack_exports__);
     position: {
       type: String,
       "default": 'top'
+    },
+    flash: {
+      type: Object,
+      "default": null
     }
   },
-  data: function data() {
-    return {
-      theMessage: null,
-      theVariant: null,
-      time: null,
-      timeStatus: 0,
-      timerHandler: null,
-      intervalHandler: null
-    };
-  },
-  updated: function updated() {
-    this.add(this.message, this.variant);
+  watch: {
+    flash: {
+      deep: true,
+      immediate: true,
+      handler: function handler(nv) {
+        if (nv) this.add(nv.message, nv.variant);
+      }
+    },
+    message: {
+      immediate: true,
+      handler: function handler(nv) {
+        this.add(nv, this.variant);
+      }
+    }
   },
   computed: {
     alertStyle: function alertStyle() {
@@ -2557,7 +2573,7 @@ var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$props$buttons, _$props$buttons$back$, _$props$buttons$back$2, _$props$buttons$back, _$props$buttons$new$t, _$props$buttons$new$i, _ctx$$page$props, _$props$flash, _$props$flash2;
+  var _$props$buttons, _$props$buttons$back$, _$props$buttons$back$2, _$props$buttons$back, _$props$buttons$new$t, _$props$buttons$new$i, _ctx$$page$props;
 
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -2731,11 +2747,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["text", "icon", "to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(_ctx$$page$props = _ctx.$page.props) !== null && _ctx$$page$props !== void 0 && _ctx$$page$props.filterAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Filter, {
     key: 0
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AlertUi, {
-    variant: (_$props$flash = $props.flash) === null || _$props$flash === void 0 ? void 0 : _$props$flash.variant,
-    message: (_$props$flash2 = $props.flash) === null || _$props$flash2 === void 0 ? void 0 : _$props$flash2.message
+    flash: $props.flash
   }, null, 8
   /* PROPS */
-  , ["variant", "message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]), _hoisted_26])], 2
+  , ["flash"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]), _hoisted_26])], 2
   /* CLASS */
   )])], 64
   /* STABLE_FRAGMENT */

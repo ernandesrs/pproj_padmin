@@ -21,15 +21,6 @@ import FadeTransition from '../FadeTransition.vue';
 
 export default {
     components: { ButtonUi, IconUi, FadeTransition },
-
-    props: {
-        variant: { type: String, default: "default" },
-        message: { type: String, default: null },
-        fixed: { type: Boolean, default: false },
-        noAutoClose: { type: Boolean, default: false },
-        position: { type: String, default: 'top' },
-    },
-
     data() {
         return {
             theMessage: null,
@@ -40,11 +31,30 @@ export default {
             intervalHandler: null,
         };
     },
-
-    updated() {
-        this.add(this.message, this.variant);
+    props: {
+        variant: { type: String, default: "default" },
+        message: { type: String, default: null },
+        fixed: { type: Boolean, default: false },
+        noAutoClose: { type: Boolean, default: false },
+        position: { type: String, default: 'top' },
+        flash: { type: Object, default: null }
     },
-
+    watch: {
+        flash: {
+            deep: true,
+            immediate: true,
+            handler(nv) {
+                if (nv)
+                    this.add(nv.message, nv.variant);
+            }
+        },
+        message: {
+            immediate: true,
+            handler(nv) {
+                this.add(nv, this.variant);
+            }
+        },
+    },
     computed: {
         alertStyle() {
             let position = this.position == 'top' ? 'alert-float-top' : 'alert-float-bottom';
@@ -62,7 +72,6 @@ export default {
             return `${alertIcons[this.theVariant]}`;
         },
     },
-
     methods: {
         add(message, variant) {
             this.theMessage = message;
@@ -76,7 +85,6 @@ export default {
                 this.timer();
             }
         },
-
         clear() {
             this.theMessage = null;
             this.theVariant = null;
@@ -84,7 +92,6 @@ export default {
                 this.timerReset();
             }
         },
-
         timer() {
             this.timerHandler = setTimeout(() => {
                 this.clear();
@@ -94,7 +101,6 @@ export default {
                 this.timeStatus++;
             }, 100);
         },
-
         timerReset() {
             clearTimeout(this.timerHandler);
             clearInterval(this.intervalHandler);

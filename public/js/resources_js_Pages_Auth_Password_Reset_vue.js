@@ -214,6 +214,16 @@ __webpack_require__.r(__webpack_exports__);
     IconUi: _IconUi_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     FadeTransition: _FadeTransition_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  data: function data() {
+    return {
+      theMessage: null,
+      theVariant: null,
+      time: null,
+      timeStatus: 0,
+      timerHandler: null,
+      intervalHandler: null
+    };
+  },
   props: {
     variant: {
       type: String,
@@ -234,20 +244,26 @@ __webpack_require__.r(__webpack_exports__);
     position: {
       type: String,
       "default": 'top'
+    },
+    flash: {
+      type: Object,
+      "default": null
     }
   },
-  data: function data() {
-    return {
-      theMessage: null,
-      theVariant: null,
-      time: null,
-      timeStatus: 0,
-      timerHandler: null,
-      intervalHandler: null
-    };
-  },
-  updated: function updated() {
-    this.add(this.message, this.variant);
+  watch: {
+    flash: {
+      deep: true,
+      immediate: true,
+      handler: function handler(nv) {
+        if (nv) this.add(nv.message, nv.variant);
+      }
+    },
+    message: {
+      immediate: true,
+      handler: function handler(nv) {
+        this.add(nv, this.variant);
+      }
+    }
   },
   computed: {
     alertStyle: function alertStyle() {
