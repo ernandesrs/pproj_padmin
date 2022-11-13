@@ -1,6 +1,7 @@
 <template>
     <FadeTransition>
-        <div v-if="theMessage" :class="alertStyle" role="alert">
+        <div @mouseover="alertMouseOver" @mouseout="alertMouseOut" v-if="theMessage"
+            :class="alertStyle" role="alert">
             <div class="alert-inner d-flex align-items-center py-2 px-3">
                 <div class="d-flex align-items-center me-auto">
                     <IconUi :icon="alertIcon" class="alert-icon" />
@@ -73,6 +74,14 @@ export default {
         },
     },
     methods: {
+        alertMouseOver() {
+            if (!this.noAutoClose)
+                this.timerReset();
+        },
+        alertMouseOut() {
+            if (!this.noAutoClose)
+                this.timer();
+        },
         add(message, variant) {
             this.theMessage = message;
             this.theVariant = variant;

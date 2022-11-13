@@ -105,6 +105,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    alertMouseOver: function alertMouseOver() {
+      if (!this.noAutoClose) this.timerReset();
+    },
+    alertMouseOut: function alertMouseOut() {
+      if (!this.noAutoClose) this.timer();
+    },
     add: function add(message, variant) {
       this.theMessage = message;
       this.theVariant = variant;
@@ -499,6 +505,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$data.theMessage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
         key: 0,
+        onMouseover: _cache[0] || (_cache[0] = function () {
+          return $options.alertMouseOver && $options.alertMouseOver.apply($options, arguments);
+        }),
+        onMouseout: _cache[1] || (_cache[1] = function () {
+          return $options.alertMouseOut && $options.alertMouseOut.apply($options, arguments);
+        }),
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.alertStyle),
         role: "alert"
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_IconUi, {
@@ -524,8 +536,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)(["width:".concat($data.timeStatus, "%;")])
       }, null, 4
       /* STYLE */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
-      /* CLASS */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 34
+      /* CLASS, HYDRATE_EVENTS */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
