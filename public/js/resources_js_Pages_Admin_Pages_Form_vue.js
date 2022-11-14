@@ -2058,6 +2058,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Editor, {
     onChange: $options.updateValue,
     init: {
+      language: 'pt_BR',
       min_height: 475,
       menubar: false,
       plugins: 'lists link image table code codesample help wordcount autosave fullscreen anchor',

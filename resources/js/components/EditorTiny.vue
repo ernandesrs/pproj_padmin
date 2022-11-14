@@ -1,5 +1,6 @@
 <template>
     <Editor @change="updateValue" :init="{
+      language: 'pt_BR',
       min_height: 475,
       menubar: false,
       plugins: 'lists link image table code codesample help wordcount autosave fullscreen anchor',
@@ -43,7 +44,7 @@
   
 <script>
 
-import Editor from '@tinymce/tinymce-vue'
+import Editor from '@tinymce/tinymce-vue';
 
 export default {
     components: { Editor },
