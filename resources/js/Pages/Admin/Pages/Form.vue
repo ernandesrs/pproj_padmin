@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="col-12 mb-4">
-                        <TextAreaForm type="text" label="Descrição:" name="description"
+                        <TextAreaForm label="Descrição:" name="description"
                             v-model="form.description"
                             :error-message="form.errors.description" rows="3" />
                     </div>
@@ -137,7 +137,7 @@ import TextAreaForm from '../../../Components/Form/TextAreaForm.vue';
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi,TextAreaForm },
+    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi, TextAreaForm },
     props: {
         page: { type: Object, default: {} },
         terms: { type: Object, default: {} },
