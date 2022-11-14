@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SectionRequest;
 use App\Models\Section\Section;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class SectionController extends Controller
@@ -49,10 +49,10 @@ class SectionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  SectionRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SectionRequest $request)
     {
         //
     }
@@ -82,11 +82,11 @@ class SectionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  SectionRequest $request
      * @param Section $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(SectionRequest $request, Section $section)
     {
         //
     }
