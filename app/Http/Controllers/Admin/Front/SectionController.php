@@ -147,6 +147,11 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->delete();
+
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "A seção foi excluída com sucesso!",
+        ]);
     }
 }

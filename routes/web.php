@@ -57,9 +57,9 @@ Route::group([
         'create' => 'admin.sections.create',
         'store' => 'admin.sections.store',
         'edit' => 'admin.sections.edit',
-        'update' => 'admin.sections.update',
-        'destroy' => 'admin.sections.destroy',
-    ]);
+    ])->except(["update", "destroy"]);
+    Route::post("/sections/{section}/update", [AdminSectionController::class, "update"])->name("admin.sections.update");
+    Route::post("/sections/{section}/destroy", [AdminSectionController::class, "destroy"])->name("admin.sections.destroy");
 
     Route::get("/pages", [AdminPageController::class, "index"])->name("admin.pages.index");
     Route::get("/pages/create", [AdminPageController::class, "create"])->name("admin.pages.create");
