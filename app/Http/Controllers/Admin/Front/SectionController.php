@@ -92,7 +92,7 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
-        //
+        return back();
     }
 
     /**
@@ -136,7 +136,21 @@ class SectionController extends Controller
      */
     public function update(SectionRequest $request, Section $section)
     {
-        //
+        $validated = $request->validated();
+
+        if ($image = $validated["content"]["image"] ?? null) {
+            $image = Image::where("id", $image)->first();
+            if ($image) {
+                $validated["content"]["image"] = $image->path;
+            }
+        }
+
+        $section->update($validated);
+
+        return redirect()->route("admin.sections.edit", ["section" => $section->id])->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Os dados da seção foram atualizados com sucesso!",
+        ]);
     }
 
     /**

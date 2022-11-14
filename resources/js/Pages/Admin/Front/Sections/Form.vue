@@ -233,11 +233,13 @@ export default {
         this.form.subtitle = this.section.subtitle;
 
         this.form.content.content = this.section.content.content;
-        this.form.content.image = this.section.content.image;
+        this.form.content.image = null;
         this.form.content.image_url = this.section.content.image_url;
         this.imagePreview = this.section.content.image_url;
 
         this.form.buttons = this.section.buttons;
+        
+        this.updateButtonsOrder();
     },
 
     methods: {

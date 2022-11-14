@@ -2152,10 +2152,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   this.form.title = this.section.title;
   this.form.subtitle = this.section.subtitle;
   this.form.content.content = this.section.content.content;
-  this.form.content.image = this.section.content.image;
+  this.form.content.image = null;
   this.form.content.image_url = this.section.content.image_url;
   this.imagePreview = this.section.content.image_url;
   this.form.buttons = this.section.buttons;
+  this.updateButtonsOrder();
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
     var _this$form;
