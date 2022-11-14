@@ -12,7 +12,7 @@
         },
         aligns: {
             icon: 'align-left',
-            tooltip: 'Alinhamenots',
+            tooltip: 'Alinhamentos',
             items: 'alignleft aligncenter alignright alignnone'
         },
         subsup: {

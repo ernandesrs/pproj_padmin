@@ -2070,7 +2070,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         aligns: {
           icon: 'align-left',
-          tooltip: 'Alinhamenots',
+          tooltip: 'Alinhamentos',
           items: 'alignleft aligncenter alignright alignnone'
         },
         subsup: {
