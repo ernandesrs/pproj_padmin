@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
+use App\Models\Media\Image;
 use App\Models\Section\Section;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class SectionController extends Controller
@@ -38,6 +40,8 @@ class SectionController extends Controller
     {
         return Inertia::render("Admin/Front/Sections/Form", [
             "pageTitle" => "Nova seção",
+            "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
+            "images" => session()->get("images", null),
             "buttons" => [
                 "back" => [
                     "url" => route("admin.sections.index"),
@@ -54,7 +58,30 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $validated["buttons"] = json_encode($validated["buttons"] ?? []);
+
+        $image = $validated["content"]["image"] ?? null;
+        $content = $validated["content"]["content"] ?? null;
+        if ($image) {
+            $image = Image::where("id", $image)->first();
+            if ($image) {
+                $image = $image->path;
+            }
+        }
+
+        $validated["content"] = json_encode([
+            "image" => $image,
+            "content" => $content,
+        ]);
+
+        $section = Section::create($validated);
+
+        return redirect()->route("admin.sections.edit", ["section" => $section->id])->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Nova seção criada com sucesso!",
+        ]);
     }
 
     /**
@@ -76,7 +103,28 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        //
+        $section->buttons = json_decode($section->buttons);
+        $section->content = json_decode($section->content);
+        if ($section->content->image) {
+            $section->content->image_url = Storage::url($section->content->image);
+        }
+
+        return Inertia::render("Admin/Front/Sections/Form", [
+            "section" => $section,
+            "pageTitle" => "Editar seção",
+            "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
+            "images" => session()->get("images", null),
+            "buttons" => [
+                "back" => [
+                    "url" => route("admin.sections.index"),
+                ],
+                "new" => [
+                    "icon" => "plusLg",
+                    "text" => "Nova seção",
+                    "url" => route("admin.sections.create"),
+                ],
+            ],
+        ]);
     }
 
     /**

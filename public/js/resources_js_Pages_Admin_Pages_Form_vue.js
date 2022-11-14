@@ -472,6 +472,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tinymce/tinymce-vue */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var settings = {
+  "default": {
+    language: 'pt_BR',
+    menubar: false,
+    toolbar_groups: {
+      titles: {
+        icon: 'format',
+        tooltip: 'Títulos',
+        items: 'h2 h3 h4 h5 h6 blockquote'
+      },
+      aligns: {
+        icon: 'align-left',
+        tooltip: 'Alinhamentos',
+        items: 'alignleft aligncenter alignright alignnone'
+      },
+      subsup: {
+        icon: 'superscript',
+        tooltip: '',
+        items: 'superscript subscript'
+      },
+      lists: {
+        icon: 'ordered-list',
+        tooltip: '',
+        items: 'bullist numlist'
+      }
+    }
+  },
+  basic: {
+    plugins: 'lists link code codesample help autosave anchor',
+    toolbar: 'titles aligns | fontfamily fontsize forecolor backcolor removeformat | bold italic strikethrough underline | subsup | lists | link anchor code codesample'
+  },
+  full: {
+    min_height: 475,
+    plugins: 'lists link image table code codesample help wordcount autosave fullscreen anchor',
+    toolbar: 'titles aligns | fontfamily fontsize forecolor backcolor removeformat | bold italic strikethrough underline | subsup | lists | image link table anchor code codesample fullscreen',
+    image_caption: true,
+    image_advtab: true,
+    images_upload_url: route('admin.medias.images.upload'),
+    images_upload_credentials: true,
+    image_uploadtab: true,
+    images_file_types: 'jpeg,jpg,png,webp',
+    autosave_ask_before_unload: true,
+    // default: true
+    autosave_interval: '30s',
+    // default: 30s
+    autosave_retention: '20m' // default: 20m(tempo que o conteúdo salvo automaticamnete deverá ficar no armazenamento local do navegador)
+
+  }
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -485,11 +540,27 @@ __webpack_require__.r(__webpack_exports__);
     apiKey: {
       type: String,
       "default": "no-api-key"
+    },
+    basic: {
+      type: Boolean,
+      "default": false
+    },
+    minHeight: {
+      type: [Number, String],
+      "default": null
     }
   },
   methods: {
     updateValue: function updateValue(event, editor) {
       this.$emit("update:modelValue", editor.getContent());
+    }
+  },
+  computed: {
+    init: function init() {
+      var defaultSettings = settings["default"];
+      var customSettings = this.basic ? settings.basic : settings.full;
+      if (this.minHeight) customSettings.min_height = parseInt(this.minHeight);
+      return _objectSpread(_objectSpread({}, defaultSettings), customSettings);
     }
   }
 });
@@ -2062,47 +2133,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Editor, {
     onChange: $options.updateValue,
-    init: {
-      language: 'pt_BR',
-      min_height: 475,
-      menubar: false,
-      plugins: 'lists link image table code codesample help wordcount autosave fullscreen anchor',
-      toolbar: 'titles aligns | fontfamily fontsize forecolor backcolor removeformat | bold italic strikethrough underline | subsup | lists | image link table anchor code codesample fullscreen',
-      toolbar_groups: {
-        titles: {
-          icon: 'format',
-          tooltip: 'Títulos',
-          items: 'h2 h3 h4 h5 h6 blockquote'
-        },
-        aligns: {
-          icon: 'align-left',
-          tooltip: 'Alinhamentos',
-          items: 'alignleft aligncenter alignright alignnone'
-        },
-        subsup: {
-          icon: 'superscript',
-          tooltip: '',
-          items: 'superscript subscript'
-        },
-        lists: {
-          icon: 'ordered-list',
-          tooltip: '',
-          items: 'bullist numlist'
-        }
-      },
-      image_caption: true,
-      image_advtab: true,
-      images_upload_url: _ctx.$route('admin.medias.images.upload'),
-      images_upload_credentials: true,
-      image_uploadtab: true,
-      images_file_types: 'jpeg,jpg,png,webp',
-      autosave_ask_before_unload: true,
-      // default: true
-      autosave_interval: '30s',
-      // default: 30s
-      autosave_retention: '20m' // default: 20m(tempo que o conteúdo salvo automaticamnete deverá ficar no armazenamento local do navegador)
-
-    },
+    init: $options.init,
     "initial-value": $props.modelValue,
     value: $props.modelValue,
     "output-format": "html",
