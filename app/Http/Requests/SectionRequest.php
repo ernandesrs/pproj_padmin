@@ -29,6 +29,7 @@ class SectionRequest extends FormRequest
             "name" => ["required", "max:25", 'unique:sections,name' . (($this->section->id ?? null) ? ',' . $this->section->id : '')],
             "title" => ["required", "max:50", 'unique:sections,title' . (($this->section->id ?? null) ? ',' . $this->section->id : '')],
             "subtitle" => ["nullable", "max:75"],
+            "visible" => ["required", "boolean"],
 
             "content.content" => ["nullable"],
             "content.image" => ["nullable", "numeric", "exists:images,id"],

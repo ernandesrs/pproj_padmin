@@ -167,6 +167,11 @@
                     </div>
                 </div>
 
+                <div class="col-12 mb-4 d-flex justify-content-center">
+                    <InputForm label="Ocultar/Mostrar esta seção" type="checkbox"
+                        name="visible" v-model="form.visible" />
+                </div>
+
                 <div class="col-12 text-center">
                     <ButtonUi type="submit" variant="primary"
                         :text="`${section.id ? 'Atualizar seção' : 'Salvar seção'}`"
@@ -211,6 +216,7 @@ export default {
                 name: null,
                 title: null,
                 subtitle: null,
+                visible: false,
                 content: {
                     image: null,
                     content: null
@@ -230,6 +236,7 @@ export default {
         this.form.type = this.section.type;
         this.form.name = this.section.name;
         this.form.title = this.section.title;
+        this.form.visible = this.section.visible;
         this.form.subtitle = this.section.subtitle;
 
         this.form.content.content = this.section.content.content;
@@ -238,7 +245,7 @@ export default {
         this.imagePreview = this.section.content.image_url;
 
         this.form.buttons = this.section.buttons;
-        
+
         this.updateButtonsOrder();
     },
 

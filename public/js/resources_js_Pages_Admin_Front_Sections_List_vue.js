@@ -2813,10 +2813,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1 fw-light",
           text: section.visible ? 'Visível' : 'Oculto',
-          variant: "info"
+          variant: section.visible ? 'info' : 'secondary',
+          icon: section.visible ? 'eye' : 'eyeSlash'
         }, null, 8
         /* PROPS */
-        , ["text"])];
+        , ["text", "variant", "icon"])];
       }),
       actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {

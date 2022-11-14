@@ -20,6 +20,7 @@ return [
 
     'exclamationCircleFill' => 'bi bi-exclamation-circle-fill',
     'eye' => 'bi bi-eye',
+    'eyeSlash' => 'bi bi-eye-slash',
 
     'fileEarmark' => 'bi bi-file-earmark',
     'fileEarmarkText' => 'bi bi-file-earmark-text',

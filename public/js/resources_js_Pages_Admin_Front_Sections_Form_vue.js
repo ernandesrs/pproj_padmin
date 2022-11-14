@@ -2132,6 +2132,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       name: null,
       title: null,
       subtitle: null,
+      visible: false,
       content: {
         image: null,
         content: null
@@ -2150,6 +2151,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   this.form.type = this.section.type;
   this.form.name = this.section.name;
   this.form.title = this.section.title;
+  this.form.visible = this.section.visible;
   this.form.subtitle = this.section.subtitle;
   this.form.content.content = this.section.content.content;
   this.form.content.image = null;
@@ -3971,6 +3973,9 @@ var _hoisted_33 = {
   "class": "mb-4 text-center"
 };
 var _hoisted_34 = {
+  "class": "col-12 mb-4 d-flex justify-content-center"
+};
+var _hoisted_35 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -4016,7 +4021,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["show", "onModalClose", "onImageInsert"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
@@ -4231,7 +4236,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     size: "sm"
   }, null, 8
   /* PROPS */
-  , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+    label: "Ocultar/Mostrar esta seção",
+    type: "checkbox",
+    name: "visible",
+    modelValue: $data.form.visible,
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+      return $data.form.visible = $event;
+    })
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     variant: "primary",
     text: "".concat($props.section.id ? 'Atualizar seção' : 'Salvar seção'),

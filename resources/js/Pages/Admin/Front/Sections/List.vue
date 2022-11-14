@@ -10,7 +10,9 @@
         }">
             <template v-slot:badges>
                 <BadgeUi class="mb-1 me-1 fw-light"
-                    :text="section.visible ? 'Visível' : 'Oculto'" variant="info" />
+                    :text="section.visible ? 'Visível' : 'Oculto'"
+                    :variant="section.visible ? 'info' : 'secondary'"
+                    :icon="section.visible ? 'eye' : 'eyeSlash'" />
             </template>
 
             <template v-slot:actions>
