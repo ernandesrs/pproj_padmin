@@ -20,7 +20,7 @@
 
                     <div v-if="form.content_type == 1" class="col-12 mb-4">
                         <label class="mb-1">Conteúdo:</label>
-                        <EditorTiny v-model="form.content" />
+                        <EditorTiny v-model="form.content" :api-key="tinyApiKey" />
                     </div>
 
                     <div v-else-if="form.content_type == 2" class="col-12 mb-4">
@@ -141,6 +141,7 @@ export default {
     props: {
         page: { type: Object, default: {} },
         terms: { type: Object, default: {} },
+        tinyApiKey: { type: String, default: null }
     },
 
     data() {

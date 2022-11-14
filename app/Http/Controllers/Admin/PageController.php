@@ -56,6 +56,7 @@ class PageController extends Controller
             "pageTitle" => "Nova página",
             "terms" => __("terms.page"),
             "images" => session()->get("images", null),
+            "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
             "buttons" => [
                 "back" => [
                     "url" => route("admin.pages.index"),
@@ -120,6 +121,7 @@ class PageController extends Controller
             "page" => new PageResource($page),
             "terms" => __("terms.page"),
             "pageTitle" => "Editar página",
+            "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
             "images" => session()->get("images", null),
             "buttons" => [
                 "back" => [

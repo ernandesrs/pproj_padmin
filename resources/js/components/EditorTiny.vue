@@ -38,7 +38,7 @@
       autosave_interval: '30s', // default: 30s
       autosave_retention: '20m', // default: 20m(tempo que o conteúdo salvo automaticamnete deverá ficar no armazenamento local do navegador)
     }" :initial-value="modelValue" :value="modelValue" output-format="html"
-        api-key="no-api-key" />
+        :api-key="apiKey" />
 </template>
   
 <script>
@@ -48,7 +48,8 @@ import Editor from '@tinymce/tinymce-vue'
 export default {
     components: { Editor },
     props: {
-        modelValue: { type: String, default: null }
+        modelValue: { type: String, default: null },
+        apiKey: { type: String, default: "no-api-key" }
     },
     methods: {
         updateValue(event, editor) {
@@ -57,9 +58,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.tox-notifications-container {
-    display: none !important;
-}
-</style>
