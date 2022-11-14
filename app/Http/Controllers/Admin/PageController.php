@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
 use App\Http\Resources\PageResource;
+use App\Http\Services\FilterService;
 use App\Models\Media\Image;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -14,11 +15,6 @@ use Inertia\Inertia;
 class PageController extends Controller
 {
     /**
-     * @var boolean
-     */
-    private $filtering = false;
-
-    /**
      * List pages.
      *
      * @param Request $request
@@ -26,7 +22,7 @@ class PageController extends Controller
      */
     public function index(Request $request)
     {
-        $results = $this->filter($request);
+        $filter = (new FilterService(new Page()))->filter($request);
 
         /**
          * flag to page resource(make only small thumbnail)
@@ -34,18 +30,18 @@ class PageController extends Controller
         session()->flash("mk_thumb", ["small"]);
 
         return Inertia::render("Admin/Pages/List", [
-            "pages" => PageResource::collection($results),
+            "pages" => PageResource::collection($filter->model),
             "terms" => __("terms.page"),
             "filterAction" => route("admin.pages.index"),
-            "isFiltering" => $this->filtering,
+            "isFiltering" => $filter->filtering,
             "pageTitle" => "Páginas",
             "buttons" => [
                 "new" => [
                     "icon" => "fileEarmarkPlus",
                     "text" => "Nova página",
-                    "url" => route("admin.pages.create")
-                ]
-            ]
+                    "url" => route("admin.pages.create"),
+                ],
+            ],
         ]);
     }
 
@@ -62,9 +58,9 @@ class PageController extends Controller
             "images" => session()->get("images", null),
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.pages.index")
-                ]
-            ]
+                    "url" => route("admin.pages.index"),
+                ],
+            ],
         ]);
     }
 
@@ -82,15 +78,17 @@ class PageController extends Controller
 
         if ($coverId = $validated["cover"] ?? null) {
             $image = Image::where("id", $coverId)->first();
-            if ($image)
+            if ($image) {
                 $validated["cover"] = $image->path;
+            }
+
         }
 
         $page = Page::create($validated);
 
         return redirect()->route("admin.pages.edit", ["page" => $page->id])->with("flash_alert", [
             "variant" => "success",
-            "message" => "Uma nova página foi criada com sucesso!"
+            "message" => "Uma nova página foi criada com sucesso!",
         ]);
     }
 
@@ -125,14 +123,14 @@ class PageController extends Controller
             "images" => session()->get("images", null),
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.pages.index")
+                    "url" => route("admin.pages.index"),
                 ],
                 "new" => [
                     "icon" => "fileEarmarkPlus",
                     "text" => "Nova página",
-                    "url" => route("admin.pages.create")
-                ]
-            ]
+                    "url" => route("admin.pages.create"),
+                ],
+            ],
         ]);
     }
 
@@ -151,8 +149,10 @@ class PageController extends Controller
 
         if ($coverId = $validated["cover"] ?? null) {
             $image = Image::where("id", $coverId)->first();
-            if ($image)
+            if ($image) {
                 $validated["cover"] = $image->path;
+            }
+
         }
 
         $page->update($validated);
@@ -175,29 +175,6 @@ class PageController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return
-     */
-    public function filter(Request $request)
-    {
-        $filters = $this->validate($request, [
-            "filter" => ["nullable", "boolean"],
-            "search" => ["nullable", "string"],
-        ]);
-
-        $users = Page::whereNotNull("id")->orderBy("protection", "DESC")->orderBy("created_at", "DESC");
-
-        if ($filters["filter"] ?? null) {
-            if ($filters["search"] ?? null)
-                $users->whereRaw("MATCH(title,description) AGAINST('{$filters['search']}')");
-
-            $this->filtering = true;
-        }
-
-        return $users->paginate(20);
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Page  $page
@@ -207,20 +184,22 @@ class PageController extends Controller
     {
         $this->authorize("delete", $page);
 
-        if ($page->protection == Page::PROTECTION_SYSTEM)
+        if ($page->protection == Page::PROTECTION_SYSTEM) {
             return back()->with("flash_alert", [
                 "variant" => "warning",
-                "message" => "Página protegida pelo sistema não pode ser excluída!"
+                "message" => "Página protegida pelo sistema não pode ser excluída!",
             ]);
+        }
 
         $slugs = $page->slugs()->first();
         $page->delete();
-        if ($slugs->pages()->count() == 0)
+        if ($slugs->pages()->count() == 0) {
             $slugs->delete();
+        }
 
         return back()->with("flash_alert", [
             "variant" => "warning",
-            "message" => "A página foi excluída definitivamente com sucesso!"
+            "message" => "A página foi excluída definitivamente com sucesso!",
         ]);
     }
 }

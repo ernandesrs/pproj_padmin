@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Media;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
 use App\Http\Resources\VideoResource;
+use App\Http\Services\FilterService;
 use App\Http\Services\VideoService;
 use App\Models\Media\Video;
 use Illuminate\Http\Request;
@@ -13,11 +14,6 @@ use Inertia\Inertia;
 class VideoController extends Controller
 {
     /**
-     * @var boolean
-     */
-    private $filtering = false;
-
-    /**
      * Filter and/or list videos
      *
      * @param Request $request
@@ -25,20 +21,20 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
-        $videos = $this->filter($request);
+        $filter = (new FilterService(new Video()))->filter($request);
 
         return Inertia::render("Admin/Medias/Videos/List", [
-            "videos" => VideoResource::collection($videos),
+            "videos" => VideoResource::collection($filter->model),
             "filterAction" => route("admin.medias.videos.index"),
-            "isFiltering" => $this->filtering,
+            "isFiltering" => $filter->filtering,
             "pageTitle" => "Vídeos",
             "buttons" => [
                 "new" => [
                     "text" => "Upload",
                     "icon" => "video",
-                    "url" => route("admin.medias.videos.create")
-                ]
-            ]
+                    "url" => route("admin.medias.videos.create"),
+                ],
+            ],
         ]);
     }
 
@@ -55,9 +51,9 @@ class VideoController extends Controller
             "pageTitle" => "Novo vídeo",
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.medias.videos.index")
-                ]
-            ]
+                    "url" => route("admin.medias.videos.index"),
+                ],
+            ],
         ]);
     }
 
@@ -77,7 +73,7 @@ class VideoController extends Controller
 
         session()->flash("flash_alert", [
             "variant" => "success",
-            "message" => "Nova vídeo '" . $video->name . "' salvo com sucesso!"
+            "message" => "Nova vídeo '" . $video->name . "' salvo com sucesso!",
         ]);
 
         return redirect()->route("admin.medias.videos.index");
@@ -107,12 +103,12 @@ class VideoController extends Controller
             "video" => new VideoResource($video),
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.medias.videos.index")
+                    "url" => route("admin.medias.videos.index"),
                 ],
                 "new" => [
-                    "url" => route("admin.medias.videos.create")
-                ]
-            ]
+                    "url" => route("admin.medias.videos.create"),
+                ],
+            ],
         ]);
     }
 
@@ -134,7 +130,7 @@ class VideoController extends Controller
 
         session()->flash("flash_alert", [
             "variant" => "success",
-            "message" => "Dados do vídeo foram atualizados com sucesso!"
+            "message" => "Dados do vídeo foram atualizados com sucesso!",
         ]);
         return redirect()->route("admin.medias.videos.index");
     }
@@ -153,33 +149,8 @@ class VideoController extends Controller
 
         session()->flash("flash_alert", [
             "variant" => "info",
-            "message" => "Vídeo exluído com sucesso!"
+            "message" => "Vídeo exluído com sucesso!",
         ]);
         return back();
-    }
-
-    /**
-     * Get and/or filter videos
-     * 
-     * @param Request $request
-     * @return
-     */
-    private function filter(Request $request)
-    {
-        $filters = $this->validate($request, [
-            "filter" => ["nullable", "boolean"],
-            "search" => ["nullable", "string"],
-        ]);
-
-        $videos = Video::whereNotNull("id")->orderBy("created_at", "DESC");
-
-        if ($filters["filter"] ?? null) {
-            if ($filters["search"] ?? null)
-                $videos->whereRaw("MATCH(name,tags) AGAINST('{$filters['search']}')");
-
-            $this->filtering = true;
-        }
-
-        return $videos->paginate(20);
     }
 }

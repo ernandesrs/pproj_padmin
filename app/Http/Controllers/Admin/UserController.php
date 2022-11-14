@@ -6,6 +6,7 @@ use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
+use App\Http\Services\FilterService;
 use App\Http\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,18 +17,13 @@ use Inertia\Inertia;
 class UserController extends Controller
 {
     /**
-     * @var boolean
-     */
-    private $filtering = false;
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Inertia\Response
      */
     public function index(Request $request)
     {
-        $results = $this->filter($request);
+        $filter = (new FilterService(new User(), 18))->filter($request);
 
         /**
          * flag to user resource(make only small thumbnail)
@@ -35,16 +31,16 @@ class UserController extends Controller
         session()->flash("mk_thumb", ["small"]);
 
         return Inertia::render("Admin/Users/List", [
-            "users" => UserResource::collection($results),
+            "users" => UserResource::collection($filter->model),
             "terms" => __("terms.user"),
             "filterAction" => route("admin.users.index"),
-            "isFiltering" => $this->filtering,
+            "isFiltering" => $filter->filtering,
             "pageTitle" => "Usuários",
             "buttons" => [
                 "new" => [
-                    "url" => route("admin.users.create")
-                ]
-            ]
+                    "url" => route("admin.users.create"),
+                ],
+            ],
         ]);
     }
 
@@ -59,9 +55,9 @@ class UserController extends Controller
             "pageTitle" => "Novo usuário",
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.users.index")
-                ]
-            ]
+                    "url" => route("admin.users.index"),
+                ],
+            ],
         ]);
     }
 
@@ -81,7 +77,7 @@ class UserController extends Controller
 
         session()->flash("flash_alert", [
             "variant" => "success",
-            "message" => "Novo usuário cadastrado com sucesso, um link de verificação foi enviado para o email informado."
+            "message" => "Novo usuário cadastrado com sucesso, um link de verificação foi enviado para o email informado.",
         ]);
 
         return Inertia::location(route("admin.users.edit", ["user" => $user->id]));
@@ -117,12 +113,12 @@ class UserController extends Controller
             "pageTitle" => "Editar usuário",
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.users.index")
+                    "url" => route("admin.users.index"),
                 ],
                 "new" => [
-                    "url" => route("admin.users.create")
-                ]
-            ]
+                    "url" => route("admin.users.create"),
+                ],
+            ],
         ]);
     }
 
@@ -143,7 +139,7 @@ class UserController extends Controller
 
         Session::flash("flash_alert", [
             "message" => "Os dados de " . $user->first_name . " foram atualizados com sucesso!",
-            "variant" => "success"
+            "variant" => "success",
         ]);
 
         return back();
@@ -219,28 +215,5 @@ class UserController extends Controller
         }
 
         return redirect()->back();
-    }
-
-    /**
-     * @param Request $request
-     * @return 
-     */
-    public function filter(Request $request)
-    {
-        $filters = $this->validate($request, [
-            "filter" => ["nullable", "boolean"],
-            "search" => ["nullable", "string"],
-        ]);
-
-        $users = User::whereNotNull("id")->orderBy("level", "DESC")->orderBy("created_at", "DESC");
-
-        if ($filters["filter"] ?? null) {
-            if ($filters["search"] ?? null)
-                $users->whereRaw("MATCH(first_name,last_name,username,email) AGAINST('{$filters['search']}')");
-
-            $this->filtering = true;
-        }
-
-        return $users->paginate(18);
     }
 }

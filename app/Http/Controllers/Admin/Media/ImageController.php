@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Media;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
 use App\Http\Resources\ImageResource;
+use App\Http\Services\FilterService;
 use App\Http\Services\ImageService;
 use App\Models\Media\Image;
 use Illuminate\Http\Request;
@@ -12,11 +13,6 @@ use Inertia\Inertia;
 
 class ImageController extends Controller
 {
-    /**
-     * @var boolean
-     */
-    private $filtering = false;
-
     /**
      * Display a listing of the resource.
      *
@@ -26,28 +22,29 @@ class ImageController extends Controller
     public function index(Request $request)
     {
         $onlyList = $request->get("onlyList", false);
-        $images = $this->filter($request);
+        $filter = (new FilterService(new Image()))->filter($request);
 
         /**
          * flag to image resource(to make only the small thumbnail)
          */
         session()->flash("mk_thumb", ["small"]);
 
-        if ($onlyList)
-            return back()->with("images", ImageResource::collection($images));
+        if ($onlyList) {
+            return back()->with("images", ImageResource::collection($filter->model));
+        }
 
         return Inertia::render("Admin/Medias/Images/List", [
-            "images" => ImageResource::collection($images),
+            "images" => ImageResource::collection($filter->model),
             "filterAction" => route("admin.medias.images.index"),
-            "isFiltering" => $this->filtering,
+            "isFiltering" => $filter->filtering,
             "pageTitle" => "Imagens",
             "buttons" => [
                 "new" => [
                     "text" => "Upload",
                     "icon" => "image",
-                    "url" => route("admin.medias.images.create")
-                ]
-            ]
+                    "url" => route("admin.medias.images.create"),
+                ],
+            ],
         ]);
     }
 
@@ -64,9 +61,9 @@ class ImageController extends Controller
             "pageTitle" => "Nova imagem",
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.medias.images.index")
-                ]
-            ]
+                    "url" => route("admin.medias.images.index"),
+                ],
+            ],
         ]);
     }
 
@@ -86,7 +83,7 @@ class ImageController extends Controller
 
         session()->flash("flash_alert", [
             "variant" => "success",
-            "message" => "Nova imagem '" . $image->name . "' salva com sucesso!"
+            "message" => "Nova imagem '" . $image->name . "' salva com sucesso!",
         ]);
 
         return redirect()->route("admin.medias.images.index");
@@ -94,7 +91,7 @@ class ImageController extends Controller
 
     /**
      * Store new image and return a image resource
-     * 
+     *
      * @param ImageRequest $request
      * @return ImageResource|\Illuminate\Http\RedirectResponse
      */
@@ -109,7 +106,7 @@ class ImageController extends Controller
         if ($request->header("x-inertia", false)) {
             return back()->with("flash_alert", [
                 "variant" => "success",
-                "message" => "Imagem enviada com sucesso!"
+                "message" => "Imagem enviada com sucesso!",
             ]);
         }
 
@@ -145,12 +142,12 @@ class ImageController extends Controller
             "image" => new ImageResource($image),
             "buttons" => [
                 "back" => [
-                    "url" => route("admin.medias.images.index")
+                    "url" => route("admin.medias.images.index"),
                 ],
                 "new" => [
-                    "url" => route("admin.medias.images.create")
-                ]
-            ]
+                    "url" => route("admin.medias.images.create"),
+                ],
+            ],
         ]);
     }
 
@@ -172,7 +169,7 @@ class ImageController extends Controller
 
         session()->flash("flash_alert", [
             "variant" => "success",
-            "message" => "Dados da imagem foram atualizados com sucesso!"
+            "message" => "Dados da imagem foram atualizados com sucesso!",
         ]);
         return redirect()->route("admin.medias.images.index");
     }
@@ -191,33 +188,8 @@ class ImageController extends Controller
 
         session()->flash("flash_alert", [
             "variant" => "info",
-            "message" => "Imagem exluída com sucesso!"
+            "message" => "Imagem exluída com sucesso!",
         ]);
         return back();
-    }
-
-    /**
-     * Get and/or filter images
-     * 
-     * @param Request $request
-     * @return
-     */
-    private function filter(Request $request)
-    {
-        $filters = $this->validate($request, [
-            "filter" => ["nullable", "boolean"],
-            "search" => ["nullable", "string"],
-        ]);
-
-        $images = Image::whereNotNull("id")->orderBy("created_at", "DESC");
-
-        if ($filters["filter"] ?? null) {
-            if ($filters["search"] ?? null)
-                $images->whereRaw("MATCH(name,tags) AGAINST('{$filters['search']}')");
-
-            $this->filtering = true;
-        }
-
-        return $images->paginate(20);
     }
 }
