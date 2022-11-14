@@ -2804,7 +2804,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: section.id,
       item: {
         cover: null,
-        title: section.title,
+        title: '[' + section.name + '] ' + section.title,
         subtitle: section.subtitle,
         coverStyle: 'rectangle'
       }
@@ -2812,9 +2812,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       badges: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1 fw-light",
-          text: "Opa, top",
+          text: section.visible ? 'Visível' : 'Oculto',
           variant: "info"
-        })];
+        }, null, 8
+        /* PROPS */
+        , ["text"])];
       }),
       actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
@@ -2826,8 +2828,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })
         }, null, 8
         /* PROPS */
-        , ["to"]), section.can["delete"] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
-          key: 0,
+        , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
           "confirm-text": "Excluir?",
           icon: "trash",
           variant: "danger",
@@ -2840,7 +2841,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "confirm-with-request": ""
         }, null, 8
         /* PROPS */
-        , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+        , ["data-action"])];
       }),
       _: 2
       /* DYNAMIC */

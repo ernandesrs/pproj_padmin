@@ -4,12 +4,13 @@
     <div class="row justify-content-center">
         <ListItem v-for="section in sections?.data" :key="section.id" :item="{
             cover: null,
-            title: section.title,
+            title: '[' + section.name + '] ' + section.title,
             subtitle: section.subtitle,
             coverStyle: 'rectangle'
         }">
             <template v-slot:badges>
-                <BadgeUi class="mb-1 me-1 fw-light" text="Opa, top" variant="info" />
+                <BadgeUi class="mb-1 me-1 fw-light"
+                    :text="section.visible ? 'Visível' : 'Oculto'" variant="info" />
             </template>
 
             <template v-slot:actions>
@@ -17,9 +18,8 @@
                     section: section.id
                 })" />
 
-                <ButtonConfirmationUi v-if="section.can.delete" confirm-text="Excluir?"
-                    icon="trash" variant="danger" size="sm" class="ms-2" position="right"
-                    :data-action="$route('admin.sections.destroy',
+                <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
+                    variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.sections.destroy',
                     { section: section.id })" confirm-with-request />
             </template>
         </ListItem>

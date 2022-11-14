@@ -19,7 +19,7 @@ class SectionController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Front/Sections/List', [
-            'sections' => null,
+            'sections' => Section::paginate(20),
             'pageTitle' => 'Seções',
             "buttons" => [
                 "new" => [
