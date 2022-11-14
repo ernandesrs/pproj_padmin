@@ -19,6 +19,25 @@ class FilterService
             ],
             "search_in" => "title,description",
         ],
+        "App\Models\User" => [
+            "order_by" => [
+                ["level", "desc"],
+                ["created_at", "desc"],
+            ],
+            "search_in" => "first_name,last_name,username,email",
+        ],
+        "App\Models\Media\Image" => [
+            "order_by" => [
+                ["created_at", "desc"],
+            ],
+            "search_in" => "name,tags",
+        ],
+        "App\Models\Media\Video" => [
+            "order_by" => [
+                ["created_at", "desc"],
+            ],
+            "search_in" => "name,tags",
+        ],
     ];
 
     /**
@@ -37,7 +56,6 @@ class FilterService
     public $limit;
 
     /**
-     *
      * @var bool
      */
     public $filtering;
@@ -74,7 +92,7 @@ class FilterService
         if ($filterable = $this->filterable) {
             if ($orders = $filterable["order_by"]) {
                 foreach ($orders as $order) {
-                    $this->model = $this->model->orderBy($$order[0], $$order[1]);
+                    $this->model = $this->model->orderBy($order[0], $order[1]);
                 }
             }
 
