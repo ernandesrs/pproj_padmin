@@ -90,7 +90,7 @@ class FilterService
         $this->model = $this->model->whereNotNull("id");
 
         if ($filterable = $this->filterable) {
-            if ($orders = $filterable["order_by"]) {
+            if ($orders = $filterable["order_by"] ?? null) {
                 foreach ($orders as $order) {
                     $this->model = $this->model->orderBy($order[0], $order[1]);
                 }
