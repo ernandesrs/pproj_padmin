@@ -1,24 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Admin\AdminController as AdminController;
+use App\Http\Controllers\Admin\Front\MenuController as AdminMenuController;
+use App\Http\Controllers\Admin\Front\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\Front\SettingController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\Media\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
-use App\Http\Controllers\Admin\Front\MenuController as AdminMenuController;
-
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
 use App\Http\Controllers\Auth\VerifyController;
 use App\Http\Controllers\Front\FrontController;
+use Illuminate\Support\Facades\Route;
 
 // ADMIN
 Route::group([
     "prefix" => "admin",
-    "middleware" => ["auth", "admin_access", "throttle:admin_visitor_limits"]
+    "middleware" => ["auth", "admin_access", "throttle:admin_visitor_limits"],
 ], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
 
@@ -53,6 +52,15 @@ Route::group([
         Route::post("/videos/delete/{video}", [AdminVideoController::class, "destroy"])->name("admin.medias.videos.destroy");
     });
 
+    Route::resource("sections", AdminSectionController::class)->names([
+        'index' => 'admin.sections.index',
+        'create' => 'admin.sections.create',
+        'store' => 'admin.sections.store',
+        'edit' => 'admin.sections.edit',
+        'update' => 'admin.sections.update',
+        'destroy' => 'admin.sections.destroy',
+    ]);
+
     Route::get("/pages", [AdminPageController::class, "index"])->name("admin.pages.index");
     Route::get("/pages/create", [AdminPageController::class, "create"])->name("admin.pages.create");
     Route::post("/pages/store", [AdminPageController::class, "store"])->name("admin.pages.store");
@@ -77,7 +85,7 @@ Route::group([], function () {
     Route::get('/', [FrontController::class, "index"])->name("front.index");
 
     Route::get('/mailable', function () {
-        // 
+        //
     })->name("front.mailable");
 
     Route::get("/builder", [\App\Http\Controllers\Builder::class, "build"]);

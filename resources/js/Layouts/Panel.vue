@@ -197,8 +197,14 @@ export default {
                         text: 'Gerenciar ' + this.appName,
                         to: '#',
                         icon: 'layoutWtf',
-                        activeIn: ['Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Menus/List', 'Admin/Front/Menus/Form', 'Admin/Front/Settings'],
+                        activeIn: ['Admin/Front/Sections/List', 'Admin/Front/Sections/Form', 'Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Menus/List', 'Admin/Front/Menus/Form', 'Admin/Front/Settings'],
                         items: [
+                            {
+                                text: 'Seções',
+                                to: this.$route("admin.sections.index"),
+                                icon: 'collection',
+                                activeIn: ['Admin/Front/Sections/List', 'Admin/Front/Sections/Form']
+                            },
                             {
                                 text: 'Páginas',
                                 to: this.$route("admin.pages.index"),
