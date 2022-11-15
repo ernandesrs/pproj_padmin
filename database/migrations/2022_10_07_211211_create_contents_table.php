@@ -17,7 +17,8 @@ class CreateContentsTable extends Migration
             $table->id();
 
             $table->string("name", 25)->nullable(false)->unique();
-            $table->text("content")->nullable(true);
+            $table->boolean("is_json")->default(false);
+            $table->json("content")->nullable(true);
 
             $table->timestamps();
         });
