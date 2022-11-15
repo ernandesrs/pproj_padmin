@@ -1359,24 +1359,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   menus: {
     type: Object,
     "default": {}
+  },
+  sections: {
+    type: Object,
+    "default": {}
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
-  var _this$settings$conten, _this$settings, _this$settings$conten2, _this$settings$conten3, _this$settings$conten4, _this$settings2, _this$settings2$conte, _this$settings2$conte2, _this$settings3, _this$settings3$conte, _this$settings4, _this$settings4$conte, _this$settings5, _this$settings5$conte, _this$settings$conten5, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings$conten6, _this$settings7, _this$settings7$conte, _this$settings7$conte2;
+  var _this$settings$conten, _this$settings, _this$settings$conten2, _this$settings$conten3, _this$settings$conten4, _this$settings2, _this$settings2$conte, _this$settings2$conte2, _this$settings$conten5, _this$settings3, _this$settings3$conte, _this$settings3$conte2, _this$settings$conten6, _this$settings4, _this$settings4$conte, _this$settings4$conte2, _this$settings$conten7, _this$settings5, _this$settings5$conte, _this$settings5$conte2, _this$settings$conten8, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings$conten9, _this$settings7, _this$settings7$conte, _this$settings7$conte2;
 
   return {
     faviconPreview: (_this$settings$conten = (_this$settings = this.settings) === null || _this$settings === void 0 ? void 0 : (_this$settings$conten2 = _this$settings.content) === null || _this$settings$conten2 === void 0 ? void 0 : (_this$settings$conten3 = _this$settings$conten2.header) === null || _this$settings$conten3 === void 0 ? void 0 : _this$settings$conten3.favicon_url) !== null && _this$settings$conten !== void 0 ? _this$settings$conten : null,
     logoPreview: (_this$settings$conten4 = (_this$settings2 = this.settings) === null || _this$settings2 === void 0 ? void 0 : (_this$settings2$conte = _this$settings2.content) === null || _this$settings2$conte === void 0 ? void 0 : (_this$settings2$conte2 = _this$settings2$conte.header) === null || _this$settings2$conte2 === void 0 ? void 0 : _this$settings2$conte2.logo_url) !== null && _this$settings$conten4 !== void 0 ? _this$settings$conten4 : null,
     form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
-      title: (_this$settings3 = this.settings) === null || _this$settings3 === void 0 ? void 0 : (_this$settings3$conte = _this$settings3.content) === null || _this$settings3$conte === void 0 ? void 0 : _this$settings3$conte.title,
-      description: (_this$settings4 = this.settings) === null || _this$settings4 === void 0 ? void 0 : (_this$settings4$conte = _this$settings4.content) === null || _this$settings4$conte === void 0 ? void 0 : _this$settings4$conte.description,
-      follow: (_this$settings5 = this.settings) === null || _this$settings5 === void 0 ? void 0 : (_this$settings5$conte = _this$settings5.content) === null || _this$settings5$conte === void 0 ? void 0 : _this$settings5$conte.follow,
       header: {
         favicon: null,
         logo: null,
-        menu_main: (_this$settings$conten5 = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.header) === null || _this$settings6$conte2 === void 0 ? void 0 : _this$settings6$conte2.menu_main) !== null && _this$settings$conten5 !== void 0 ? _this$settings$conten5 : null
+        menu_main: (_this$settings$conten5 = (_this$settings3 = this.settings) === null || _this$settings3 === void 0 ? void 0 : (_this$settings3$conte = _this$settings3.content) === null || _this$settings3$conte === void 0 ? void 0 : (_this$settings3$conte2 = _this$settings3$conte.header) === null || _this$settings3$conte2 === void 0 ? void 0 : _this$settings3$conte2.menu_main) !== null && _this$settings$conten5 !== void 0 ? _this$settings$conten5 : null
+      },
+      sections: {
+        section_1: (_this$settings$conten6 = (_this$settings4 = this.settings) === null || _this$settings4 === void 0 ? void 0 : (_this$settings4$conte = _this$settings4.content) === null || _this$settings4$conte === void 0 ? void 0 : (_this$settings4$conte2 = _this$settings4$conte.sections) === null || _this$settings4$conte2 === void 0 ? void 0 : _this$settings4$conte2.section_1) !== null && _this$settings$conten6 !== void 0 ? _this$settings$conten6 : null,
+        section_2: (_this$settings$conten7 = (_this$settings5 = this.settings) === null || _this$settings5 === void 0 ? void 0 : (_this$settings5$conte = _this$settings5.content) === null || _this$settings5$conte === void 0 ? void 0 : (_this$settings5$conte2 = _this$settings5$conte.sections) === null || _this$settings5$conte2 === void 0 ? void 0 : _this$settings5$conte2.section_2) !== null && _this$settings$conten7 !== void 0 ? _this$settings$conten7 : null,
+        section_3: (_this$settings$conten8 = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.sections) === null || _this$settings6$conte2 === void 0 ? void 0 : _this$settings6$conte2.section_3) !== null && _this$settings$conten8 !== void 0 ? _this$settings$conten8 : null
       },
       footer: {
-        menu_main: (_this$settings$conten6 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.footer) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.menu_main) !== null && _this$settings$conten6 !== void 0 ? _this$settings$conten6 : null
+        menu_main: (_this$settings$conten9 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.footer) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.menu_main) !== null && _this$settings$conten9 !== void 0 ? _this$settings$conten9 : null
       }
     }),
     showImagesModalList: false,
@@ -2845,18 +2851,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "row"
+  "class": "row mb-4"
 };
 var _hoisted_2 = {
-  "class": "col-12 col-lg-6"
+  "class": "col-12 col-lg-4"
 };
 var _hoisted_3 = {
-  "class": "card card-body mb-4"
+  "class": "card card-body mb-4 h-100"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "fs-5 fw-semibold"
-}, "Geral", -1
+}, "Cabeçalho", -1
 /* HOISTED */
 );
 
@@ -2864,59 +2870,55 @@ var _hoisted_5 = {
   "class": "row"
 };
 var _hoisted_6 = {
-  "class": "col-12 mb-4"
+  "class": "col-6 mb-4 text-center"
 };
 var _hoisted_7 = {
-  "class": "col-12 mb-4"
+  "class": "col-6 mb-4 text-center"
 };
 var _hoisted_8 = {
   "class": "col-12"
 };
 var _hoisted_9 = {
-  "class": "col-12 col-lg-6"
+  "class": "col-12 col-lg-4"
 };
 var _hoisted_10 = {
-  "class": "card card-body mb-4"
+  "class": "card card-body mb- h-100"
 };
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "fs-5 fw-semibold"
-}, "Cabeçalho", -1
+}, "Corpo", -1
 /* HOISTED */
 );
 
 var _hoisted_12 = {
-  "class": "row mb-4"
+  "class": "row"
 };
 var _hoisted_13 = {
-  "class": "col-6 mb-4 text-center"
+  "class": "col-12 mb-4"
 };
 var _hoisted_14 = {
-  "class": "col-6 mb-4 text-center"
+  "class": "col-12 mb-4"
 };
 var _hoisted_15 = {
-  "class": "col-12"
+  "class": "col-12 mb-4"
 };
 var _hoisted_16 = {
-  "class": "card card-body mb-4"
+  "class": "col-12 col-lg-4"
+};
+var _hoisted_17 = {
+  "class": "card card-body mb-4 h-100"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "fs-5 fw-semibold"
 }, "Rodapé", -1
 /* HOISTED */
 );
 
-var _hoisted_18 = {
-  "class": "row mb-4"
+var _hoisted_19 = {
+  "class": "row"
 };
-
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col-6 mb-4 text-center"
-}, null, -1
-/* HOISTED */
-);
-
 var _hoisted_20 = {
   "class": "col-12"
 };
@@ -2928,10 +2930,6 @@ var _hoisted_22 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ModalImagesList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalImagesList");
-
-  var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
-
-  var _component_TextAreaForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TextAreaForm");
 
   var _component_ImagePreviewUi = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ImagePreviewUi");
 
@@ -2949,38 +2947,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
-    label: "Título do site:",
-    name: "title",
-    modelValue: $data.form.title,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.form.title = $event;
-    }),
-    "error-message": $data.form.errors.title
-  }, null, 8
-  /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TextAreaForm, {
-    label: "Descrição do site:",
-    name: "description",
-    modelValue: $data.form.description,
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.form.description = $event;
-    }),
-    "error-message": $data.form.errors.description,
-    rows: "3"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
-    label: "Permitir indexação aos mecanismos de buscas",
-    type: "checkbox",
-    name: "follow",
-    modelValue: $data.form.follow,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.form.follow = $event;
-    })
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
     "preview-url": $data.faviconPreview,
     "preview-alt": "Favicon preview",
     borderless: $data.faviconPreview ? true : false,
@@ -2996,7 +2963,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "data-to": "favicon"
   }, null, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
     "preview-url": $data.logoPreview,
     "preview-alt": "Logo preview",
     borderless: $data.logoPreview ? true : false,
@@ -3012,11 +2979,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "data-to": "logo"
   }, null, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Menu principal:",
     name: "menu_main",
     modelValue: $data.form.header.menu_main,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.form.header.menu_main = $event;
     }),
     options: $props.menus.map(function (menu) {
@@ -3028,7 +2995,55 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors['header.menu_main']
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options", "error-message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["modelValue", "options", "error-message"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+    label: "Seção 1:",
+    name: "section_1",
+    modelValue: $data.form.sections.section_1,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.form.sections.section_1 = $event;
+    }),
+    options: $props.sections.map(function (section) {
+      return {
+        text: section.name,
+        value: section.id
+      };
+    }),
+    "error-message": $data.form.errors['sections.section_1']
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "options", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+    label: "Seção 2:",
+    name: "section-2",
+    modelValue: $data.form.sections.section_2,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.form.sections.section_2 = $event;
+    }),
+    options: $props.sections.map(function (section) {
+      return {
+        text: section.name,
+        value: section.id
+      };
+    }),
+    "error-message": $data.form.errors['sections.section_2']
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "options", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+    label: "Seção 3:",
+    name: "section_3",
+    modelValue: $data.form.sections.section_3,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.form.sections.section_3 = $event;
+    }),
+    options: $props.sections.map(function (section) {
+      return {
+        text: section.name,
+        value: section.id
+      };
+    }),
+    "error-message": $data.form.errors['sections.section_3']
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "options", "error-message"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Menu rodapé:",
     name: "menu_main",
     modelValue: $data.form.footer.menu_main,

@@ -8,6 +8,7 @@ use App\Http\Resources\MenuResource;
 use App\Models\Content;
 use App\Models\Media\Image;
 use App\Models\Menu;
+use App\Models\Section\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -25,6 +26,7 @@ class SettingController extends Controller
         $settings->content = json_decode($settings->content);
 
         $menus = MenuResource::collection(Menu::all());
+        $sections = Section::where("visible", true)->get();
 
         if ($favicon = $settings->content->header->favicon) {
             $settings->content->header->favicon_url = Thumb::thumb($favicon);
@@ -41,6 +43,7 @@ class SettingController extends Controller
         return Inertia::render("Admin/Front/Settings", [
             "settings" => $settings,
             "menus" => $menus,
+            "sections" => $sections,
             "images" => session()->get("images", null),
             "pageTitle" => "Configurações de: " . config("app.name"),
         ]);

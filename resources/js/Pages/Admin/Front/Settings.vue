@@ -4,32 +4,11 @@
         @imageInsert="insertImage" />
 
     <form @submit.prevent="submit">
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <div class="card card-body mb-4">
-                    <h2 class="fs-5 fw-semibold">Geral</h2>
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            <InputForm label="Título do site:" name="title"
-                                v-model="form.title" :error-message="form.errors.title" />
-                        </div>
-                        <div class="col-12 mb-4">
-                            <TextAreaForm label="Descrição do site:" name="description"
-                                v-model="form.description"
-                                :error-message="form.errors.description" rows="3" />
-                        </div>
-                        <div class="col-12">
-                            <InputForm label="Permitir indexação aos mecanismos de buscas"
-                                type="checkbox" name="follow" v-model="form.follow" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="card card-body mb-4">
+        <div class="row mb-4">
+            <div class="col-12 col-lg-4">
+                <div class="card card-body mb-4 h-100">
                     <h2 class="fs-5 fw-semibold">Cabeçalho</h2>
-                    <div class="row mb-4">
+                    <div class="row">
                         <div class="col-6 mb-4 text-center">
                             <ImagePreviewUi :preview-url="faviconPreview"
                                 preview-alt="Favicon preview"
@@ -61,14 +40,47 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card card-body mb-4">
-                    <h2 class="fs-5 fw-semibold">Rodapé</h2>
-                    <div class="row mb-4">
-                        <div class="col-6 mb-4 text-center">
-
+            <div class="col-12 col-lg-4">
+                <div class="card card-body mb- h-100">
+                    <h2 class="fs-5 fw-semibold">Corpo</h2>
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <SelectForm label="Seção 1:" name="section_1"
+                                v-model="form.sections.section_1" :options="sections.map((section) => {
+                                    return {
+                                        text: section.name,
+                                        value: section.id
+                                    };
+                                })" :error-message="form.errors['sections.section_1']" />
                         </div>
+                        <div class="col-12 mb-4">
+                            <SelectForm label="Seção 2:" name="section-2"
+                                v-model="form.sections.section_2" :options="sections.map((section) => {
+                                    return {
+                                        text: section.name,
+                                        value: section.id
+                                    };
+                                })" :error-message="form.errors['sections.section_2']" />
+                        </div>
+                        <div class="col-12 mb-4">
+                            <SelectForm label="Seção 3:" name="section_3"
+                                v-model="form.sections.section_3" :options="sections.map((section) => {
+                                    return {
+                                        text: section.name,
+                                        value: section.id
+                                    };
+                                })" :error-message="form.errors['sections.section_3']" />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-12 col-lg-4">
+                <div class="card card-body mb-4 h-100">
+                    <h2 class="fs-5 fw-semibold">Rodapé</h2>
+                    <div class="row">
                         <div class="col-12">
                             <SelectForm label="Menu rodapé:" name="menu_main"
                                 v-model="form.footer.menu_main" :options="menus.map((menu) => {
@@ -111,6 +123,7 @@ export default {
     props: {
         settings: { type: Object, default: {} },
         menus: { type: Object, default: {} },
+        sections: { type: Object, default: {} },
     },
 
     data() {
@@ -118,13 +131,15 @@ export default {
             faviconPreview: this.settings?.content?.header?.favicon_url ?? null,
             logoPreview: this.settings?.content?.header?.logo_url ?? null,
             form: useForm({
-                title: this.settings?.content?.title,
-                description: this.settings?.content?.description,
-                follow: this.settings?.content?.follow,
                 header: {
                     favicon: null,
                     logo: null,
                     menu_main: this.settings?.content?.header?.menu_main ?? null,
+                },
+                sections: {
+                    section_1: this.settings?.content?.sections?.section_1 ?? null,
+                    section_2: this.settings?.content?.sections?.section_2 ?? null,
+                    section_3: this.settings?.content?.sections?.section_3 ?? null,
                 },
                 footer: {
                     menu_main: this.settings?.content?.footer?.menu_main ?? null,
