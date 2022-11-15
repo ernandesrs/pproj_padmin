@@ -76,7 +76,7 @@
                         <label class="mb-1">{{ form.type == 0 ?
                                 'Conteúdo' : 'Descrição'
                         }}:</label>
-                        <EditorTiny v-model="tinyEditor" :api-key="tinyApiKey" full
+                        <EditorTiny v-model="tinyEditor" :api-key="tinyApiKey" basic
                             min-height=200 />
                         <small class="text-danger" v-if="tinyEditorError">{{
                                 tinyEditorError
@@ -251,7 +251,7 @@ export default {
         }
     },
 
-    mounted() {
+    created() {
         if (!this.section?.id) return;
 
         this.form.id = this.section.id;
@@ -261,11 +261,13 @@ export default {
         this.form.visible = this.section.visible;
         this.form.subtitle = this.section.subtitle;
 
-        this.form.content.content = this.section.content.content;
-        this.form.content.image = null;
-        this.form.content.image_url = this.section.content.image_url;
-        this.imagePreview = this.section.content.image_url;
+        if (this.section.type == 0) {
+            this.tinyEditor = this.section.content.content;
+        } else if (this.section.type == 1) {
+            this.tinyEditor = this.section.content.description;
+        }
 
+        this.imagePreview = this.section.content.image_url;
         this.form.buttons = this.section.buttons;
 
         this.updateButtonsOrder();

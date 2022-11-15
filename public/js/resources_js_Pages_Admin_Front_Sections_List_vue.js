@@ -2815,8 +2815,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: section.id,
       item: {
         cover: null,
-        title: '[' + section.name + '] ' + section.title,
-        subtitle: '',
+        title: section.name,
+        subtitle: section.title,
         coverStyle: 'rectangle'
       }
     }, {

@@ -2169,7 +2169,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   }
-}), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
+}), _defineProperty(_layout$layout$compon, "created", function created() {
   var _this$section;
 
   if (!((_this$section = this.section) !== null && _this$section !== void 0 && _this$section.id)) return;
@@ -2179,9 +2179,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   this.form.title = this.section.title;
   this.form.visible = this.section.visible;
   this.form.subtitle = this.section.subtitle;
-  this.form.content.content = this.section.content.content;
-  this.form.content.image = null;
-  this.form.content.image_url = this.section.content.image_url;
+
+  if (this.section.type == 0) {
+    this.tinyEditor = this.section.content.content;
+  } else if (this.section.type == 1) {
+    this.tinyEditor = this.section.content.description;
+  }
+
   this.imagePreview = this.section.content.image_url;
   this.form.buttons = this.section.buttons;
   this.updateButtonsOrder();
@@ -4119,7 +4123,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $data.tinyEditor = $event;
     }),
     "api-key": $props.tinyApiKey,
-    full: "",
+    basic: "",
     "min-height": "200"
   }, null, 8
   /* PROPS */

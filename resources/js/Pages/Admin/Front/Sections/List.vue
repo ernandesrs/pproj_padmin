@@ -4,8 +4,8 @@
     <div class="row justify-content-center">
         <ListItem v-for="section in sections?.data" :key="section.id" :item="{
             cover: null,
-            title: '[' + section.name + '] ' + section.title,
-            subtitle: '',
+            title: section.name,
+            subtitle: section.title,
             coverStyle: 'rectangle'
         }">
             <template v-slot:badges>
