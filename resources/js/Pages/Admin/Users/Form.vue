@@ -8,22 +8,23 @@
                     <ButtonConfirmationUi v-if="user.next_level && user.can.promote"
                         text="Promover" confirm-text="Promover?" size="sm"
                         variant="success" icon="userPlus" class="m-1" position="center"
-                        :data-action="$route('admin.users.promote', {user: user.id})"
-                        confirm-with-request />
+                        :data-action="$route('admin.users.promote', { user: user.id })"
+                        confirm-with-request request-method="post" />
                     <ButtonConfirmationUi v-if="user.previous_level && user.can.demote"
                         text="Rebaixar" confirm-text="Rebaixar?" size="sm"
                         variant="danger" icon="userMinus" class="m-1" position="center"
-                        :data-action="$route('admin.users.demote', {user: user.id})"
-                        confirm-with-request />
+                        :data-action="$route('admin.users.demote', { user: user.id })"
+                        confirm-with-request request-method="post" />
                 </div>
                 <div class="py-3 text-center">
                     <p class="mb-0">
                         <strong>Registro:</strong> <span class="text-muted">{{
-                        getDate(user.created_at) }}</span>
+                                getDate(user.created_at)
+                        }}</span>
                     </p>
                     <p class="mb-0">
                         <span class="badge bg-primary">
-                            Nível: {{ terms.level['level_'+user.level] }}
+                            Nível: {{ terms.level['level_' + user.level] }}
                         </span>
                     </p>
                 </div>
@@ -52,9 +53,9 @@
 
                     <div class="col-12 col-sm-5 col-md-6 mb-4">
                         <SelectForm label="Gênero" name="gender" :options="[
-                            {text: 'Não definir', value: 0},
-                            {text: 'Masculino', value: 1},
-                            {text: 'Feminino', value: 2},
+                            { text: 'Não definir', value: 0 },
+                            { text: 'Masculino', value: 1 },
+                            { text: 'Feminino', value: 2 },
                         ]" v-model="form.gender" :error-message="form.errors.gender" />
                     </div>
 
@@ -91,8 +92,9 @@
 
                     <div v-if="user?.id && user.can.update || !user?.id"
                         class="col-12 text-center">
-                        <ButtonUi :text="user?.id ? 'Atualizar' : 'Cadastrar'" type="submit" variant="primary"
-                            icon="checkLg" :disabled="form.processing" />
+                        <ButtonUi :text="user?.id ? 'Atualizar' : 'Cadastrar'"
+                            type="submit" variant="primary" icon="checkLg"
+                            :disabled="form.processing" />
                     </div>
                 </div>
             </form>
@@ -149,8 +151,15 @@ export default {
 
     methods: {
         submit() {
-            let action = this.form?.id ? route('admin.users.update', { user: this.form.id }) : route('admin.users.create');
-            this.form.post(action);
+            let action = route('admin.users.store');
+
+            if (this.form?.id) {
+                action = route('admin.users.update', { user: this.form.id });
+
+                this.form.put(action);
+            } else {
+                this.form.post(action);
+            }
         },
 
         getDate(data) {

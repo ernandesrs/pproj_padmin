@@ -23,7 +23,8 @@
                     title="Bootstrap Icons"> https://icons.getbootstrap.com</a>
             </li>
             <li>
-                Então você poderá navegar entre os milhares de ícones existentes. Você pode facilmente
+                Então você poderá navegar entre os milhares de ícones existentes. Você
+                pode facilmente
                 encontrar um ícone utilizando o campo de filtragem. Clique sobre o ícone
                 escolhido.
             </li>
@@ -163,12 +164,14 @@ export default {
         submit() {
             let action = route("admin.menus.store");
 
-            if (this.form?.id)
-                action = route('admin.menus.update', { menu: this.menu.id });
-
             this.form.items = this.items;
 
-            this.form.post(action);
+            if (this.form?.id) {
+                action = route('admin.menus.update', { menu: this.menu.id });
+                this.form.put(action);
+            } else {
+                this.form.post(action);
+            }
         },
 
         addMenuItem() {

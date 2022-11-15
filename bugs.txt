@@ -1,2 +1,3 @@
 [Page create]: campos já preenchidos são perdidos ao abrir modal de inserção/upload de imagens
 [Section create]: campos já preenchidos são perdidos ao abrir modal de inserção/upload de imagens
+[User update]: ao fazer upload de foto ocorre erro de validação(campos obrigatórios não preenchidos)

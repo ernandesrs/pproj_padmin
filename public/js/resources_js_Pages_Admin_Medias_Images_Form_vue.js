@@ -1133,13 +1133,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   this.form.tags = this.image.tags;
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
-    var _this$image2, _this$image3;
+    var _this$image2;
 
     var action = route("admin.medias.images.store");
-    if ((_this$image2 = this.image) !== null && _this$image2 !== void 0 && _this$image2.id) action = route("admin.medias.images.update", {
-      image: (_this$image3 = this.image) === null || _this$image3 === void 0 ? void 0 : _this$image3.id
-    });
-    this.form.post(action);
+
+    if ((_this$image2 = this.image) !== null && _this$image2 !== void 0 && _this$image2.id) {
+      var _this$image3;
+
+      action = route("admin.medias.images.update", {
+        image: (_this$image3 = this.image) === null || _this$image3 === void 0 ? void 0 : _this$image3.id
+      });
+      this.form.put(action);
+    } else {
+      this.form.post(action);
+    }
   }
 }), _layout$layout$compon);
 

@@ -43,6 +43,7 @@ export default {
 
         dataAction: { type: String, default: null },
         confirmWithRequest: { type: Boolean, default: false },
+        requestMethod: { type: String, default: 'get' },
 
         position: { type: String, default: 'right' },
 
@@ -106,10 +107,19 @@ export default {
 
         request(e) {
             let action = e.target.getAttribute("data-action");
+
             if (!action)
                 return;
 
-            Inertia.post(action, null, {
+            let methods = ["GET", "POST", "DELETE", "PUT", "DELETE"];
+            let method = this.requestMethod.toUpperCase();
+
+            if (!methods.includes(method))
+                return;
+
+            Inertia.visit(action, {
+                method: method,
+                data: null,
                 onStart: visit => {
                     this.waitRequest = true;
                     this.buttonCancel.disabled = this.buttonConfirm.disabled = true;

@@ -73,10 +73,13 @@ export default {
     methods: {
         submit() {
             let action = route("admin.medias.videos.store");
-            if (this.video?.id)
-                action = route("admin.medias.videos.update", { video: this.video?.id });
 
-            this.form.post(action);
+            if (this.video?.id) {
+                action = route("admin.medias.videos.update", { video: this.video?.id });
+                this.form.put(action);
+            } else {
+                this.form.post(action);
+            }
         }
     }
 }

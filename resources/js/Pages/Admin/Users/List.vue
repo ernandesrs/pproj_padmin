@@ -24,7 +24,7 @@
             <ButtonConfirmationUi v-if="user.can.delete" confirm-text="Excluir?"
                 icon="trash" variant="danger" size="sm" class="ms-2" position="right"
                 :data-action="$route('admin.users.destroy',
-                {user: user.id})" confirm-with-request />
+                {user: user.id})" confirm-with-request request-method="delete" />
         </template>
     </ListItem>
 

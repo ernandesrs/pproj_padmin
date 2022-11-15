@@ -21,59 +21,67 @@ Route::group([
 ], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
 
-    Route::group(["prefix" => "users"], function () {
-        Route::get("/", [AdminUserController::class, "index"])->name("admin.users.index");
-        Route::get("/create", [AdminUserController::class, "create"])->name("admin.users.create");
-        Route::post("/create", [AdminUserController::class, "store"])->name("admin.users.store");
-        Route::get("/edit/{user}", [AdminUserController::class, "edit"])->name("admin.users.edit");
-        Route::post("/edit/{user}", [AdminUserController::class, "update"])->name("admin.users.update");
-        Route::post("/destroy/{user}", [AdminUserController::class, "destroy"])->name("admin.users.destroy");
-        Route::post("/promote/{user}", [AdminUserController::class, "promote"])->name("admin.users.promote");
-        Route::post("/demote/{user}", [AdminUserController::class, "demote"])->name("admin.users.demote");
-    });
+    Route::resource("users", AdminUserController::class)->names([
+        'index' => 'admin.users.index',
+        'create' => 'admin.users.create',
+        'store' => 'admin.users.store',
+        'edit' => 'admin.users.edit',
+        'update' => 'admin.users.update',
+        'destroy' => 'admin.users.destroy',
+    ]);
+    Route::post("/promote/{user}", [AdminUserController::class, "promote"])->name("admin.users.promote");
+    Route::post("/demote/{user}", [AdminUserController::class, "demote"])->name("admin.users.demote");
 
     Route::group(["prefix" => "medias"], function () {
-        Route::get("/images", [AdminImageController::class, "index"])->name("admin.medias.images.index");
-        Route::get("/images/show/{image}", [AdminImageController::class, "show"])->name("admin.medias.images.show");
-        Route::get("/images/create", [AdminImageController::class, "create"])->name("admin.medias.images.create");
-        Route::post("/images/store", [AdminImageController::class, "store"])->name("admin.medias.images.store");
+        Route::resource("images", AdminImageController::class)->names([
+            'index' => 'admin.medias.images.index',
+            'show' => 'admin.medias.images.show',
+            'create' => 'admin.medias.images.create',
+            'store' => 'admin.medias.images.store',
+            'edit' => 'admin.medias.images.edit',
+            'update' => 'admin.medias.images.update',
+            'destroy' => 'admin.medias.images.destroy',
+        ]);
         Route::post("/images/upload", [AdminImageController::class, "upload"])->name("admin.medias.images.upload");
-        Route::get("/images/update/{image}", [AdminImageController::class, "edit"])->name("admin.medias.images.edit");
-        Route::post("/images/update/{image}", [AdminImageController::class, "update"])->name("admin.medias.images.update");
-        Route::post("/images/delete/{image}", [AdminImageController::class, "destroy"])->name("admin.medias.images.destroy");
 
-        Route::get("/videos", [AdminVideoController::class, "index"])->name("admin.medias.videos.index");
-        Route::get("/videos/show/{video}", [AdminVideoController::class, "show"])->name("admin.medias.videos.show");
-        Route::get("/videos/create", [AdminVideoController::class, "create"])->name("admin.medias.videos.create");
-        Route::post("/videos/store", [AdminVideoController::class, "store"])->name("admin.medias.videos.store");
-        Route::post("/videos/upload", [AdminVideoController::class, "upload"])->name("admin.medias.videos.upload");
-        Route::get("/videos/update/{video}", [AdminVideoController::class, "edit"])->name("admin.medias.videos.edit");
-        Route::post("/videos/update/{video}", [AdminVideoController::class, "update"])->name("admin.medias.videos.update");
-        Route::post("/videos/delete/{video}", [AdminVideoController::class, "destroy"])->name("admin.medias.videos.destroy");
+        Route::resource("videos", AdminVideoController::class)->names([
+            'index' => 'admin.medias.videos.index',
+            'show' => 'admin.medias.videos.show',
+            'create' => 'admin.medias.videos.create',
+            'store' => 'admin.medias.videos.store',
+            'edit' => 'admin.medias.videos.edit',
+            'update' => 'admin.medias.videos.update',
+            'destroy' => 'admin.medias.videos.destroy',
+        ]);
+        Route::post("/videos/upload", [AdminImageController::class, "upload"])->name("admin.medias.videos.upload");
     });
+
+    Route::resource("pages", AdminPageController::class)->names([
+        'index' => 'admin.pages.index',
+        'create' => 'admin.pages.create',
+        'store' => 'admin.pages.store',
+        'edit' => 'admin.pages.edit',
+        'update' => 'admin.pages.update',
+        'destroy' => 'admin.pages.destroy',
+    ]);
 
     Route::resource("sections", AdminSectionController::class)->names([
         'index' => 'admin.sections.index',
         'create' => 'admin.sections.create',
         'store' => 'admin.sections.store',
         'edit' => 'admin.sections.edit',
-    ])->except(["update", "destroy"]);
-    Route::post("/sections/{section}/update", [AdminSectionController::class, "update"])->name("admin.sections.update");
-    Route::post("/sections/{section}/destroy", [AdminSectionController::class, "destroy"])->name("admin.sections.destroy");
+        'update' => 'admin.sections.update',
+        'destroy' => 'admin.sections.destroy',
+    ]);
 
-    Route::get("/pages", [AdminPageController::class, "index"])->name("admin.pages.index");
-    Route::get("/pages/create", [AdminPageController::class, "create"])->name("admin.pages.create");
-    Route::post("/pages/store", [AdminPageController::class, "store"])->name("admin.pages.store");
-    Route::get("/pages/edit/{page}", [AdminPageController::class, "edit"])->name("admin.pages.edit");
-    Route::post("/pages/update/{page}", [AdminPageController::class, "update"])->name("admin.pages.update");
-    Route::post("/pages/destroy/{page}", [AdminPageController::class, "destroy"])->name("admin.pages.destroy");
-
-    Route::get("/menus", [AdminMenuController::class, "index"])->name("admin.menus.index");
-    Route::get("/menus/create", [AdminMenuController::class, "create"])->name("admin.menus.create");
-    Route::post("/menus/store", [AdminMenuController::class, "store"])->name("admin.menus.store");
-    Route::get("/menus/edit/{menu}", [AdminMenuController::class, "edit"])->name("admin.menus.edit");
-    Route::post("/menus/update/{menu}", [AdminMenuController::class, "update"])->name("admin.menus.update");
-    Route::post("/menus/destroy/{menu}", [AdminMenuController::class, "destroy"])->name("admin.menus.destroy");
+    Route::resource("menus", AdminMenuController::class)->names([
+        'index' => 'admin.menus.index',
+        'create' => 'admin.menus.create',
+        'store' => 'admin.menus.store',
+        'edit' => 'admin.menus.edit',
+        'update' => 'admin.menus.update',
+        'destroy' => 'admin.menus.destroy',
+    ]);
 
     // FRONT SETTINGS
     Route::get("/settings", [SettingController::class, "edit"])->name("admin.settings.edit");

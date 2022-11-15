@@ -707,6 +707,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
+    requestMethod: {
+      type: String,
+      "default": 'get'
+    },
     position: {
       type: String,
       "default": 'right'
@@ -772,7 +776,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var action = e.target.getAttribute("data-action");
       if (!action) return;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(action, null, {
+      var methods = ["GET", "POST", "DELETE", "PUT", "DELETE"];
+      var method = this.requestMethod.toUpperCase();
+      if (!methods.includes(method)) return;
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.visit(action, {
+        method: method,
+        data: null,
         onStart: function onStart(visit) {
           _this.waitRequest = true;
           _this.buttonCancel.disabled = _this.buttonConfirm.disabled = true;
@@ -1370,9 +1379,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     type: Boolean,
     "default": false
   }
-}), _defineProperty(_layout$layout$compon, "data", function data() {
-  return {};
-}), _defineProperty(_layout$layout$compon, "methods", {}), _defineProperty(_layout$layout$compon, "computed", {}), _layout$layout$compon);
+}), _layout$layout$compon);
 
 /***/ }),
 
@@ -2752,6 +2759,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             video: video.id
           }),
           "confirm-with-request": "",
+          "request-method": "delete",
           outlined: ""
         }, null, 8
         /* PROPS */

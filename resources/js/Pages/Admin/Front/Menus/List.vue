@@ -21,7 +21,7 @@
                 <ButtonConfirmationUi v-if="menu.can.delete" confirm-text="Excluir?"
                     icon="trash" variant="danger" size="sm" class="ms-2" position="right"
                     :data-action="$route('admin.menus.destroy',
-                    { menu: menu.id })" confirm-with-request />
+                    { menu: menu.id })" confirm-with-request request-method="delete" />
             </template>
         </ListItem>
     </div>
@@ -50,20 +50,6 @@ export default {
         menus: { type: Object, default: [] },
         isFiltering: { type: Boolean, default: false },
     },
-
-    data() {
-        return {
-        };
-    },
-
-    mounted() {
-    },
-
-    methods: {
-    },
-
-    computed: {
-    }
 }
 
 </script>

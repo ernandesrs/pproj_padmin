@@ -806,6 +806,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
+    requestMethod: {
+      type: String,
+      "default": 'get'
+    },
     position: {
       type: String,
       "default": 'right'
@@ -871,7 +875,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var action = e.target.getAttribute("data-action");
       if (!action) return;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(action, null, {
+      var methods = ["GET", "POST", "DELETE", "PUT", "DELETE"];
+      var method = this.requestMethod.toUpperCase();
+      if (!methods.includes(method)) return;
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.visit(action, {
+        method: method,
+        data: null,
         onStart: function onStart(visit) {
           _this.waitRequest = true;
           _this.buttonCancel.disabled = _this.buttonConfirm.disabled = true;
@@ -2740,7 +2749,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "data-action": _ctx.$route('admin.users.destroy', {
             user: user.id
           }),
-          "confirm-with-request": ""
+          "confirm-with-request": "",
+          "request-method": "delete"
         }, null, 8
         /* PROPS */
         , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];

@@ -2082,10 +2082,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   submit: function submit() {
     var _this$page;
 
-    var action = (_this$page = this.page) !== null && _this$page !== void 0 && _this$page.id ? route("admin.pages.update", {
-      page: this.page.id
-    }) : route("admin.pages.store");
-    this.form.post(action);
+    var action = route("admin.pages.store");
+
+    if ((_this$page = this.page) !== null && _this$page !== void 0 && _this$page.id) {
+      action = route("admin.pages.update", {
+        page: this.page.id
+      });
+      this.form.put(action);
+    } else {
+      this.form.post(action);
+    }
   },
   setPageContentOnForm: function setPageContentOnForm() {
     var _this$page2, _this$page3;

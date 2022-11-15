@@ -31,7 +31,7 @@
                                 confirm-text="Excluir?" size="sm" variant="danger"
                                 icon="trash" position="center" class="mx-1 my-1"
                                 :data-action="$route('admin.medias.videos.destroy', { video: video.id })"
-                                confirm-with-request outlined />
+                                confirm-with-request request-method="delete" outlined />
                         </div>
                     </div>
                 </template>
@@ -63,17 +63,6 @@ export default {
         terms: { type: Object, default: {} },
         isFiltering: { type: Boolean, default: false },
     },
-
-    data() {
-        return {
-        };
-    },
-
-    methods: {
-    },
-
-    computed: {
-    }
 }
 
 </script>

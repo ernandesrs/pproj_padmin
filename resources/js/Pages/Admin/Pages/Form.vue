@@ -167,8 +167,14 @@ export default {
     },
     methods: {
         submit() {
-            let action = this.page?.id ? route("admin.pages.update", { page: this.page.id }) : route("admin.pages.store");
-            this.form.post(action)
+            let action = route("admin.pages.store");
+
+            if (this.page?.id) {
+                action = route("admin.pages.update", { page: this.page.id });
+                this.form.put(action);
+            } else {
+                this.form.post(action);
+            }
         },
 
         setPageContentOnForm() {

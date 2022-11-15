@@ -29,7 +29,7 @@
             <ButtonConfirmationUi v-if="page.can?.delete" confirm-text="Excluir?"
                 icon="trash" variant="danger" size="sm" class="ms-2" position="right"
                 :data-action="$route('admin.pages.destroy',
-                {page: page.id})" confirm-with-request />
+                {page: page.id})" confirm-with-request request-method="delete" />
         </template>
     </ListItem>
 

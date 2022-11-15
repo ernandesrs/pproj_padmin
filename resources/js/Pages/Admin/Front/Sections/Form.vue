@@ -253,10 +253,12 @@ export default {
         submit() {
             let action = route("admin.sections.store");
 
-            if (this.form?.id)
+            if (this.form?.id) {
                 action = route('admin.sections.update', { section: this.section.id });
-
-            this.form.post(action);
+                this.form.put(action);
+            } else {
+                this.form.post(action);
+            }
         },
 
         modalImagesListShow() {

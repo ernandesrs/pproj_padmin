@@ -648,6 +648,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
+    requestMethod: {
+      type: String,
+      "default": 'get'
+    },
     position: {
       type: String,
       "default": 'right'
@@ -713,7 +717,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var action = e.target.getAttribute("data-action");
       if (!action) return;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(action, null, {
+      var methods = ["GET", "POST", "DELETE", "PUT", "DELETE"];
+      var method = this.requestMethod.toUpperCase();
+      if (!methods.includes(method)) return;
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.visit(action, {
+        method: method,
+        data: null,
         onStart: function onStart(visit) {
           _this.waitRequest = true;
           _this.buttonCancel.disabled = _this.buttonConfirm.disabled = true;
@@ -1254,10 +1263,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   submit: function submit() {
     var _this$form;
 
-    var action = (_this$form = this.form) !== null && _this$form !== void 0 && _this$form.id ? route('admin.users.update', {
-      user: this.form.id
-    }) : route('admin.users.create');
-    this.form.post(action);
+    var action = route('admin.users.store');
+
+    if ((_this$form = this.form) !== null && _this$form !== void 0 && _this$form.id) {
+      action = route('admin.users.update', {
+        user: this.form.id
+      });
+      this.form.put(action);
+    } else {
+      this.form.post(action);
+    }
   },
   getDate: function getDate(data) {
     return new Date(data).toLocaleDateString("pt-BR");
@@ -2469,7 +2484,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "data-action": _ctx.$route('admin.users.promote', {
       user: $props.user.id
     }),
-    "confirm-with-request": ""
+    "confirm-with-request": "",
+    "request-method": "post"
   }, null, 8
   /* PROPS */
   , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.user.previous_level && $props.user.can.demote ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonConfirmationUi, {
@@ -2484,7 +2500,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "data-action": _ctx.$route('admin.users.demote', {
       user: $props.user.id
     }),
-    "confirm-with-request": ""
+    "confirm-with-request": "",
+    "request-method": "post"
   }, null, 8
   /* PROPS */
   , ["data-action"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDate($props.user.created_at)), 1

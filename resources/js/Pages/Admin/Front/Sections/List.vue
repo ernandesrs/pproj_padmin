@@ -22,7 +22,7 @@
 
                 <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
                     variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.sections.destroy',
-                    { section: section.id })" confirm-with-request />
+                    { section: section.id })" confirm-with-request request-method="delete" />
             </template>
         </ListItem>
     </div>
@@ -51,20 +51,6 @@ export default {
         sections: { type: Object, default: [] },
         isFiltering: { type: Boolean, default: false },
     },
-
-    data() {
-        return {
-        };
-    },
-
-    mounted() {
-    },
-
-    methods: {
-    },
-
-    computed: {
-    }
 }
 
 </script>

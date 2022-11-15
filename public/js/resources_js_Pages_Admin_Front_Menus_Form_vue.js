@@ -698,6 +698,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
+    requestMethod: {
+      type: String,
+      "default": 'get'
+    },
     position: {
       type: String,
       "default": 'right'
@@ -763,7 +767,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var action = e.target.getAttribute("data-action");
       if (!action) return;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(action, null, {
+      var methods = ["GET", "POST", "DELETE", "PUT", "DELETE"];
+      var method = this.requestMethod.toUpperCase();
+      if (!methods.includes(method)) return;
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.visit(action, {
+        method: method,
+        data: null,
         onStart: function onStart(visit) {
           _this.waitRequest = true;
           _this.buttonCancel.disabled = _this.buttonConfirm.disabled = true;
@@ -1432,11 +1441,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this$form;
 
     var action = route("admin.menus.store");
-    if ((_this$form = this.form) !== null && _this$form !== void 0 && _this$form.id) action = route('admin.menus.update', {
-      menu: this.menu.id
-    });
     this.form.items = this.items;
-    this.form.post(action);
+
+    if ((_this$form = this.form) !== null && _this$form !== void 0 && _this$form.id) {
+      action = route('admin.menus.update', {
+        menu: this.menu.id
+      });
+      this.form.put(action);
+    } else {
+      this.form.post(action);
+    }
   },
   addMenuItem: function addMenuItem() {
     this.items.unshift({

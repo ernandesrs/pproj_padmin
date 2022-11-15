@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-12 text-center">
                     <ButtonUi type="submit" variant="primary"
-                        :text="`${image?.id?'Atualizar':'Enviar'}`" icon="arrowUp"
+                        :text="`${image?.id ? 'Atualizar' : 'Enviar'}`" icon="arrowUp"
                         :disabled="form.processing" />
                 </div>
             </div>
@@ -71,10 +71,13 @@ export default {
     methods: {
         submit() {
             let action = route("admin.medias.images.store");
-            if (this.image?.id)
-                action = route("admin.medias.images.update", { image: this.image?.id });
 
-            this.form.post(action);
+            if (this.image?.id) {
+                action = route("admin.medias.images.update", { image: this.image?.id });
+                this.form.put(action);
+            } else {
+                this.form.post(action);
+            }
         }
     }
 }
