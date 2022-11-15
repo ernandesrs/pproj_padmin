@@ -9,6 +9,9 @@ class Section extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
     protected $fillable = ["name", "title", "subtitle", "content", "buttons", "visible"];
 
     /**
@@ -19,10 +22,23 @@ class Section extends Model
     public function update(array $attributes = [], array $options = [])
     {
         if ($attributes["content"]["image"] == null) {
-            $this->content = json_decode($this->content);
             $attributes["content"]["image"] = $this->content->image;
         }
 
         return parent::update($attributes, $options);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::retrieved(function ($section) {
+            $section->content = json_decode($section->content);
+            $section->buttons = json_decode($section->buttons);
+            return $section;
+        });
     }
 }

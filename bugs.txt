@@ -1,1 +1,2 @@
-[Page create]: filled fields are reset when inserting page cover
+[Page create]: campos já preenchidos são perdidos ao abrir modal de inserção/upload de imagens
+[Section create]: campos já preenchidos são perdidos ao abrir modal de inserção/upload de imagens

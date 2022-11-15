@@ -103,9 +103,7 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        $section->buttons = json_decode($section->buttons);
-        $section->content = json_decode($section->content);
-        if ($section->content->image) {
+        if ($section->content->image ?? null) {
             $section->content->image_url = Storage::url($section->content->image);
         }
 
