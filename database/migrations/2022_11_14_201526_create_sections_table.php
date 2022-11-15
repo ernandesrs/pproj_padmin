@@ -20,7 +20,7 @@ class CreateSectionsTable extends Migration
             $table->string('name', 25)->unique();
             $table->string('title', 50)->unique();
             $table->string('subtitle', 75)->nullable();
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->boolean('visible')->default(false);
             $table->json('buttons')->default(json_encode([]));
 
