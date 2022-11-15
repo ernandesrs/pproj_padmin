@@ -19,7 +19,7 @@ mix.vue()
     .css("resources/css/auth/app.css", "public/css/auth")
 
     .css("resources/css/panel/app.css", "public/css/panel")
-    .scripts(["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"], "public/js/panel/bootstrap.js")
-    
+    .scripts(["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"], "public/js/bootstrap.js")
+
     .css("resources/css/front/app.css", "public/css/front")
     ;

@@ -4,5 +4,5 @@
     "/css/panel/app.css": "/css/panel/app.css",
     "/css/auth/app.css": "/css/auth/app.css",
     "/css/bootstrap-icons.css": "/css/bootstrap-icons.css",
-    "/js/panel/bootstrap.js": "/js/panel/bootstrap.js"
+    "/js/bootstrap.js": "/js/bootstrap.js"
 }
