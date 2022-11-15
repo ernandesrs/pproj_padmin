@@ -30,7 +30,7 @@ class Section extends Model
      */
     public static function create(array $attributes)
     {
-        $attributes["buttons"] = json_encode($attributes["buttons"]);
+        $attributes["buttons"] = json_encode($attributes["buttons"] ?? []);
         $attributes["content"] = json_encode($attributes["content"]);
 
         $section = new Section($attributes);

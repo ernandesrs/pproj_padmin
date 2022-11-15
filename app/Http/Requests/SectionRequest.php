@@ -45,7 +45,7 @@ class SectionRequest extends FormRequest
         if ($this->type == Section::TYPE_DEFAULT) {
             $rules["content.content"] = ["nullable"];
         } else if ($this->type == Section::TYPE_BANNER) {
-            $rules["content.description"] = ["required", "max:255"];
+            $rules["content.description"] = ["required", "max:750"];
         }
 
         return $rules;
