@@ -154,7 +154,6 @@ export default {
 
         insertImage(event) {
             let data = JSON.parse(event.target.getAttribute("data-info"));
-            console.log(event, data);
 
             if (!data?.id) return;
 

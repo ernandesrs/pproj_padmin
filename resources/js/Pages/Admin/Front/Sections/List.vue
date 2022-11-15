@@ -5,7 +5,7 @@
         <ListItem v-for="section in sections?.data" :key="section.id" :item="{
             cover: null,
             title: '[' + section.name + '] ' + section.title,
-            subtitle: section.subtitle,
+            subtitle: '',
             coverStyle: 'rectangle'
         }">
             <template v-slot:badges>
@@ -13,6 +13,9 @@
                     :text="section.visible ? 'Visível' : 'Oculto'"
                     :variant="section.visible ? 'info' : 'secondary'"
                     :icon="section.visible ? 'eye' : 'eyeSlash'" />
+                <BadgeUi class="mb-1 me-1 fw-light"
+                    :text="`Tipo de seção: ${terms.type['type_' + section.type]} `"
+                    variant="warning" />
             </template>
 
             <template v-slot:actions>
@@ -22,7 +25,8 @@
 
                 <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
                     variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.sections.destroy',
-                    { section: section.id })" confirm-with-request request-method="delete" />
+                    { section: section.id })" confirm-with-request
+                    request-method="delete" />
             </template>
         </ListItem>
     </div>
@@ -50,6 +54,7 @@ export default {
     props: {
         sections: { type: Object, default: [] },
         isFiltering: { type: Boolean, default: false },
+        terms: { type: Object, default: {} }
     },
 }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Section\Section;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,14 +25,13 @@ class SectionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            "type" => ["required", Rule::in([0])],
+        $rules = [
+            "type" => ["required", Rule::in(Section::TYPES)],
             "name" => ["required", "max:25", 'unique:sections,name' . (($this->section->id ?? null) ? ',' . $this->section->id : '')],
             "title" => ["required", "max:50", 'unique:sections,title' . (($this->section->id ?? null) ? ',' . $this->section->id : '')],
             "subtitle" => ["nullable", "max:75"],
             "visible" => ["required", "boolean"],
 
-            "content.content" => ["nullable"],
             "content.image" => ["nullable", "numeric", "exists:images,id"],
 
             "buttons.*.text" => ["required", "max:30", "string"],
@@ -41,5 +41,13 @@ class SectionRequest extends FormRequest
             "buttons.*.icon" => ["nullable", "string", "max:50"],
             "buttons.*.style" => ["required", "string", Rule::in(["primary", "outline-primary", "secondary", "outline-secondary", "link"])],
         ];
+
+        if ($this->type == Section::TYPE_DEFAULT) {
+            $rules["content.content"] = ["nullable"];
+        } else if ($this->type == Section::TYPE_BANNER) {
+            $rules["content.description"] = ["required", "max:255"];
+        }
+
+        return $rules;
     }
 }

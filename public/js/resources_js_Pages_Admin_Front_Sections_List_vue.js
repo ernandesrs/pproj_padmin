@@ -1447,6 +1447,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   isFiltering: {
     type: Boolean,
     "default": false
+  },
+  terms: {
+    type: Object,
+    "default": {}
   }
 }), _layout$layout$compon);
 
@@ -2812,7 +2816,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       item: {
         cover: null,
         title: '[' + section.name + '] ' + section.title,
-        subtitle: section.subtitle,
+        subtitle: '',
         coverStyle: 'rectangle'
       }
     }, {
@@ -2824,7 +2828,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           icon: section.visible ? 'eye' : 'eyeSlash'
         }, null, 8
         /* PROPS */
-        , ["text", "variant", "icon"])];
+        , ["text", "variant", "icon"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
+          "class": "mb-1 me-1 fw-light",
+          text: "Tipo de se\xE7\xE3o: ".concat($props.terms.type['type_' + section.type], " "),
+          variant: "warning"
+        }, null, 8
+        /* PROPS */
+        , ["text"])];
       }),
       actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {

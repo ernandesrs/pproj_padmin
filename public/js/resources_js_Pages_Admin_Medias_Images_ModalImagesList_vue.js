@@ -661,7 +661,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     insertImage: function insertImage(event) {
       var data = JSON.parse(event.target.getAttribute("data-info"));
-      console.log(event, data);
       if (!(data !== null && data !== void 0 && data.id)) return;
       this.$emit("imageInsert", data);
       this.showModal = false;

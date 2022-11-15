@@ -9,10 +9,35 @@ class Section extends Model
 {
     use HasFactory;
 
+    const TYPE_DEFAULT = 0;
+    const TYPE_BANNER = 1;
+    const TYPE_BANNER_IMAGES = 2;
+    const TYPES = [
+        self::TYPE_DEFAULT,
+        self::TYPE_BANNER,
+    ];
+
     /**
      * @var array
      */
-    protected $fillable = ["name", "title", "subtitle", "content", "buttons", "visible"];
+    protected $fillable = ["type", "name", "title", "subtitle", "content", "buttons", "visible"];
+
+    /**
+     * Undocumented function
+     *
+     * @param array $attributes
+     * @return
+     */
+    public static function create(array $attributes)
+    {
+        $attributes["buttons"] = json_encode($attributes["buttons"]);
+        $attributes["content"] = json_encode($attributes["content"]);
+
+        $section = new Section($attributes);
+        $section->save();
+
+        return $section;
+    }
 
     /**
      * @param array $attributes

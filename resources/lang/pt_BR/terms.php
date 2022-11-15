@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Page;
+use App\Models\Section\Section;
 use App\Models\User;
 
 return [
@@ -15,7 +16,7 @@ return [
             'gender_' . User::GENDER_NONE => 'Indefinido',
             'gender_' . User::GENDER_MALE => 'Masculino',
             'gender_' . User::GENDER_FEMALE => 'Feminino',
-        ]
+        ],
     ],
     'page' => [
         'status' => [
@@ -26,7 +27,14 @@ return [
         'type' => [
             'type_' . Page::CONTENT_TYPE_TEXT => 'Texto',
             'type_' . Page::CONTENT_TYPE_VIEW => 'Customizado',
-        ]
+        ],
     ],
-    'menu' => []
+    'menu' => [],
+    'section' => [
+        'type' => [
+            'type_' . Section::TYPE_DEFAULT => 'Padrão',
+            'type_' . Section::TYPE_BANNER => 'Banner',
+            'type_' . Section::TYPE_BANNER_IMAGES => 'Banner com imagens',
+        ],
+    ],
 ];

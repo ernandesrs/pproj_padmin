@@ -54,8 +54,7 @@
                             <SelectForm label="Tipo de seção:" :options="[
                                 { value: 0, text: 'Padrão' },
                                 { value: 1, text: 'Banner único' },
-                                { value: 2, text: 'Banner único com imagens' },
-                                { value: 3, text: 'Slides de banner' },
+                                { value: 2, text: 'Banner único com imagens' }
                             ]" v-model="form.type" :error-message="form.errors.type" />
                         </div>
 
@@ -69,15 +68,19 @@
                         <InputForm type="text" name="title" v-model="form.title"
                             label="Título:" :error-message="form.errors.title" />
                     </div>
-                    <div class="mb-4">
+                    <div v-if="form.type == 0" class="mb-4">
                         <InputForm type="text" name="subtitle" v-model="form.subtitle"
                             label="Subtítulo:" :error-message="form.errors.subtitle" />
                     </div>
-
                     <div class="mb-4">
-                        <label class="mb-1">Conteúdo:</label>
-                        <EditorTiny v-model="form.content.content" :api-key="tinyApiKey"
-                            full min-height=200 />
+                        <label class="mb-1">{{ form.type == 0 ?
+                                'Conteúdo' : 'Descrição'
+                        }}:</label>
+                        <EditorTiny v-model="tinyEditor" :api-key="tinyApiKey" full
+                            min-height=200 />
+                        <small class="text-danger" v-if="tinyEditorError">{{
+                                tinyEditorError
+                        }}</small>
                     </div>
                 </div>
 
@@ -219,14 +222,33 @@ export default {
                 visible: false,
                 content: {
                     image: null,
-                    content: null
+                    content: null,
+                    description: null,
                 },
                 buttons: []
             }),
+            tinyEditor: null,
+            tinyEditorError: null,
             showImagesModalList: false,
             showHowItWorkModal: false,
             imagePreview: null
         };
+    },
+
+    watch: {
+        form: {
+            deep: true,
+            handler(nv) {
+                let errors = nv.errors;
+
+                this.tinyEditorError = null;
+                if (errors["content.content"]) {
+                    this.tinyEditorError = errors["content.content"];
+                } else if (errors["content.description"]) {
+                    this.tinyEditorError = errors["content.description"];
+                }
+            }
+        }
     },
 
     mounted() {
@@ -252,6 +274,8 @@ export default {
     methods: {
         submit() {
             let action = route("admin.sections.store");
+
+            this.setContent();
 
             if (this.form?.id) {
                 action = route('admin.sections.update', { section: this.section.id });
@@ -320,6 +344,13 @@ export default {
                 return item;
             });
         },
+
+        setContent() {
+            if (this.form.type == 0)
+                this.form.content.content = this.tinyEditor;
+            else
+                this.form.content.description = this.tinyEditor;
+        }
     },
 
     computed: {

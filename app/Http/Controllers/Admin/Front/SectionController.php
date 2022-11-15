@@ -21,6 +21,7 @@ class SectionController extends Controller
         return Inertia::render('Admin/Front/Sections/List', [
             'sections' => Section::paginate(20),
             'pageTitle' => 'Seções',
+            'terms' => __('terms.section'),
             "buttons" => [
                 "new" => [
                     "icon" => "plusLg",
@@ -60,10 +61,7 @@ class SectionController extends Controller
     {
         $validated = $request->validated();
 
-        $validated["buttons"] = json_encode($validated["buttons"] ?? []);
-
         $image = $validated["content"]["image"] ?? null;
-        $content = $validated["content"]["content"] ?? null;
         if ($image) {
             $image = Image::where("id", $image)->first();
             if ($image) {
@@ -71,10 +69,7 @@ class SectionController extends Controller
             }
         }
 
-        $validated["content"] = json_encode([
-            "image" => $image,
-            "content" => $content,
-        ]);
+        $validated["content"]["image"] = $image;
 
         $section = Section::create($validated);
 
