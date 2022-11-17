@@ -3,6 +3,11 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     background-color: $light-light;
+
+    a,
+    .btn-link {
+        text-decoration: none;
+    }
 }
 
 .header {
