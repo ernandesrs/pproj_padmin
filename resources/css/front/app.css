@@ -11123,6 +11123,144 @@ textarea.form-control-lg {
 body {
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #fefefe;
+}
+
+.header {
+  min-height: 80px;
+}
+
+.main {
+  position: relative;
+}
+.main .section {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: 5rem 0;
+}
+.main .section .container {
+  position: relative;
+}
+.main .section.section-banner {
+  min-height: unset;
+  min-height: calc(100vh - 80px);
+}
+.main .section.section-banner .lead {
+  background-color: rgba(254, 254, 254, 0.25);
+  border-radius: 0.325rem;
+}
+.main .section.section-banner .banner-image,
+.main .section.section-banner .banner-images {
+  width: 100%;
+  max-width: 475px;
+  height: 100%;
+  position: relative;
+}
+.main .section.section-banner .banner-image img,
+.main .section.section-banner .banner-images img {
+  width: 100%;
+}
+.main .section.section-banner .banner-image::after,
+.main .section.section-banner .banner-images::after {
+  content: "";
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(to left, #fefefe 10%, rgba(0, 0, 0, 0));
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 0.325rem;
+}
+.main .section.default-section .section-title {
+  font-size: 120%;
+  font-weight: 600;
+  color: #565656;
+}
+.main .section.default-section .section-subtitle {
+  font-size: 175%;
+  font-weight: 700;
+  color: #454545;
+}
+.main .section.default-section .section-content,
+.main .section.default-section .section-description {
+  font-size: 110%;
+}
+.main .section.default-section .section-image,
+.main .section.default-section .section-images {
+  width: 100%;
+  max-width: 475px;
+  height: 100%;
+  position: relative;
+}
+.main .section.default-section .section-image img,
+.main .section.default-section .section-images img {
+  width: 100%;
+}
+.main .section.default-section .section-image::after,
+.main .section.default-section .section-images::after {
+  content: "";
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(to right, #fefefe 10%, rgba(0, 0, 0, 0));
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0.325rem;
+}
+
+.footer {
+  position: relative;
+}
+
+@media (min-width: 576px) {
+  .main .section.default-section .section-title {
+    font-size: 130%;
+  }
+  .main .section.default-section .section-subtitle {
+    font-size: 225%;
+  }
+}
+@media (min-width: 768px) {
+  .main .section.default-section .section-title {
+    font-size: 150%;
+  }
+  .main .section.default-section .section-content,
+.main .section.default-section .section-description {
+    font-size: 125%;
+  }
+  .main .section.default-section .section-subtitle {
+    font-size: 250%;
+  }
+}
+@media (min-width: 992px) {
+  .main .section.section-banner .banner-image,
+.main .section.section-banner .banner-images {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+  .main .section.default-section .section-subtitle {
+    font-size: 275%;
+  }
+  .main .section.default-section .section-image,
+.main .section.default-section .section-images {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+@media (min-width: 1200px) {
+  .main .section.section-banner .banner-image,
+.main .section.section-banner .banner-images {
+    max-width: 575px;
+  }
+  .main .section.default-section .section-image,
+.main .section.default-section .section-images {
+    max-width: 500px;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */

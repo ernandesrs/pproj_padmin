@@ -1,4 +1,105 @@
 body {
     width: 100%;
     min-height: 100vh;
+    overflow-x: hidden;
+    background-color: $light-light;
+}
+
+.header {
+    min-height: $header-height;
+}
+
+.main {
+    position: relative;
+
+    .section {
+        display: flex;
+        align-items: center;
+        min-height: 100vh;
+        padding: $spacer * 5 0;
+
+        .container {
+            position: relative;
+        }
+
+        &.section-banner {
+            min-height: unset;
+            min-height: calc(100vh - $header-height);
+
+            .lead {
+                background-color: rgb($light-light, .25);
+                border-radius: $border-radius-lg;
+            }
+
+            .banner-image,
+            .banner-images {
+                width: 100%;
+                max-width: 475px;
+                height: 100%;
+                position: relative;
+
+                img {
+                    width: 100%;
+                }
+
+                &::after {
+                    content: "";
+                    width: 120px;
+                    height: 100%;
+                    background: linear-gradient(to left, $light-light 10%, rgb(0, 0, 0, 0));
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    border-radius: $border-radius-lg;
+                }
+            }
+        }
+
+        &.default-section {
+
+            .section-title {
+                font-size: 120%;
+                font-weight: 600;
+                color: $dark-light;
+            }
+
+            .section-subtitle {
+                font-size: 175%;
+                font-weight: 700;
+                color: $dark;
+            }
+
+            .section-content,
+            .section-description {
+                font-size: 110%;
+            }
+
+            .section-image,
+            .section-images {
+                width: 100%;
+                max-width: 475px;
+                height: 100%;
+                position: relative;
+
+                img {
+                    width: 100%;
+                }
+
+                &::after {
+                    content: "";
+                    width: 120px;
+                    height: 100%;
+                    background: linear-gradient(to right, $light-light 10%, rgb(0, 0, 0, 0));
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: $border-radius-lg;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    position: relative;
 }

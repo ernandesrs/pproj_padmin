@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header class="bg-transparent">
+    <header class="header">
         <div class="container">
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid">
@@ -49,10 +49,10 @@
             </nav>
         </div>
     </header>
-    <main>
+    <main class="main">
         @yield('content')
     </main>
-    <footer class="py-3 text-center">
+    <footer class="footer py-3 text-center">
         <div class="container">
             <small>
                 {{ config('app.name') }} &copy; {{ date('Y') }} - Por <a href="https://github.com/ernandesrs"
