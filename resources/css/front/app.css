@@ -11138,7 +11138,7 @@ body {
   display: flex;
   align-items: center;
   min-height: 100vh;
-  padding: 5rem 0;
+  padding: 2rem 0;
 }
 .main .section .container {
   position: relative;
@@ -11161,17 +11161,6 @@ body {
 .main .section.section-banner .banner-image img,
 .main .section.section-banner .banner-images img {
   width: 100%;
-}
-.main .section.section-banner .banner-image::after,
-.main .section.section-banner .banner-images::after {
-  content: "";
-  width: 120px;
-  height: 100%;
-  background: linear-gradient(to left, #fefefe 10%, rgba(0, 0, 0, 0));
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-radius: 0.325rem;
 }
 .main .section.default-section .section-title {
   font-size: 120%;
@@ -11197,17 +11186,6 @@ body {
 .main .section.default-section .section-image img,
 .main .section.default-section .section-images img {
   width: 100%;
-}
-.main .section.default-section .section-image::after,
-.main .section.default-section .section-images::after {
-  content: "";
-  width: 120px;
-  height: 100%;
-  background: linear-gradient(to right, #fefefe 10%, rgba(0, 0, 0, 0));
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 0.325rem;
 }
 
 .footer {
@@ -11235,27 +11213,17 @@ body {
   }
 }
 @media (min-width: 992px) {
-  .main .section.section-banner .banner-image,
-.main .section.section-banner .banner-images {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
+  .main .section.section-banner {
+    background-color: transparent;
   }
   .main .section.default-section .section-subtitle {
     font-size: 275%;
-  }
-  .main .section.default-section .section-image,
-.main .section.default-section .section-images {
-    position: absolute;
-    left: 0;
-    top: 0;
   }
 }
 @media (min-width: 1200px) {
   .main .section.section-banner .banner-image,
 .main .section.section-banner .banner-images {
-    max-width: 575px;
+    max-width: 550px;
   }
   .main .section.default-section .section-image,
 .main .section.default-section .section-images {

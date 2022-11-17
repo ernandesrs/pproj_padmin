@@ -39,26 +39,12 @@
     .main {
         .section {
             &.section-banner {
-
-                .banner-image,
-                .banner-images {
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    z-index: -1;
-                }
+                background-color: transparent;
             }
 
             &.default-section {
                 .section-subtitle {
                     font-size: 275%;
-                }
-
-                .section-image,
-                .section-images {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
                 }
             }
         }
@@ -72,7 +58,7 @@
 
                 .banner-image,
                 .banner-images {
-                    max-width: 575px;
+                    max-width: 550px;
                 }
             }
 
