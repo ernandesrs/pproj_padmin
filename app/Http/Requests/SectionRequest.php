@@ -40,6 +40,7 @@ class SectionRequest extends FormRequest
             "buttons.*.url" => ["required", "string", "max:255"],
             "buttons.*.icon" => ["nullable", "string", "max:50"],
             "buttons.*.style" => ["required", "string", Rule::in(["primary", "outline-primary", "secondary", "outline-secondary", "link"])],
+            "buttons.*.position" => ["required", "string", Rule::in(["start", "end"])],
         ];
 
         if ($this->type == Section::TYPE_DEFAULT) {

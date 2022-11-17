@@ -116,26 +116,11 @@
                                         <InputForm label="Título:" v-model="button.title"
                                             :error-message="form.errors[`buttons.${index}.title`]" />
                                     </div>
-                                    <div class="col-7 col-lg-7 mb-3">
+                                    <div class="col-12 col-lg-6 mb-3">
                                         <InputForm label="URL:" v-model="button.url"
                                             :error-message="form.errors[`buttons.${index}.url`]" />
                                     </div>
-                                    <div class="col-5 col-lg-5 mb-3">
-                                        <SelectForm label="Estilo:" v-model="button.style"
-                                            :options="[
-                                                { value: 'primary', text: 'Primário' },
-                                                { value: 'outline-primary', text: 'Primário bordado' },
-                                                { value: 'secondary', text: 'Secundário' },
-                                                { value: 'outline-secondary', text: 'Secundário bordado' },
-                                                { value: 'link', text: 'Link' },
-                                            ]" only-values />
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <InputForm label="Ícone:" v-model="button.icon" />
-                                        <a @click.prevent="showHowItWorkModal = true"
-                                            href=""><small>Como funciona?</small></a>
-                                    </div>
-                                    <div class="col-3 mb-3">
+                                    <div class="col-6 col-lg-3 mb-3">
                                         <SelectForm label="Abrir na:" :options="[
                                             {
                                                 value: '_self',
@@ -148,10 +133,32 @@
                                         ]" v-model="button.target"
                                             :error-message="form.errors[`buttons.${index}.target`]" />
                                     </div>
-                                    <div class="col-3 mb-3">
+                                    <div class="col-6 col-lg-3 mb-3">
                                         <SelectForm @hasChange="changeButtonsOrder"
                                             label="Ordem:" v-model="button.order"
                                             :options="options" only-values />
+                                    </div>
+                                    <div class="col-12 col-lg-4 mb-3">
+                                        <SelectForm label="Estilo:" v-model="button.style"
+                                            :options="[
+                                                { value: 'primary', text: 'Primário' },
+                                                { value: 'outline-primary', text: 'Primário bordado' },
+                                                { value: 'secondary', text: 'Secundário' },
+                                                { value: 'outline-secondary', text: 'Secundário bordado' },
+                                                { value: 'link', text: 'Link' },
+                                            ]" only-values />
+                                    </div>
+                                    <div class="col-6 col-lg-4 mb-3">
+                                        <InputForm label="Ícone:" v-model="button.icon" />
+                                        <a @click.prevent="showHowItWorkModal = true"
+                                            href=""><small>Como funciona?</small></a>
+                                    </div>
+                                    <div class="col-6 col-lg-4 mb-3">
+                                        <SelectForm label="Posição:"
+                                            v-model="button.position" :options="[
+                                                { value: 'start', text: 'Início' },
+                                                { value: 'end', text: 'Final' },
+                                            ]" only-values />
                                     </div>
                                     <div class="col-12 text-center">
                                         <ButtonConfirmationUi @hasConfirmed="removeButton"
@@ -310,6 +317,7 @@ export default {
                 title: "Link title #" + index,
                 icon: null,
                 style: "primary",
+                position: "start",
             });
             this.updateButtonsOrder();
         },

@@ -2223,7 +2223,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       target: "_self",
       title: "Link title #" + index,
       icon: null,
-      style: "primary"
+      style: "primary",
+      position: "start"
     });
     this.updateButtonsOrder();
   },
@@ -3985,36 +3986,39 @@ var _hoisted_25 = {
   "class": "col-12 col-sm-6 mb-3"
 };
 var _hoisted_26 = {
-  "class": "col-7 col-lg-7 mb-3"
+  "class": "col-12 col-lg-6 mb-3"
 };
 var _hoisted_27 = {
-  "class": "col-5 col-lg-5 mb-3"
+  "class": "col-6 col-lg-3 mb-3"
 };
 var _hoisted_28 = {
-  "class": "col-6 mb-3"
+  "class": "col-6 col-lg-3 mb-3"
+};
+var _hoisted_29 = {
+  "class": "col-12 col-lg-4 mb-3"
+};
+var _hoisted_30 = {
+  "class": "col-6 col-lg-4 mb-3"
 };
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "Como funciona?", -1
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "Como funciona?", -1
 /* HOISTED */
 );
 
-var _hoisted_30 = [_hoisted_29];
-var _hoisted_31 = {
-  "class": "col-3 mb-3"
-};
-var _hoisted_32 = {
-  "class": "col-3 mb-3"
-};
+var _hoisted_32 = [_hoisted_31];
 var _hoisted_33 = {
-  "class": "col-12 text-center"
+  "class": "col-6 col-lg-4 mb-3"
 };
 var _hoisted_34 = {
-  "class": "mb-4 text-center"
+  "class": "col-12 text-center"
 };
 var _hoisted_35 = {
-  "class": "col-12 mb-4 d-flex justify-content-center"
+  "class": "mb-4 text-center"
 };
 var _hoisted_36 = {
+  "class": "col-12 mb-4 d-flex justify-content-center"
+};
+var _hoisted_37 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -4179,6 +4183,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }, null, 8
             /* PROPS */
             , ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+              label: "Abrir na:",
+              options: [{
+                value: '_self',
+                text: 'Aba atual'
+              }, {
+                value: '_blank',
+                text: 'Outra aba'
+              }],
+              modelValue: button.target,
+              "onUpdate:modelValue": function onUpdateModelValue($event) {
+                return button.target = $event;
+              },
+              "error-message": $data.form.errors["buttons.".concat(index, ".target")]
+            }, null, 8
+            /* PROPS */
+            , ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+              onHasChange: $options.changeButtonsOrder,
+              label: "Ordem:",
+              modelValue: button.order,
+              "onUpdate:modelValue": function onUpdateModelValue($event) {
+                return button.order = $event;
+              },
+              options: $options.options,
+              "only-values": ""
+            }, null, 8
+            /* PROPS */
+            , ["onHasChange", "modelValue", "onUpdate:modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
               label: "Estilo:",
               modelValue: button.style,
               "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -4203,7 +4234,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               "only-values": ""
             }, null, 8
             /* PROPS */
-            , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+            , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
               label: "Ícone:",
               modelValue: button.icon,
               "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -4216,34 +4247,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 return $data.showHowItWorkModal = true;
               }, ["prevent"])),
               href: ""
-            }, _hoisted_30)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
-              label: "Abrir na:",
+            }, _hoisted_32)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+              label: "Posição:",
+              modelValue: button.position,
+              "onUpdate:modelValue": function onUpdateModelValue($event) {
+                return button.position = $event;
+              },
               options: [{
-                value: '_self',
-                text: 'Aba atual'
+                value: 'start',
+                text: 'Início'
               }, {
-                value: '_blank',
-                text: 'Outra aba'
+                value: 'end',
+                text: 'Final'
               }],
-              modelValue: button.target,
-              "onUpdate:modelValue": function onUpdateModelValue($event) {
-                return button.target = $event;
-              },
-              "error-message": $data.form.errors["buttons.".concat(index, ".target")]
-            }, null, 8
-            /* PROPS */
-            , ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
-              onHasChange: $options.changeButtonsOrder,
-              label: "Ordem:",
-              modelValue: button.order,
-              "onUpdate:modelValue": function onUpdateModelValue($event) {
-                return button.order = $event;
-              },
-              options: $options.options,
               "only-values": ""
             }, null, 8
             /* PROPS */
-            , ["onHasChange", "modelValue", "onUpdate:modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+            , ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
               onHasConfirmed: $options.removeButton,
               onHasCanceled: _cache[7] || (_cache[7] = function () {}),
               icon: "trash",
@@ -4268,7 +4288,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.addNewButton,
     text: "Adicionar botão",
     variant: "primary",
@@ -4276,7 +4296,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     size: "sm"
   }, null, 8
   /* PROPS */
-  , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Ocultar/Mostrar esta seção",
     type: "checkbox",
     name: "visible",
@@ -4286,7 +4306,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     variant: "primary",
     text: "".concat($props.section.id ? 'Atualizar seção' : 'Salvar seção'),

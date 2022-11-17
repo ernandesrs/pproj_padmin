@@ -20,15 +20,18 @@
                         </div>
                         <div class="d-grid gap-2 d-lg-flex justify-content-lg-start">
                             @foreach ($section_1->buttons as $button)
-                                <a href="{{ $button->url }}"
-                                    class="btn btn-{{ $button->style }} btn-lg px-4 me-md-2 fw-semibold"
-                                    target="{{ $button->target }}" title="{{ $button->title }}">
-                                    @if (($button->align ?? 'start') == 'start')
-                                        {!! $button->icon !!} <span>{{ $button->text }}</span>
-                                    @else
-                                        <span>{{ $button->text }}</span> {!! $button->icon !!}
-                                    @endif
-                                </a>
+                                @component('front.components.link',
+                                    [
+                                        'url' => $button->url,
+                                        'variant' => $button->style,
+                                        'size' => 'large',
+                                        'target' => $button->target,
+                                        'title' => $button->title,
+                                        'iconTag' => $button->icon,
+                                        'position' => $button->position,
+                                        'text' => $button->text,
+                                    ])
+                                @endcomponent
                             @endforeach
                         </div>
                     </div>
