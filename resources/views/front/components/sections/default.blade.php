@@ -1,4 +1,4 @@
-<section class="section default-section {{ $alignment }}-section">
+<section class="section default-section {{ $alignment }}-section" id="{{ Str::slug($section->name) }}">
     <div class="container">
         <div class="row justify-content-center justify-content-lg-start align-items-center">
             <div
