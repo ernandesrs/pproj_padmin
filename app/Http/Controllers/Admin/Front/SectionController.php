@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Front;
 
+use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
 use App\Models\Media\Image;
 use App\Models\Section\Section;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -61,15 +63,24 @@ class SectionController extends Controller
     {
         $validated = $request->validated();
 
-        $image = $validated["content"]["image"] ?? null;
-        if ($image) {
-            $image = Image::where("id", $image)->first();
+        if ($validated["type"] == Section::TYPE_BANNER) {
+            $image = $validated["content"]["image"] ?? null;
             if ($image) {
-                $image = $image->path;
+                $image = Image::where("id", $image)->first();
+                if ($image) {
+                    $image = $image->path;
+                }
             }
+            $validated["content"]["image"] = $image;
+        } else {
+            $images = $validated["content"]["images"] ?? [];
+            foreach ($images as $key => $image) {
+                $imageModel = Image::where("id", $image["id"] ?? 0)->first();
+                if ($imageModel)
+                    $images[$key]["path"] = $imageModel->path;
+            }
+            $validated["content"]["images"] = $images;
         }
-
-        $validated["content"]["image"] = $image;
 
         $section = Section::create($validated);
 
@@ -100,6 +111,14 @@ class SectionController extends Controller
     {
         if ($section->content->image ?? null) {
             $section->content->image_url = Storage::url($section->content->image);
+        } else if ($section->content->images ?? null) {
+            $section->content->images = Collection::make($section->content->images)->map(function ($item) {
+                return [
+                    "id" => $item->id,
+                    "path" => $item->path,
+                    "url" => Thumb::thumb($item->path)
+                ];
+            });
         }
 
         return Inertia::render("Admin/Front/Sections/Form", [
@@ -131,11 +150,23 @@ class SectionController extends Controller
     {
         $validated = $request->validated();
 
-        if ($image = $validated["content"]["image"] ?? null) {
-            $image = Image::where("id", $image)->first();
+        if ($section->type == Section::TYPE_BANNER) {
+            $image = $validated["content"]["image"] ?? null;
             if ($image) {
-                $validated["content"]["image"] = $image->path;
+                $image = Image::where("id", $image)->first();
+                if ($image) {
+                    $image = $image->path;
+                }
             }
+            $validated["content"]["image"] = $image;
+        } else {
+            $images = $validated["content"]["images"] ?? [];
+            foreach ($images as $key => $image) {
+                $imageModel = Image::where("id", $image["id"] ?? 0)->first();
+                if ($imageModel)
+                    $images[$key]["path"] = $imageModel->path;
+            }
+            $validated["content"]["images"] = $images;
         }
 
         $section->update($validated);

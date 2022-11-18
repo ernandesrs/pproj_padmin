@@ -43,7 +43,7 @@ class FrontSettingRequest extends FormRequest
             "sections.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $s = Section::where("id", $val)->first();
 
-                if ($s && $s->type != Section::TYPE_BANNER)
+                if ($s && !in_array($s->type, [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES]))
                     $fail("Apenas seções do tipo " . __("terms.section.type.type_" . Section::TYPE_BANNER) . " é aceito aqui.");
             }],
             "sections.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {

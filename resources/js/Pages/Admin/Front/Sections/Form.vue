@@ -55,7 +55,8 @@
                                 { value: 0, text: 'Padrão' },
                                 { value: 1, text: 'Banner único' },
                                 { value: 2, text: 'Banner único com imagens' }
-                            ]" v-model="form.type" :error-message="form.errors.type" />
+                            ]" v-model="form.type" :error-message="form.errors.type"
+                                only-values :disabled="form.id ? true : false" />
                         </div>
 
                         <div class="col-6 col-xl-7">
@@ -64,14 +65,17 @@
                                 :error-message="form.errors.name" />
                         </div>
                     </div>
+
                     <div class="mb-4">
                         <InputForm type="text" name="title" v-model="form.title"
                             label="Título:" :error-message="form.errors.title" />
                     </div>
+
                     <div v-if="form.type == 0" class="mb-4">
                         <InputForm type="text" name="subtitle" v-model="form.subtitle"
                             label="Subtítulo:" :error-message="form.errors.subtitle" />
                     </div>
+
                     <div class="mb-4">
                         <label class="mb-1">{{ form.type == 0 ?
                                 'Conteúdo' : 'Descrição'
@@ -85,108 +89,204 @@
                 </div>
 
                 <div class="col-12 col-md-10 col-lg-6 mb-4">
-                    <div
-                        class="d-flex flex-column justify-content-center align-items-center">
-                        <ImagePreviewUi :preview-url="imagePreview"
-                            :borderless="imagePreview ? true : false" />
-                    </div>
-
-                    <!-- cover upload -->
-                    <div class="text-center mb-4">
-                        <ButtonUi @click="modalImagesListShow"
-                            :text="`${imagePreview ? 'Atualizar imagem' : 'Inserir imagem'}`"
-                            icon="image" variant="success" size="sm" />
-                    </div>
-
                     <div class="mb-4">
-                        <div class="fs-5 mb-3 fw-semibold">Botões/links da seção</div>
-                        <div v-if="this.form.buttons.length > 2"
-                            class="border border-danger text-danger text-center py-2 mb-2">
-                            Recomendamos no máximo 2 botões/links por seção!
-                        </div>
-                        <AccordionGroup>
-                            <AccordionItem v-for="button, index in form.buttons"
-                                :key="index" :header-text="button.text" :id="index">
-                                <div class="row">
-                                    <div class="col-12 col-sm-6 mb-3">
-                                        <InputForm label="Texto:" v-model="button.text"
-                                            :error-message="form.errors[`buttons.${index}.text`]" />
+                        <CardUi no-shadow border>
+                            <template v-slot:content>
+                                <div v-if="form.type != 2">
+                                    <div class="fs-5 mb-3 fw-semibold">
+                                        Imagem da seção
                                     </div>
-                                    <div class="col-12 col-sm-6 mb-3">
-                                        <InputForm label="Título:" v-model="button.title"
-                                            :error-message="form.errors[`buttons.${index}.title`]" />
+
+                                    <div
+                                        class="d-flex flex-column justify-content-center align-items-center mb-3">
+                                        <ImagePreviewUi :preview-url="imagePreview"
+                                            :borderless="imagePreview ? true : false" />
                                     </div>
-                                    <div class="col-12 col-lg-6 mb-3">
-                                        <InputForm label="URL:" v-model="button.url"
-                                            :error-message="form.errors[`buttons.${index}.url`]" />
-                                    </div>
-                                    <div class="col-6 col-lg-3 mb-3">
-                                        <SelectForm label="Abrir na:" :options="[
-                                            {
-                                                value: '_self',
-                                                text: 'Aba atual'
-                                            },
-                                            {
-                                                value: '_blank',
-                                                text: 'Outra aba'
-                                            }
-                                        ]" v-model="button.target"
-                                            :error-message="form.errors[`buttons.${index}.target`]" />
-                                    </div>
-                                    <div class="col-6 col-lg-3 mb-3">
-                                        <SelectForm @hasChange="changeButtonsOrder"
-                                            label="Ordem:" v-model="button.order"
-                                            :options="options" only-values />
-                                    </div>
-                                    <div class="col-12 col-lg-4 mb-3">
-                                        <SelectForm label="Estilo:" v-model="button.style"
-                                            :options="[
-                                                { value: 'primary', text: 'Primário' },
-                                                { value: 'outline-primary', text: 'Primário bordado' },
-                                                { value: 'secondary', text: 'Secundário' },
-                                                { value: 'outline-secondary', text: 'Secundário bordado' },
-                                                { value: 'link', text: 'Link' },
-                                            ]" only-values />
-                                    </div>
-                                    <div class="col-6 col-lg-4 mb-3">
-                                        <InputForm label="Ícone:" v-model="button.icon" />
-                                        <a @click.prevent="showHowItWorkModal = true"
-                                            href=""><small>Como funciona?</small></a>
-                                    </div>
-                                    <div class="col-6 col-lg-4 mb-3">
-                                        <SelectForm label="Posição:"
-                                            v-model="button.position" :options="[
-                                                { value: 'start', text: 'Início' },
-                                                { value: 'end', text: 'Final' },
-                                            ]" only-values />
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <ButtonConfirmationUi @hasConfirmed="removeButton"
-                                            @hasCanceled="" icon="trash" variant="danger"
-                                            size="sm" position="center"
-                                            :data-item="index" />
+
+                                    <!-- cover upload -->
+                                    <div class="text-center">
+                                        <ButtonUi @click="modalImagesListShow"
+                                            :text="`${imagePreview ? 'Atualizar imagem' : 'Escolher imagem'}`"
+                                            icon="image" variant="success" size="sm" />
                                     </div>
                                 </div>
-                            </AccordionItem>
-                        </AccordionGroup>
+
+                                <div v-else>
+                                    <div class="fs-5 mb-3 fw-semibold">
+                                        Imagens da seção
+                                    </div>
+
+                                    <ul class="nav nav-pills align-items-center mb-3">
+                                        <li v-for="image, key in form.content.images"
+                                            :key="key" class="nav-item">
+                                            <button
+                                                :class="['nav-link fs-6 px-3 py-1', { 'active': key == 0 }]"
+                                                data-bs-toggle="pill"
+                                                :data-bs-target="`#tab-${(key + 1)}`"
+                                                type="button">
+                                                Imagem {{ (key + 1) }}
+                                            </button>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content mb-3">
+                                        <div v-for="image, key in form.content.images"
+                                            :key="key"
+                                            :class="['tab-pane fade show', { 'active': key == 0 }]"
+                                            :id="`tab-${(key + 1)}`">
+
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center mb-3">
+                                                <ImagePreviewUi :preview-url="image.url"
+                                                    :borderless="image.url ? true : false" />
+                                            </div>
+
+                                            <!-- cover upload -->
+                                            <div
+                                                class="d-flex justify-content-center gap-2">
+                                                <ButtonConfirmationUi
+                                                    @hasConfirmed="removeImageField"
+                                                    @hasCanceled=""
+                                                    :text="`${'Excluir'} `" icon="trash"
+                                                    variant="danger" size="sm"
+                                                    position="center" :data-item="key" />
+
+                                                <ButtonUi @click="modalImagesListShow"
+                                                    :text="`${image.url ? 'Atualizar' : 'Escolher'} `"
+                                                    icon="image" variant="success"
+                                                    size="sm" :data-item="key" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <ButtonUi @click="addNewImageField"
+                                            text="Adicionar imagem" icon="plusLg"
+                                            variant="primary" size="sm" />
+                                    </div>
+                                </div>
+                            </template>
+                        </CardUi>
                     </div>
 
-                    <div class="mb-4 text-center">
-                        <ButtonUi @click="addNewButton" text="Adicionar botão"
-                            variant="primary" icon="plusLg" size="sm" />
+                    <!-- buttons/link -->
+                    <div class="mb-4">
+                        <CardUi no-shadow border>
+                            <template v-slot:content>
+                                <div class="fs-5 mb-3 fw-semibold">
+                                    Links da seção
+                                </div>
+
+                                <div v-if="this.form.buttons.length > 2"
+                                    class="border border-danger text-danger text-center py-2 mb-2">
+                                    Recomendamos no máximo 2 links por seção!
+                                </div>
+
+                                <div class="mb-3">
+                                    <AccordionGroup>
+                                        <AccordionItem
+                                            v-for="button, index in form.buttons"
+                                            :key="index" :header-text="button.text"
+                                            :id="index">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6 mb-3">
+                                                    <InputForm label="Texto:"
+                                                        v-model="button.text"
+                                                        :error-message="form.errors[`buttons.${index}.text`]" />
+                                                </div>
+                                                <div class="col-12 col-sm-6 mb-3">
+                                                    <InputForm label="Título:"
+                                                        v-model="button.title"
+                                                        :error-message="form.errors[`buttons.${index}.title`]" />
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <InputForm label="URL:"
+                                                        v-model="button.url"
+                                                        :error-message="form.errors[`buttons.${index}.url`]" />
+                                                </div>
+                                                <div class="col-6 col-lg-3 mb-3">
+                                                    <SelectForm label="Abrir na:"
+                                                        :options="[
+                                                            {
+                                                                value: '_self',
+                                                                text: 'Aba atual'
+                                                            },
+                                                            {
+                                                                value: '_blank',
+                                                                text: 'Outra aba'
+                                                            }
+                                                        ]" v-model="button.target"
+                                                        :error-message="form.errors[`buttons.${index}.target`]" />
+                                                </div>
+                                                <div class="col-6 col-lg-3 mb-3">
+                                                    <SelectForm
+                                                        @hasChange="changeButtonsOrder"
+                                                        label="Ordem:"
+                                                        v-model="button.order"
+                                                        :options="options" only-values />
+                                                </div>
+                                                <div class="col-12 col-lg-4 mb-3">
+                                                    <SelectForm label="Estilo:"
+                                                        v-model="button.style" :options="[
+                                                            { value: 'primary', text: 'Primário' },
+                                                            { value: 'outline-primary', text: 'Primário bordado' },
+                                                            { value: 'secondary', text: 'Secundário' },
+                                                            { value: 'outline-secondary', text: 'Secundário bordado' },
+                                                            { value: 'link', text: 'Link' },
+                                                        ]" only-values />
+                                                </div>
+                                                <div class="col-6 col-lg-4 mb-3">
+                                                    <InputForm label="Ícone:"
+                                                        v-model="button.icon" />
+                                                    <a @click.prevent="showHowItWorkModal = true"
+                                                        href=""><small>Como
+                                                            funciona?</small></a>
+                                                </div>
+                                                <div class="col-6 col-lg-4 mb-3">
+                                                    <SelectForm label="Posição:"
+                                                        v-model="button.position"
+                                                        :options="[
+                                                            { value: 'start', text: 'Início' },
+                                                            { value: 'end', text: 'Final' },
+                                                        ]" only-values />
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    <ButtonConfirmationUi
+                                                        @hasConfirmed="removeButton"
+                                                        @hasCanceled="" icon="trash"
+                                                        variant="danger" size="sm"
+                                                        position="center"
+                                                        :data-item="index" />
+                                                </div>
+                                            </div>
+                                        </AccordionItem>
+                                    </AccordionGroup>
+                                </div>
+
+                                <div v-if="form.buttons.length == 0"
+                                    class="p-2 mb-3 border text-center">
+                                    Não há links nesta seção
+                                </div>
+
+                                <div class="text-center">
+                                    <ButtonUi @click="addNewButton" text="Adicionar link"
+                                        variant="primary" icon="plusLg" size="sm" />
+                                </div>
+                            </template>
+                        </CardUi>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 mb-4 d-flex justify-content-center">
-                    <InputForm label="Ocultar/Mostrar esta seção" type="checkbox"
-                        name="visible" v-model="form.visible" />
-                </div>
+            <div class="col-12 mb-4 d-flex justify-content-center">
+                <InputForm label="Ocultar/Mostrar esta seção" type="checkbox"
+                    name="visible" v-model="form.visible" />
+            </div>
 
-                <div class="col-12 text-center">
-                    <ButtonUi type="submit" variant="primary"
-                        :text="`${section.id ? 'Atualizar seção' : 'Salvar seção'}`"
-                        icon="checkLg" :disabled="form.processing" />
-                </div>
+            <div class="col-12 text-center">
+                <ButtonUi type="submit" variant="primary"
+                    :text="`${section.id ? 'Atualizar seção' : 'Salvar seção'}`"
+                    icon="checkLg" :disabled="form.processing" />
             </div>
         </div>
     </form>
@@ -208,11 +308,12 @@ import ModalImagesList from '../../Medias/Images/ModalImagesList.vue';
 import AccordionGroup from '../../../../Components/Ui/Accordion/AccordionGroup.vue';
 import AccordionItem from '../../../../Components/Ui/Accordion/AccordionItem.vue';
 import ModalUi from '../../../../Components/Ui/ModalUi.vue';
+import CardUi from '../../../../Components/Ui/CardUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi },
+    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi, CardUi },
     props: {
         section: { type: Object, default: {} },
         tinyApiKey: { type: String, default: null },
@@ -231,6 +332,14 @@ export default {
                     image: null,
                     content: null,
                     description: null,
+                    insertImageOn: null,
+                    images: [
+                        {
+                            id: null,
+                            path: null,
+                            url: null
+                        }
+                    ],
                 },
                 buttons: []
             }),
@@ -238,7 +347,7 @@ export default {
             tinyEditorError: null,
             showImagesModalList: false,
             showHowItWorkModal: false,
-            imagePreview: null
+            imagePreview: null,
         };
     },
 
@@ -270,14 +379,18 @@ export default {
 
         if (this.section.type == 0) {
             this.tinyEditor = this.section.content.content;
-        } else if (this.section.type == 1) {
+        } else if ([1, 2].includes(this.section.type)) {
             this.tinyEditor = this.section.content.description;
+            if (this.section.type == 2) {
+                this.form.content.images = this.section.content.images ?? [];
+            }
         }
 
         this.imagePreview = this.section.content.image_url;
         this.form.buttons = this.section.buttons;
 
         this.updateButtonsOrder();
+        this.updateImagesOrder();
     },
 
     methods: {
@@ -294,8 +407,12 @@ export default {
             }
         },
 
-        modalImagesListShow() {
+        modalImagesListShow(event) {
             this.showImagesModalList = true;
+
+            if (this.form.type == 2) {
+                this.form.content.insertImageOn = event.target.getAttribute("data-item");
+            }
         },
 
         modalImagesListClose() {
@@ -303,8 +420,13 @@ export default {
         },
 
         insertImage(data) {
-            this.imagePreview = data.thumb_small;
-            this.form.content.image = data.id;
+            if (this.form.type == 2) {
+                this.form.content.images[this.form.content.insertImageOn].id = data.id;
+                this.form.content.images[this.form.content.insertImageOn].url = data.thumb_small;
+            } else {
+                this.imagePreview = data.thumb_small;
+                this.form.content.image = data.id;
+            }
         },
 
         addNewButton() {
@@ -360,7 +482,31 @@ export default {
                 this.form.content.content = this.tinyEditor;
             else
                 this.form.content.description = this.tinyEditor;
-        }
+        },
+
+        addNewImageField() {
+            this.form.content.images.push({
+                id: null,
+                path: null,
+                url: null
+            });
+        },
+
+        removeImageField(event) {
+            let item = event.path[2].getAttribute("data-item");
+
+            if (!item) return;
+
+            this.form.content.images.splice(item, 1);
+            this.updateImagesOrder();
+        },
+
+        updateImagesOrder() {
+            this.form.content.images = this.form.content.images.map((item, index) => {
+                item.order = index;
+                return item;
+            });
+        },
     },
 
     computed: {

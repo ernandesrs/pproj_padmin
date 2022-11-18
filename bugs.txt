@@ -1,3 +1,7 @@
 [Page create]: campos já preenchidos são perdidos ao abrir modal de inserção/upload de imagens
+(Resolvido com implementação do preverveState no componente Admin/Medias/Images/ModalImagesList)
+
 [Section create]: campos já preenchidos são perdidos ao abrir modal de inserção/upload de imagens
+(Resolvido com implementação do preverveState no componente Admin/Medias/Images/ModalImagesList)
+
 [User update]: ao fazer upload de foto ocorre erro de validação(campos obrigatórios não preenchidos)

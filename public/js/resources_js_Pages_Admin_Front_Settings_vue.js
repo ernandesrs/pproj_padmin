@@ -1497,16 +1497,38 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getImages: function getImages() {
-      var _this$images;
+      var _this$images,
+          _this = this;
 
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       if ((_this$images = this.images) !== null && _this$images !== void 0 && _this$images.data && !force) return;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("admin.medias.images.index", {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.visit(route("admin.medias.images.index", {
         onlyList: 1
-      }));
+      }), {
+        only: ["images"],
+        preserveState: true,
+        onSuccess: function onSuccess(response) {
+          _this.images = response.props.images;
+        }
+      });
     },
     search: function search() {
-      this.searchForm.get(route("admin.medias.images.index"));
+      var _this2 = this;
+
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.visit(route("admin.medias.images.index", {
+        onlyList: 1
+      }), {
+        data: {
+          search: this.searchForm.search,
+          filter: this.searchForm.filter,
+          onlyList: this.searchForm.onlyList
+        },
+        only: ["images"],
+        preserveState: true,
+        onSuccess: function onSuccess(response) {
+          _this2.images = response.props.images;
+        }
+      });
     },
     insertImage: function insertImage(event) {
       var data = JSON.parse(event.target.getAttribute("data-info"));
@@ -1515,15 +1537,16 @@ __webpack_require__.r(__webpack_exports__);
       this.showModal = false;
     },
     uploadImage: function uploadImage() {
-      var _this = this;
+      var _this3 = this;
 
       var action = this.$route('admin.medias.images.upload');
       this.uploadForm.post(action, {
         onSuccess: function onSuccess(r) {
-          _this.showImagesList();
+          _this3.showImagesList();
 
-          _this.getImages(true);
-        }
+          _this3.getImages(true);
+        },
+        preserveState: true
       });
     },
     showImagesList: function showImagesList() {
