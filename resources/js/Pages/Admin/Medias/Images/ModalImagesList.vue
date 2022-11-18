@@ -145,8 +145,13 @@ export default {
     methods: {
         getImages(force = false) {
             if (this.images?.data && !force) return;
+
             Inertia.visit(route("admin.medias.images.index", { onlyList: 1 }), {
-                only: ["images"]
+                only: ["images"],
+                preserveState: true,
+                onSuccess: (response) => {
+                    this.images = response.props.images;
+                }
             });
         },
 
@@ -157,7 +162,11 @@ export default {
                     filter: this.searchForm.filter,
                     onlyList: this.searchForm.onlyList
                 },
-                only: ["images"]
+                only: ["images"],
+                preserveState: true,
+                onSuccess: (response) => {
+                    this.images = response.props.images;
+                }
             });
         },
 
@@ -178,7 +187,8 @@ export default {
                 onSuccess: (r) => {
                     this.showImagesList();
                     this.getImages(true);
-                }
+                },
+                preserveState: true,
             });
         },
 
