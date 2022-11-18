@@ -145,11 +145,20 @@ export default {
     methods: {
         getImages(force = false) {
             if (this.images?.data && !force) return;
-            Inertia.get(route("admin.medias.images.index", { onlyList: 1 }));
+            Inertia.visit(route("admin.medias.images.index", { onlyList: 1 }), {
+                only: ["images"]
+            });
         },
 
         search() {
-            this.searchForm.get(route("admin.medias.images.index"));
+            Inertia.visit(route("admin.medias.images.index", { onlyList: 1 }), {
+                data: {
+                    search: this.searchForm.search,
+                    filter: this.searchForm.filter,
+                    onlyList: this.searchForm.onlyList
+                },
+                only: ["images"]
+            });
         },
 
         insertImage(event) {
