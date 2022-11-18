@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin\Front;
 
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FrontSettingRequest;
 use App\Http\Resources\MenuResource;
 use App\Models\Content;
 use App\Models\Media\Image;
 use App\Models\Menu;
 use App\Models\Section\Section;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class SettingController extends Controller
@@ -52,10 +53,10 @@ class SettingController extends Controller
     /**
      * Undocumented function
      *
-     * @param Request $request
+     * @param FrontSettingRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(FrontSettingRequest $request)
     {
         $validated = $this->validated($request);
 
@@ -73,10 +74,6 @@ class SettingController extends Controller
      */
     public function updateSettings(array $validated)
     {
-        if (!Gate::allows("update_settings")) {
-            abort(403);
-        }
-
         $settings = Content::where("name", "front_settings")->first();
         if (!$settings) {
             return null;
@@ -116,7 +113,18 @@ class SettingController extends Controller
      */
     private function validated(Request $request)
     {
-        return $request->validate([
+        $data = $request->only([
+            "header.favicon",
+            "header.logo",
+            "header.menu_main",
+
+            "sections.section_1",
+            "sections.section_2",
+            "sections.section_3",
+
+            "footer.menu_main",
+        ]);
+        $validator = Validator::make($data,[
             "header.favicon" => ["nullable", "numeric", "exists:images,id"],
             "header.logo" => ["nullable", "numeric", "exists:images,id"],
             "header.menu_main" => ["nullable", "numeric", "exists:menus,id"],
@@ -127,5 +135,22 @@ class SettingController extends Controller
 
             "footer.menu_main" => ["nullable", "numeric", "exists:menus,id"],
         ]);
+
+        $section_1 = Section::where("id", $data["sections"]["section_1"] ?? 0)->first();
+        $section_2 = Section::where("id", $data["sections"]["section_2"] ?? 0)->first();
+        $section_3 = Section::where("id", $data["sections"]["section_3"] ?? 0)->first();
+        if($section_1 && !in_array($section_1->type, [Section::TYPE_BANNER])){
+            $validator->errors()->add("sections.section_1", "Tipo de seção não aceito");
+        }
+
+        if($section_2 && !in_array($section_2->type, [Section::TYPE_DEFAULT])){
+            $validator->errors()->add("sections.section_2", "Tipo de seção não aceito");
+        }
+        
+        if($section_3 && !in_array($section_3->type, [Section::TYPE_DEFAULT])){
+            $validator->errors()->add("sections.section_3", "Tipo de seção não aceito");
+        }
+        
+        return $validator->validate();
     }
 }
