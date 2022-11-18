@@ -10,6 +10,7 @@
         <link rel="shortcut icon" href="{{ Storage::url($favicon) }}" type="image/x-icon">
     @endif
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <link rel="stylesheet" href="{{ asset('css/front/app.css') }}">
 </head>
 
@@ -61,7 +62,24 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script>
+        let splidesDefault = document.querySelectorAll('.jsSplideDefault');
+
+        if (splidesDefault.length) {
+            for (var i = 0; i < splidesDefault.length; i++) {
+                new Splide(splidesDefault[i], {
+                    type: 'loop',
+                    arrows: false,
+                    speed: 750,
+                    autoplay: true,
+                    interval: 3500,
+                    pagination: false
+                }).mount();
+            }
+        }
+    </script>
 </body>
 
 </html>

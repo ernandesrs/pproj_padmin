@@ -7,7 +7,23 @@
                 <div class="row justify-content-center justify-content-lg-start align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center align-items-center">
                         <div class="d-flex align-items-center banner-image">
-                            <img class="rounded-lg-3" src="{{ Storage::url($section_1->content->image) }}" alt="">
+                            @if ($section_1->type == 2)
+                                <div class="splide jsSplideDefault" role="group" aria-label="Splide Basic HTML Example">
+                                    <div class="splide__track">
+                                        <ul class="splide__list">
+                                            @foreach ($section_1->content->images ?? [] as $image)
+                                                <li class="splide__slide">
+                                                    <img class="rounded-lg-3" src="{{ Storage::url($image->path) }}"
+                                                        alt="">
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @else
+                                <img class="rounded-lg-3" src="{{ Storage::url($section_1->content->image) }}"
+                                    alt="">
+                            @endif
                         </div>
                     </div>
 
