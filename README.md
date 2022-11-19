@@ -10,19 +10,49 @@ PADMIN é um painel administrativo criado com o intuito de colocar em prática c
 5. Atualização de senha
 
 ### Painel administrativo
-1. Gerenciamento de usuários
-   - Listagem e filtragem de usuários
-   - Criação de usuários
-   - Atualização de usuários
-   - Exclusão de usuários
+1. Gerenciamento de usuários(crud)
    - Promoção e rebaixamento de nível de usuário
-2. Gerenciamento de imagens
-   - Listagem e filtragem de imagens
-   - Upload de imagens
-   - Atualização de dados das imagens
-   - Exclusão de imagens
-3. Gerenciamento de páginas
-   - Listagem e filtragem de páginas
-   - Cadastro de novas páginas
-   - Atualização de páginas
-   - Exclusão de páginas
+2. Gerenciamento de mídias
+   - Imagens(crud)
+   - Vídeos(curd)
+3. Gerencimento de um site
+   - Gerenciamento de seções(crud)
+   - Gerenciamento de páginas(crud)
+   - Gerenciamento de menus
+   - Configurações
+
+## Instalação
+### Requisitos
+Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e Vue JS.
+
+### Passos
+1. Obtenha o código fonte do seu jeito(clone, download) e coloque-o onde for melhor para você.
+2. Acesse a pasta da aplicação via terminal e execute os seguintes comandos:
+   > npm install
+   > composer install
+3. Copiar o '.env.example' e renomear para '.env'.
+4. Abrir o '.env' e essencialmente configurar:
+   - Dados de acesso ao seu banco de dados local
+   - Dados SMTP para envio de emails como o https://mailtrap.io(necessário para envio de emails ao criar uma conta ou criar usuários)
+5. Executar o servidor Laravel com:
+   > php artisan serve
+6. Gerar das tabelas do banco de dados com:
+   > php artisan migrate
+7. Gerar chave da aplicação:
+   > php artisan key:generate
+8. Gerar link simbólico para a pasta pública:
+   > php artisan storage:link
+9. Por fim, acesse no navegador a seguinte url: <b><i>SUA URL LOCAL</i>/builder<b>(funciona apenas se sua aplicação estiver configurada como aplicação 'local' e não 'production')
+   Esta url irá criar os dados básicos para a aplicação, como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da apliação.
+
+<b>Dados do usuário principal</b>:
+   <b>E-mail:<b> master@master.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
+   <b>Senha:</b> masterpassword
+   
+<b>Dados do usuário comum</b>:
+   <b>E-mail:<b> guest@guest.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
+   <b>Senha:</b> guestpassword
+
+<b>Acesso a página inicial</b>: <b><i>SUA URL LOCAL</i><b>
+<b>Acesso a página de login</b>: <b><i>SUA URL LOCAL</i>/auth/login<b>
+<b>Acesso ao painel</b>: <b><i>SUA URL LOCAL</i>/admin<b>
