@@ -185,6 +185,8 @@ class SectionController extends Controller
                 $imageModel = Image::where("id", $image["id"] ?? 0)->first();
                 if ($imageModel)
                     $images[$key]["path"] = $imageModel->path;
+                else
+                    unset($images[$key]);
             }
             $validated["content"]["images"] = $images;
         }
