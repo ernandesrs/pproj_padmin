@@ -51,12 +51,10 @@
                 <div class="col-12 col-md-10 col-lg-6 mb-4">
                     <div class="row">
                         <div class="col-6 col-xl-5 mb-4">
-                            <SelectForm label="Tipo de seção:" :options="[
-                                { value: 0, text: 'Padrão' },
-                                { value: 1, text: 'Banner único' },
-                                { value: 2, text: 'Banner único com imagens' }
-                            ]" v-model="form.type" :error-message="form.errors.type"
-                                only-values :disabled="form.id ? true : false" />
+                            <SelectForm label="Tipo de seção:"
+                                :options="sectionTypesOptions" v-model="form.type"
+                                :error-message="form.errors.type" only-values
+                                :disabled="form.id ? true : false" />
                         </div>
 
                         <div class="col-6 col-xl-7">
@@ -71,20 +69,20 @@
                             label="Título:" :error-message="form.errors.title" />
                     </div>
 
-                    <div v-if="form.type == 0" class="mb-4">
+                    <div v-if="showSubtitleField" class="mb-4">
                         <InputForm type="text" name="subtitle" v-model="form.subtitle"
                             label="Subtítulo:" :error-message="form.errors.subtitle" />
                     </div>
 
                     <div class="mb-4">
-                        <label class="mb-1">{{ form.type == 0 ?
-                                'Conteúdo' : 'Descrição'
-                        }}:</label>
+                        <label class="mb-1">
+                            {{ tinyEditorLabelText }}
+                        </label>
                         <EditorTiny v-model="tinyEditor" :api-key="tinyApiKey" basic
                             min-height=200 />
-                        <small class="text-danger" v-if="tinyEditorError">{{
-                                tinyEditorError
-                        }}</small>
+                        <small class="text-danger" v-if="tinyEditorError">
+                            {{ tinyEditorError }}
+                        </small>
                     </div>
                 </div>
 
@@ -92,7 +90,7 @@
                     <div class="mb-4">
                         <CardUi no-shadow border>
                             <template v-slot:content>
-                                <div v-if="form.type != 2">
+                                <div v-if="showSingleImageUploadField">
                                     <div class="fs-5 mb-3 fw-semibold">
                                         Imagem da seção
                                     </div>
@@ -111,7 +109,7 @@
                                     </div>
                                 </div>
 
-                                <div v-else>
+                                <div v-else-if="showMultipleImagesUploadField">
                                     <div class="fs-5 mb-3 fw-semibold">
                                         Imagens da seção
                                     </div>
@@ -223,7 +221,8 @@
                                                         @hasChange="changeButtonsOrder"
                                                         label="Ordem:"
                                                         v-model="button.order"
-                                                        :options="options" only-values />
+                                                        :options="buttonsOrder"
+                                                        only-values />
                                                 </div>
                                                 <div class="col-12 col-lg-4 mb-3">
                                                     <SelectForm label="Estilo:"
@@ -316,6 +315,8 @@ export default {
     components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi, CardUi },
     props: {
         section: { type: Object, default: {} },
+        section_types: { type: Object, default: {} },
+        terms: { type: Object, default: {} },
         tinyApiKey: { type: String, default: null },
     },
 
@@ -343,11 +344,17 @@ export default {
                 },
                 buttons: []
             }),
+
             tinyEditor: null,
             tinyEditorError: null,
             showImagesModalList: false,
             showHowItWorkModal: false,
             imagePreview: null,
+            sectionsThatHasImage: [0, 2],
+            sectionsThatHasImages: [1, 3],
+            sectionsThatHasDescription: [2, 3],
+            sectionsThatHasContent: [0, 1],
+            sectionsThatHasSubtitle: [0, 1],
         };
     },
 
@@ -371,22 +378,26 @@ export default {
         if (!this.section?.id) return;
 
         this.form.id = this.section.id;
-        this.form.type = this.section.type;
+        this.form.type = parseInt(this.section.type);
         this.form.name = this.section.name;
         this.form.title = this.section.title;
         this.form.visible = this.section.visible;
         this.form.subtitle = this.section.subtitle;
 
-        if (this.section.type == 0) {
+        // content/description
+        if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
             this.tinyEditor = this.section.content.content;
-        } else if ([1, 2].includes(this.section.type)) {
+        } else {
             this.tinyEditor = this.section.content.description;
-            if (this.section.type == 2) {
-                this.form.content.images = this.section.content.images ?? [];
-            }
         }
 
-        this.imagePreview = this.section.content.image_url;
+        // image/images
+        if (this.sectionsThatHasImages.includes(parseInt(this.section.type))) {
+            this.form.content.images = this.section.content.images ?? [];
+        } else {
+            this.imagePreview = this.section.content.image_url;
+        }
+
         this.form.buttons = this.section.buttons;
 
         this.updateButtonsOrder();
@@ -410,7 +421,7 @@ export default {
         modalImagesListShow(event) {
             this.showImagesModalList = true;
 
-            if (this.form.type == 2) {
+            if (this.sectionsThatHasImages.includes(parseInt(this.form.type))) {
                 this.form.content.insertImageOn = event.target.getAttribute("data-item");
             }
         },
@@ -420,7 +431,7 @@ export default {
         },
 
         insertImage(data) {
-            if (this.form.type == 2) {
+            if (this.sectionsThatHasImages.includes(parseInt(this.form.type))) {
                 this.form.content.images[this.form.content.insertImageOn].id = data.id;
                 this.form.content.images[this.form.content.insertImageOn].url = data.thumb_small;
             } else {
@@ -478,7 +489,7 @@ export default {
         },
 
         setContent() {
-            if (this.form.type == 0)
+            if (this.sectionsThatHasContent.includes(parseInt(this.form.type)))
                 this.form.content.content = this.tinyEditor;
             else
                 this.form.content.description = this.tinyEditor;
@@ -490,6 +501,7 @@ export default {
                 path: null,
                 url: null
             });
+            this.updateImagesOrder();
         },
 
         removeImageField(event) {
@@ -510,7 +522,7 @@ export default {
     },
 
     computed: {
-        options() {
+        buttonsOrder() {
             let numbers = Object.keys(new Array(this.form.buttons.length).fill(null)).map(Number);
             let options = numbers.map((item) => {
                 return {
@@ -519,6 +531,34 @@ export default {
                 };
             });
             return options;
+        },
+
+        sectionTypesOptions() {
+            let types = (Object.values(this.section_types)).map((item) => {
+                return {
+                    value: item,
+                    text: `${this.terms.type['type_' + item]}`
+                };
+            });
+            return types;
+        },
+
+        showSubtitleField() {
+            return this.sectionsThatHasSubtitle.includes(parseInt(this.form.type));
+        },
+
+        showSingleImageUploadField() {
+            return this.sectionsThatHasImage.includes(parseInt(this.form.type));
+        },
+
+        showMultipleImagesUploadField() {
+            return this.sectionsThatHasImages.includes(parseInt(this.form.type));
+        },
+
+        tinyEditorLabelText() {
+            return this.sectionsThatHasContent.includes(parseInt(this.form.type)) ?
+                'Conteúdo:' :
+                'Descrição:';
         }
     }
 }

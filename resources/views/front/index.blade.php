@@ -7,7 +7,7 @@
                 <div class="row justify-content-center justify-content-lg-start align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center align-items-center">
                         <div class="d-flex align-items-center banner-image">
-                            @if ($section_1->type == 2)
+                            @if (in_array($section_1->type, [1, 3]))
                                 <div class="splide jsSplideDefault" role="group" aria-label="Splide Basic HTML Example">
                                     <div class="splide__track">
                                         <ul class="splide__list">

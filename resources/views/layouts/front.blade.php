@@ -50,9 +50,11 @@
             </nav>
         </div>
     </header>
+
     <main class="main">
         @yield('content')
     </main>
+
     <footer class="footer py-3 text-center">
         <div class="container">
             <small>

@@ -2132,6 +2132,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     type: Object,
     "default": {}
   },
+  section_types: {
+    type: Object,
+    "default": {}
+  },
+  terms: {
+    type: Object,
+    "default": {}
+  },
   tinyApiKey: {
     type: String,
     "default": null
@@ -2162,7 +2170,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     tinyEditorError: null,
     showImagesModalList: false,
     showHowItWorkModal: false,
-    imagePreview: null
+    imagePreview: null,
+    sectionsThatHasImage: [0, 2],
+    sectionsThatHasImages: [1, 3],
+    sectionsThatHasDescription: [2, 3],
+    sectionsThatHasContent: [0, 1],
+    sectionsThatHasSubtitle: [0, 1]
   };
 }), _defineProperty(_layout$layout$compon, "watch", {
   form: {
@@ -2183,25 +2196,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   if (!((_this$section = this.section) !== null && _this$section !== void 0 && _this$section.id)) return;
   this.form.id = this.section.id;
-  this.form.type = this.section.type;
+  this.form.type = parseInt(this.section.type);
   this.form.name = this.section.name;
   this.form.title = this.section.title;
   this.form.visible = this.section.visible;
-  this.form.subtitle = this.section.subtitle;
+  this.form.subtitle = this.section.subtitle; // content/description
 
-  if (this.section.type == 0) {
+  if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
     this.tinyEditor = this.section.content.content;
-  } else if ([1, 2].includes(this.section.type)) {
+  } else {
     this.tinyEditor = this.section.content.description;
+  } // image/images
 
-    if (this.section.type == 2) {
-      var _this$section$content;
 
-      this.form.content.images = (_this$section$content = this.section.content.images) !== null && _this$section$content !== void 0 ? _this$section$content : [];
-    }
+  if (this.sectionsThatHasImages.includes(parseInt(this.section.type))) {
+    var _this$section$content;
+
+    this.form.content.images = (_this$section$content = this.section.content.images) !== null && _this$section$content !== void 0 ? _this$section$content : [];
+  } else {
+    this.imagePreview = this.section.content.image_url;
   }
 
-  this.imagePreview = this.section.content.image_url;
   this.form.buttons = this.section.buttons;
   this.updateButtonsOrder();
   this.updateImagesOrder();
@@ -2224,7 +2239,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   modalImagesListShow: function modalImagesListShow(event) {
     this.showImagesModalList = true;
 
-    if (this.form.type == 2) {
+    if (this.sectionsThatHasImages.includes(parseInt(this.form.type))) {
       this.form.content.insertImageOn = event.target.getAttribute("data-item");
     }
   },
@@ -2232,7 +2247,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.showImagesModalList = false;
   },
   insertImage: function insertImage(data) {
-    if (this.form.type == 2) {
+    if (this.sectionsThatHasImages.includes(parseInt(this.form.type))) {
       this.form.content.images[this.form.content.insertImageOn].id = data.id;
       this.form.content.images[this.form.content.insertImageOn].url = data.thumb_small;
     } else {
@@ -2281,7 +2296,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   setContent: function setContent() {
-    if (this.form.type == 0) this.form.content.content = this.tinyEditor;else this.form.content.description = this.tinyEditor;
+    if (this.sectionsThatHasContent.includes(parseInt(this.form.type))) this.form.content.content = this.tinyEditor;else this.form.content.description = this.tinyEditor;
   },
   addNewImageField: function addNewImageField() {
     this.form.content.images.push({
@@ -2289,6 +2304,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       path: null,
       url: null
     });
+    this.updateImagesOrder();
   },
   removeImageField: function removeImageField(event) {
     var item = event.path[2].getAttribute("data-item");
@@ -2303,7 +2319,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   }
 }), _defineProperty(_layout$layout$compon, "computed", {
-  options: function options() {
+  buttonsOrder: function buttonsOrder() {
     var numbers = Object.keys(new Array(this.form.buttons.length).fill(null)).map(Number);
     var options = numbers.map(function (item) {
       return {
@@ -2312,6 +2328,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
     });
     return options;
+  },
+  sectionTypesOptions: function sectionTypesOptions() {
+    var _this = this;
+
+    var types = Object.values(this.section_types).map(function (item) {
+      return {
+        value: item,
+        text: "".concat(_this.terms.type['type_' + item])
+      };
+    });
+    return types;
+  },
+  showSubtitleField: function showSubtitleField() {
+    return this.sectionsThatHasSubtitle.includes(parseInt(this.form.type));
+  },
+  showSingleImageUploadField: function showSingleImageUploadField() {
+    return this.sectionsThatHasImage.includes(parseInt(this.form.type));
+  },
+  showMultipleImagesUploadField: function showMultipleImagesUploadField() {
+    return this.sectionsThatHasImages.includes(parseInt(this.form.type));
+  },
+  tinyEditorLabelText: function tinyEditorLabelText() {
+    return this.sectionsThatHasContent.includes(parseInt(this.form.type)) ? 'Conteúdo:' : 'Descrição:';
   }
 }), _layout$layout$compon);
 
@@ -4187,16 +4226,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Tipo de seção:",
-    options: [{
-      value: 0,
-      text: 'Padrão'
-    }, {
-      value: 1,
-      text: 'Banner único'
-    }, {
-      value: 2,
-      text: 'Banner único com imagens'
-    }],
+    options: $options.sectionTypesOptions,
     modelValue: $data.form.type,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.form.type = $event;
@@ -4206,7 +4236,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $data.form.id ? true : false
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["options", "modelValue", "error-message", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "text",
     name: "name",
     modelValue: $data.form.name,
@@ -4228,7 +4258,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.title
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])]), $data.form.type == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  , ["modelValue", "error-message"])]), $options.showSubtitleField ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     type: "text",
     name: "subtitle",
     modelValue: $data.form.subtitle,
@@ -4239,7 +4269,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors.subtitle
   }, null, 8
   /* PROPS */
-  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.type == 0 ? 'Conteúdo' : 'Descrição') + ":", 1
+  , ["modelValue", "error-message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.tinyEditorLabelText), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditorTiny, {
     modelValue: $data.tinyEditor,
@@ -4258,7 +4288,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     border: ""
   }, {
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [$data.form.type != 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
+      return [$options.showSingleImageUploadField ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
         "preview-url": $data.imagePreview,
         borderless: $data.imagePreview ? true : false
       }, null, 8
@@ -4271,7 +4301,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm"
       }, null, 8
       /* PROPS */
-      , ["onClick", "text"])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_25, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.form.content.images, function (image, key) {
+      , ["onClick", "text"])])])) : $options.showMultipleImagesUploadField ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_25, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.form.content.images, function (image, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
           key: key,
           "class": "nav-item"
@@ -4332,7 +4362,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm"
       }, null, 8
       /* PROPS */
-      , ["onClick"])])]))];
+      , ["onClick"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
@@ -4401,7 +4431,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   "onUpdate:modelValue": function onUpdateModelValue($event) {
                     return button.order = $event;
                   },
-                  options: $options.options,
+                  options: $options.buttonsOrder,
                   "only-values": ""
                 }, null, 8
                 /* PROPS */

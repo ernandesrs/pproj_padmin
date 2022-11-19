@@ -41,22 +41,31 @@ class FrontSettingRequest extends FormRequest
             "header.menu_main" => ["nullable", "numeric", "exists:menus,id"],
 
             "sections.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+                $allowed = [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES];
                 $s = Section::where("id", $val)->first();
 
-                if ($s && !in_array($s->type, [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES]))
-                    $fail("Apenas seções do tipo " . __("terms.section.type.type_" . Section::TYPE_BANNER) . " é aceito aqui.");
+                if ($s && !in_array($s->type, $allowed))
+                    $fail("Aceito apenas: " . implode(",", array_map(function ($item) {
+                        return __("terms.section.type.type_" . $item);
+                    }, $allowed)));
             }],
             "sections.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+                $allowed = [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES];
                 $s = Section::where("id", $val)->first();
 
-                if ($s && $s->type != Section::TYPE_DEFAULT)
-                    $fail("Apenas seções do tipo " . __("terms.section.type.type_" . Section::TYPE_DEFAULT) . " é aceito aqui.");
+                if ($s && !in_array($s->type, $allowed))
+                    $fail("Aceito apenas: " . implode(",", array_map(function ($item) {
+                        return __("terms.section.type.type_" . $item);
+                    }, $allowed)));
             }],
             "sections.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+                $allowed = [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES];
                 $s = Section::where("id", $val)->first();
 
-                if ($s && $s->type != Section::TYPE_DEFAULT)
-                    $fail("Apenas seções do tipo " . __("terms.section.type.type_" . Section::TYPE_DEFAULT) . " é aceito aqui.");
+                if ($s && !in_array($s->type, $allowed))
+                    $fail("Aceito apenas: " . implode(",", array_map(function ($item) {
+                        return __("terms.section.type.type_" . $item);
+                    }, $allowed)));
             }],
 
             "footer.menu_main" => ["nullable", "numeric", "exists:menus,id"],

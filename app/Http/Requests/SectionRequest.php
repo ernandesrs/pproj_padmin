@@ -28,7 +28,6 @@ class SectionRequest extends FormRequest
         $rules = [
             "name" => ["required", "max:25", 'unique:sections,name' . (($this->section->id ?? null) ? ',' . $this->section->id : '')],
             "title" => ["required", "max:50"],
-            "subtitle" => ["nullable", "max:75"],
             "visible" => ["required", "boolean"],
 
             "buttons.*.text" => ["required", "max:30", "string"],
@@ -44,15 +43,21 @@ class SectionRequest extends FormRequest
             $rules["type"] = ["required", Rule::in(Section::TYPES)];
         }
 
-        if ($this->type == Section::TYPE_DEFAULT) {
-            $rules["content.content"] = ["required"];
-            $rules["content.image"] = ["nullable", "numeric", "exists:images,id"];
-        } else if (in_array($this->type, [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES])) {
-            $rules["content.description"] = ["required", "max:750"];
+        $type = empty($this->section) ? $this->type : $this->section->type;
 
-            if ($this->type == Section::TYPE_BANNER_IMAGES) {
-                $rules["content.images.*.id"] = ["nullable", "numeric", "exists:images,id"];
-            }
+        // image/images
+        if (in_array($type, [Section::TYPE_DEFAULT, Section::TYPE_BANNER])) {
+            $rules["content.image"] = ["nullable", "numeric", "exists:images,id"];
+        } elseif (in_array($type, [Section::TYPE_DEFAULT_IMAGES, Section::TYPE_BANNER_IMAGES])) {
+            $rules["content.images.*.id"] = ["nullable", "numeric", "exists:images,id"];
+        }
+
+        // subtitle/content/description
+        if (in_array($type, [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES])) {
+            $rules["subtitle"] = ["required", "max:75"];
+            $rules["content.content"] = ["required"];
+        } else if (in_array($type, [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES])) {
+            $rules["content.description"] = ["required", "max:750"];
         }
 
         return $rules;

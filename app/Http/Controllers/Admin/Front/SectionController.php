@@ -42,6 +42,8 @@ class SectionController extends Controller
     public function create()
     {
         return Inertia::render("Admin/Front/Sections/Form", [
+            "section_types" => Section::TYPES,
+            "terms" => __("terms.section"),
             "pageTitle" => "Nova seção",
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
             "images" => session()->get("images", null),
@@ -61,26 +63,7 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        $validated = $request->validated();
-
-        if ($validated["type"] == Section::TYPE_BANNER) {
-            $image = $validated["content"]["image"] ?? null;
-            if ($image) {
-                $image = Image::where("id", $image)->first();
-                if ($image) {
-                    $image = $image->path;
-                }
-            }
-            $validated["content"]["image"] = $image;
-        } else {
-            $images = $validated["content"]["images"] ?? [];
-            foreach ($images as $key => $image) {
-                $imageModel = Image::where("id", $image["id"] ?? 0)->first();
-                if ($imageModel)
-                    $images[$key]["path"] = $imageModel->path;
-            }
-            $validated["content"]["images"] = $images;
-        }
+        $validated = $this->getImage($request->validated());
 
         $section = Section::create($validated);
 
@@ -123,6 +106,8 @@ class SectionController extends Controller
 
         return Inertia::render("Admin/Front/Sections/Form", [
             "section" => $section,
+            "section_types" => Section::TYPES,
+            "terms" => __("terms.section"),
             "pageTitle" => "Editar seção",
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
             "images" => session()->get("images", null),
@@ -148,26 +133,7 @@ class SectionController extends Controller
      */
     public function update(SectionRequest $request, Section $section)
     {
-        $validated = $request->validated();
-
-        if ($section->type == Section::TYPE_BANNER) {
-            $image = $validated["content"]["image"] ?? null;
-            if ($image) {
-                $image = Image::where("id", $image)->first();
-                if ($image) {
-                    $image = $image->path;
-                }
-            }
-            $validated["content"]["image"] = $image;
-        } else {
-            $images = $validated["content"]["images"] ?? [];
-            foreach ($images as $key => $image) {
-                $imageModel = Image::where("id", $image["id"] ?? 0)->first();
-                if ($imageModel)
-                    $images[$key]["path"] = $imageModel->path;
-            }
-            $validated["content"]["images"] = $images;
-        }
+        $validated = $this->getImage($request->validated(), $section);
 
         $section->update($validated);
 
@@ -191,5 +157,37 @@ class SectionController extends Controller
             "variant" => "success",
             "message" => "A seção foi excluída com sucesso!",
         ]);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param array $validated
+     * @param Section|null $section
+     * @return array
+     */
+    private function getImage(array $validated, ?Section $section = null)
+    {
+        $type = $section ? $section->type : $validated["type"];
+
+        if ($type == Section::TYPE_BANNER) {
+            $image = $validated["content"]["image"] ?? null;
+            if ($image) {
+                $image = Image::where("id", $image)->first();
+                if ($image) {
+                    $image = $image->path;
+                }
+            }
+            $validated["content"]["image"] = $image;
+        } else {
+            $images = $validated["content"]["images"] ?? [];
+            foreach ($images as $key => $image) {
+                $imageModel = Image::where("id", $image["id"] ?? 0)->first();
+                if ($imageModel)
+                    $images[$key]["path"] = $imageModel->path;
+            }
+            $validated["content"]["images"] = $images;
+        }
+        return $validated;
     }
 }

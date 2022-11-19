@@ -5,8 +5,8 @@
                 class="col-lg-6 {{ ($alignment ?? 'left') == 'right' ? 'order-lg-5' : '' }} d-flex justify-content-center mb-4 mb-lg-0">
                 @component('front.components.sections.images',
                     [
-                        $section->content->image ?? null ? 'image' : 'images' =>
-                            $section->content->image ?? ($section->content->images ?? []),
+                        'image' => $section->content->image ?? null,
+                        'images' => $section->content->images ?? [],
                     ])
                 @endcomponent
             </div>

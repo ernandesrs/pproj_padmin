@@ -10,12 +10,14 @@ class Section extends Model
     use HasFactory;
 
     const TYPE_DEFAULT = 0;
-    const TYPE_BANNER = 1;
-    const TYPE_BANNER_IMAGES = 2;
+    const TYPE_DEFAULT_IMAGES = 1;
+    const TYPE_BANNER = 2;
+    const TYPE_BANNER_IMAGES = 3;
     const TYPES = [
         self::TYPE_DEFAULT,
+        self::TYPE_DEFAULT_IMAGES,
         self::TYPE_BANNER,
-        self::TYPE_BANNER_IMAGES
+        self::TYPE_BANNER_IMAGES,
     ];
 
     /**
@@ -47,11 +49,11 @@ class Section extends Model
      */
     public function update(array $attributes = [], array $options = [])
     {
-        if (in_array($this->type, [self::TYPE_BANNER, self::TYPE_DEFAULT]) && $attributes["content"]["image"] == null) {
+        if (in_array($this->type, [self::TYPE_DEFAULT, self::TYPE_BANNER]) && $attributes["content"]["image"] == null) {
             $attributes["content"]["image"] = $this->content->image;
         }
 
-        if ($this->type == self::TYPE_BANNER_IMAGES && $attributes["content"]["images"] == null) {
+        if (in_array($this->type, [self::TYPE_DEFAULT_IMAGES, self::TYPE_BANNER_IMAGES]) && $attributes["content"]["images"] == null) {
             $attributes["content"]["images"] = [];
         }
 
