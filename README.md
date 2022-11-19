@@ -42,8 +42,7 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
    > php artisan key:generate
 8. Gerar link simbólico para a pasta pública:
    > php artisan storage:link
-9. Por fim, acesse no navegador a seguinte url: <b><i>SUA URL LOCAL</i>/builder</b>(funcionará apenas se sua aplicação estiver configurada com <b>APP_LOCAL</b> como 'local' e não 'production').
-   Esta url irá criar os dados básicos para a aplicação como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da aplicação.
+9. Por fim, acesse no navegador a seguinte url: <b><i>http://127.0.0.1:8000</i>/builder</b> (funcionará apenas se sua aplicação estiver configurada com <b>APP_LOCAL</b> como 'local' e não 'production'). Esta url irá criar os dados básicos para a aplicação como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da aplicação.
 
 #### Dados do usuário principal:
    - E-mail: master@master.mail ou então o email configurado na variável ambiente <b>MAIL_ADMIN_ADDRESS</b>.
@@ -54,10 +53,10 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
    - Senha: guestpassword
 
 #### Acesso a página inicial:
-<b><i>SUA URL LOCAL</i></b>
+   - <b><i>http://127.0.0.1:8000</i></b>
 
 #### Acesso a página de login:
-<b><i>SUA URL LOCAL</i>/auth/login</b>
+   - <b><i>http://127.0.0.1:8000</i>/auth/login</b>
 
 #### Acesso ao painel:
-<b><i>SUA URL LOCAL</i>/admin</b>
+   - <b><i>http://127.0.0.1:8000</i>/admin</b>
