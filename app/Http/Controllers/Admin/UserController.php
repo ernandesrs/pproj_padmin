@@ -216,4 +216,27 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * User photo upload
+     *
+     * @param Request $request
+     * @param User $user
+     * @return void
+     */
+    public function uploadPhoto(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            "photo" => ["required", "max:5000", "mimes:png,jpg,webp"],
+        ]);
+
+        $photo = $validated["photo"];
+        if ($user->photo)
+            Storage::delete("public/{$user->photo}");
+
+        $user->photo = $photo->store("avatars", "public");
+        $user->save();
+
+        return back();
+    }
 }

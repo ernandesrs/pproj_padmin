@@ -45,13 +45,6 @@ class UserService
      */
     public function update(array $validated, User $user)
     {
-        if ($photo = $validated["photo"]) {
-            if ($user->photo)
-                Storage::delete("public/{$user->photo}");
-
-            $user->photo = $photo->store("avatars", "public");
-        }
-
         $user->first_name = $validated["first_name"];
         $user->last_name = $validated["last_name"];
         $user->username = $validated["username"];

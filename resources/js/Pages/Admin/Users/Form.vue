@@ -3,7 +3,15 @@
     <div class="row justify-content-center">
         <div v-if="form?.id" class="col-12 col-md-4 mb-3 mb-md-0">
             <div class="d-flex flex-column align-items-center">
-                <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
+                <div>
+                    <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
+                </div>
+
+                <div v-if="form.id" class="px-lg-4 pt-3">
+                    <InputForm @update:modelValue="photoUpload" label="Nova foto"
+                        type="file" name="photo" :error-message="photoUploadError" />
+                </div>
+
                 <div class="d-flex pt-3">
                     <ButtonConfirmationUi v-if="user.next_level && user.can.promote"
                         text="Promover" confirm-text="Promover?" size="sm"
@@ -19,7 +27,7 @@
                 <div class="py-3 text-center">
                     <p class="mb-0">
                         <strong>Registro:</strong> <span class="text-muted">{{
-                                getDate(user.created_at)
+                        getDate(user.created_at)
                         }}</span>
                     </p>
                     <p class="mb-0">
@@ -65,18 +73,6 @@
                             :disabled="form?.id ? true : false" />
                     </div>
 
-                    <div v-if="form.id" class="col-12 mb-4">
-                        <InputForm
-                            @update:modelValue="form.photo = $event.target.files[0]"
-                            label="Foto" type="file" name="photo"
-                            :error-message="form.errors.photo" />
-
-                        <progress v-if="form.progress" :value="form.progress.percentage"
-                            max="100">
-                            {{ form.progress.percentage }}%
-                        </progress>
-                    </div>
-
                     <div class="col-12 col-md-6 mb-4">
                         <InputForm label="Senha" type="password" name="password"
                             v-model="form.password"
@@ -111,6 +107,7 @@ import InputForm from '../../../Components/Form/InputForm.vue';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
     components: { InputForm, SelectForm, ButtonUi, ButtonConfirmationUi },
@@ -146,13 +143,50 @@ export default {
                 password: null,
                 password_confirmation: null
             }),
+            photoUploadError: null
         };
     },
 
     methods: {
+        photoUpload(event) {
+            let photo = event.target.files[0];
+
+            this.photoUploadError = '';
+            if (!photo) {
+                this.photoUploadError = 'Selecione uma foto';
+                return;
+            }
+
+            let types = ['image/png', 'image/jpg', 'image/jpeg'];
+            if (!types.includes(photo.type)) {
+                this.photoUploadError = 'Tipo de foto não aceito';
+                return;
+            }
+
+            if (photo.size > 5242880) {
+                this.photoUploadError = 'O tamanho da foto muito grande';
+                return;
+            }
+
+            let action = route('admin.users.uploadPhoto', { user: this.user.id });
+
+            Inertia.post(action, { photo: photo }, {
+                preserveState: true,
+                onError: (response) => {
+                    if (response.photo) {
+                        this.photoUploadError = response.photo;
+                    } else {
+                        this.photoUploadError = 'Houve um erro ao fazer upload.';
+                    }
+                },
+                onSuccess: (response) => {
+                    this.images = response.props.images;
+                }
+            });
+        },
+
         submit() {
             let action = route('admin.users.store');
-
             if (this.form?.id) {
                 action = route('admin.users.update', { user: this.form.id });
 

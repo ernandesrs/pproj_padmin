@@ -29,8 +29,9 @@ Route::group([
         'update' => 'admin.users.update',
         'destroy' => 'admin.users.destroy',
     ]);
-    Route::post("/promote/{user}", [AdminUserController::class, "promote"])->name("admin.users.promote");
-    Route::post("/demote/{user}", [AdminUserController::class, "demote"])->name("admin.users.demote");
+    Route::post("/users/{user}/promote", [AdminUserController::class, "promote"])->name("admin.users.promote");
+    Route::post("/users/{user}/demote", [AdminUserController::class, "demote"])->name("admin.users.demote");
+    Route::post("/users/{user}/upload-photo", [AdminUserController::class, "uploadPhoto"])->name("admin.users.uploadPhoto");
 
     Route::group(["prefix" => "medias"], function () {
         Route::resource("images", AdminImageController::class)->names([

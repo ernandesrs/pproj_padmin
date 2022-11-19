@@ -31,7 +31,6 @@ class UserRequest extends FormRequest
             "username" => ["required", "max:20", "unique:users,username" . ($this->user ? ',' . $this->user->id : '')],
             "gender" => ["required", Rule::in(User::GENDERS)],
             "email" => ["required", "email", "unique:users,email" . ($this->user ? ',' . $this->user->id : '')],
-            "photo" => ["nullable", "max:5000", "mimes:png,jpg,webp"],
             "password" => [($this->user ? 'nullable' : 'required'), "confirmed"],
         ];
 

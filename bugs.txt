@@ -5,3 +5,4 @@
 (Resolvido com implementação do preverveState no componente Admin/Medias/Images/ModalImagesList)
 
 [User update]: ao fazer upload de foto ocorre erro de validação(campos obrigatórios não preenchidos)
+(Resolvido com implementação de upload de foto a parte)
