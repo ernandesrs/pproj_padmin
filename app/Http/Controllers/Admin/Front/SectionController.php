@@ -63,6 +63,8 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
+        $this->authorize("create", new Section());
+
         $validated = $this->getImage($request->validated());
 
         $section = Section::create($validated);
@@ -133,6 +135,8 @@ class SectionController extends Controller
      */
     public function update(SectionRequest $request, Section $section)
     {
+        $this->authorize("update", $section);
+
         $validated = $this->getImage($request->validated(), $section);
 
         $section->update($validated);
@@ -151,6 +155,8 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
+        $this->authorize("delete", $section);
+
         $section->delete();
 
         return back()->with("flash_alert", [

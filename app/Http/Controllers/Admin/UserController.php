@@ -226,6 +226,8 @@ class UserController extends Controller
      */
     public function uploadPhoto(Request $request, User $user)
     {
+        $this->authorize("update", $user);
+
         $validated = $request->validate([
             "photo" => ["required", "max:5000", "mimes:png,jpg,webp"],
         ]);
