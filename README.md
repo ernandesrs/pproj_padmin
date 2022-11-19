@@ -30,17 +30,17 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
 2. Acesse a pasta da aplicação via terminal e execute os seguintes comandos:
    > npm install
    > composer install
-3. Copiar o '.env.example' e renomear para '.env'.
-4. Abrir o '.env' e essencialmente configurar:
+3. Copie o '.env.example' e renomear para '.env'.
+4. Abra o '.env' e essencialmente configurar:
    - Dados de acesso ao seu banco de dados local
    - Dados SMTP para envio de emails como o https://mailtrap.io (necessário para envio de emails ao criar uma conta ou criar usuários)
-5. Executar o servidor Laravel com:
+5. Execute o servidor Laravel com:
    > php artisan serve
-6. Gerar das tabelas do banco de dados com:
+6. Gere aas tabelas do banco de dados com:
    > php artisan migrate
-7. Gerar chave da aplicação:
+7. Gere a chave da aplicação:
    > php artisan key:generate
-8. Gerar link simbólico para a pasta pública:
+8. Gere o link simbólico para a pasta pública:
    > php artisan storage:link
 9. Por fim, acesse no navegador a seguinte url: <b><i>http://127.0.0.1:8000</i>/builder</b> (funcionará apenas se sua aplicação estiver configurada com <b>APP_LOCAL</b> como 'local' e não 'production'). Esta url irá criar os dados básicos para a aplicação como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da aplicação.
 
