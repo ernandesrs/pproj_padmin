@@ -45,14 +45,14 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
 9. Por fim, acesse no navegador a seguinte url: <b><i>SUA URL LOCAL</i>/builder</b>(funciona apenas se sua aplicação estiver configurada como aplicação 'local' e não 'production')
    Esta url irá criar os dados básicos para a aplicação, como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da apliação.
 
-   <b>Dados do usuário principal</b>:
-      <b>E-mail:</b> master@master.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
-      <b>Senha:</b> masterpassword
+<b>Dados do usuário principal</b>:
+   <b>E-mail:</b> master@master.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
+   <b>Senha:</b> masterpassword
    
-   <b>Dados do usuário comum</b>:
-      <b>E-mail:</b> guest@guest.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
-      <b>Senha:</b> guestpassword
+<b>Dados do usuário comum</b>:
+   <b>E-mail:</b> guest@guest.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
+   <b>Senha:</b> guestpassword
 
-      <b>Acesso a página inicial</b>: <b><i>SUA URL LOCAL</i></b>
-      <b>Acesso a página de login</b>: <b><i>SUA URL LOCAL</i>/auth/login</b>
-      <b>Acesso ao painel</b>: <b><i>SUA URL LOCAL</i>/admin</b>
+<b>Acesso a página inicial</b>: <b><i>SUA URL LOCAL</i></b>
+<b>Acesso a página de login</b>: <b><i>SUA URL LOCAL</i>/auth/login</b>
+<b>Acesso ao painel</b>: <b><i>SUA URL LOCAL</i>/admin</b>
