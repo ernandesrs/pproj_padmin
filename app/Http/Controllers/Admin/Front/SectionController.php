@@ -98,8 +98,8 @@ class SectionController extends Controller
             $section->content->images = Collection::make($section->content->images)->map(function ($item) {
                 return [
                     "id" => $item->id,
-                    "path" => $item->path,
-                    "url" => Thumb::thumb($item->path)
+                    "path" => $item->path ?? null,
+                    "url" => Thumb::thumb($item->path ?? null)
                 ];
             });
         }
@@ -170,7 +170,7 @@ class SectionController extends Controller
     {
         $type = $section ? $section->type : $validated["type"];
 
-        if ($type == Section::TYPE_BANNER) {
+        if (in_array($type, [Section::TYPE_DEFAULT, Section::TYPE_BANNER])) {
             $image = $validated["content"]["image"] ?? null;
             if ($image) {
                 $image = Image::where("id", $image)->first();
