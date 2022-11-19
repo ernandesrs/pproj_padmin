@@ -34,14 +34,14 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
 4. Abra o '.env' e essencialmente configurar:
    - Dados de acesso ao seu banco de dados local
    - Dados SMTP para envio de emails como o https://mailtrap.io (necessário para envio de emails ao criar uma conta ou criar usuários)
-5. Execute o servidor Laravel com:
-   > php artisan serve
-6. Gere aas tabelas do banco de dados com:
+5. Gere as tabelas do banco de dados com:
    > php artisan migrate
-7. Gere a chave da aplicação:
+6. Gere a chave da aplicação:
    > php artisan key:generate
-8. Gere o link simbólico para a pasta pública:
+7. Gere o link simbólico para a pasta pública:
    > php artisan storage:link
+8. Execute o servidor Laravel com:
+   > php artisan serve
 9. Por fim, acesse no navegador a seguinte url: <b><i>http://127.0.0.1:8000</i>/builder</b> (funcionará apenas se sua aplicação estiver configurada com <b>APP_LOCAL</b> como 'local' e não 'production'). Esta url irá criar os dados básicos para a aplicação como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da aplicação.
 
 #### Dados do usuário principal:
