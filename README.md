@@ -33,7 +33,7 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
 3. Copiar o '.env.example' e renomear para '.env'.
 4. Abrir o '.env' e essencialmente configurar:
    - Dados de acesso ao seu banco de dados local
-   - Dados SMTP para envio de emails como o https://mailtrap.io(necessário para envio de emails ao criar uma conta ou criar usuários)
+   - Dados SMTP para envio de emails como o https://mailtrap.io (necessário para envio de emails ao criar uma conta ou criar usuários)
 5. Executar o servidor Laravel com:
    > php artisan serve
 6. Gerar das tabelas do banco de dados com:
@@ -42,17 +42,22 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
    > php artisan key:generate
 8. Gerar link simbólico para a pasta pública:
    > php artisan storage:link
-9. Por fim, acesse no navegador a seguinte url: <b><i>SUA URL LOCAL</i>/builder</b>(funciona apenas se sua aplicação estiver configurada como aplicação 'local' e não 'production')
-   Esta url irá criar os dados básicos para a aplicação, como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da apliação.
+9. Por fim, acesse no navegador a seguinte url: <b><i>SUA URL LOCAL</i>/builder</b>(funcionará apenas se sua aplicação estiver configurada com <b>APP_LOCAL</b> como 'local' e não 'production').
+   Esta url irá criar os dados básicos para a aplicação como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da aplicação.
 
-<b>Dados do usuário principal</b>:
-   <b>E-mail:</b> master@master.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
-   <b>Senha:</b> masterpassword
+#### Dados do usuário principal:
+   - E-mail: master@master.mail ou então o email configurado na variável ambiente <b>MAIL_ADMIN_ADDRESS</b>.
+   - Senha: masterpassword
    
-<b>Dados do usuário comum</b>:
-   <b>E-mail:</b> guest@guest.mail ou então o email configurando na variável <b>MAIL_ADMIN_ADDRESS</b> no arquivo <b>'.env'</b>.
-   <b>Senha:</b> guestpassword
+#### Dados do usuário comum:
+   - E-mail: guest@guest.mail.
+   - Senha: guestpassword
 
-<b>Acesso a página inicial</b>: <b><i>SUA URL LOCAL</i></b>
-<b>Acesso a página de login</b>: <b><i>SUA URL LOCAL</i>/auth/login</b>
-<b>Acesso ao painel</b>: <b><i>SUA URL LOCAL</i>/admin</b>
+#### Acesso a página inicial:
+<b><i>SUA URL LOCAL</i></b>
+
+#### Acesso a página de login:
+<b><i>SUA URL LOCAL</i>/auth/login</b>
+
+#### Acesso ao painel:
+<b><i>SUA URL LOCAL</i>/admin</b>
