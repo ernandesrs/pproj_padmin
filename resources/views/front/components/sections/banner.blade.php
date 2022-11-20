@@ -1,25 +1,21 @@
-<section class="section default-section {{ $alignment ?? 'left' }}-section" id="{{ Str::slug($section->name) }}">
+<section class="section section-banner">
     <div class="container">
         <div class="row justify-content-center justify-content-lg-start align-items-center">
-            <div
-                class="col-lg-6 {{ ($alignment ?? 'left') == 'right' ? 'order-lg-5' : '' }} d-flex justify-content-center mb-4 mb-lg-0">
+            <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center align-items-center">
                 @component('front.components.sections.images',
                     [
+                        'images' => $section->content->images ?? null,
                         'image' => $section->content->image ?? null,
-                        'images' => $section->content->images ?? [],
                     ])
                 @endcomponent
             </div>
 
-            <div class="col-lg-6 text-center text-lg-start {{ ($alignment ?? 'left') == 'right' ? 'order-lg-1' : '' }}">
-                <h1 class="section-title fw-semibold lh-1">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h1 class="display-4 fw-semibold lh-1 text-dark-dark">
                     {{ $section->title }}
                 </h1>
-                <h2 class="section-subtitle">
-                    {{ $section->subtitle }}
-                </h2>
-                <div class="section-content text-dark-light px-3 px-lg-0 py-4">
-                    {!! $section->content->content !!}
+                <div class="lead text-dark-light fw-normal my-3 pt-3 pe-3 pb-3 rounded-lg">
+                    {!! $section->content->description !!}
                 </div>
                 <div class="d-grid gap-2 d-lg-flex justify-content-lg-start">
                     @foreach ($section->buttons as $button)
@@ -31,8 +27,6 @@
                                 'target' => $button->target,
                                 'title' => $button->title,
                                 'iconTag' => $button->icon,
-                                // 'iconClass' => 'bi bi-4-square',
-                                // 'iconName' => 'appIndicator',
                                 'position' => $button->position,
                                 'text' => $button->text,
                             ])

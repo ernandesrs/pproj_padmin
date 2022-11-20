@@ -13,7 +13,9 @@
     @if (($position ?? 'start') == 'start')
         @if ($iconClass ?? null)
             <i class="{{ $iconClass }}"></i>
-        @else
+        @elseif($iconName ?? null)
+            {{ Icons::elem($iconName) }}
+        @elseif($iconTag ?? null)
             {!! $iconTag !!}
         @endif
         <span>{{ $text }}</span>
@@ -21,7 +23,9 @@
         <span>{{ $text }}</span>
         @if ($iconClass ?? null)
             <i class="{{ $iconClass }}"></i>
-        @else
+        @elseif($iconName ?? null)
+            {!! Icons::elem($iconName) !!}
+        @elseif($iconTag ?? null)
             {!! $iconTag !!}
         @endif
     @endif

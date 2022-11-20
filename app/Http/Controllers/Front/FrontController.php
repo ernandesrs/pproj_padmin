@@ -38,9 +38,11 @@ class FrontController extends Controller
             "pageTitle" => $page->title,
             "settings" => $settings,
             "menu_main" => $menu_main ?? null,
-            "section_1" => $section_1,
-            "section_2" => $section_2,
-            "section_3" => $section_3,
+            "sections" => [
+                $section_1,
+                $section_2,
+                $section_3,
+            ]
         ]);
     }
 }
