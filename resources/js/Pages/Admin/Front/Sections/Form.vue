@@ -114,53 +114,56 @@
                                         Imagens da seção
                                     </div>
 
-                                    <ul class="nav nav-pills align-items-center mb-3">
-                                        <li v-for="image, key in form.content.images"
-                                            :key="key" class="nav-item">
-                                            <button
-                                                :class="['nav-link fs-6 px-3 py-1', { 'active': key == 0 }]"
-                                                data-bs-toggle="pill"
-                                                :data-bs-target="`#tab-${(key + 1)}`"
-                                                type="button">
-                                                Imagem {{ (key + 1) }}
-                                            </button>
-                                        </li>
-                                    </ul>
+                                    <TabpanelUi pills navs-alignment="center">
+                                        <template v-slot:tabNavs>
+                                            <TabNavItem
+                                                v-for="image, key in form.content.images"
+                                                :key="key" :name="`image${key}`"
+                                                :content-name="`image${key}Panel`"
+                                                :text="`${(key + 1)}`"
+                                                :show="key == 0 ? true : false" />
+                                        </template>
 
-                                    <div class="tab-content mb-3">
-                                        <div v-for="image, key in form.content.images"
-                                            :key="key"
-                                            :class="['tab-pane fade show', { 'active': key == 0 }]"
-                                            :id="`tab-${(key + 1)}`">
+                                        <template v-slot:tabContents>
+                                            <TabContent
+                                                v-for="image, key in form.content.images"
+                                                :key="key" :name="`image${key}Panel`"
+                                                :nav-name="`image${key}`"
+                                                :show="key == 0 ? true : false">
 
-                                            <div
-                                                class="d-flex flex-column justify-content-center align-items-center mb-3">
-                                                <ImagePreviewUi :preview-url="image.url"
-                                                    :borderless="image.url ? true : false" />
-                                            </div>
+                                                <!-- image preview -->
+                                                <div
+                                                    class="d-flex flex-column justify-content-center align-items-center mb-3">
+                                                    <ImagePreviewUi
+                                                        :preview-url="image.url"
+                                                        :borderless="image.url ? true : false" />
+                                                </div>
 
-                                            <!-- cover upload -->
-                                            <div
-                                                class="d-flex justify-content-center gap-2">
-                                                <ButtonConfirmationUi
-                                                    @hasConfirmed="removeImageField"
-                                                    @hasCanceled=""
-                                                    :text="`${'Excluir'} `" icon="trash"
-                                                    variant="danger" size="sm"
-                                                    position="center" :data-item="key" />
+                                                <!-- image delete/upload -->
+                                                <div
+                                                    class="d-flex justify-content-center gap-2">
+                                                    <ButtonConfirmationUi
+                                                        @hasConfirmed="removeImageField"
+                                                        @hasCanceled=""
+                                                        :text="`${'Excluir'} `"
+                                                        icon="trash" variant="danger"
+                                                        size="sm" position="center"
+                                                        :data-item="key" />
 
-                                                <ButtonUi @click="modalImagesListShow"
-                                                    :text="`${image.url ? 'Atualizar' : 'Escolher'} `"
-                                                    icon="image" variant="success"
-                                                    size="sm" :data-item="key" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                                    <ButtonUi @click="modalImagesListShow"
+                                                        :text="`${image.url ? 'Atualizar' : 'Escolher'} `"
+                                                        icon="image" variant="success"
+                                                        size="sm" :data-item="key" />
+                                                </div>
+
+                                            </TabContent>
+                                        </template>
+                                    </TabpanelUi>
 
                                     <div class="text-center">
                                         <ButtonUi @click="addNewImageField"
                                             text="Adicionar imagem" icon="plusLg"
-                                            variant="primary" size="sm" />
+                                            variant="link" size="sm" />
                                     </div>
                                 </div>
                             </template>
@@ -269,7 +272,7 @@
 
                                 <div class="text-center">
                                     <ButtonUi @click="addNewButton" text="Adicionar link"
-                                        variant="primary" icon="plusLg" size="sm" />
+                                        variant="link" icon="plusLg" size="sm" />
                                 </div>
                             </template>
                         </CardUi>
@@ -308,11 +311,14 @@ import AccordionGroup from '../../../../Components/Ui/Accordion/AccordionGroup.v
 import AccordionItem from '../../../../Components/Ui/Accordion/AccordionItem.vue';
 import ModalUi from '../../../../Components/Ui/ModalUi.vue';
 import CardUi from '../../../../Components/Ui/CardUi.vue';
+import TabpanelUi from '../../../../components/Ui/Tabpanel/TabpanelUi.vue';
+import TabNavItem from '../../../../components/Ui/Tabpanel/TabNavItem.vue';
+import TabContent from '../../../../components/Ui/Tabpanel/TabContent.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi, CardUi },
+    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi, CardUi, TabpanelUi, TabNavItem, TabContent },
     props: {
         section: { type: Object, default: {} },
         section_types: { type: Object, default: {} },
