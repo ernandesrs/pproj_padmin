@@ -74,7 +74,7 @@
                             label="Subtítulo:" :error-message="form.errors.subtitle" />
                     </div>
 
-                    <div class="mb-4">
+                    <div v-if="showContentField" class="mb-4">
                         <label class="mb-1">
                             {{ tinyEditorLabelText }}
                         </label>
@@ -84,11 +84,18 @@
                             {{ tinyEditorError }}
                         </small>
                     </div>
+
+                    <div class="mb-4">
+                        <SelectForm v-if="showBindablesField" label="Vincular com:"
+                            :options="bindablesOptions" v-model="bindable"
+                            :error-message="form.errors.bindable" />
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-10 col-lg-6 mb-4">
                     <div class="mb-4">
-                        <CardUi no-shadow border>
+                        <CardUi no-shadow border
+                            v-if="showSingleImageUploadField || showMultipleImagesUploadField">
                             <template v-slot:content>
                                 <div v-if="showSingleImageUploadField">
                                     <div class="fs-5 mb-3 fw-semibold">
@@ -321,6 +328,7 @@ export default {
     components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi, CardUi, TabpanelUi, TabNavItem, TabContent },
     props: {
         section: { type: Object, default: {} },
+        bindables: { type: Object, default: {} },
         section_types: { type: Object, default: {} },
         terms: { type: Object, default: {} },
         tinyApiKey: { type: String, default: null },
@@ -340,6 +348,10 @@ export default {
                     content: null,
                     description: null,
                     insertImageOn: null,
+                    bindable: {
+                        id: null,
+                        name: null,
+                    },
                     images: [
                         {
                             id: null,
@@ -351,6 +363,7 @@ export default {
                 buttons: []
             }),
 
+            bindable: null,
             tinyEditor: null,
             tinyEditorError: null,
             showImagesModalList: false,
@@ -360,7 +373,9 @@ export default {
             sectionsThatHasImages: [1, 3],
             sectionsThatHasDescription: [2, 3],
             sectionsThatHasContent: [0, 1],
-            sectionsThatHasSubtitle: [0, 1],
+            sectionsThatHasSubtitle: [0, 1, 4],
+            sectionsThatHasContents: [0, 1, 2, 3],
+            sectionsThatHasBindables: [4],
         };
     },
 
@@ -377,6 +392,15 @@ export default {
                     this.tinyEditorError = errors["content.description"];
                 }
             }
+        },
+
+        bindable: {
+            deep: true,
+            handler(nv) {
+                let arr = nv.split("*");
+                this.form.content.bindable.id = arr[0];
+                this.form.content.bindable.name = arr[1];
+            }
         }
     },
 
@@ -390,11 +414,14 @@ export default {
         this.form.visible = this.section.visible;
         this.form.subtitle = this.section.subtitle;
 
-        // content/description
+        // content/description/bindable
         if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
             this.tinyEditor = this.section.content.content;
-        } else {
+        } else if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
             this.tinyEditor = this.section.content.description;
+        } else if (this.sectionsThatHasBindables.includes(parseInt(this.section.type))) {
+            this.form.content.bindable = this.section.content.bindable;
+            this.bindable = [this.form.content.bindable.id, this.form.content.bindable.name].join("*");
         }
 
         // image/images
@@ -565,6 +592,36 @@ export default {
             return this.sectionsThatHasContent.includes(parseInt(this.form.type)) ?
                 'Conteúdo:' :
                 'Descrição:';
+        },
+
+        showContentField() {
+            return this.sectionsThatHasContents.includes(parseInt(this.form.type));
+        },
+
+        showBindablesField() {
+            return this.sectionsThatHasBindables.includes(parseInt(this.form.type));
+        },
+
+        bindablesOptions() {
+            let bindablesList = Object.entries(this.bindables);
+
+            let b = bindablesList.map((bindables) => {
+                return bindables[1][0].map((bindable) => {
+                    return {
+                        text: `[${this.terms.bindable[bindables[0]]}] ${bindable.name}`,
+                        value: `${bindable.id}*${bindables[0]}`
+                    };
+                });
+            });
+
+            let unified = b[0];
+            b.forEach((item, key) => {
+                if (key > 0) {
+                    unified = unified.concat(item);
+                }
+            });
+
+            return unified;
         }
     }
 }

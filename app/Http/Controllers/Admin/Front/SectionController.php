@@ -41,8 +41,15 @@ class SectionController extends Controller
      */
     public function create()
     {
+        $bindables = [];
+
+        foreach ((new Section())->bindables ?? [] as $key => $db) {
+            $bindables[$key][] = (new $db)->all();
+        }
+
         return Inertia::render("Admin/Front/Sections/Form", [
             "section_types" => Section::TYPES,
+            "bindables" => $bindables,
             "terms" => __("terms.section"),
             "pageTitle" => "Nova seção",
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
@@ -106,8 +113,15 @@ class SectionController extends Controller
             });
         }
 
+        $bindables = [];
+
+        foreach ((new Section())->bindables ?? [] as $key => $db) {
+            $bindables[$key][] = (new $db)->all();
+        }
+
         return Inertia::render("Admin/Front/Sections/Form", [
             "section" => $section,
+            "bindables" => $bindables,
             "section_types" => Section::TYPES,
             "terms" => __("terms.section"),
             "pageTitle" => "Editar seção",

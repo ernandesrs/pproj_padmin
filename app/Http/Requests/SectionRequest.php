@@ -56,8 +56,30 @@ class SectionRequest extends FormRequest
         if (in_array($type, [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES])) {
             $rules["subtitle"] = ["required", "max:75"];
             $rules["content.content"] = ["required"];
-        } else if (in_array($type, [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES])) {
+        } elseif (in_array($type, [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES])) {
             $rules["content.description"] = ["required", "max:750"];
+        } elseif (in_array($type, [Section::TYPE_BOUND])) {
+            $rules["content.bindable"] = ["required", function ($attr, $val, $fail) {
+                $id = $val["id"] ?? null;
+                $name = $val["name"] ?? null;
+
+                if (!$id || !$name) {
+                    $fail("Erro ao identificar o vinculável.");
+                    return false;
+                }
+
+                $bindable = (new Section())->bindables[$name] ?? null;
+                if (!$bindable) {
+                    $fail("Escolha um vinculável válido.");
+                    return false;
+                }
+
+                $bindableInstance = new $bindable;
+                if ($bindableInstance->where("id", $id)->count() == 0) {
+                    $fail("O vinculável escolhido não existe.");
+                    return false;
+                }
+            }];
         }
 
         return $rules;

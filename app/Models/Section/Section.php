@@ -13,12 +13,21 @@ class Section extends Model
     const TYPE_DEFAULT_IMAGES = 1;
     const TYPE_BANNER = 2;
     const TYPE_BANNER_IMAGES = 3;
+    const TYPE_BOUND = 4;
     const TYPES = [
         self::TYPE_DEFAULT,
         self::TYPE_DEFAULT_IMAGES,
         self::TYPE_BANNER,
         self::TYPE_BANNER_IMAGES,
+        self::TYPE_BOUND
     ];
+
+    /**
+     * Bindable models
+     *
+     * @var array
+     */
+    public $bindables = [];
 
     /**
      * @var array
@@ -69,7 +78,19 @@ class Section extends Model
     {
         static::retrieved(function ($section) {
             $section->content = json_decode($section->content);
+
+            if ($section->type == self::TYPE_BOUND) {
+                $bname = $section->content->bindable->name;
+                $bindable = $section->bindables[$bname] ?? null;
+
+                if ($bindable) {
+                    $section->content->bindable = (new $bindable)->where("id", $section->content->bindable->id)->first();
+                    $section->content->bindable->name = $bname;
+                }
+            }
+
             $section->buttons = json_decode($section->buttons);
+
             return $section;
         });
     }

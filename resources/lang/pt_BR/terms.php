@@ -36,6 +36,11 @@ return [
             'type_' . Section::TYPE_DEFAULT_IMAGES => 'Padrão com imagens',
             'type_' . Section::TYPE_BANNER => 'Banner',
             'type_' . Section::TYPE_BANNER_IMAGES => 'Banner com imagens',
+            'type_' . Section::TYPE_BOUND => 'Vinculado',
         ],
+        'bindable' => [
+            'image' => 'Imagem',
+            'video' => 'Vídeo',
+        ]
     ],
 ];
