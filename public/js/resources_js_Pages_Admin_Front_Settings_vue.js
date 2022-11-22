@@ -1240,8 +1240,13 @@ var WIDTH_MOBILE = 768;
           text: 'Gerenciar ' + this.appName,
           to: '#',
           icon: 'layoutWtf',
-          activeIn: ['Admin/Front/Sections/List', 'Admin/Front/Sections/Form', 'Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Menus/List', 'Admin/Front/Menus/Form', 'Admin/Front/Settings'],
+          activeIn: ['Admin/Front/Products/List', 'Admin/Front/Products/Form', 'Admin/Front/Sections/List', 'Admin/Front/Sections/Form', 'Admin/Pages/List', 'Admin/Pages/Form', 'Admin/Front/Menus/List', 'Admin/Front/Menus/Form', 'Admin/Front/Settings'],
           items: [{
+            text: 'Produtos',
+            to: this.$route("admin.products.index"),
+            icon: 'box',
+            activeIn: ['Admin/Front/Products/List', 'Admin/Front/Products/Form']
+          }, {
             text: 'Seções',
             to: this.$route("admin.sections.index"),
             icon: 'collection',

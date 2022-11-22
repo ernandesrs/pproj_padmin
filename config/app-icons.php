@@ -8,6 +8,8 @@ return [
     'arrowUp' => 'bi bi-arrow-up',
     'arrowDown' => 'bi bi-arrow-down',
 
+    'box' => 'bi bi-box',
+
     'calendarCheck' => 'bi bi-calendar2-check',
     'calendarDate' => 'bi bi-calendar2-date',
     'check' => 'bi bi-check',

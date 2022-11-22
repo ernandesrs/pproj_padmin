@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController as AdminController;
 use App\Http\Controllers\Admin\Front\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\Front\SectionController as AdminSectionController;
+use App\Http\Controllers\Admin\Front\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\Media\VideoController as AdminVideoController;
@@ -64,6 +65,14 @@ Route::group([
         'edit' => 'admin.pages.edit',
         'update' => 'admin.pages.update',
         'destroy' => 'admin.pages.destroy',
+    ]);
+    Route::resource("products", AdminProductController::class)->names([
+        'index' => 'admin.products.index',
+        'create' => 'admin.products.create',
+        'store' => 'admin.products.store',
+        'edit' => 'admin.products.edit',
+        'update' => 'admin.products.update',
+        'destroy' => 'admin.products.destroy',
     ]);
 
     Route::resource("sections", AdminSectionController::class)->names([
