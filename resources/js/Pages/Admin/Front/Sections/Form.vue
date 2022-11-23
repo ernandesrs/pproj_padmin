@@ -87,7 +87,7 @@
 
                     <div class="mb-4">
                         <SelectForm v-if="showBindablesField" label="Vincular com:"
-                            :options="bindablesOptions" v-model="bindable"
+                            :options="bindablesOptions" v-model="form.content.bindable"
                             :error-message="form.errors.bindable" />
                     </div>
                 </div>
@@ -348,10 +348,7 @@ export default {
                     content: null,
                     description: null,
                     insertImageOn: null,
-                    bindable: {
-                        id: null,
-                        name: null,
-                    },
+                    bindable: null,
                     images: [
                         {
                             id: null,
@@ -363,7 +360,6 @@ export default {
                 buttons: []
             }),
 
-            bindable: null,
             tinyEditor: null,
             tinyEditorError: null,
             showImagesModalList: false,
@@ -393,15 +389,6 @@ export default {
                 }
             }
         },
-
-        bindable: {
-            deep: true,
-            handler(nv) {
-                let arr = nv.split("*");
-                this.form.content.bindable.id = arr[0];
-                this.form.content.bindable.name = arr[1];
-            }
-        }
     },
 
     created() {
@@ -605,20 +592,11 @@ export default {
         bindablesOptions() {
             let bindablesList = Object.entries(this.bindables);
 
-            let b = bindablesList.map((bindables) => {
-                return bindables[1][0].map((bindable) => {
-                    return {
-                        text: `[${this.terms.bindable[bindables[0]]}] ${bindable.name}`,
-                        value: `${bindable.id}*${bindables[0]}`
-                    };
-                });
-            });
-
-            let unified = b[0];
-            b.forEach((item, key) => {
-                if (key > 0) {
-                    unified = unified.concat(item);
-                }
+            let unified = bindablesList.map((item) => {
+                return {
+                    text: this.terms.bindable[item[0]],
+                    value: item[0]
+                };
             });
 
             return unified;

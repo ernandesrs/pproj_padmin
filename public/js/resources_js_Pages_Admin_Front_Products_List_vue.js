@@ -2815,10 +2815,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ListItem, {
       key: product.id,
       item: {
-        cover: null,
+        cover: product.image.thumb_small,
         title: product.title,
         subtitle: '',
-        coverStyle: 'rectangle'
+        coverStyle: 'square'
       }
     }, {
       badges: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

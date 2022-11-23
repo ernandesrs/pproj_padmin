@@ -3,10 +3,10 @@
 
     <div class="row justify-content-center">
         <ListItem v-for="product in products?.data" :key="product.id" :item="{
-            cover: null,
+            cover: product.image.thumb_small,
             title: product.title,
             subtitle: '',
-            coverStyle: 'rectangle'
+            coverStyle: 'square'
         }">
             <template v-slot:badges>
                 <BadgeUi class="mb-1 me-1 fw-light" text="kkkj" variant="info" />

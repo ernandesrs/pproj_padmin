@@ -2176,10 +2176,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         content: null,
         description: null,
         insertImageOn: null,
-        bindable: {
-          id: null,
-          name: null
-        },
+        bindable: null,
         images: [{
           id: null,
           path: null,
@@ -2188,7 +2185,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       buttons: []
     }),
-    bindable: null,
     tinyEditor: null,
     tinyEditorError: null,
     showImagesModalList: false,
@@ -2214,14 +2210,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } else if (errors["content.description"]) {
         this.tinyEditorError = errors["content.description"];
       }
-    }
-  },
-  bindable: {
-    deep: true,
-    handler: function handler(nv) {
-      var arr = nv.split("*");
-      this.form.content.bindable.id = arr[0];
-      this.form.content.bindable.name = arr[1];
     }
   }
 }), _defineProperty(_layout$layout$compon, "created", function created() {
@@ -2398,19 +2386,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this2 = this;
 
     var bindablesList = Object.entries(this.bindables);
-    var b = bindablesList.map(function (bindables) {
-      return bindables[1][0].map(function (bindable) {
-        return {
-          text: "[".concat(_this2.terms.bindable[bindables[0]], "] ").concat(bindable.name),
-          value: "".concat(bindable.id, "*").concat(bindables[0])
-        };
-      });
-    });
-    var unified = b[0];
-    b.forEach(function (item, key) {
-      if (key > 0) {
-        unified = unified.concat(item);
-      }
+    var unified = bindablesList.map(function (item) {
+      return {
+        text: _this2.terms.bindable[item[0]],
+        value: item[0]
+      };
     });
     return unified;
   }
@@ -4451,9 +4431,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0,
     label: "Vincular com:",
     options: $options.bindablesOptions,
-    modelValue: $data.bindable,
+    modelValue: $data.form.content.bindable,
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return $data.bindable = $event;
+      return $data.form.content.bindable = $event;
     }),
     "error-message": $data.form.errors.bindable
   }, null, 8

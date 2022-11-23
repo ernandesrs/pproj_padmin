@@ -39,8 +39,7 @@ return [
             'type_' . Section::TYPE_BOUND => 'Vinculado',
         ],
         'bindable' => [
-            'image' => 'Imagem',
-            'video' => 'Vídeo',
+            'product' => 'Produto',
         ]
     ],
 ];

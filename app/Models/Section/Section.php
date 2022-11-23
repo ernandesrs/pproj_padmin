@@ -22,12 +22,16 @@ class Section extends Model
         self::TYPE_BOUND
     ];
 
+    const BINDABLES = [
+        "product" => \App\Models\Front\Product::class
+    ];
+
     /**
      * Bindable models
      *
      * @var array
      */
-    public $bindables = [];
+    public $bindables = self::BINDABLES;
 
     /**
      * @var array
@@ -78,17 +82,6 @@ class Section extends Model
     {
         static::retrieved(function ($section) {
             $section->content = json_decode($section->content);
-
-            if ($section->type == self::TYPE_BOUND) {
-                $bname = $section->content->bindable->name;
-                $bindable = $section->bindables[$bname] ?? null;
-
-                if ($bindable) {
-                    $section->content->bindable = (new $bindable)->where("id", $section->content->bindable->id)->first();
-                    $section->content->bindable->name = $bname;
-                }
-            }
-
             $section->buttons = json_decode($section->buttons);
 
             return $section;
