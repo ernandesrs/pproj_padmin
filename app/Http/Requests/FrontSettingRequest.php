@@ -59,6 +59,15 @@ class FrontSettingRequest extends FormRequest
                     }, $allowed)));
             }],
             "sections.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+                $allowed = [Section::TYPE_BOUND];
+                $s = Section::where("id", $val)->first();
+
+                if ($s && !in_array($s->type, $allowed))
+                    $fail("Aceito apenas: " . implode(",", array_map(function ($item) {
+                        return __("terms.section.type.type_" . $item);
+                    }, $allowed)));
+            }],
+            "sections.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES];
                 $s = Section::where("id", $val)->first();
 

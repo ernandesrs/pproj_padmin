@@ -58,7 +58,7 @@ class SettingController extends Controller
      */
     public function update(FrontSettingRequest $request)
     {
-        $validated = $this->validated($request);
+        $validated = $request->validated();
 
         $this->updateSettings($validated);
 
@@ -103,54 +103,5 @@ class SettingController extends Controller
         $settings->save();
 
         return $settings;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param Request $request
-     * @return array
-     */
-    private function validated(Request $request)
-    {
-        $data = $request->only([
-            "header.favicon",
-            "header.logo",
-            "header.menu_main",
-
-            "sections.section_1",
-            "sections.section_2",
-            "sections.section_3",
-
-            "footer.menu_main",
-        ]);
-        $validator = Validator::make($data,[
-            "header.favicon" => ["nullable", "numeric", "exists:images,id"],
-            "header.logo" => ["nullable", "numeric", "exists:images,id"],
-            "header.menu_main" => ["nullable", "numeric", "exists:menus,id"],
-
-            "sections.section_1" => ["nullable", "numeric", "exists:sections,id"],
-            "sections.section_2" => ["nullable", "numeric", "exists:sections,id"],
-            "sections.section_3" => ["nullable", "numeric", "exists:sections,id"],
-
-            "footer.menu_main" => ["nullable", "numeric", "exists:menus,id"],
-        ]);
-
-        $section_1 = Section::where("id", $data["sections"]["section_1"] ?? 0)->first();
-        $section_2 = Section::where("id", $data["sections"]["section_2"] ?? 0)->first();
-        $section_3 = Section::where("id", $data["sections"]["section_3"] ?? 0)->first();
-        if($section_1 && !in_array($section_1->type, [Section::TYPE_BANNER])){
-            $validator->errors()->add("sections.section_1", "Tipo de seção não aceito");
-        }
-
-        if($section_2 && !in_array($section_2->type, [Section::TYPE_DEFAULT])){
-            $validator->errors()->add("sections.section_2", "Tipo de seção não aceito");
-        }
-        
-        if($section_3 && !in_array($section_3->type, [Section::TYPE_DEFAULT])){
-            $validator->errors()->add("sections.section_3", "Tipo de seção não aceito");
-        }
-        
-        return $validator->validate();
     }
 }

@@ -73,6 +73,15 @@
                                     };
                                 })" :error-message="form.errors['sections.section_3']" />
                         </div>
+                        <div class="col-12 mb-4">
+                            <SelectForm label="Seção 4:" name="section_4"
+                                v-model="form.sections.section_4" :options="sections.map((section) => {
+                                    return {
+                                        text: section.name,
+                                        value: section.id
+                                    };
+                                })" :error-message="form.errors['sections.section_4']" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,6 +149,7 @@ export default {
                     section_1: this.settings?.content?.sections?.section_1 ?? null,
                     section_2: this.settings?.content?.sections?.section_2 ?? null,
                     section_3: this.settings?.content?.sections?.section_3 ?? null,
+                    section_4: this.settings?.content?.sections?.section_4 ?? null,
                 },
                 footer: {
                     menu_main: this.settings?.content?.footer?.menu_main ?? null,

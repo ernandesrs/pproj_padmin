@@ -1370,7 +1370,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     "default": {}
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
-  var _this$settings$conten, _this$settings, _this$settings$conten2, _this$settings$conten3, _this$settings$conten4, _this$settings2, _this$settings2$conte, _this$settings2$conte2, _this$settings$conten5, _this$settings3, _this$settings3$conte, _this$settings3$conte2, _this$settings$conten6, _this$settings4, _this$settings4$conte, _this$settings4$conte2, _this$settings$conten7, _this$settings5, _this$settings5$conte, _this$settings5$conte2, _this$settings$conten8, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings$conten9, _this$settings7, _this$settings7$conte, _this$settings7$conte2;
+  var _this$settings$conten, _this$settings, _this$settings$conten2, _this$settings$conten3, _this$settings$conten4, _this$settings2, _this$settings2$conte, _this$settings2$conte2, _this$settings$conten5, _this$settings3, _this$settings3$conte, _this$settings3$conte2, _this$settings$conten6, _this$settings4, _this$settings4$conte, _this$settings4$conte2, _this$settings$conten7, _this$settings5, _this$settings5$conte, _this$settings5$conte2, _this$settings$conten8, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings$conten9, _this$settings7, _this$settings7$conte, _this$settings7$conte2, _this$settings$conten10, _this$settings8, _this$settings8$conte, _this$settings8$conte2;
 
   return {
     faviconPreview: (_this$settings$conten = (_this$settings = this.settings) === null || _this$settings === void 0 ? void 0 : (_this$settings$conten2 = _this$settings.content) === null || _this$settings$conten2 === void 0 ? void 0 : (_this$settings$conten3 = _this$settings$conten2.header) === null || _this$settings$conten3 === void 0 ? void 0 : _this$settings$conten3.favicon_url) !== null && _this$settings$conten !== void 0 ? _this$settings$conten : null,
@@ -1384,10 +1384,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       sections: {
         section_1: (_this$settings$conten6 = (_this$settings4 = this.settings) === null || _this$settings4 === void 0 ? void 0 : (_this$settings4$conte = _this$settings4.content) === null || _this$settings4$conte === void 0 ? void 0 : (_this$settings4$conte2 = _this$settings4$conte.sections) === null || _this$settings4$conte2 === void 0 ? void 0 : _this$settings4$conte2.section_1) !== null && _this$settings$conten6 !== void 0 ? _this$settings$conten6 : null,
         section_2: (_this$settings$conten7 = (_this$settings5 = this.settings) === null || _this$settings5 === void 0 ? void 0 : (_this$settings5$conte = _this$settings5.content) === null || _this$settings5$conte === void 0 ? void 0 : (_this$settings5$conte2 = _this$settings5$conte.sections) === null || _this$settings5$conte2 === void 0 ? void 0 : _this$settings5$conte2.section_2) !== null && _this$settings$conten7 !== void 0 ? _this$settings$conten7 : null,
-        section_3: (_this$settings$conten8 = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.sections) === null || _this$settings6$conte2 === void 0 ? void 0 : _this$settings6$conte2.section_3) !== null && _this$settings$conten8 !== void 0 ? _this$settings$conten8 : null
+        section_3: (_this$settings$conten8 = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.sections) === null || _this$settings6$conte2 === void 0 ? void 0 : _this$settings6$conte2.section_3) !== null && _this$settings$conten8 !== void 0 ? _this$settings$conten8 : null,
+        section_4: (_this$settings$conten9 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.sections) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.section_4) !== null && _this$settings$conten9 !== void 0 ? _this$settings$conten9 : null
       },
       footer: {
-        menu_main: (_this$settings$conten9 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.footer) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.menu_main) !== null && _this$settings$conten9 !== void 0 ? _this$settings$conten9 : null
+        menu_main: (_this$settings$conten10 = (_this$settings8 = this.settings) === null || _this$settings8 === void 0 ? void 0 : (_this$settings8$conte = _this$settings8.content) === null || _this$settings8$conte === void 0 ? void 0 : (_this$settings8$conte2 = _this$settings8$conte.footer) === null || _this$settings8$conte2 === void 0 ? void 0 : _this$settings8$conte2.menu_main) !== null && _this$settings$conten10 !== void 0 ? _this$settings$conten10 : null
       }
     }),
     showImagesModalList: false,
@@ -2932,28 +2933,31 @@ var _hoisted_15 = {
   "class": "col-12 mb-4"
 };
 var _hoisted_16 = {
-  "class": "col-12 col-lg-4"
+  "class": "col-12 mb-4"
 };
 var _hoisted_17 = {
+  "class": "col-12 col-lg-4"
+};
+var _hoisted_18 = {
   "class": "card card-body mb-4 h-100"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "fs-5 fw-semibold"
 }, "Rodapé", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = {
+var _hoisted_20 = {
   "class": "row"
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "col-12"
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   "class": "row justify-content-center"
 };
-var _hoisted_22 = {
+var _hoisted_23 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2972,7 +2976,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["show", "onModalClose", "onImageInsert"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
@@ -3071,11 +3075,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors['sections.section_3']
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options", "error-message"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+  , ["modelValue", "options", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+    label: "Seção 4:",
+    name: "section_4",
+    modelValue: $data.form.sections.section_4,
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.form.sections.section_4 = $event;
+    }),
+    options: $props.sections.map(function (section) {
+      return {
+        text: section.name,
+        value: section.id
+      };
+    }),
+    "error-message": $data.form.errors['sections.section_4']
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "options", "error-message"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Menu rodapé:",
     name: "menu_main",
     modelValue: $data.form.footer.menu_main,
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.form.footer.menu_main = $event;
     }),
     options: $props.menus.map(function (menu) {
@@ -3087,7 +3107,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "error-message": $data.form.errors['footer.menu_main']
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options", "error-message"])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  , ["modelValue", "options", "error-message"])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     text: "Atualizar",
     icon: "checkLg",
     type: "submit",
