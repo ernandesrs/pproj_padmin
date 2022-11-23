@@ -1,8 +1,12 @@
 <template>
     <div class="d-flex flex-column flex-sm-row mb-2 list-item">
         <div class="d-flex align-items-center py-2 b w-100">
-            <div v-if="theCover" class="d-none d-sm-block list-item-cover">
-                <img :class="theCoverStyle" :src="theCover" :alt="theTitle">
+            <div class="d-none d-sm-block list-item-cover">
+                <img v-if="theCover" :class="theCoverStyle" :src="theCover"
+                    :alt="theTitle">
+                <div v-else-if="$slots.cover">
+                    <slot name="cover" />
+                </div>
             </div>
             <div class="d-flex flex-column ms-2 list-item-info">
                 <h5 class="mb-0 fs-6 fw-semibold">{{ theTitle }}</h5>

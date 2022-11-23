@@ -8,7 +8,9 @@
             subtitle: service.description,
             coverStyle: 'square'
         }">
-            <template v-slot:badges>
+            <template v-slot:cover>
+                <div class="d-flex justify-content-center align-items-center fs-5"
+                    style="width:50px;height:50px;" v-html="service.icon"></div>
             </template>
 
             <template v-slot:actions>
