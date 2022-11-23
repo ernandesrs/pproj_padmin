@@ -26,7 +26,7 @@
                 ])
             @endcomponent
         @elseif(in_array($section->type, [\App\Models\Section\Section::TYPE_BOUND]))
-            @component('front.components.sections.items',
+            @component('front.components.sections.cards-list',
                 [
                     'section' => $section,
                     'items' => $section->bindables() ?? [],

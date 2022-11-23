@@ -1,4 +1,4 @@
-<section class="section default-section {{ $alignment ?? 'left' }}-section" id="{{ Str::slug($section->name) }}">
+<section class="section default-section {{ $alignment ?? 'left' }}-section cards-section" id="{{ Str::slug($section->name) }}">
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-sm-10 col-lg-8 col-xl-6 text-center px-5">
@@ -14,19 +14,13 @@
                 <div class="row justify-content-center">
                     @foreach ($items as $item)
                         <div class="col-10 col-sm-6 col-md-4 mb-4 mb-lg-0">
-                            <div class="card card-body border-0">
-                                <div class="d-flex flex-column justify-content-center align-items-center mb-3">
-                                    <div class="icon fs-2 py-2 px-3 bg-secondary rounded-5 text-light">
-                                        {!! $item->icon !!}
-                                    </div>
-                                    <div class="text-center">
-                                        <h2 class="fs-5 fw-semibold mb-0 py-2">{{ $item->title }}</h2>
-                                        <p class="">
-                                            {{ $item->description }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            @component('front.components.cards.card-with-icon',
+                                [
+                                    'icon' => $item->icon,
+                                    'title' => $item->title,
+                                    'description' => $item->description,
+                                ])
+                            @endcomponent
                         </div>
                     @endforeach
                 </div>
@@ -42,7 +36,7 @@
                                 'size' => 'large',
                                 'target' => $button->target,
                                 'title' => $button->title,
-                                'iconTag' => $button->icon,
+                                'iconTag' => $button->icon ?? null,
                                 // 'iconClass' => 'bi bi-4-square',
                                 // 'iconName' => 'appIndicator',
                                 'position' => $button->position,
