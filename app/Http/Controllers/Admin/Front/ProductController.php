@@ -129,6 +129,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route("admin.products.index")->with("flash_alert", [
+            "variant" => "warning",
+            "message" => "O produto foi excluido com sucesso!"
+        ]);
     }
 }

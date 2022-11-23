@@ -9,7 +9,10 @@
             coverStyle: 'square'
         }">
             <template v-slot:badges>
-                <BadgeUi class="mb-1 me-1 fw-light" text="kkkj" variant="info" />
+                <BadgeUi class="mb-1 me-1 fw-light" :text="`Preço: R$ ${product.price}`"
+                    variant="success" />
+                <BadgeUi v-if="product.old_price" class="mb-1 me-1 fw-light"
+                    :text="`Preço anterior: R$ ${product.old_price}`" variant="danger" />
             </template>
 
             <template v-slot:actions>

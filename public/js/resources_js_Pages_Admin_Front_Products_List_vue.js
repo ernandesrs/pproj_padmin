@@ -2824,9 +2824,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       badges: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BadgeUi, {
           "class": "mb-1 me-1 fw-light",
-          text: "kkkj",
-          variant: "info"
-        })];
+          text: "Pre\xE7o: R$ ".concat(product.price),
+          variant: "success"
+        }, null, 8
+        /* PROPS */
+        , ["text"]), product.old_price ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BadgeUi, {
+          key: 0,
+          "class": "mb-1 me-1 fw-light",
+          text: "Pre\xE7o anterior: R$ ".concat(product.old_price),
+          variant: "danger"
+        }, null, 8
+        /* PROPS */
+        , ["text"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
       }),
       actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
