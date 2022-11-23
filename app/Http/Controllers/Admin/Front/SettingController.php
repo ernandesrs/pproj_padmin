@@ -43,6 +43,7 @@ class SettingController extends Controller
 
         return Inertia::render("Admin/Front/Settings", [
             "settings" => $settings,
+            "terms" => __("terms"),
             "menus" => $menus,
             "sections" => $sections,
             "images" => session()->get("images", null),

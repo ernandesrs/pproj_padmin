@@ -4,8 +4,8 @@
         @imageInsert="insertImage" />
 
     <form @submit.prevent="submit">
-        <div class="row mb-4">
-            <div class="col-12 col-lg-4">
+        <div class="row">
+            <div class="col-12 col-lg-4 mb-4">
                 <div class="card card-body mb-4 h-100">
                     <h2 class="fs-5 fw-semibold">Cabeçalho</h2>
                     <div class="row">
@@ -42,51 +42,45 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-4 mb-4">
                 <div class="card card-body mb- h-100">
                     <h2 class="fs-5 fw-semibold">Corpo</h2>
+                    <p class="text-muted">
+                        Crie seções em <strong>Seções</strong> >
+                        <Link :href="$route('admin.sections.create')">
+                        <strong>Nova seção</strong>
+                        </Link> e defina abaixo quais delas serão exibidas.
+                    </p>
                     <div class="row">
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 1:" name="section_1"
-                                v-model="form.sections.section_1" :options="sections.map((section) => {
-                                    return {
-                                        text: section.name,
-                                        value: section.id
-                                    };
-                                })" :error-message="form.errors['sections.section_1']" />
+                                v-model="form.sections.section_1"
+                                :options="sectionsOptions([2, 3])"
+                                :error-message="form.errors['sections.section_1']" />
                         </div>
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 2:" name="section-2"
-                                v-model="form.sections.section_2" :options="sections.map((section) => {
-                                    return {
-                                        text: section.name,
-                                        value: section.id
-                                    };
-                                })" :error-message="form.errors['sections.section_2']" />
+                                v-model="form.sections.section_2"
+                                :options="sectionsOptions([0, 1])"
+                                :error-message="form.errors['sections.section_2']" />
                         </div>
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 3:" name="section_3"
-                                v-model="form.sections.section_3" :options="sections.map((section) => {
-                                    return {
-                                        text: section.name,
-                                        value: section.id
-                                    };
-                                })" :error-message="form.errors['sections.section_3']" />
+                                v-model="form.sections.section_3"
+                                :options="sectionsOptions([4])"
+                                :error-message="form.errors['sections.section_3']" />
                         </div>
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 4:" name="section_4"
-                                v-model="form.sections.section_4" :options="sections.map((section) => {
-                                    return {
-                                        text: section.name,
-                                        value: section.id
-                                    };
-                                })" :error-message="form.errors['sections.section_4']" />
+                                v-model="form.sections.section_4"
+                                :options="sectionsOptions([0, 1])"
+                                :error-message="form.errors['sections.section_4']" />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-4 mb-4">
                 <div class="card card-body mb-4 h-100">
                     <h2 class="fs-5 fw-semibold">Rodapé</h2>
                     <div class="row">
@@ -116,7 +110,7 @@
 
 <script>
 
-import { useForm } from '@inertiajs/inertia-vue3';
+import { Link, useForm } from '@inertiajs/inertia-vue3';
 import Layout from './../../../Layouts/Panel.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
@@ -128,10 +122,11 @@ import SelectForm from '../../../Components/Form/SelectForm.vue';
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ImagePreviewUi, ModalImagesList, TextAreaForm, SelectForm },
+    components: { InputForm, ButtonUi, ImagePreviewUi, ModalImagesList, TextAreaForm, SelectForm, Link },
     props: {
         settings: { type: Object, default: {} },
         menus: { type: Object, default: {} },
+        terms: { type: Object, default: {} },
         sections: { type: Object, default: {} },
     },
 
@@ -190,6 +185,17 @@ export default {
                 this.form.header.logo = data.id;
             }
         },
+
+        sectionsOptions(allowedSectionTypes = []) {
+            return this.sections.filter((section) => {
+                return allowedSectionTypes.includes(section.type);
+            }).map((section) => {
+                return {
+                    text: `${section.name}`,
+                    value: section.id
+                };
+            });
+        }
     }
 }
 </script>
