@@ -1,34 +1,30 @@
 <template>
-    <EmptyList :show="!products?.data?.length" :is-filter="isFiltering" />
+    <EmptyList :show="!services?.data?.length" :is-filter="isFiltering" />
 
     <div class="row justify-content-center">
-        <ListItem v-for="product in products?.data" :key="product.id" :item="{
-            cover: product.image.thumb_small,
-            title: product.title,
-            subtitle: '',
+        <ListItem v-for="service in services?.data" :key="service.id" :item="{
+            cover: null,
+            title: service.title,
+            subtitle: service.description,
             coverStyle: 'square'
         }">
             <template v-slot:badges>
-                <BadgeUi class="mb-1 me-1 fw-light" :text="`Preço: R$ ${product.price}`"
-                    variant="success" />
-                <BadgeUi v-if="product.old_price" class="mb-1 me-1 fw-light"
-                    :text="`Preço anterior: R$ ${product.old_price}`" variant="danger" />
             </template>
 
             <template v-slot:actions>
-                <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.products.edit', {
-                    product: product.id
+                <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.services.edit', {
+                    service: service.id
                 })" />
 
                 <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
-                    variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.products.destroy',
-                    { product: product.id })" confirm-with-request
+                    variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.services.destroy',
+                    { service: service.id })" confirm-with-request
                     request-method="delete" />
             </template>
         </ListItem>
     </div>
 
-    <PaginationUi label="Paginação de productos" :pages="products?.meta?.links" />
+    <PaginationUi label="Paginação de serviços" :pages="services?.meta?.links" />
 
 </template>
 
@@ -49,7 +45,7 @@ export default {
     components: { EmptyList, ListItem, PaginationUi, CardUi, ButtonUi, ButtonConfirmationUi, BadgeUi },
 
     props: {
-        products: { type: Object, default: [] },
+        services: { type: Object, default: [] },
         isFiltering: { type: Boolean, default: false },
     },
 }

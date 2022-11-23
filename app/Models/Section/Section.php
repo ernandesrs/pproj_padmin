@@ -23,7 +23,7 @@ class Section extends Model
     ];
 
     const BINDABLES = [
-        "product" => \App\Models\Front\Product::class
+        "service" => \App\Models\Front\Service::class
     ];
 
     /**
@@ -83,8 +83,24 @@ class Section extends Model
         static::retrieved(function ($section) {
             $section->content = json_decode($section->content);
             $section->buttons = json_decode($section->buttons);
-
             return $section;
         });
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return null||\Illuminate\Database\Eloquent\Collection
+     */
+    public function bindables()
+    {
+        $collection = null;
+        if ($this->type == self::TYPE_BOUND) {
+            $bindable = self::BINDABLES[$this->content->bindable] ?? null;
+            if ($bindable) {
+                $collection = (new $bindable())->all();
+            }
+        }
+        return $collection;
     }
 }

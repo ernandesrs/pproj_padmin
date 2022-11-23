@@ -39,7 +39,7 @@ return [
             'type_' . Section::TYPE_BOUND => 'Vinculado',
         ],
         'bindable' => [
-            'product' => 'Produto',
+            'service' => 'Services',
         ]
     ],
 ];

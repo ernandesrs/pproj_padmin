@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class ServiceResource extends JsonResource
 {
     use ResourceTrait;
 
@@ -20,13 +20,9 @@ class ProductResource extends JsonResource
             "id" => $this->id,
             "title" => $this->title,
             "icon" => $this->icon,
-            "image" => $this->image,
-            "price" => $this->price,
-            "old_price" => $this->old_price,
+            "description" => $this->description,
         ];
 
-        // dd($arr);
-        // $arr = $this->thumbs("image", $arr, "square");
         return $arr;
     }
 }

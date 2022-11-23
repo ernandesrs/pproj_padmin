@@ -26557,22 +26557,6 @@ var map = {
 		"./resources/js/Pages/Admin/Front/Menus/List.vue",
 		"resources_js_Pages_Admin_Front_Menus_List_vue"
 	],
-	"./Admin/Front/Products/Form": [
-		"./resources/js/Pages/Admin/Front/Products/Form.vue",
-		"resources_js_Pages_Admin_Front_Products_Form_vue"
-	],
-	"./Admin/Front/Products/Form.vue": [
-		"./resources/js/Pages/Admin/Front/Products/Form.vue",
-		"resources_js_Pages_Admin_Front_Products_Form_vue"
-	],
-	"./Admin/Front/Products/List": [
-		"./resources/js/Pages/Admin/Front/Products/List.vue",
-		"resources_js_Pages_Admin_Front_Products_List_vue"
-	],
-	"./Admin/Front/Products/List.vue": [
-		"./resources/js/Pages/Admin/Front/Products/List.vue",
-		"resources_js_Pages_Admin_Front_Products_List_vue"
-	],
 	"./Admin/Front/Sections/Form": [
 		"./resources/js/Pages/Admin/Front/Sections/Form.vue",
 		"resources_js_Pages_Admin_Front_Sections_Form_vue"
@@ -26588,6 +26572,22 @@ var map = {
 	"./Admin/Front/Sections/List.vue": [
 		"./resources/js/Pages/Admin/Front/Sections/List.vue",
 		"resources_js_Pages_Admin_Front_Sections_List_vue"
+	],
+	"./Admin/Front/Services/Form": [
+		"./resources/js/Pages/Admin/Front/Services/Form.vue",
+		"resources_js_Pages_Admin_Front_Services_Form_vue"
+	],
+	"./Admin/Front/Services/Form.vue": [
+		"./resources/js/Pages/Admin/Front/Services/Form.vue",
+		"resources_js_Pages_Admin_Front_Services_Form_vue"
+	],
+	"./Admin/Front/Services/List": [
+		"./resources/js/Pages/Admin/Front/Services/List.vue",
+		"resources_js_Pages_Admin_Front_Services_List_vue"
+	],
+	"./Admin/Front/Services/List.vue": [
+		"./resources/js/Pages/Admin/Front/Services/List.vue",
+		"resources_js_Pages_Admin_Front_Services_List_vue"
 	],
 	"./Admin/Front/Settings": [
 		"./resources/js/Pages/Admin/Front/Settings.vue",
@@ -26874,7 +26874,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Admin_Front_Menus_Form_vue":1,"resources_js_Pages_Admin_Front_Menus_List_vue":1,"resources_js_Pages_Admin_Front_Products_Form_vue":1,"resources_js_Pages_Admin_Front_Products_List_vue":1,"resources_js_Pages_Admin_Front_Sections_Form_vue":1,"resources_js_Pages_Admin_Front_Sections_List_vue":1,"resources_js_Pages_Admin_Front_Settings_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Medias_Images_Form_vue":1,"resources_js_Pages_Admin_Medias_Images_List_vue":1,"resources_js_Pages_Admin_Medias_Images_ModalImagesList_vue":1,"resources_js_Pages_Admin_Medias_Videos_Form_vue":1,"resources_js_Pages_Admin_Medias_Videos_List_vue":1,"resources_js_Pages_Admin_Pages_Form_vue":1,"resources_js_Pages_Admin_Pages_List_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Password_Forget_vue":1,"resources_js_Pages_Auth_Password_Reset_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_Verification_Notify_vue":1,"resources_js_Pages_Auth_Verification_Verify_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Admin_Front_Menus_Form_vue":1,"resources_js_Pages_Admin_Front_Menus_List_vue":1,"resources_js_Pages_Admin_Front_Sections_Form_vue":1,"resources_js_Pages_Admin_Front_Sections_List_vue":1,"resources_js_Pages_Admin_Front_Services_Form_vue":1,"resources_js_Pages_Admin_Front_Services_List_vue":1,"resources_js_Pages_Admin_Front_Settings_vue":1,"resources_js_Pages_Admin_Index_vue":1,"resources_js_Pages_Admin_Medias_Images_Form_vue":1,"resources_js_Pages_Admin_Medias_Images_List_vue":1,"resources_js_Pages_Admin_Medias_Images_ModalImagesList_vue":1,"resources_js_Pages_Admin_Medias_Videos_Form_vue":1,"resources_js_Pages_Admin_Medias_Videos_List_vue":1,"resources_js_Pages_Admin_Pages_Form_vue":1,"resources_js_Pages_Admin_Pages_List_vue":1,"resources_js_Pages_Admin_Users_Form_vue":1,"resources_js_Pages_Admin_Users_List_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Password_Forget_vue":1,"resources_js_Pages_Auth_Password_Reset_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_Verification_Notify_vue":1,"resources_js_Pages_Auth_Verification_Verify_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

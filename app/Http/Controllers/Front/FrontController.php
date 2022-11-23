@@ -32,6 +32,7 @@ class FrontController extends Controller
         $section_1 = Section::where("id", $settings->content->sections->section_1 ?? 0)->first();
         $section_2 = Section::where("id", $settings->content->sections->section_2 ?? 0)->first();
         $section_3 = Section::where("id", $settings->content->sections->section_3 ?? 0)->first();
+        $section_4 = Section::where("id", $settings->content->sections->section_4 ?? 0)->first();
 
         $page = Page::findBySlug("inicio", config("app.locale"))->first();
         return view("front.index", [
@@ -42,6 +43,7 @@ class FrontController extends Controller
                 $section_1,
                 $section_2,
                 $section_3,
+                $section_4
             ]
         ]);
     }
