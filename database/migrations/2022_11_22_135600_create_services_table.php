@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('title', 50)->unique();
             $table->string('icon')->nullable();
             $table->text('description');
+            $table->boolean('visible')->default(false);
             $table->fullText(['title', 'description']);
 
             $table->timestamps();

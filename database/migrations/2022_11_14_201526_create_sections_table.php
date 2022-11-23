@@ -23,6 +23,7 @@ class CreateSectionsTable extends Migration
             $table->text('content')->nullable();
             $table->boolean('visible')->default(false);
             $table->json('buttons')->default(json_encode([]));
+            $table->fullText(['name', 'title', 'subtitle']);
 
             $table->timestamps();
         });

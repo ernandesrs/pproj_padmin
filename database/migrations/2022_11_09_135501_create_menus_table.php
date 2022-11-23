@@ -18,6 +18,7 @@ class CreateMenusTable extends Migration
 
             $table->string('name', 25)->unique()->nullable(false);
             $table->json('items')->nullable(false)->default(json_encode([]));
+            $table->fullText(['name']);
 
             $table->timestamps();
         });
