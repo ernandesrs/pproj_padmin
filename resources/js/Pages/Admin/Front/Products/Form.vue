@@ -53,12 +53,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-4">
-                                <InputForm label="Nome do produto:" v-model="form.title"
+                                <InputForm label="Nome do produto:" name="title"
+                                    v-model="form.title"
                                     :error-message="form.errors.title" />
                             </div>
 
                             <div class="mb-4">
-                                <InputForm label="Ícone:" v-model="form.icon"
+                                <InputForm label="Ícone:" name="icon" v-model="form.icon"
                                     :error-message="form.errors.icon" />
                             </div>
                         </div>
@@ -66,28 +67,30 @@
                         <div
                             class="col-12 d-flex flex-column justify-content-center mb-4">
                             <div class="mb-3">
-                                <ImagePreviewUi :preview-url="coverPreview"
-                                    :borderless="coverPreview ? true : false" />
+                                <ImagePreviewUi :preview-url="form.image.thumb_small"
+                                    :borderless="form.image.thumb_small ? true : false" />
                             </div>
 
                             <!-- cover upload -->
                             <div class="text-center">
                                 <ButtonUi @click="modalImagesListShow"
-                                    :text="`${coverPreview ? 'Atualizar capa' : 'Inserir capa'}`"
+                                    :text="`${form.image.thumb_small ? 'Atualizar capa' : 'Inserir capa'}`"
                                     icon="image" variant="success" size="sm" />
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6">
                             <div class="mb-4">
-                                <InputForm label="Preço:" v-model="form.price"
+                                <InputForm label="Preço:" name="price"
+                                    v-model="form.price"
                                     :error-message="form.errors.price" />
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6">
                             <div class="mb-4">
-                                <InputForm label="Preço antigo:" v-model="form.old_price"
+                                <InputForm label="Preço antigo:" name="old_price"
+                                    v-model="form.old_price"
                                     :error-message="form.errors.old_price" />
                             </div>
                         </div>
@@ -134,12 +137,14 @@ export default {
                 title: null,
                 price: null,
                 old_price: null,
-                image: null,
+                image: {
+                    id: null,
+                    thumb_small: null
+                },
                 icon: null
             }),
             showHowItWorkModal: false,
             showImagesModalList: false,
-            coverPreview: null
         };
     },
 
@@ -150,7 +155,7 @@ export default {
         this.form.title = this.product.title;
         this.form.price = this.product.price;
         this.form.old_price = this.product.old_price;
-        this.form.image = this.product.image;
+        this.form.image = this.product.image ?? this.form.image;
         this.form.icon = this.product.icon;
     },
 
@@ -175,8 +180,8 @@ export default {
         },
 
         insertImage(data) {
-            this.coverPreview = data.thumb_small;
-            this.form.image = data.id;
+            this.form.image.thumb_small = data.thumb_small;
+            this.form.image.id = data.id;
         }
     },
 }

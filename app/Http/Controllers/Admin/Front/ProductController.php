@@ -14,7 +14,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
@@ -34,7 +34,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -54,7 +54,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ProductRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ProductRequest $request)
     {
@@ -72,7 +72,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Front\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show(Product $product)
     {
@@ -83,13 +83,14 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Front\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit(Product $product)
     {
         return Inertia::render('Admin/Front/Products/Form', [
             'product' => $product,
             'pageTitle' => 'Editar produto',
+            'images' => session()->get('images', null),
             "buttons" => [
                 "new" => [
                     "url" => route("admin.products.create")
@@ -104,20 +105,27 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProductRequest  $request
      * @param  \App\Models\Front\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $validated = $request->validated();
+
+        $product->update($validated);
+
+        return redirect()->route("admin.products.index")->with("flash_alert", [
+            "variant" => "success",
+            "message" => "O produto foi atualizado com sucesso!"
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Front\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Product $product)
     {

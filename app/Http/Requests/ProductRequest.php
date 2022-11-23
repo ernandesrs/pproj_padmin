@@ -38,7 +38,7 @@ class ProductRequest extends FormRequest
     {
         return [
             "title" => ["required", "max:50", "unique:products,title" . ($this->product ? "," . $this->product->id : "")],
-            "image" => ["required", "exists:images,id"],
+            "image.id" => ["required", "exists:images,id"],
             "icon" => ["required", "string"],
             "price" => ["required", "numeric"],
             "old_price" => ["nullable", "numeric"]

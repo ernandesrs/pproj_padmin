@@ -1499,22 +1499,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: null,
       price: null,
       old_price: null,
-      image: null,
+      image: {
+        id: null,
+        thumb_small: null
+      },
       icon: null
     }),
     showHowItWorkModal: false,
-    showImagesModalList: false,
-    coverPreview: null
+    showImagesModalList: false
   };
 }), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
-  var _this$product;
+  var _this$product, _this$product$image;
 
   if (!((_this$product = this.product) !== null && _this$product !== void 0 && _this$product.id)) return;
   this.form.id = this.product.id;
   this.form.title = this.product.title;
   this.form.price = this.product.price;
   this.form.old_price = this.product.old_price;
-  this.form.image = this.product.image;
+  this.form.image = (_this$product$image = this.product.image) !== null && _this$product$image !== void 0 ? _this$product$image : this.form.image;
   this.form.icon = this.product.icon;
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
@@ -1538,8 +1540,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.showImagesModalList = false;
   },
   insertImage: function insertImage(data) {
-    this.coverPreview = data.thumb_small;
-    this.form.image = data.id;
+    this.form.image.thumb_small = data.thumb_small;
+    this.form.image.id = data.id;
   }
 }), _layout$layout$compon);
 
@@ -3209,6 +3211,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Nome do produto:",
+    name: "title",
     modelValue: $data.form.title,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.form.title = $event;
@@ -3218,6 +3221,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Ícone:",
+    name: "icon",
     modelValue: $data.form.icon,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.form.icon = $event;
@@ -3226,13 +3230,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue", "error-message"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
-    "preview-url": $data.coverPreview,
-    borderless: $data.coverPreview ? true : false
+    "preview-url": $data.form.image.thumb_small,
+    borderless: $data.form.image.thumb_small ? true : false
   }, null, 8
   /* PROPS */
   , ["preview-url", "borderless"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" cover upload "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     onClick: $options.modalImagesListShow,
-    text: "".concat($data.coverPreview ? 'Atualizar capa' : 'Inserir capa'),
+    text: "".concat($data.form.image.thumb_small ? 'Atualizar capa' : 'Inserir capa'),
     icon: "image",
     variant: "success",
     size: "sm"
@@ -3240,6 +3244,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["onClick", "text"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Preço:",
+    name: "price",
     modelValue: $data.form.price,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.form.price = $event;
@@ -3249,6 +3254,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["modelValue", "error-message"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Preço antigo:",
+    name: "old_price",
     modelValue: $data.form.old_price,
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.form.old_price = $event;
