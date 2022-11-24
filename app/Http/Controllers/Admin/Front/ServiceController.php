@@ -125,6 +125,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        $this->authorize("delete", new Service());
+
         $service->delete();
 
         return redirect()->route("admin.services.index")->with("flash_alert", [
