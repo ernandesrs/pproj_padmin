@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content;
-use App\Models\Menu;
 use App\Models\Page;
-use App\Models\Section\Section;
 use Illuminate\Contracts\View\View;
 
 class FrontController extends Controller
@@ -23,28 +21,12 @@ class FrontController extends Controller
             return;
         }
 
-        $settings->content = json_decode($settings->content ?? "");
-
-        if ($settings->content->header->menu_main ?? null) {
-            $menu_main = Menu::where("id", $settings->content->header->menu_main ?? 0)->first();
-        }
-
-        $section_1 = Section::where("id", $settings->content->sections->section_1 ?? 0)->first();
-        $section_2 = Section::where("id", $settings->content->sections->section_2 ?? 0)->first();
-        $section_3 = Section::where("id", $settings->content->sections->section_3 ?? 0)->first();
-        $section_4 = Section::where("id", $settings->content->sections->section_4 ?? 0)->first();
-
         $page = Page::findBySlug("inicio", config("app.locale"))->first();
         return view("front.index", [
             "pageTitle" => $page->title,
             "settings" => $settings,
-            "menu_main" => $menu_main ?? null,
-            "sections" => [
-                $section_1,
-                $section_2,
-                $section_3,
-                $section_4
-            ]
+            "menu_main" => $settings->content->header->menu_main,
+            "home_sections" => $settings->content->home
         ]);
     }
 }

@@ -1375,7 +1375,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     "default": {}
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
-  var _this$settings$conten, _this$settings, _this$settings$conten2, _this$settings$conten3, _this$settings$conten4, _this$settings2, _this$settings2$conte, _this$settings2$conte2, _this$settings$conten5, _this$settings3, _this$settings3$conte, _this$settings3$conte2, _this$settings$conten6, _this$settings4, _this$settings4$conte, _this$settings4$conte2, _this$settings$conten7, _this$settings5, _this$settings5$conte, _this$settings5$conte2, _this$settings$conten8, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings$conten9, _this$settings7, _this$settings7$conte, _this$settings7$conte2, _this$settings$conten10, _this$settings8, _this$settings8$conte, _this$settings8$conte2;
+  var _this$settings$conten, _this$settings, _this$settings$conten2, _this$settings$conten3, _this$settings$conten4, _this$settings2, _this$settings2$conte, _this$settings2$conte2, _this$settings$conten5, _this$settings3, _this$settings3$conte, _this$settings3$conte2, _this$settings$conten6, _this$settings4, _this$settings4$conte, _this$settings4$conte2, _this$settings4$conte3, _this$settings$conten7, _this$settings5, _this$settings5$conte, _this$settings5$conte2, _this$settings5$conte3, _this$settings$conten8, _this$settings6, _this$settings6$conte, _this$settings6$conte2, _this$settings6$conte3, _this$settings$conten9, _this$settings7, _this$settings7$conte, _this$settings7$conte2, _this$settings7$conte3, _this$settings$conten10, _this$settings8, _this$settings8$conte, _this$settings8$conte2;
 
   return {
     faviconPreview: (_this$settings$conten = (_this$settings = this.settings) === null || _this$settings === void 0 ? void 0 : (_this$settings$conten2 = _this$settings.content) === null || _this$settings$conten2 === void 0 ? void 0 : (_this$settings$conten3 = _this$settings$conten2.header) === null || _this$settings$conten3 === void 0 ? void 0 : _this$settings$conten3.favicon_url) !== null && _this$settings$conten !== void 0 ? _this$settings$conten : null,
@@ -1386,11 +1386,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         logo: null,
         menu_main: (_this$settings$conten5 = (_this$settings3 = this.settings) === null || _this$settings3 === void 0 ? void 0 : (_this$settings3$conte = _this$settings3.content) === null || _this$settings3$conte === void 0 ? void 0 : (_this$settings3$conte2 = _this$settings3$conte.header) === null || _this$settings3$conte2 === void 0 ? void 0 : _this$settings3$conte2.menu_main) !== null && _this$settings$conten5 !== void 0 ? _this$settings$conten5 : null
       },
-      sections: {
-        section_1: (_this$settings$conten6 = (_this$settings4 = this.settings) === null || _this$settings4 === void 0 ? void 0 : (_this$settings4$conte = _this$settings4.content) === null || _this$settings4$conte === void 0 ? void 0 : (_this$settings4$conte2 = _this$settings4$conte.sections) === null || _this$settings4$conte2 === void 0 ? void 0 : _this$settings4$conte2.section_1) !== null && _this$settings$conten6 !== void 0 ? _this$settings$conten6 : null,
-        section_2: (_this$settings$conten7 = (_this$settings5 = this.settings) === null || _this$settings5 === void 0 ? void 0 : (_this$settings5$conte = _this$settings5.content) === null || _this$settings5$conte === void 0 ? void 0 : (_this$settings5$conte2 = _this$settings5$conte.sections) === null || _this$settings5$conte2 === void 0 ? void 0 : _this$settings5$conte2.section_2) !== null && _this$settings$conten7 !== void 0 ? _this$settings$conten7 : null,
-        section_3: (_this$settings$conten8 = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.sections) === null || _this$settings6$conte2 === void 0 ? void 0 : _this$settings6$conte2.section_3) !== null && _this$settings$conten8 !== void 0 ? _this$settings$conten8 : null,
-        section_4: (_this$settings$conten9 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.sections) === null || _this$settings7$conte2 === void 0 ? void 0 : _this$settings7$conte2.section_4) !== null && _this$settings$conten9 !== void 0 ? _this$settings$conten9 : null
+      home: {
+        section_1: (_this$settings$conten6 = (_this$settings4 = this.settings) === null || _this$settings4 === void 0 ? void 0 : (_this$settings4$conte = _this$settings4.content) === null || _this$settings4$conte === void 0 ? void 0 : (_this$settings4$conte2 = _this$settings4$conte.home) === null || _this$settings4$conte2 === void 0 ? void 0 : (_this$settings4$conte3 = _this$settings4$conte2.section_1) === null || _this$settings4$conte3 === void 0 ? void 0 : _this$settings4$conte3.id) !== null && _this$settings$conten6 !== void 0 ? _this$settings$conten6 : null,
+        section_2: (_this$settings$conten7 = (_this$settings5 = this.settings) === null || _this$settings5 === void 0 ? void 0 : (_this$settings5$conte = _this$settings5.content) === null || _this$settings5$conte === void 0 ? void 0 : (_this$settings5$conte2 = _this$settings5$conte.home) === null || _this$settings5$conte2 === void 0 ? void 0 : (_this$settings5$conte3 = _this$settings5$conte2.section_2) === null || _this$settings5$conte3 === void 0 ? void 0 : _this$settings5$conte3.id) !== null && _this$settings$conten7 !== void 0 ? _this$settings$conten7 : null,
+        section_3: (_this$settings$conten8 = (_this$settings6 = this.settings) === null || _this$settings6 === void 0 ? void 0 : (_this$settings6$conte = _this$settings6.content) === null || _this$settings6$conte === void 0 ? void 0 : (_this$settings6$conte2 = _this$settings6$conte.home) === null || _this$settings6$conte2 === void 0 ? void 0 : (_this$settings6$conte3 = _this$settings6$conte2.section_3) === null || _this$settings6$conte3 === void 0 ? void 0 : _this$settings6$conte3.id) !== null && _this$settings$conten8 !== void 0 ? _this$settings$conten8 : null,
+        section_4: (_this$settings$conten9 = (_this$settings7 = this.settings) === null || _this$settings7 === void 0 ? void 0 : (_this$settings7$conte = _this$settings7.content) === null || _this$settings7$conte === void 0 ? void 0 : (_this$settings7$conte2 = _this$settings7$conte.home) === null || _this$settings7$conte2 === void 0 ? void 0 : (_this$settings7$conte3 = _this$settings7$conte2.section_4) === null || _this$settings7$conte3 === void 0 ? void 0 : _this$settings7$conte3.id) !== null && _this$settings$conten9 !== void 0 ? _this$settings$conten9 : null
       },
       footer: {
         menu_main: (_this$settings$conten10 = (_this$settings8 = this.settings) === null || _this$settings8 === void 0 ? void 0 : (_this$settings8$conte = _this$settings8.content) === null || _this$settings8$conte === void 0 ? void 0 : (_this$settings8$conte2 = _this$settings8$conte.footer) === null || _this$settings8$conte2 === void 0 ? void 0 : _this$settings8$conte2.menu_main) !== null && _this$settings$conten10 !== void 0 ? _this$settings$conten10 : null
@@ -3077,9 +3077,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["href"]), _hoisted_17]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Seção 1:",
     name: "section_1",
-    modelValue: $data.form.sections.section_1,
+    modelValue: $data.form.home.section_1,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.form.sections.section_1 = $event;
+      return $data.form.home.section_1 = $event;
     }),
     options: $options.sectionsOptions([2, 3]),
     "error-message": $data.form.errors['sections.section_1']
@@ -3088,9 +3088,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["modelValue", "options", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Seção 2:",
     name: "section-2",
-    modelValue: $data.form.sections.section_2,
+    modelValue: $data.form.home.section_2,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.form.sections.section_2 = $event;
+      return $data.form.home.section_2 = $event;
     }),
     options: $options.sectionsOptions([0, 1]),
     "error-message": $data.form.errors['sections.section_2']
@@ -3099,9 +3099,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["modelValue", "options", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Seção 3:",
     name: "section_3",
-    modelValue: $data.form.sections.section_3,
+    modelValue: $data.form.home.section_3,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.form.sections.section_3 = $event;
+      return $data.form.home.section_3 = $event;
     }),
     options: $options.sectionsOptions([4]),
     "error-message": $data.form.errors['sections.section_3']
@@ -3110,9 +3110,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["modelValue", "options", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
     label: "Seção 4:",
     name: "section_4",
-    modelValue: $data.form.sections.section_4,
+    modelValue: $data.form.home.section_4,
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.form.sections.section_4 = $event;
+      return $data.form.home.section_4 = $event;
     }),
     options: $options.sectionsOptions([0, 1]),
     "error-message": $data.form.errors['sections.section_4']

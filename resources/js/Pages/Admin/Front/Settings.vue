@@ -54,25 +54,25 @@
                     <div class="row">
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 1:" name="section_1"
-                                v-model="form.sections.section_1"
+                                v-model="form.home.section_1"
                                 :options="sectionsOptions([2, 3])"
                                 :error-message="form.errors['sections.section_1']" />
                         </div>
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 2:" name="section-2"
-                                v-model="form.sections.section_2"
+                                v-model="form.home.section_2"
                                 :options="sectionsOptions([0, 1])"
                                 :error-message="form.errors['sections.section_2']" />
                         </div>
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 3:" name="section_3"
-                                v-model="form.sections.section_3"
+                                v-model="form.home.section_3"
                                 :options="sectionsOptions([4])"
                                 :error-message="form.errors['sections.section_3']" />
                         </div>
                         <div class="col-12 mb-4">
                             <SelectForm label="Seção 4:" name="section_4"
-                                v-model="form.sections.section_4"
+                                v-model="form.home.section_4"
                                 :options="sectionsOptions([0, 1])"
                                 :error-message="form.errors['sections.section_4']" />
                         </div>
@@ -140,11 +140,11 @@ export default {
                     logo: null,
                     menu_main: this.settings?.content?.header?.menu_main ?? null,
                 },
-                sections: {
-                    section_1: this.settings?.content?.sections?.section_1 ?? null,
-                    section_2: this.settings?.content?.sections?.section_2 ?? null,
-                    section_3: this.settings?.content?.sections?.section_3 ?? null,
-                    section_4: this.settings?.content?.sections?.section_4 ?? null,
+                home: {
+                    section_1: this.settings?.content?.home?.section_1?.id ?? null,
+                    section_2: this.settings?.content?.home?.section_2?.id ?? null,
+                    section_3: this.settings?.content?.home?.section_3?.id ?? null,
+                    section_4: this.settings?.content?.home?.section_4?.id ?? null,
                 },
                 footer: {
                     menu_main: this.settings?.content?.footer?.menu_main ?? null,

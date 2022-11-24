@@ -10,8 +10,6 @@ use App\Models\Content;
 use App\Models\Media\Image;
 use App\Models\Menu;
 use App\Models\Section\Section;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class SettingController extends Controller
@@ -24,7 +22,6 @@ class SettingController extends Controller
     public function edit()
     {
         $settings = Content::where("name", "front_settings")->first();
-        $settings->content = json_decode($settings->content);
 
         $menus = MenuResource::collection(Menu::all());
         $sections = Section::where("visible", true)->get();
@@ -76,15 +73,16 @@ class SettingController extends Controller
     public function updateSettings(array $validated)
     {
         $settings = Content::where("name", "front_settings")->first();
+
         if (!$settings) {
             return null;
         }
 
-        $content = json_decode($settings->content);
+        $content = $settings->content;
 
         $content->header->menu_main = $validated["header"]["menu_main"] ?? null;
         $content->footer->menu_main = $validated["footer"]["menu_main"] ?? null;
-        $content->sections = $validated["sections"];
+        $content->home = $validated["home"];
 
         if ($faviconId = $validated["header"]["favicon"] ?? null) {
             $favicon = Image::where("id", $faviconId)->first();

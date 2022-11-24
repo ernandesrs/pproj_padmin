@@ -115,7 +115,6 @@ class Builder extends Controller
         } else {
             echo "success on home page create<br>";
         }
-
     }
 
     /**
@@ -146,7 +145,6 @@ class Builder extends Controller
         } else {
             echo "success on privacy terms page create<br>";
         }
-
     }
 
     /**
@@ -177,7 +175,6 @@ class Builder extends Controller
         } else {
             echo "success on use terms page create<br>";
         }
-
     }
 
     /**
@@ -198,7 +195,7 @@ class Builder extends Controller
                 "logo" => null,
                 "menu_main" => null,
             ],
-            "sections" => [
+            "home" => [
                 "section_1" => null,
                 "section_2" => null,
                 "section_3" => null,

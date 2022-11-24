@@ -40,7 +40,7 @@ class FrontSettingRequest extends FormRequest
             "header.logo" => ["nullable", "numeric", "exists:images,id"],
             "header.menu_main" => ["nullable", "numeric", "exists:menus,id"],
 
-            "sections.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "home.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES];
                 $s = Section::where("id", $val)->first();
 
@@ -49,7 +49,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "sections.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "home.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES];
                 $s = Section::where("id", $val)->first();
 
@@ -58,7 +58,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "sections.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "home.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_BOUND];
                 $s = Section::where("id", $val)->first();
 
@@ -67,7 +67,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "sections.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "home.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES];
                 $s = Section::where("id", $val)->first();
 
