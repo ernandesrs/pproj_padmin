@@ -67,26 +67,44 @@
         <div class="col-10">
             <LabelForm label="Ícone:" />
             <div class="input-group">
-                <select class="form-select" @change="iconSourceChange"
-                    v-model="icon.source">
+                <select :class="[
+                    'form-select',
+                    {
+                        'is-invalid': errors['icon.source']
+                    }
+                ]" @change="iconSourceChange" v-model="icon.source">
                     <option selected>Origem</option>
                     <option value="local">Local</option>
                     <option value="html">HTML</option>
                 </select>
                 <input @input="getClassFromHtmlIcon" v-if="icon.source == 'html'"
-                    type="text" class="form-control" placeholder="HTML do ícone aqui">
+                    type="text" :class="[
+                        'form-control',
+                        {
+                            'is-invalid': errors['icon.class']
+                        }
+                    ]" placeholder=" HTML do ícone aqui" v-model="icon.class">
                 <ButtonUi v-else-if="icon.source == 'local'"
                     @click="showIconsModal = true" variant="outline-primary"
                     text="Escolher ícone" />
-                <div v-else class="d-flex align-items-center ps-3 t-auto">
-                    Escolha uma fonte
+                <div v-else class="d-flex align-items-center px-2 t-auto">
+                    Escolha uma origem
                 </div>
-                <select class="form-select" v-model="icon.position">
+                <select v-if="!hidePositionField" :class="[
+                    'form-select',
+                    {
+                        'is-invalid': errors['icon.position']
+                    }
+                ]" v-model="icon.position">
                     <option selected>Posição</option>
                     <option value="start">Início</option>
                     <option value="end">Final</option>
                 </select>
             </div>
+            <small v-if="errors['icon.source'] || errors['icon.position']"
+                class="text-danger py-2">
+                {{ errors['icon.source'] }} {{ errors['icon.position'] }}
+            </small>
         </div>
 
         <div class="col-2">
@@ -115,6 +133,12 @@ import ModalUi from './Ui/ModalUi.vue';
 export default {
     components: { ModalUi, ButtonUi, InputForm, LabelForm },
 
+    props: {
+        iconData: { type: Object, default: null },
+        errors: { type: Object, default: null },
+        hidePositionField: { type: Boolean, default: false }
+    },
+
     emits: {
         'iconHasSet': null
     },
@@ -126,7 +150,7 @@ export default {
             icons: Object.keys(this.$icons),
             filtered: [],
 
-            icon: {
+            icon: this.iconData ?? {
                 source: 'local',
                 class: null,
                 name: null,
