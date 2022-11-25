@@ -8,6 +8,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ServiceRequest extends FormRequest
 {
+    use RequestTrait;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,10 +30,15 @@ class ServiceRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             "title" => ["required", "max:50", "unique:services,title" . ($this->service ? "," . $this->service->id : "")],
-            "icon" => ["required", "string"],
             "description" => ["required", "string", "max:500"],
         ];
+
+        if (!empty($this->icon["name"]) || !empty($this->icon["class"])) {
+            $rules += $this->iconRules();
+        }
+
+        return $rules;
     }
 }

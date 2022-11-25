@@ -2795,7 +2795,13 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "row justify-content-center"
 };
-var _hoisted_2 = ["innerHTML"];
+var _hoisted_2 = {
+  "class": "d-flex justify-content-center align-items-center fs-5",
+  style: {
+    "width": "50px",
+    "height": "50px"
+  }
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$props$services, _$props$services$data, _$props$services2, _$props$services3, _$props$services3$met;
 
@@ -2825,16 +2831,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, {
       cover: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": "d-flex justify-content-center align-items-center fs-5",
-          style: {
-            "width": "50px",
-            "height": "50px"
-          },
-          innerHTML: service.icon
-        }, null, 8
-        /* PROPS */
-        , _hoisted_2)];
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [service.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+          key: 0
+        }, [service.icon.name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+          key: 0,
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(_ctx.$icons[service.icon.name])
+        }, null, 2
+        /* CLASS */
+        )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+          key: 1,
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(service.icon["class"])
+        }, null, 2
+        /* CLASS */
+        ))], 64
+        /* STABLE_FRAGMENT */
+        )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
       }),
       actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {

@@ -15,7 +15,9 @@
                             <div class="mb-4">
                                 <div class="row">
                                     <div class="col-12">
-                                        <IconSetter @iconHasSet="iconHasSet" />
+                                        <IconSetter @iconHasSet="iconHasSet"
+                                            :icon-data="form.icon"
+                                            :errors="form.errors" hide-position-field />
                                     </div>
                                 </div>
                             </div>
@@ -70,10 +72,10 @@ export default {
     data() {
         return {
             form: useForm({
-                id: null,
-                title: null,
-                description: null,
-                icon: {
+                id: this.service.id ?? null,
+                title: this.service.title ?? null,
+                description: this.service.description ?? null,
+                icon: this.service.icon ?? {
                     source: 'local',
                     name: null,
                     class: null,
@@ -81,15 +83,6 @@ export default {
                 }
             }),
         };
-    },
-
-    mounted() {
-        if (!this.service?.id) return;
-
-        this.form.id = this.service.id;
-        this.form.title = this.service.title;
-        this.form.icon = this.service.icon;
-        this.form.description = this.service.description;
     },
 
     methods: {
@@ -104,8 +97,8 @@ export default {
             }
         },
 
-        iconHasSet(event) {
-            console.log(event);
+        iconHasSet(icon) {
+            this.form.icon = icon;
         }
     },
 }

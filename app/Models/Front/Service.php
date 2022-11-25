@@ -25,7 +25,7 @@ class Service extends Model
         $service = new Service();
 
         $service->title = $attr['title'];
-        $service->icon = $attr['icon'];
+        $service->icon = ($attr['icon'] ?? null) ? json_encode($attr['icon']) : null;
         $service->description = $attr['description'];
 
         $service->save();
@@ -42,6 +42,21 @@ class Service extends Model
      */
     public function update(array $attr = [], array $options = [])
     {
+        $attr['icon'] = ($attr['icon'] ?? null) ? json_encode($attr['icon']) : null;
         return parent::update($attr, $options);
+    }
+
+    /**
+     * Booted method
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::retrieved(function ($service) {
+            if ($service->icon) {
+                $service->icon = json_decode($service->icon);
+            }
+        });
     }
 }

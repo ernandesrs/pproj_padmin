@@ -444,16 +444,32 @@ __webpack_require__.r(__webpack_exports__);
     InputForm: _Form_InputForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     LabelForm: _Form_LabelForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: {
+    iconData: {
+      type: Object,
+      "default": null
+    },
+    errors: {
+      type: Object,
+      "default": null
+    },
+    hidePositionField: {
+      type: Boolean,
+      "default": false
+    }
+  },
   emits: {
     'iconHasSet': null
   },
   data: function data() {
+    var _this$iconData;
+
     return {
       searchIcon: null,
       filtering: false,
       icons: Object.keys(this.$icons),
       filtered: [],
-      icon: {
+      icon: (_this$iconData = this.iconData) !== null && _this$iconData !== void 0 ? _this$iconData : {
         source: 'local',
         "class": null,
         name: null,
@@ -1679,12 +1695,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     "default": {}
   }
 }), _defineProperty(_layout$layout$compon, "data", function data() {
+  var _this$service$id, _this$service$title, _this$service$descrip, _this$service$icon;
+
   return {
     form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
-      id: null,
-      title: null,
-      description: null,
-      icon: {
+      id: (_this$service$id = this.service.id) !== null && _this$service$id !== void 0 ? _this$service$id : null,
+      title: (_this$service$title = this.service.title) !== null && _this$service$title !== void 0 ? _this$service$title : null,
+      description: (_this$service$descrip = this.service.description) !== null && _this$service$descrip !== void 0 ? _this$service$descrip : null,
+      icon: (_this$service$icon = this.service.icon) !== null && _this$service$icon !== void 0 ? _this$service$icon : {
         source: 'local',
         name: null,
         "class": null,
@@ -1692,14 +1710,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     })
   };
-}), _defineProperty(_layout$layout$compon, "mounted", function mounted() {
-  var _this$service;
-
-  if (!((_this$service = this.service) !== null && _this$service !== void 0 && _this$service.id)) return;
-  this.form.id = this.service.id;
-  this.form.title = this.service.title;
-  this.form.icon = this.service.icon;
-  this.form.description = this.service.description;
 }), _defineProperty(_layout$layout$compon, "methods", {
   submit: function submit() {
     var _this$form;
@@ -1715,8 +1725,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.post(action);
     }
   },
-  iconHasSet: function iconHasSet(event) {
-    console.log(event);
+  iconHasSet: function iconHasSet(icon) {
+    this.form.icon = icon;
   }
 }), _layout$layout$compon);
 
@@ -2307,7 +2317,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_17 = [_hoisted_14, _hoisted_15, _hoisted_16];
 var _hoisted_18 = {
   key: 2,
-  "class": "d-flex align-items-center ps-3 t-auto"
+  "class": "d-flex align-items-center px-2 t-auto"
 };
 
 var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
@@ -2330,14 +2340,18 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_22 = [_hoisted_19, _hoisted_20, _hoisted_21];
 var _hoisted_23 = {
+  key: 0,
+  "class": "text-danger py-2"
+};
+var _hoisted_24 = {
   "class": "col-2"
 };
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, " Como funciona? ", -1
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, " Como funciona? ", -1
 /* HOISTED */
 );
 
-var _hoisted_25 = [_hoisted_24];
+var _hoisted_26 = [_hoisted_25];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_InputForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputForm");
 
@@ -2400,40 +2414,52 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LabelForm, {
     label: "Ícone:"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "class": "form-select",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['form-select', {
+      'is-invalid': $props.errors['icon.source']
+    }]),
     onChange: _cache[3] || (_cache[3] = function () {
       return _ctx.iconSourceChange && _ctx.iconSourceChange.apply(_ctx, arguments);
     }),
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.icon.source = $event;
     })
-  }, _hoisted_17, 544
-  /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.icon.source]]), $data.icon.source == 'html' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+  }, _hoisted_17, 34
+  /* CLASS, HYDRATE_EVENTS */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.icon.source]]), $data.icon.source == 'html' ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
     onInput: _cache[5] || (_cache[5] = function () {
       return $options.getClassFromHtmlIcon && $options.getClassFromHtmlIcon.apply($options, arguments);
     }),
     type: "text",
-    "class": "form-control",
-    placeholder: "HTML do ícone aqui"
-  }, null, 32
-  /* HYDRATE_EVENTS */
-  )) : $data.icon.source == 'local' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['form-control', {
+      'is-invalid': $props.errors['icon.class']
+    }]),
+    placeholder: " HTML do ícone aqui",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return $data.icon["class"] = $event;
+    })
+  }, null, 34
+  /* CLASS, HYDRATE_EVENTS */
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.icon["class"]]]) : $data.icon.source == 'local' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonUi, {
     key: 1,
-    onClick: _cache[6] || (_cache[6] = function ($event) {
+    onClick: _cache[7] || (_cache[7] = function ($event) {
       return $data.showIconsModal = true;
     }),
     variant: "outline-primary",
     text: "Escolher ícone"
-  })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, " Escolha uma fonte ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "class": "form-select",
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+  })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, " Escolha uma origem ")), !$props.hidePositionField ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("select", {
+    key: 3,
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['form-select', {
+      'is-invalid': $props.errors['icon.position']
+    }]),
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $data.icon.position = $event;
     })
-  }, _hoisted_22, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.icon.position]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LabelForm, {
+  }, _hoisted_22, 2
+  /* CLASS */
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.icon.position]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $props.errors['icon.source'] || $props.errors['icon.position'] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors['icon.source']) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors['icon.position']), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LabelForm, {
     label: "Preview:"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     icon: $data.icon.name,
@@ -2456,11 +2482,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS, DYNAMIC_SLOTS */
   , ["icon"])])]), $data.icon.source == 'html' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 0,
-    onClick: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+    onClick: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $data.showHowItWorkModal = true;
     }, ["prevent"])),
     href: ""
-  }, _hoisted_25)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  }, _hoisted_26)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -3648,10 +3674,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_IconSetter, {
-    onIconHasSet: $options.iconHasSet
+    onIconHasSet: $options.iconHasSet,
+    "icon-data": $data.form.icon,
+    errors: $data.form.errors,
+    "hide-position-field": ""
   }, null, 8
   /* PROPS */
-  , ["onIconHasSet"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TextAreaForm, {
+  , ["onIconHasSet", "icon-data", "errors"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TextAreaForm, {
     label: "Descrição:",
     name: "description",
     modelValue: $data.form.description,

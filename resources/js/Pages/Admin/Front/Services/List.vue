@@ -10,7 +10,13 @@
         }">
             <template v-slot:cover>
                 <div class="d-flex justify-content-center align-items-center fs-5"
-                    style="width:50px;height:50px;" v-html="service.icon"></div>
+                    style="width:50px;height:50px;">
+                    <template v-if="service.icon">
+                        <span v-if="service.icon.name"
+                            :class="$icons[service.icon.name]"></span>
+                        <span v-else :class="service.icon.class"></span>
+                    </template>
+                </div>
             </template>
 
             <template v-slot:actions>
