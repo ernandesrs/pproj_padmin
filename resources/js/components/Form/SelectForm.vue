@@ -5,8 +5,7 @@
         <select @input="updateValue" :class="selectStyle" :name="name" :id="name"
             :readonly="readonly" :disabled="disabled" :value="modelValue">
             <option v-for="option in theOptions" v-bind:key="option.value"
-                :value="option.value">
-                {{ option.text }}
+                :value="option.value" v-html="option.text">
             </option>
         </select>
 

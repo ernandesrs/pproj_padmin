@@ -1,4 +1,5 @@
 <template>
+
     <form @submit.prevent="submit">
         <div class="card card-body border-0">
             <div class="row justify-content-center">
@@ -12,8 +13,11 @@
                             </div>
 
                             <div class="mb-4">
-                                <InputForm label="Ícone:" name="icon" v-model="form.icon"
-                                    :error-message="form.errors.icon" />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <IconSetter @iconHasSet="iconHasSet" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -52,11 +56,13 @@ import ModalUi from '../../../../Components/Ui/ModalUi.vue';
 import ImagePreviewUi from '../../../../Components/Ui/ImagePreviewUi.vue';
 import ModalImagesList from '../../Medias/Images/ModalImagesList.vue';
 import TextAreaForm from '../../../../Components/Form/TextAreaForm.vue';
+import IconSetter from '../../../../Components/IconSetter.vue';
+import LabelForm from '../../../../Components/Form/LabelForm.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, AccordionGroup, AccordionItem, ModalUi, ImagePreviewUi, ModalImagesList, TextAreaForm },
+    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, AccordionGroup, AccordionItem, ModalUi, ImagePreviewUi, ModalImagesList, TextAreaForm, IconSetter, LabelForm },
     props: {
         service: { type: Object, default: {} }
     },
@@ -67,7 +73,12 @@ export default {
                 id: null,
                 title: null,
                 description: null,
-                icon: null
+                icon: {
+                    source: 'local',
+                    name: null,
+                    class: null,
+                    position: 'start',
+                }
             }),
         };
     },
@@ -91,6 +102,10 @@ export default {
             } else {
                 this.form.post(action);
             }
+        },
+
+        iconHasSet(event) {
+            console.log(event);
         }
     },
 }
