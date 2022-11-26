@@ -31,10 +31,8 @@
                                 'target' => $button->target,
                                 'title' => $button->title,
                                 'iconTag' => $button->icon,
-                                // 'iconClass' => 'bi bi-4-square',
-                                // 'iconName' => 'appIndicator',
-                                'position' => $button->position,
                                 'text' => $button->text,
+                                'icon' => $button->icon,
                             ])
                         @endcomponent
                     @endforeach

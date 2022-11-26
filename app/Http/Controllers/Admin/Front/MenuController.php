@@ -120,7 +120,7 @@ class MenuController extends Controller
         $this->authorize("update", $menu);
 
         $validated = $request->validated();
-
+dd($validated);
         $menu->name = $validated["name"];
         $menu->items = json_encode($validated["items"] ?? []);
         $menu->save();

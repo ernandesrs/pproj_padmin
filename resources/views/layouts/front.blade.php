@@ -34,16 +34,13 @@
                     </button>
                     <div class="collapse navbar-collapse" id="headerMainNav">
                         @if ($menu_main)
-                            <ul class="navbar-nav ms-auto">
-                                @foreach ($menu_main->items as $menuItem)
-                                    <li class="nav-item">
-                                        <a href="{{ $menuItem->url }}" target="{{ $menuItem->target }}"
-                                            title="{{ $menuItem->title }}" class="nav-link">
-                                            {!! $menuItem->icon !!} {{ $menuItem->text }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                            @component('front.components.nav',
+                                [
+                                    'items' => $menu_main->items,
+                                    'customClass' => 'ms-auto',
+                                    'vertical' => false,
+                                ])
+                            @endcomponent
                         @endif
                     </div>
                 </div>

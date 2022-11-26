@@ -10,23 +10,17 @@
 
 <a href="{{ $url }}" class="btn btn-{{ $variant }} {{ $theSize }}" target="{{ $target }}"
     title="{{ $title }}">
-    @if (($position ?? 'start') == 'start')
-        @if ($iconClass ?? null)
-            <i class="{{ $iconClass }}"></i>
-        @elseif($iconName ?? null)
-            {{ Icons::elem($iconName) }}
-        @elseif($iconTag ?? null)
-            {!! $iconTag !!}
-        @endif
-        <span>{{ $text }}</span>
-    @else
-        <span>{{ $text }}</span>
-        @if ($iconClass ?? null)
-            <i class="{{ $iconClass }}"></i>
-        @elseif($iconName ?? null)
-            {!! Icons::elem($iconName) !!}
-        @elseif($iconTag ?? null)
-            {!! $iconTag !!}
-        @endif
-    @endif
+    @component('front.components.icon',
+        [
+            'icon' => $icon,
+            'position' => 'start',
+        ])
+    @endcomponent
+    <span>{{ $text }}</span>
+    @component('front.components.icon',
+        [
+            'icon' => $icon,
+            'position' => 'end',
+        ])
+    @endcomponent
 </a>

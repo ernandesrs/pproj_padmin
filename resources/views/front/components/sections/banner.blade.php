@@ -26,9 +26,8 @@
                                 'size' => 'large',
                                 'target' => $button->target,
                                 'title' => $button->title,
-                                'iconTag' => $button->icon,
-                                'position' => $button->position,
                                 'text' => $button->text,
+                                'icon' => $button->icon,
                             ])
                         @endcomponent
                     @endforeach
