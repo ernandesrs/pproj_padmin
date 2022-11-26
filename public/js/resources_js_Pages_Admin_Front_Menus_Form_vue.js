@@ -415,6 +415,9 @@ __webpack_require__.r(__webpack_exports__);
       }
       this.emitUpdateEvent();
     },
+    iconPositionChange: function iconPositionChange() {
+      this.emitUpdateEvent();
+    },
     showIconsModal: function showIconsModal() {
       this.$emit('requestingIconsModal');
     },
@@ -2068,15 +2071,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     text: "Escolher"
   }, null, 8 /* PROPS */, ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, " Escolha uma origem ")), !$props.hidePositionField ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("select", {
     key: 3,
+    onChange: _cache[4] || (_cache[4] = function () {
+      return $options.iconPositionChange && $options.iconPositionChange.apply($options, arguments);
+    }),
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['form-select', {
       'is-invalid': $props.errors['icon.position']
     }]),
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.icon.position = $event;
     })
-  }, _hoisted_13, 2 /* CLASS */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.icon.position]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $props.errors['icon.source'] || $props.errors['icon.position'] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors['icon.source']) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors['icon.position']), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $data.icon.source == 'html' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+  }, _hoisted_13, 34 /* CLASS, HYDRATE_EVENTS */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.icon.position]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $props.errors['icon.source'] || $props.errors['icon.position'] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors['icon.source']) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors['icon.position']), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $data.icon.source == 'html' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 0,
-    onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onClick: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.showIconsHelpModal && $options.showIconsHelpModal.apply($options, arguments);
     }, ["prevent"])),
     href: ""

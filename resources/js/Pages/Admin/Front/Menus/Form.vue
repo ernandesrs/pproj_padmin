@@ -138,7 +138,6 @@ export default {
     methods: {
         submit() {
             let action = route("admin.menus.store");
-
             this.form.items = this.items;
 
             if (this.form?.id) {

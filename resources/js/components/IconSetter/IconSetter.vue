@@ -34,7 +34,7 @@
                     Escolha uma origem
                 </div>
 
-                <select v-if="!hidePositionField" :class="[
+                <select @change="iconPositionChange" v-if="!hidePositionField" :class="[
                     'form-select',
                     {
                         'is-invalid': errors['icon.position']
@@ -121,6 +121,10 @@ export default {
                 }
             }
 
+            this.emitUpdateEvent();
+        },
+
+        iconPositionChange() {
             this.emitUpdateEvent();
         },
 
