@@ -31,8 +31,8 @@ class Content extends Model
                 }
 
                 // get footer menu
-                if ($content->content->footer->menu_main) {
-                    $content->content->footer->menu_main = Menu::where("id", $content->content->footer->menu_main)->first();
+                if ($content->content->footer->menu_footer) {
+                    $content->content->footer->menu_footer = Menu::where("id", $content->content->footer->menu_footer)->first();
                 }
             }
         });
