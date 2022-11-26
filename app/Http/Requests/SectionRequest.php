@@ -36,8 +36,8 @@ class SectionRequest extends FormRequest
             "buttons.*.url" => ["required", "string", "max:255"],
 
             "buttons.*.icon.source" => ["nullable", "string", Rule::in("local", "html")],
-            "buttons.*.icon.name" => ["required_if:buttons.*.icon.source,local", "string"],
-            "buttons.*.icon.class" => ["required_if:buttons.*.icon.class,html", "string"],
+            "buttons.*.icon.name" => ["nullable", "required_if:buttons.*.icon.source,local", "string"],
+            "buttons.*.icon.class" => ["nullable", "required_if:buttons.*.icon.class,html", "string"],
             "buttons.*.icon.position" => ["nullable", "string", Rule::in("start", "end", "center")],
 
             "buttons.*.style" => ["required", "string", Rule::in(["primary", "outline-primary", "secondary", "outline-secondary", "link"])],

@@ -1,47 +1,8 @@
 <template>
+    <ModalIcons :show="showIconsModal" @modalClose="showIconsModal = false"
+        @iconHasChoosed="iconHasChoosed" />
 
-    <ModalUi :show="showHowItWorkModal" @modalClose="showHowItWorkModal = false"
-        size="lg">
-        <h1 class="fs-4">Conheça</h1>
-        <p>
-            Este sistema se utiliza de uma poderosa e conhecida biblioteca de ícones,
-            o <a href="https://icons.getbootstrap.com" target="_blank"
-                title="Bootstrap Icons">
-                Bootstrap Icons</a>! Esta biblioteca possui quase 2.000 ícones e eles
-            estão todos disponíveis
-            para você!
-        </p>
-        <h1 class="fs-4">Como inserir?</h1>
-        <p>
-            Para inserir um ícone é simples! Você precisa obter a tag html do ícone e
-            colar no campo de ícones no formulário. Se possui dúvidas, siga os passos
-            abaixo:
-        </p>
-        <ol>
-            <li>
-                Acesse <a href="https://icons.getbootstrap.com" target="_blank"
-                    title="Bootstrap Icons"> https://icons.getbootstrap.com</a>
-            </li>
-            <li>
-                Então você poderá navegar entre os milhares de ícones existentes. Você
-                pode facilmente
-                encontrar um ícone utilizando o campo de filtragem. Clique sobre o ícone
-                escolhido.
-            </li>
-            <li>
-                Na página do ícone à direita(em desktop) você terá diversas formas de
-                obter este ícone, dentre elas a opção <strong>Icon font</strong>. Copie o
-                código HTML indicado.
-            </li>
-            <li>
-                Volte para este painel e cole o código obtido no campo
-                <strong>Ícone</strong> e então <strong>salve as alterações</strong>.
-            </li>
-            <li>
-                Pronto! Você já inseriu um ícone para o seu link ou botão.
-            </li>
-        </ol>
-    </ModalUi>
+    <ModalIconHelp :show="showModalIconsHelp" @modalClose="showModalIconsHelp = false" />
 
     <form @submit.prevent="submit">
         <div class="card card-body border-0">
@@ -60,26 +21,16 @@
                 <div class="col-12 col-md-10 col-lg-7 mb-4">
                     <AccordionGroup>
                         <AccordionItem v-for="item, key in items" :key="key" :id="key"
-                            :header-text="item.text">
+                            :header-text="item.text"
+                            @showedIndexHasUpdated="updateButtonIndex">
                             <div class="row">
                                 <div class="col-12 col-sm-6 mb-3">
-                                    <InputForm label="Texto:" v-model="item.text"
-                                        :error-message="form.errors[`items.${key}.text`]" />
+                                    <SelectForm @hasChange="changeOrder" label="Ordem:"
+                                        v-model="item.order" :options="options"
+                                        only-values />
                                 </div>
+
                                 <div class="col-12 col-sm-6 mb-3">
-                                    <InputForm label="Título:" v-model="item.title"
-                                        :error-message="form.errors[`items.${key}.title`]" />
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <InputForm label="URL:" v-model="item.url"
-                                        :error-message="form.errors[`items.${key}.url`]" />
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <InputForm label="Ícone:" v-model="item.icon" />
-                                    <a @click.prevent="showHowItWorkModal = true"
-                                        href=""><small>Como funciona?</small></a>
-                                </div>
-                                <div class="col-3 mb-3">
                                     <SelectForm label="Abrir na:" :options="[
                                         {
                                             value: '_self',
@@ -92,11 +43,29 @@
                                     ]" v-model="item.target"
                                         :error-message="form.errors[`items.${key}.target`]" />
                                 </div>
-                                <div class="col-3 mb-3">
-                                    <SelectForm @hasChange="changeOrder" label="Ordem:"
-                                        v-model="item.order" :options="options"
-                                        only-values />
+
+                                <div class="col-12 col-sm-6 mb-3">
+                                    <InputForm label="Texto:" v-model="item.text"
+                                        :error-message="form.errors[`items.${key}.text`]" />
                                 </div>
+
+                                <div class="col-12 col-sm-6 mb-3">
+                                    <InputForm label="Título:" v-model="item.title"
+                                        :error-message="form.errors[`items.${key}.title`]" />
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <InputForm label="URL:" v-model="item.url"
+                                        :error-message="form.errors[`items.${key}.url`]" />
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <IconSetter @iconHasSet="iconHasSet"
+                                        @requestingIconsModal="showIconsModal = true"
+                                        @requestingModalIconsHelp="showModalIconsHelp = true"
+                                        :icon-data="item.icon" />
+                                </div>
+
                                 <div class="col-12 text-center">
                                     <ButtonConfirmationUi @hasConfirmed="removeItem"
                                         @hasCanceled="" icon="trash" variant="danger"
@@ -129,11 +98,14 @@ import SelectForm from '../../../../Components/Form/SelectForm.vue';
 import AccordionGroup from '../../../../Components/Ui/Accordion/AccordionGroup.vue';
 import AccordionItem from '../../../../Components/Ui/Accordion/AccordionItem.vue';
 import ModalUi from '../../../../Components/Ui/ModalUi.vue';
+import IconSetter from '../../../../Components/IconSetter/IconSetter.vue';
+import ModalIcons from '../../../../Components/IconSetter/ModalIcons.vue';
+import ModalIconHelp from '../../../../Components/IconSetter/ModalIconHelp.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, AccordionGroup, AccordionItem, ModalUi },
+    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, AccordionGroup, AccordionItem, ModalUi, IconSetter, ModalIcons, ModalIconHelp },
     props: {
         menu: { type: Object, default: {} }
     },
@@ -146,7 +118,10 @@ export default {
                 items: null
             }),
             items: [],
-            showHowItWorkModal: false
+
+            showModalIconsHelp: false,
+            showIconsModal: false,
+            buttonIndex: -1,
         };
     },
 
@@ -180,7 +155,12 @@ export default {
                 url: "https://example.com",
                 target: "_self",
                 title: "Menu item title",
-                icon: null,
+                icon: {
+                    source: "local",
+                    name: null,
+                    class: null,
+                    position: "start"
+                },
             });
 
             this.updateItemsOrder();
@@ -218,6 +198,24 @@ export default {
                 return item;
             });
         },
+
+        updateButtonIndex(nindex) {
+            this.buttonIndex = nindex;
+        },
+
+        /**
+         * ICON
+         */
+
+        iconHasChoosed(icon) {
+            this.showIconsModal = false;
+            this.items[this.buttonIndex].icon.class = icon.class;
+            this.items[this.buttonIndex].icon.name = icon.name;
+        },
+
+        iconHasSet(icon) {
+            this.items[this.buttonIndex].icon = icon;
+        }
     },
 
     computed: {

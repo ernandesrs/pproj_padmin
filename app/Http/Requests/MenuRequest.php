@@ -38,13 +38,18 @@ class MenuRequest extends FormRequest
      */
     public function rules()
     {
+        // dd(json_decode($this->content));
         return [
             "name" => ["required", "max:25", "unique:menus,name" . ($this->menu ? "," . $this->menu->id : "")],
             "items.*.text" => ["required", "max:30", "string"],
             "items.*.title" => ["nullable", "max:50", "string"],
             "items.*.target" => ["required", Rule::in(["_self", "_blank"])],
             "items.*.url" => ["required", "string", "max:255"],
-            "items.*.icon" => ["nullable", "string", "max:50"],
+
+            "items.*.icon.source" => ["nullable", "string", Rule::in("local", "html")],
+            "items.*.icon.name" => ["nullable", "required_if:items.*.icon.source,local", "string"],
+            "items.*.icon.class" => ["nullable", "required_if:items.*.icon.class,html", "string"],
+            "items.*.icon.position" => ["nullable", "string", Rule::in("start", "end", "center")],
         ];
     }
 
