@@ -31,7 +31,7 @@
 
                         <div class="col-12">
                             <SelectForm label="Menu principal:" name="menu_main"
-                                v-model="form.header.menu_main" :options="menus.map((menu) => {
+                                v-model="form.header.menu_main.id" :options="menus.map((menu) => {
                                     return {
                                         text: menu.name,
                                         value: menu.id
@@ -85,13 +85,13 @@
                     <h2 class="fs-5 fw-semibold">Rodapé</h2>
                     <div class="row">
                         <div class="col-12">
-                            <SelectForm label="Menu rodapé:" name="menu_main"
-                                v-model="form.footer.menu_main" :options="menus.map((menu) => {
+                            <SelectForm label="Menu rodapé:" name="menu_footer"
+                                v-model="form.footer.menu_footer.id" :options="menus.map((menu) => {
                                     return {
                                         text: menu.name,
                                         value: menu.id
                                     };
-                                })" :error-message="form.errors['footer.menu_main']" />
+                                })" :error-message="form.errors['footer.menu_footer']" />
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,9 @@ export default {
                 header: {
                     favicon: null,
                     logo: null,
-                    menu_main: this.settings?.content?.header?.menu_main ?? null,
+                    menu_main: this.settings?.content?.header?.menu_main ?? {
+                        id: null
+                    },
                 },
                 home: {
                     section_1: this.settings?.content?.home?.section_1?.id ?? null,
@@ -147,7 +149,9 @@ export default {
                     section_4: this.settings?.content?.home?.section_4?.id ?? null,
                 },
                 footer: {
-                    menu_main: this.settings?.content?.footer?.menu_main ?? null,
+                    menu_footer: this.settings?.content?.footer?.menu_footer ?? {
+                        id: null
+                    },
                 }
 
             }),
@@ -158,11 +162,11 @@ export default {
 
     methods: {
         submit() {
-            if (this.form.header.menu_main == "none")
-                this.form.header.menu_main = null;
+            if (this.form.header.menu_main.id == "none")
+                this.form.header.menu_main.id = null;
 
-            if (this.form.footer.menu_main == "none")
-                this.form.footer.menu_main = null;
+            if (this.form.footer.menu_footer.id == "none")
+                this.form.footer.menu_footer.id = null;
 
             this.form.post(route("admin.settings.update"));
         },

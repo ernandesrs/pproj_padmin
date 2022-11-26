@@ -38,7 +38,7 @@ class FrontSettingRequest extends FormRequest
         return [
             "header.favicon" => ["nullable", "numeric", "exists:images,id"],
             "header.logo" => ["nullable", "numeric", "exists:images,id"],
-            "header.menu_main" => ["nullable", "numeric", "exists:menus,id"],
+            "header.menu_main.id" => ["nullable", "numeric", "exists:menus,id"],
 
             "home.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES];
@@ -77,7 +77,7 @@ class FrontSettingRequest extends FormRequest
                     }, $allowed)));
             }],
 
-            "footer.menu_main" => ["nullable", "numeric", "exists:menus,id"],
+            "footer.menu_footer.id" => ["nullable", "numeric", "exists:menus,id"],
         ];
     }
 }
