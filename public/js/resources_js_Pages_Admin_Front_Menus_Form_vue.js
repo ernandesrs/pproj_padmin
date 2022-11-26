@@ -443,6 +443,40 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     }
+  },
+  emits: {
+    'showedIndexHasUpdated': null
+  },
+  data: function data() {
+    return {
+      showedIndex: -1
+    };
+  },
+  mounted: function mounted() {
+    this.updateAccordionItemShowedIndex();
+  },
+  methods: {
+    updateAccordionItemShowedIndex: function updateAccordionItemShowedIndex() {
+      var _this = this;
+      var acitem = this.$refs.accordionItem;
+      if (acitem) {
+        var acitems = document.querySelectorAll('#' + this.$parent.id + ' .accordion-item .accordion-collapse');
+        acitem.addEventListener('shown.bs.collapse', function () {
+          var index = -1;
+          acitems.forEach(function (item, key) {
+            if (index !== -1) return;
+            if (item.classList.contains('show')) {
+              index = key;
+            }
+          });
+          _this.showedIndex = index;
+          _this.emitUpdatedIndexEvent();
+        });
+      }
+    },
+    emitUpdatedIndexEvent: function emitUpdatedIndexEvent() {
+      this.$emit('showedIndexHasUpdated', this.showedIndex);
+    }
   }
 });
 
@@ -1809,6 +1843,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  ref: "accordionItem",
   "class": "accordion-item"
 };
 var _hoisted_2 = ["id"];
@@ -1834,7 +1869,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'show': $props.show
     }]),
     "data-bs-parent": ['#' + this.$parent.$props.id]
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])], 10 /* CLASS, PROPS */, _hoisted_4)]);
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])], 10 /* CLASS, PROPS */, _hoisted_4)], 512 /* NEED_PATCH */);
 }
 
 /***/ }),

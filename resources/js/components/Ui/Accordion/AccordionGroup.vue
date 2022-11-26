@@ -9,7 +9,7 @@
 export default {
     props: {
         id: { type: [String, Number], default: "accordion" + (new Date()).getTime() }
-    },
+    }
 };
 
 </script>

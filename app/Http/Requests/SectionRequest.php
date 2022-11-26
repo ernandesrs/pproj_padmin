@@ -34,9 +34,13 @@ class SectionRequest extends FormRequest
             "buttons.*.title" => ["nullable", "max:50", "string"],
             "buttons.*.target" => ["required", Rule::in(["_self", "_blank"])],
             "buttons.*.url" => ["required", "string", "max:255"],
-            "buttons.*.icon" => ["nullable", "string", "max:50"],
+
+            "buttons.*.icon.source" => ["nullable", "string", Rule::in("local", "html")],
+            "buttons.*.icon.name" => ["required_if:buttons.*.icon.source,local", "string"],
+            "buttons.*.icon.class" => ["required_if:buttons.*.icon.class,html", "string"],
+            "buttons.*.icon.position" => ["nullable", "string", Rule::in("start", "end", "center")],
+
             "buttons.*.style" => ["required", "string", Rule::in(["primary", "outline-primary", "secondary", "outline-secondary", "link"])],
-            "buttons.*.position" => ["required", "string", Rule::in(["start", "end"])],
         ];
 
         if (empty($this->section)) {
