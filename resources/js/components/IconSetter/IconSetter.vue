@@ -1,8 +1,11 @@
 <template>
 
     <div class="row">
-        <div class="col-10">
-            <LabelForm label="Ícone:" />
+        <div class="col-12">
+            <div class="d-flex align-items-center">
+                <LabelForm label="Ícone:" />
+                <span :class="icon.class" class="ms-2"></span>
+            </div>
 
             <div class="input-group">
                 <select @change="iconSourceChange" :class="[
@@ -25,7 +28,7 @@
                     ]" placeholder="HTML do ícone aqui" v-model="icon.class">
 
                 <ButtonUi v-else-if="icon.source == 'local'" @click="showIconsModal"
-                    variant="outline-primary" text="Escolher ícone" />
+                    variant="outline-primary" text="Escolher" />
 
                 <div v-else class="d-flex align-items-center px-2 t-auto">
                     Escolha uma origem
@@ -48,15 +51,6 @@
                 {{ errors['icon.source'] }} {{ errors['icon.position'] }}
             </small>
         </div>
-
-        <div class="col-2">
-            <LabelForm label="Preview:" />
-            <ButtonUi :icon="icon.name" class="ms-1">
-                <template v-if="icon.class" v-slot:buttonContent>
-                    <span :class="icon.class"></span>
-                </template>
-            </ButtonUi>
-        </div>
     </div>
 
     <a v-if="icon.source == 'html'" @click.prevent="showIconsHelpModal" href="">
@@ -76,7 +70,7 @@ export default {
 
     props: {
         iconData: { type: Object, default: null },
-        errors: { type: Object, default: null },
+        errors: { type: Object, default: {} },
         hidePositionField: { type: Boolean, default: false }
     },
 
