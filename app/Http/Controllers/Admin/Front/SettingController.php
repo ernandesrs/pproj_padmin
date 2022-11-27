@@ -80,8 +80,8 @@ class SettingController extends Controller
 
         $content = $settings->content;
 
-        $content->header->menu_main = $validated["header"]["menu_main"] ?? null;
-        $content->footer->menu_main = $validated["footer"]["menu_main"] ?? null;
+        $content->header->menu_main = $validated["header"]["menu_main"]["id"] ?? null;
+        $content->footer->menu_footer = $validated["footer"]["menu_footer"]["id"] ?? null;
         $content->home = $validated["home"];
 
         if ($faviconId = $validated["header"]["favicon"] ?? null) {

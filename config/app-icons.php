@@ -24,13 +24,18 @@ return [
     'eye' => 'bi bi-eye',
     'eyeSlash' => 'bi bi-eye-slash',
 
+    'facebook' => 'bi bi-facebook',
+
     'fileEarmark' => 'bi bi-file-earmark',
     'fileEarmarkText' => 'bi bi-file-earmark-text',
     'fileEarmarkPlus' => 'bt bi-file-earmark-plus',
 
+    'github' => 'bi bi-github',
+
     'infoCircleFill' => 'bi bi-info-circle-fill',
     'images' => 'bi bi-images',
     'image' => 'bi bi-image',
+    'instagram' => 'bi bi-instagram',
 
     'layoutWtf' => 'bi bi-layout-wtf',
     'listRight' => 'bi bi-filter-right',
@@ -41,6 +46,8 @@ return [
     'loading' => 'bi bi-arrow-clockwise animation-rotate-z',
 
     'home' => 'bi bi-house',
+
+    'messenger' => 'bi bi-messenger',
 
     'pencilSquare' => 'bi bi-pencil-square',
     'pieChart' => 'bi bi-pie-chart',
@@ -57,6 +64,9 @@ return [
     'textRight' => 'bi bi-text-right',
     'textCenter' => 'bi bi-text-center',
 
+    'twitter' => 'bi bi-twitter',
+    'twitch' => 'bi bi-twitch',
+
     'video' => 'bi bi-play-btn',
 
     'user' => 'bi bi-person',
@@ -69,4 +79,6 @@ return [
 
     'x' => 'bi bi-x',
     'xLg' => 'bi bi-x-lg',
+
+    'whatsapp' => 'bi bi-whatsapp'
 ];
