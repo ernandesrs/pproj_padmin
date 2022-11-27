@@ -1,7 +1,7 @@
 <section class="section section-banner">
     <div class="container">
         <div class="row justify-content-center justify-content-lg-start align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0 p-0 d-flex justify-content-center align-items-center">
                 @component('front.components.sections.images',
                     [
                         'images' => $section->content->images ?? null,

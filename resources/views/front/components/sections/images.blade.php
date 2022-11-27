@@ -2,7 +2,7 @@
     @if ($image ?? false)
         <img class="img-fluid" src="{{ Storage::url($image) }}" alt="">
     @elseif($images ?? false)
-        <div class="splide jsSplideDefault" role="group" aria-label="Splide Basic HTML Example">
+        <div class="splide jsSplideDefault" role="group" aria-label="Slide de imagens">
             <div class="splide__track">
                 <ul class="splide__list">
                     @foreach ($images ?? [] as $image)
