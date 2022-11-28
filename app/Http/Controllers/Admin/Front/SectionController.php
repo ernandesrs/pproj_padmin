@@ -102,7 +102,8 @@ class SectionController extends Controller
                 return [
                     "id" => $item->id,
                     "path" => $item->path ?? null,
-                    "url" => Thumb::thumb($item->path ?? null)
+                    "url" => Thumb::thumb($item->path ?? null),
+                    "interval" => ($item->interval ?? null) ? str_replace(",", ".", ($item->interval / 1000)) : null,
                 ];
             });
         }
@@ -191,9 +192,10 @@ class SectionController extends Controller
             $images = $validated["content"]["images"] ?? [];
             foreach ($images as $key => $image) {
                 $imageModel = Image::where("id", $image["id"] ?? 0)->first();
-                if ($imageModel)
+                if ($imageModel) {
                     $images[$key]["path"] = $imageModel->path;
-                else
+                    $images[$key]["interval"] = ($image["interval"] ?? 2.5) * 1000;
+                } else
                     unset($images[$key]);
             }
             $validated["content"]["images"] = $images;

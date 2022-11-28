@@ -2546,7 +2546,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   // content/description/bindable
   if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
     this.tinyEditor = this.section.content.content;
-  } else if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
+  } else if (this.sectionsThatHasDescription.includes(parseInt(this.section.type))) {
     this.tinyEditor = this.section.content.description;
   } else if (this.sectionsThatHasBindables.includes(parseInt(this.section.type))) {
     this.form.content.bindable = this.section.content.bindable;
@@ -2712,6 +2712,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   showBindablesField: function showBindablesField() {
     return this.sectionsThatHasBindables.includes(parseInt(this.form.type));
+  },
+  showSlideIntervalField: function showSlideIntervalField() {
+    return this.sectionsThatHasImages.includes(parseInt(this.form.type));
   },
   bindablesOptions: function bindablesOptions() {
     var _this2 = this;
@@ -4459,62 +4462,65 @@ var _hoisted_21 = {
   "class": "d-flex flex-column justify-content-center align-items-center mb-3"
 };
 var _hoisted_22 = {
-  "class": "d-flex justify-content-center gap-2"
+  "class": "mb-3"
 };
 var _hoisted_23 = {
-  "class": "text-center"
+  "class": "d-flex justify-content-center gap-2"
 };
 var _hoisted_24 = {
+  "class": "text-center"
+};
+var _hoisted_25 = {
   "class": "mb-4"
 };
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "fs-5 mb-3 fw-semibold"
 }, " Links da seção ", -1 /* HOISTED */);
-var _hoisted_26 = {
+var _hoisted_27 = {
   key: 0,
   "class": "border border-danger text-danger text-center py-2 mb-2"
 };
-var _hoisted_27 = {
+var _hoisted_28 = {
   "class": "mb-3"
 };
-var _hoisted_28 = {
+var _hoisted_29 = {
   "class": "row"
 };
-var _hoisted_29 = {
+var _hoisted_30 = {
   "class": "col-6 mb-3"
 };
-var _hoisted_30 = {
-  "class": "col-6 col-xl-6 mb-3"
-};
 var _hoisted_31 = {
-  "class": "col-12 col-sm-6 mb-3"
+  "class": "col-6 col-xl-6 mb-3"
 };
 var _hoisted_32 = {
   "class": "col-12 col-sm-6 mb-3"
 };
 var _hoisted_33 = {
-  "class": "col-12 col-sm-6 col-lg-8 mb-3"
+  "class": "col-12 col-sm-6 mb-3"
 };
 var _hoisted_34 = {
-  "class": "col-12 col-sm-6 col-lg-4 mb-3"
+  "class": "col-12 col-sm-6 col-lg-8 mb-3"
 };
 var _hoisted_35 = {
-  "class": "col-12 mb-3"
+  "class": "col-12 col-sm-6 col-lg-4 mb-3"
 };
 var _hoisted_36 = {
-  "class": "col-12 text-center"
+  "class": "col-12 mb-3"
 };
 var _hoisted_37 = {
+  "class": "col-12 text-center"
+};
+var _hoisted_38 = {
   key: 1,
   "class": "p-2 mb-3 border text-center"
 };
-var _hoisted_38 = {
+var _hoisted_39 = {
   "class": "text-center"
 };
-var _hoisted_39 = {
+var _hoisted_40 = {
   "class": "col-12 mb-4 d-flex justify-content-center"
 };
-var _hoisted_40 = {
+var _hoisted_41 = {
   "class": "col-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -4651,7 +4657,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" image preview "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagePreviewUi, {
                   "preview-url": image.url,
                   borderless: image.url ? true : false
-                }, null, 8 /* PROPS */, ["preview-url", "borderless"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" image delete/upload "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+                }, null, 8 /* PROPS */, ["preview-url", "borderless"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+                  label: "Duração em segundos:",
+                  modelValue: $data.form.content.images[key].interval,
+                  "onUpdate:modelValue": function onUpdateModelValue($event) {
+                    return $data.form.content.images[key].interval = $event;
+                  },
+                  "error-message": $data.form.errors['content.images.' + key + '.interval']
+                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" image delete/upload "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
                   onHasConfirmed: $options.removeImageField,
                   onHasCanceled: _cache[8] || (_cache[8] = function () {}),
                   text: 'Excluir'.concat(" "),
@@ -4675,7 +4688,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
 
         _: 1 /* STABLE */
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         onClick: $options.addNewImageField,
         text: "Adicionar imagem",
         icon: "plusLg",
@@ -4684,12 +4697,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8 /* PROPS */, ["onClick"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" buttons/link "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" buttons/link "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardUi, {
     "no-shadow": "",
     border: ""
   }, {
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_25, _this.form.buttons.length > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, " Recomendamos no máximo 2 links por seção! ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AccordionGroup, null, {
+      return [_hoisted_26, _this.form.buttons.length > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, " Recomendamos no máximo 2 links por seção! ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AccordionGroup, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.form.buttons, function (button, index) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AccordionItem, {
@@ -4699,7 +4712,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               onShowedIndexHasUpdated: $options.updateButtonIndex
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
                   onHasChange: $options.changeButtonsOrder,
                   label: "Ordem:",
                   modelValue: button.order,
@@ -4708,7 +4721,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   },
                   options: $options.buttonsOrder,
                   "only-values": ""
-                }, null, 8 /* PROPS */, ["onHasChange", "modelValue", "onUpdate:modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+                }, null, 8 /* PROPS */, ["onHasChange", "modelValue", "onUpdate:modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
                   label: "Estilo:",
                   modelValue: button.style,
                   "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -4731,28 +4744,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     text: 'Link'
                   }],
                   "only-values": ""
-                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
                   label: "Texto:",
                   modelValue: button.text,
                   "onUpdate:modelValue": function onUpdateModelValue($event) {
                     return button.text = $event;
                   },
                   "error-message": $data.form.errors["buttons.".concat(index, ".text")]
-                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
                   label: "Título:",
                   modelValue: button.title,
                   "onUpdate:modelValue": function onUpdateModelValue($event) {
                     return button.title = $event;
                   },
                   "error-message": $data.form.errors["buttons.".concat(index, ".title")]
-                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
                   label: "URL:",
                   modelValue: button.url,
                   "onUpdate:modelValue": function onUpdateModelValue($event) {
                     return button.url = $event;
                   },
                   "error-message": $data.form.errors["buttons.".concat(index, ".url")]
-                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
+                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectForm, {
                   label: "Abrir na:",
                   options: [{
                     value: '_self',
@@ -4766,7 +4779,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     return button.target = $event;
                   },
                   "error-message": $data.form.errors["buttons.".concat(index, ".target")]
-                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_IconSetter, {
+                }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue", "error-message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_IconSetter, {
                   onIconHasSet: $options.iconHasSet,
                   onRequestingIconsModal: _cache[9] || (_cache[9] = function ($event) {
                     return $data.showIconsModal = true;
@@ -4775,7 +4788,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     return $data.showModalIconsHelp = true;
                   }),
                   "icon-data": button.icon
-                }, null, 8 /* PROPS */, ["onIconHasSet", "icon-data"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
+                }, null, 8 /* PROPS */, ["onIconHasSet", "icon-data"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonConfirmationUi, {
                   onHasConfirmed: $options.removeButton,
                   onHasCanceled: _cache[11] || (_cache[11] = function () {}),
                   icon: "trash",
@@ -4791,7 +4804,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
 
         _: 1 /* STABLE */
-      })]), $data.form.buttons.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_37, " Não há links nesta seção ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+      })]), $data.form.buttons.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, " Não há links nesta seção ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
         onClick: $options.addNewButton,
         text: "Adicionar link",
         variant: "link",
@@ -4800,7 +4813,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8 /* PROPS */, ["onClick"])])];
     }),
     _: 1 /* STABLE */
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
+  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputForm, {
     label: "Ocultar/Mostrar esta seção",
     type: "checkbox",
     name: "visible",
@@ -4808,7 +4821,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
       return $data.form.visible = $event;
     })
-  }, null, 8 /* PROPS */, ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
+  }, null, 8 /* PROPS */, ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonUi, {
     type: "submit",
     variant: "primary",
     text: "".concat($props.section.id ? 'Atualizar seção' : 'Salvar seção'),

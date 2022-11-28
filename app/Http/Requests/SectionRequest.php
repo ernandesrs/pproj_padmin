@@ -54,6 +54,7 @@ class SectionRequest extends FormRequest
             $rules["content.image"] = ["nullable", "numeric", "exists:images,id"];
         } elseif (in_array($type, [Section::TYPE_DEFAULT_IMAGES, Section::TYPE_BANNER_IMAGES])) {
             $rules["content.images.*.id"] = ["nullable", "numeric", "exists:images,id"];
+            $rules["content.images.*.interval"] = ["nullable", "numeric"];
         }
 
         // subtitle/content/description

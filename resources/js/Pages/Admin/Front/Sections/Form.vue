@@ -109,6 +109,13 @@
                                                         :borderless="image.url ? true : false" />
                                                 </div>
 
+                                                <div class="mb-3">
+                                                    <InputForm
+                                                        label="Duração em segundos:"
+                                                        v-model="form.content.images[key].interval"
+                                                        :error-message="form.errors['content.images.' + key + '.interval']" />
+                                                </div>
+
                                                 <!-- image delete/upload -->
                                                 <div
                                                     class="d-flex justify-content-center gap-2">
@@ -368,7 +375,7 @@ export default {
         // content/description/bindable
         if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
             this.tinyEditor = this.section.content.content;
-        } else if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
+        } else if (this.sectionsThatHasDescription.includes(parseInt(this.section.type))) {
             this.tinyEditor = this.section.content.description;
         } else if (this.sectionsThatHasBindables.includes(parseInt(this.section.type))) {
             this.form.content.bindable = this.section.content.bindable;
@@ -573,6 +580,10 @@ export default {
 
         showBindablesField() {
             return this.sectionsThatHasBindables.includes(parseInt(this.form.type));
+        },
+
+        showSlideIntervalField() {
+            return this.sectionsThatHasImages.includes(parseInt(this.form.type));
         },
 
         bindablesOptions() {
