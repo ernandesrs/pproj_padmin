@@ -113,7 +113,7 @@
                                                     <InputForm
                                                         label="Duração em segundos:"
                                                         v-model="form.content.images[key].interval"
-                                                        :error-message="form.errors['content.images.' + key + '.interval']" />
+                                                        :error-message="form.errors['content.images.' + key + '.interval']" :mask="['#.###', '##.###']" />
                                                 </div>
 
                                                 <!-- image delete/upload -->
