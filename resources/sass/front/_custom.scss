@@ -8,6 +8,36 @@ body {
     .btn-link {
         text-decoration: none;
     }
+
+    /*
+     * SPLIDE JS STYLE
+     */
+
+    .splide {
+        .splide__arrows {
+            .splide__arrow {
+                background-color: transparent;
+
+                svg {
+                    path {
+                        fill: $dark-light;
+                    }
+                }
+            }
+        }
+
+        .splide__pagination {
+            .splide__pagination__page {
+                background-color: rgb($primary, 0.5);
+                width: .65rem;
+                height: .65rem;
+
+                &.is-active {
+                    background-color: $primary;
+                }
+            }
+        }
+    }
 }
 
 .header {

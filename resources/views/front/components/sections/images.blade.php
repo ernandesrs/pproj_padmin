@@ -2,16 +2,11 @@
     @if ($image ?? false)
         <img class="img-fluid" src="{{ Storage::url($image) }}" alt="">
     @elseif($images ?? false)
-        <div class="splide jsSplideDefault" role="group" aria-label="Slide de imagens">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    @foreach ($images ?? [] as $image)
-                        <li class="splide__slide">
-                            <img class="rounded-lg-3" src="{{ Storage::url($image->path) }}" alt="">
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+        @component('front.components.slides.images',
+            [
+                'images' => $images,
+                'slideOptions' => $slideOptions ?? null,
+            ])
+        @endcomponent
     @endif
 </div>

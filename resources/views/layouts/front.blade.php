@@ -62,23 +62,22 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+
     <script>
         let splidesDefault = document.querySelectorAll('.jsSplideDefault');
 
         if (splidesDefault.length) {
             for (var i = 0; i < splidesDefault.length; i++) {
-                new Splide(splidesDefault[i], {
-                    type: 'loop',
-                    arrows: false,
-                    speed: 750,
-                    autoplay: true,
-                    interval: 3500,
-                    pagination: false
-                }).mount();
+                let options = splidesDefault[i].getAttribute('data-options');
+
+                new Splide(splidesDefault[i], JSON.parse(options)).mount();
             }
         }
     </script>
+
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+
+    @yield('scripts')
 </body>
 
 </html>

@@ -11179,10 +11179,27 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background-color: #fefefe;
+  /*
+   * SPLIDE JS STYLE
+   */
 }
 body a,
 body .btn-link {
   text-decoration: none;
+}
+body .splide .splide__arrows .splide__arrow {
+  background-color: transparent;
+}
+body .splide .splide__arrows .splide__arrow svg path {
+  fill: #565656;
+}
+body .splide .splide__pagination .splide__pagination__page {
+  background-color: rgba(45, 111, 149, 0.5);
+  width: 0.65rem;
+  height: 0.65rem;
+}
+body .splide .splide__pagination .splide__pagination__page.is-active {
+  background-color: #2D6F95;
 }
 
 .header {

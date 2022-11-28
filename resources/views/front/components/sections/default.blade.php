@@ -7,6 +7,11 @@
                     [
                         'image' => $section->content->image ?? null,
                         'images' => $section->content->images ?? [],
+                        'slideOptions' => [
+                            'arrows' => false,
+                            'pagination' => true,
+                            'autoplay' => true,
+                        ],
                     ])
                 @endcomponent
             </div>
