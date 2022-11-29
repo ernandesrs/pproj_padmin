@@ -80,6 +80,7 @@ class SettingController extends Controller
 
         $content = $settings->content;
 
+        $content->socials = $validated["socials"] ?? null;
         $content->header->menu_main = $validated["header"]["menu_main"]["id"] ?? null;
         $content->footer->menu_footer = $validated["footer"]["menu_footer"]["id"] ?? null;
         $content->home = $validated["home"];
@@ -97,7 +98,6 @@ class SettingController extends Controller
                 $content->header->logo = $logo->path;
             }
         }
-
         $settings->content = json_encode($content);
         $settings->save();
 

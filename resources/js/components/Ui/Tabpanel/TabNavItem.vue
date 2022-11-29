@@ -1,6 +1,7 @@
 <template>
     <li class="nav-item" role="presentation">
-        <button :class="['nav-link', { 'active': show }]" :id="name" :data-bs-toggle="$parent.navStyle"
+        <button :class="['nav-link', { 'w-100 px-2 px-lg-4 px-xl-5': $parent.horizontal, 'active': show }]"
+            :id="name" :data-bs-toggle="$parent.navStyle"
             :data-bs-target="`#${contentName}TabPane`" type="button" role="tab"
             :aria-controls="`${name}TabPane`" :aria-selected="show">
             {{ text }}

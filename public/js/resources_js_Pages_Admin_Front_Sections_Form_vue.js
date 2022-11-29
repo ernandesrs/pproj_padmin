@@ -4217,6 +4217,7 @@ var _hoisted_2 = ["id", "data-bs-toggle", "data-bs-target", "aria-controls", "ar
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['nav-link', {
+      'w-100 px-2 px-lg-4 px-xl-5': _ctx.$parent.horizontal,
       'active': $props.show
     }]),
     id: $props.name,

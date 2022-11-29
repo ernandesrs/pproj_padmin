@@ -36,6 +36,14 @@ class FrontSettingRequest extends FormRequest
     public function rules()
     {
         return [
+            "socials.facebook" => ["nullable", "string"],
+            "socials.instagram" => ["nullable", "string"],
+            "socials.twitter" => ["nullable", "string"],
+            "socials.github" => ["nullable", "string"],
+            "socials.linkedin" => ["nullable", "string"],
+            "socials.tiktok" => ["nullable", "string"],
+            "socials.youtube" => ["nullable", "string"],
+
             "header.favicon" => ["nullable", "numeric", "exists:images,id"],
             "header.logo" => ["nullable", "numeric", "exists:images,id"],
             "header.menu_main.id" => ["nullable", "numeric", "exists:menus,id"],
