@@ -52,12 +52,42 @@
         @yield('content')
     </main>
 
-    <footer class="footer py-3 text-center">
+    <footer class="footer py-4 text-center">
         <div class="container">
-            <small>
-                {{ config('app.name') }} &copy; {{ date('Y') }} - Por <a href="https://github.com/ernandesrs"
-                    title="Perfil no Github" target="_blank">Ernandes R Souza</a>
-            </small>
+            @if ($settings->content->socials ?? null)
+                <div class="pb-3">
+                    @php
+                        $urls = [
+                            'facebook' => 'https://facebook.com/',
+                            'instagram' => 'https://instagram.com/',
+                            'twitter' => 'https://twitter.com/',
+                            'github' => 'https://github.com/',
+                            'linkedin' => 'https://linkedin.com/in/',
+                            'youtube' => 'https://youtube.com/@',
+                            'tiktok' => 'https://tiktok.com/@',
+                        ];
+                    @endphp
+
+                    <ul class="nav justify-content-center fs-5">
+                        @foreach ($settings->content->socials as $key => $social)
+                            @if ($social)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $urls[$key] ?? null }}{{ $social }}"
+                                        title="{{ ucfirst($key) }}" target="_blank">
+                                        {!! Icons::elem($key) !!}
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div>
+                <small>
+                    {{ config('app.name') }} &copy; {{ date('Y') }} - Por <a href="https://github.com/ernandesrs"
+                        title="Perfil no Github" target="_blank">Ernandes R Souza</a>
+                </small>
+            </div>
         </div>
     </footer>
 

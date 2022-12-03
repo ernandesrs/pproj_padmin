@@ -38,6 +38,7 @@ return [
     'instagram' => 'bi bi-instagram',
 
     'layoutWtf' => 'bi bi-layout-wtf',
+    'linkedin' => 'bi bi-linkedin',
     'listRight' => 'bi bi-filter-right',
     'listLeft' => 'bi bi-filter-left',
     'login' => 'bi bi-box-arrow-right',
