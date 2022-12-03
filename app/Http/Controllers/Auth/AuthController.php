@@ -22,7 +22,7 @@ class AuthController extends Controller
             "pageTitle" => "Login",
             "guest" => config("app.demo", false) ? [
                 "email" => "guest@guest.mail",
-                "password" => "v&ryhardpassword",
+                "password" => "guestpassword",
             ] : null
         ]);
     }
