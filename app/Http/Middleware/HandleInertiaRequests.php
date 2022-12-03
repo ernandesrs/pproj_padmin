@@ -48,7 +48,8 @@ class HandleInertiaRequests extends Middleware
             'flash' => $flash,
             'auth' => $auth ? new UserResource($auth) : null,
             'appName' => config("app.name"),
-            'icons' => Icons::toObject()
+            'icons' => Icons::toObject(),
+            'appDemo' => config("app.demo", false)
         ]);
     }
 }

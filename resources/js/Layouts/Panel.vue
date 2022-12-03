@@ -108,6 +108,16 @@
 
                 <AlertUi :flash="flash" />
 
+                <div v-if="appDemo"
+                    class="mt-4 py-4 px-4 content-inner border-warning text-warning">
+                    <h5 class="fs-6 fw-semibold">
+                        Você é um visitante em uma aplicação demo.
+                    </h5>
+                    <p class="mb-0 text-warning">
+                        Você pode apenas navegar pelo painel com limite de requisições sem realizar nenhum tipo de alteração.
+                    </p>
+                </div>
+
                 <div class="mt-4 py-4 px-4 content-inner">
                     <slot />
                 </div>
@@ -150,7 +160,8 @@ export default {
         buttons: { type: Object, default: {} },
         appName: { type: String, default: null },
         pageTitle: { type: String, default: null },
-        flash: { type: Object, default: null }
+        flash: { type: Object, default: null },
+        appDemo: { type: Boolean, default: false },
     },
 
     data() {
