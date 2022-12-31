@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Media;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VideoRequest;
+use App\Http\Requests\Media\VideoRequest;
 use App\Http\Resources\VideoResource;
 use App\Http\Services\FilterService;
 use App\Http\Services\VideoService;

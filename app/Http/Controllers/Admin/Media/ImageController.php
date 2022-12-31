@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Media;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ImageRequest;
+use App\Http\Requests\Media\ImageRequest;
 use App\Http\Resources\ImageResource;
 use App\Http\Services\FilterService;
 use App\Http\Services\ImageService;

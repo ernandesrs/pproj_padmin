@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Front;
 
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FrontSettingRequest;
+use App\Http\Requests\Front\FrontSettingRequest;
 use App\Http\Resources\MenuResource;
 use App\Models\Content;
 use App\Models\Media\Image;
