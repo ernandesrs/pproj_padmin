@@ -3,6 +3,10 @@
 namespace App\Models\Admin;
 
 use App\Models\Front\Service;
+use App\Models\Media\Image;
+use App\Models\Media\Video;
+use App\Models\Menu;
+use App\Models\Page;
 use App\Models\Section\Section;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -108,7 +112,7 @@ class Role extends Model
         if (!$modelClass)
             return $this->$ability ?? false;
 
-        $rulableName = self::RULABLES[$modelClass];
+        $rulableName = self::RULABLES[$modelClass] ?? null;
         if ($rulableRules = $this->rulables->$rulableName) {
             return $rulableRules->$ability ?? false;
         }
