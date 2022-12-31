@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Front;
 
+use App\Http\Requests\RequestTrait;
 use App\Models\Front\Service;
 use App\Policies\Front\ServicePolicy;
 use Illuminate\Foundation\Http\FormRequest;

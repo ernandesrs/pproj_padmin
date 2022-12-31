@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Front;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ServiceRequest;
+use App\Http\Requests\Front\ServiceRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Front\Service;
 use Inertia\Inertia;
