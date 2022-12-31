@@ -27,8 +27,8 @@
                 <div class="py-3 text-center">
                     <p class="mb-0">
                         <strong>Registro:</strong> <span class="text-muted">{{
-                        getDate(user.created_at)
-                        }}</span>
+        getDate(user.created_at)
+}}</span>
                     </p>
                     <p class="mb-0">
                         <span class="badge bg-primary">
@@ -61,16 +61,26 @@
 
                     <div class="col-12 col-sm-5 col-md-6 mb-4">
                         <SelectForm label="Gênero" name="gender" :options="[
-                            { text: 'Não definir', value: 0 },
-                            { text: 'Masculino', value: 1 },
-                            { text: 'Feminino', value: 2 },
-                        ]" v-model="form.gender" :error-message="form.errors.gender" />
+    { text: 'Não definir', value: 0 },
+    { text: 'Masculino', value: 1 },
+    { text: 'Feminino', value: 2 },
+]" v-model="form.gender" :error-message="form.errors.gender" />
                     </div>
 
                     <div class="col-12 mb-4">
                         <InputForm label="Email" type="email" name="email"
                             v-model="form.email" :error-message="form.errors.email"
                             :disabled="form?.id ? true : false" />
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <SelectForm label="Função" name="role" :options="Object.values(roles).map(role => {
+    return {
+        text: role.name,
+        value: role.id
+    };
+})" v-model="form.role_id"
+                            :error-message="form.errors.role_id" />
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
@@ -121,13 +131,15 @@ export default {
                 last_name: null,
                 username: null,
                 email: null,
+                role_id: null,
                 photo: null,
                 gender: 'none',
                 password: null,
                 password_confirmation: null
             }
         },
-        terms: { type: Object, default: {} }
+        roles: { type: Object, default: {} },
+        terms: { type: Object, default: {} },
     },
 
     data() {
@@ -139,6 +151,7 @@ export default {
                 username: this.user?.username ?? null,
                 email: this.user?.email ?? null,
                 photo: null,
+                role_id: this.user?.role_id ?? null,
                 gender: this.user?.gender ?? 'none',
                 password: null,
                 password_confirmation: null

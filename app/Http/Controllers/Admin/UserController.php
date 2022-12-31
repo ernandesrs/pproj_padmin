@@ -8,6 +8,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Services\FilterService;
 use App\Http\Services\UserService;
+use App\Models\Admin\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -109,6 +110,7 @@ class UserController extends Controller
 
         return Inertia::render("Admin/Users/Form", [
             "user" => new UserResource($user),
+            "roles" => Role::all(),
             "terms" => __("terms.user"),
             "pageTitle" => "Editar usuário",
             "buttons" => [

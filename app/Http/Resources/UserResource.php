@@ -28,6 +28,8 @@ class UserResource extends JsonResource
             'email_verified_at' => (string) $this->email_verified_at,
             'created_at' => (string) $this->created_at,
             'level' => (int) $this->level,
+            'role_id' => $this->role_id,
+            'role' => $this->resource->roles()->first(),
         ];
 
         $arr['can'] = [

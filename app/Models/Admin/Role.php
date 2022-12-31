@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-use App\Models\Content;
 use App\Models\Front\Service;
 use App\Models\Section\Section;
 use App\Models\User;
@@ -22,7 +21,6 @@ class Role extends Model
         Image::class => 'image',
         Video::class => 'video',
         Section::class => 'section',
-        Content::class => 'content',
         Menu::class => 'menu',
         Page::class => 'page',
         User::class => 'user'

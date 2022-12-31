@@ -10,14 +10,43 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can view any models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewAny(User $user)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission(User::class, 'viewAny');
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  User $model
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function view(User $user, User $model)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission(User::class, 'view');
+    }
+
+    /**
      * Undocumented function
      *
      * @param User $user
      * @return bool
      */
-    public function create(User $user, User $model)
+    public function create(User $user)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission(User::class, 'create');
     }
 
     /**
@@ -29,7 +58,9 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->level >= User::LEVEL_8 && ($user->id == $model->id || $user->level > $model->level);
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission(User::class, 'update') && $user->level > $model->level;
     }
 
     /**
@@ -41,7 +72,9 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->level >= User::LEVEL_8 && ($user->level > $model->level && $user->id !== $model->id);
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission(User::class, 'delete') && $user->level > $model->level;
     }
 
     /**
@@ -53,6 +86,8 @@ class UserPolicy
      */
     public function promote(User $user, User $model)
     {
+        if ($user->isSuperadmin()) return true;
+
         if ($this->isMe($user, $model) || !$user->level >= USER::LEVEL_8)
             return false;
         return $model->nextLevel() ? $model->nextLevel() < $user->level : false;
@@ -67,6 +102,8 @@ class UserPolicy
      */
     public function demote(User $user, User $model)
     {
+        if ($user->isSuperadmin()) return true;
+
         if ($this->isMe($user, $model) || !$user->level >= USER::LEVEL_8)
             return false;
         return $model->level < $user->level;

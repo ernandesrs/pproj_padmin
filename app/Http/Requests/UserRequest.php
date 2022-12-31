@@ -28,10 +28,11 @@ class UserRequest extends FormRequest
         $rules = [
             "first_name" => ["required", "max:20"],
             "last_name" => ["required", "max:50"],
-            "username" => ["required", "max:20", "unique:users,username" . ($this->user ? ',' . $this->user->id : '')],
+            "username" => ["required", "max:20", "unique:users,username" . ($this->user ? "," . $this->user->id : "")],
             "gender" => ["required", Rule::in(User::GENDERS)],
-            "email" => ["required", "email", "unique:users,email" . ($this->user ? ',' . $this->user->id : '')],
-            "password" => [($this->user ? 'nullable' : 'required'), "confirmed"],
+            "email" => ["required", "email", "unique:users,email" . ($this->user ? "," . $this->user->id : "")],
+            "password" => [($this->user ? "nullable" : "required"), "confirmed"],
+            "role_id" => ["nullable", "exists:roles,id"],
         ];
 
         return $rules;
