@@ -11,15 +11,43 @@ class MenuPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can view any models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewAny(User $user)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('viewAny', Menu::class);
+    }
+
+    /**
+     * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, Menu $menu)
+    public function view(User $user, Menu $menu)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('view', Menu::class);
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function create(User $user)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('create', Menu::class);
     }
 
     /**
@@ -31,7 +59,9 @@ class MenuPolicy
      */
     public function update(User $user, Menu $menu)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('update', Menu::class);
     }
 
     /**
@@ -43,6 +73,36 @@ class MenuPolicy
      */
     public function delete(User $user, Menu $menu)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('delete', Menu::class);
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Menu  $menu
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, Menu $menu)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('restore', Menu::class);
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Menu  $menu
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, Menu $menu)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('forceDelete', Menu::class);
     }
 }
