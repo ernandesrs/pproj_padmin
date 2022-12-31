@@ -7,7 +7,7 @@
                     <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
                 </div>
 
-                <div v-if="form.id" class="px-lg-4 pt-3">
+                <div v-if="form.id && user.can.update" class="px-lg-4 pt-3">
                     <InputForm @update:modelValue="photoUpload" label="Nova foto"
                         type="file" name="photo" :error-message="photoUploadError" />
                 </div>

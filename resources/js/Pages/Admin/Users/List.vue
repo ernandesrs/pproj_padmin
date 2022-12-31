@@ -3,28 +3,30 @@
     <EmptyList :show="!users?.data?.length" :is-filter="isFiltering" />
 
     <ListItem v-for="user in users.data" :key="user.id" :item="{
-        cover: user.thumb_small,
-        title: user.first_name + ' ' + user.last_name,
-        subtitle: user.email,
-        coverStyle: 'circle'
-    }">
+    cover: user.thumb_small,
+    title: user.first_name + ' ' + user.last_name,
+    subtitle: user.email,
+    coverStyle: 'circle'
+}">
         <template v-slot:badges>
-            <BadgeUi v-if="user.role?.name" class="mb-1 me-1" :text="user.role.name"
-                icon="user" />
+            <BadgeUi v-if="user.role?.id || user.is_superadmin" class="mb-1 me-1"
+                :text="user.is_superadmin ? 'Superadmin' : user.role.name" icon="user" />
             <BadgeUi class="mb-1 me-1"
-                :icon="`${user.email_verified_at ? 'checkLg':'xLg'}`"
-                :text="`${user.email_verified_at ? 'Verificado':'Não verificado'}`"
+                :icon="`${user.email_verified_at ? 'checkLg' : 'xLg'}`"
+                :text="`${user.email_verified_at ? 'Verificado' : 'Não verificado'}`"
                 variant="secondary" />
         </template>
 
         <template v-slot:actions>
-            <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.users.edit', {id:
-            user.id})" />
+            <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.users.edit', {
+    id:
+        user.id
+})" />
 
             <ButtonConfirmationUi v-if="user.can.delete" confirm-text="Excluir?"
                 icon="trash" variant="danger" size="sm" class="ms-2" position="right"
                 :data-action="$route('admin.users.destroy',
-                {user: user.id})" confirm-with-request request-method="delete" />
+    { user: user.id })" confirm-with-request request-method="delete" />
         </template>
     </ListItem>
 
