@@ -53,6 +53,11 @@ class Role extends Model
         return parent::update($attributes, $options);
     }
 
+    /**
+     * Users
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function users()
     {
         return $this->hasMany(User::class, 'role_id', 'id');
