@@ -10,7 +10,13 @@
                     </div>
 
                     <div v-for="rulable in rulables" class="col-12 mb-4">
-                        <div>{{ rulablesText[rulable] }}</div>
+                        <div class="d-flex flex-wrap align-items-start">
+                            <span class="inline-block me-2 fs-6 fw-semibold">
+                                {{ rulablesText[rulable] }}
+                            </span>
+                            <InputForm @hasChange="checkAll" type="checkbox"
+                                label="Marcar todos" :name="`${rulable}`" />
+                        </div>
                         <hr>
                         <div class="d-flex flex-wrap">
                             <div class="p-1" v-for="rule in rules">
@@ -83,6 +89,20 @@ export default {
         this.setRoleContentOnForm();
     },
     methods: {
+        checkAll(event) {
+            let checkAllRulable = event.target.getAttribute("name");
+
+            if (event.target.checked) {
+                Object.keys(this.form.rulables[checkAllRulable]).map(rulable => {
+                    this.form.rulables[checkAllRulable][rulable] = true;
+                });
+            } else {
+                Object.keys(this.form.rulables[checkAllRulable]).map(rulable => {
+                    this.form.rulables[checkAllRulable][rulable] = false;
+                });
+            }
+        },
+
         submit() {
             let action = route("admin.roles.store");
 

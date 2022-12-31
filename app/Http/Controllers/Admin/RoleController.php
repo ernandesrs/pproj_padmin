@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleRequest;
 use App\Http\Services\FilterService;
 use App\Models\Admin\Role;
 use Illuminate\Http\Request;
@@ -55,12 +56,17 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RoleRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        (new Role())->create($request->validated());
+
+        return redirect()->route("admin.roles.index")->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Nova função criada com sucesso!"
+        ]);
     }
 
     /**
