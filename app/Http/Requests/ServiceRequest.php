@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Front\Service;
-use App\Policies\ServicePolicy;
+use App\Policies\Front\ServicePolicy;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ServiceRequest extends FormRequest
