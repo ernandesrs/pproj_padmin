@@ -168,58 +168,6 @@ class UserController extends Controller
     }
 
     /**
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function promote(User $user)
-    {
-        $this->authorize("promote", $user);
-
-        if ($level = $user->nextLevel()) {
-            $user->level = $level;
-            $user->save();
-
-            session()->flash("flash_alert", [
-                "variant" => "success",
-                "message" => "{$user->first_name} foi promovido(a) de nível com sucesso!",
-            ]);
-        } else {
-            session()->flash("flash_alert", [
-                "variant" => "warning",
-                "message" => "{$user->first_name} já possui o nível máximo de usuário!",
-            ]);
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function demote(User $user)
-    {
-        $this->authorize("demote", $user);
-
-        if ($level = $user->previousLevel()) {
-            $user->level = $level;
-            $user->save();
-
-            session()->flash("flash_alert", [
-                "variant" => "success",
-                "message" => "{$user->first_name} foi rebaixado(a) de nível com sucesso!",
-            ]);
-        } else {
-            session()->flash("flash_alert", [
-                "variant" => "warning",
-                "message" => "{$user->first_name} já possui o nível mínimo de usuário!",
-            ]);
-        }
-
-        return redirect()->back();
-    }
-
-    /**
      * User photo upload
      *
      * @param Request $request

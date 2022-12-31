@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // ADMIN
 Route::group([
     "prefix" => "admin",
-    "middleware" => ["auth", "admin_access", "throttle:admin_visitor_limits"],
+    "middleware" => ["auth", "admin_access"],
 ], function () {
     Route::get("/", [AdminController::class, "index"])->name("admin.index");
 
@@ -31,8 +31,6 @@ Route::group([
         'update' => 'admin.users.update',
         'destroy' => 'admin.users.destroy',
     ]);
-    Route::post("/users/{user}/promote", [AdminUserController::class, "promote"])->name("admin.users.promote");
-    Route::post("/users/{user}/demote", [AdminUserController::class, "demote"])->name("admin.users.demote");
     Route::post("/users/{user}/upload-photo", [AdminUserController::class, "uploadPhoto"])->name("admin.users.uploadPhoto");
 
     Route::resource("roles", AdminRoleController::class)->names([

@@ -58,6 +58,8 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
+        if ($user->id === $model->id) return false;
+
         if ($user->isSuperadmin()) return true;
 
         return $user->hasPermission('update', User::class) && $user->level > $model->level;
@@ -72,50 +74,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
+        if ($user->id === $model->id) return false;
+
         if ($user->isSuperadmin()) return true;
 
         return $user->hasPermission('delete', User::class) && $user->level > $model->level;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function promote(User $user, User $model)
-    {
-        if ($user->isSuperadmin()) return true;
-
-        if ($this->isMe($user, $model) || !$user->level >= USER::LEVEL_8)
-            return false;
-        return $model->nextLevel() ? $model->nextLevel() < $user->level : false;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function demote(User $user, User $model)
-    {
-        if ($user->isSuperadmin()) return true;
-
-        if ($this->isMe($user, $model) || !$user->level >= USER::LEVEL_8)
-            return false;
-        return $model->level < $user->level;
-    }
-
-    /**
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    private function isMe(User $user, User $model)
-    {
-        return $user->id == $model->id;
     }
 }

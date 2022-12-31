@@ -25,9 +25,9 @@ class UserResource extends JsonResource
             'username' => (string) $this->username,
             'email' => (string) $this->email,
             'gender' => (int) $this->gender,
+            'is_superadmin' => $this->is_superadmin,
             'email_verified_at' => (string) $this->email_verified_at,
             'created_at' => (string) $this->created_at,
-            'level' => (int) $this->level,
             'role_id' => $this->role_id,
             'role' => $this->resource->roles()->first(),
         ];
@@ -35,11 +35,7 @@ class UserResource extends JsonResource
         $arr['can'] = [
             'delete' => (new UserPolicy())->delete(auth()->user(), $this->resource),
             'update' => (new UserPolicy())->update(auth()->user(), $this->resource),
-            'promote' => (new UserPolicy())->promote(auth()->user(), $this->resource),
-            'demote' => (new UserPolicy())->demote(auth()->user(), $this->resource),
         ];
-        $arr['next_level'] = $this->resource->nextLevel();
-        $arr['previous_level'] = $this->resource->previousLevel();
 
         $arr = $this->thumbs("photo", $arr, "square");
 

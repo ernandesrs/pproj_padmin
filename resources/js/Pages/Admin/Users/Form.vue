@@ -13,16 +13,6 @@
                 </div>
 
                 <div class="d-flex pt-3">
-                    <ButtonConfirmationUi v-if="user.next_level && user.can.promote"
-                        text="Promover" confirm-text="Promover?" size="sm"
-                        variant="success" icon="userPlus" class="m-1" position="center"
-                        :data-action="$route('admin.users.promote', { user: user.id })"
-                        confirm-with-request request-method="post" />
-                    <ButtonConfirmationUi v-if="user.previous_level && user.can.demote"
-                        text="Rebaixar" confirm-text="Rebaixar?" size="sm"
-                        variant="danger" icon="userMinus" class="m-1" position="center"
-                        :data-action="$route('admin.users.demote', { user: user.id })"
-                        confirm-with-request request-method="post" />
                 </div>
                 <div class="py-3 text-center">
                     <p class="mb-0">
@@ -30,9 +20,9 @@
         getDate(user.created_at)
 }}</span>
                     </p>
-                    <p class="mb-0">
+                    <p v-if="user.role?.id" class="mb-0">
                         <span class="badge bg-primary">
-                            Nível: {{ terms.level['level_' + user.level] }}
+                            Função: {{ user.role.name }}
                         </span>
                     </p>
                 </div>

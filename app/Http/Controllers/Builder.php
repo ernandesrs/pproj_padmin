@@ -44,7 +44,7 @@ class Builder extends Controller
             "username" => "Master",
             "email" => $mail,
             "password" => Hash::make("masterpassword"),
-            "level" => User::LEVEL_MASTER,
+            "is_superadmin" => true,
             "email_verified_at" => now(),
         ]);
 
@@ -74,7 +74,6 @@ class Builder extends Controller
             "username" => "Visitante",
             "email" => $mail,
             "password" => Hash::make("guestpassword"),
-            "level" => User::LEVEL_2,
             "email_verified_at" => now(),
         ]);
 

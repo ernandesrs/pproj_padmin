@@ -13,17 +13,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public const LEVEL_1 = 1;
-    public const LEVEL_2 = 2;
-    public const LEVEL_8 = 8;
-    public const LEVEL_MASTER = 9;
-    public const LEVELS = [
-        self::LEVEL_1,
-        self::LEVEL_2,
-        self::LEVEL_8,
-        self::LEVEL_MASTER,
-    ];
-
     public const GENDER_NONE = 0;
     public const GENDER_MALE = 1;
     public const GENDER_FEMALE = 2;
@@ -42,7 +31,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'username',
-        'level',
+        'is_superadmin',
         'gender',
         'photo',
         'email',
@@ -81,15 +70,6 @@ class User extends Authenticatable
     }
 
     /**
-     * User levels
-     * @return array
-     */
-    public static function levels()
-    {
-        return self::LEVELS;
-    }
-
-    /**
      * User genders
      * @return array
      */
@@ -99,51 +79,13 @@ class User extends Authenticatable
     }
 
     /**
-     * @return null|int
-     */
-    public function nextLevel()
-    {
-        $level = null;
-
-        switch ($this->level) {
-            case self::LEVEL_1:
-                $level = self::LEVEL_2;
-                break;
-            case self::LEVEL_2:
-                $level = self::LEVEL_8;
-                break;
-        }
-
-        return $level;
-    }
-
-    /**
-     * @return null|int
-     */
-    public function previousLevel()
-    {
-        $level = null;
-
-        switch ($this->level) {
-            case self::LEVEL_8:
-                $level = self::LEVEL_2;
-                break;
-            case self::LEVEL_2:
-                $level = self::LEVEL_1;
-                break;
-        }
-
-        return $level;
-    }
-
-    /**
      * Is superadmin
      *
      * @return boolean
      */
     public function isSuperadmin()
     {
-        return $this->level === self::LEVEL_MASTER;
+        return $this->is_superadmin;
     }
 
     /**

@@ -9,7 +9,7 @@
         coverStyle: 'circle'
     }">
         <template v-slot:badges>
-            <BadgeUi class="mb-1 me-1" :text="terms?.level['level_' + user.level]"
+            <BadgeUi v-if="user.role?.name" class="mb-1 me-1" :text="user.role.name"
                 icon="user" />
             <BadgeUi class="mb-1 me-1"
                 :icon="`${user.email_verified_at ? 'checkLg':'xLg'}`"
@@ -47,22 +47,11 @@ export default {
     layout: Layout,
     components: { ListItem, ButtonUi, BadgeUi, PaginationUi, ButtonConfirmationUi, EmptyList },
 
-    data() {
-        return {
-        };
-    },
-
     props: {
         users: { type: Object, default: [] },
         terms: { type: Object, default: {} },
         isFiltering: { type: Boolean, default: false },
     },
-
-    methods: {
-    },
-
-    computed: {
-    }
 }
 
 </script>

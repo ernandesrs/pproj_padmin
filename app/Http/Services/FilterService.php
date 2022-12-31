@@ -21,7 +21,6 @@ class FilterService
         ],
         "App\Models\User" => [
             "order_by" => [
-                ["level", "desc"],
                 ["created_at", "desc"],
             ],
             "search_in" => "first_name,last_name,username,email",

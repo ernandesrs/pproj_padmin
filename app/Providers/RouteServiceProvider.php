@@ -69,16 +69,5 @@ class RouteServiceProvider extends ServiceProvider
                 ]);
             });
         });
-
-        RateLimiter::for('admin_visitor_limits', function (Request $request) {
-            if ($request->user()->level == User::LEVEL_2) {
-                return Limit::perMinutes(1, 20)->by($request->ip())->response(function () {
-                    return response()->json([
-                        "message" => "Este é um ambiente de demonstração e existe um limite de requisições por minuto, e esse limite foi atingido!"
-                    ]);
-                });
-            }
-            return Limit::none();
-        });
     }
 }
