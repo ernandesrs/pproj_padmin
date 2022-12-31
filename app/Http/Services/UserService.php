@@ -48,7 +48,7 @@ class UserService
         $user->last_name = $validated["last_name"];
         $user->username = $validated["username"];
         $user->gender = $validated["gender"];
-        $user->role_id = $validated["role_id"] ?? $user->role_id;
+        $user->role_id = $validated["role_id"];
 
         if ($pass = $validated["password"] ?? null)
             $user->password = Hash::make($pass);

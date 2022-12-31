@@ -18,11 +18,16 @@ class AdminAcess
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!in_array($request->user()->level, [User::LEVEL_2, User::LEVEL_8, User::LEVEL_MASTER]))
-            return Inertia::location(route("front.index"));
+        /**
+         * @var User $user
+         */
+        $user = $request->user();
 
-        Inertia::setRootView("panel");
+        if ($user->hasPermission("admin_access") || $user->isSuperadmin()) {
+            Inertia::setRootView("panel");
+            return $next($request);
+        }
 
-        return $next($request);
+        return Inertia::location(route("front.index"));
     }
 }

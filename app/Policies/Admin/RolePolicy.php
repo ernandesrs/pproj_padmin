@@ -20,7 +20,7 @@ class RolePolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(Role::class, 'viewAny');
+        return $user->hasPermission('viewAny', Role::class);
     }
 
     /**
@@ -34,7 +34,7 @@ class RolePolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(Role::class, 'view');
+        return $user->hasPermission('view', Role::class);
     }
 
     /**
@@ -47,7 +47,7 @@ class RolePolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(Role::class, 'create');
+        return $user->hasPermission('create', Role::class);
     }
 
     /**
@@ -61,7 +61,7 @@ class RolePolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(Role::class, 'update');
+        return $user->hasPermission('update', Role::class);
     }
 
     /**
@@ -75,7 +75,7 @@ class RolePolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(Role::class, 'delete');
+        return $user->hasPermission('delete', Role::class);
     }
 
     /**
@@ -89,7 +89,7 @@ class RolePolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(Role::class, 'restore');
+        return $user->hasPermission('restore', Role::class);
     }
 
     /**
@@ -103,6 +103,6 @@ class RolePolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(Role::class, 'forceDelete');
+        return $user->hasPermission('forceDelete', Role::class);
     }
 }

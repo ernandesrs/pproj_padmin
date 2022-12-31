@@ -12,7 +12,7 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'rulables'];
+    protected $fillable = ['name', 'admin_access', 'rulables'];
 
     public const RULES = ['view', 'viewAny', 'create', 'update', 'delete', 'forceDelete', 'restore'];
     public const RULABLES = [
@@ -35,6 +35,7 @@ class Role extends Model
     public function create(array $validated)
     {
         $this->name = $validated['name'];
+        $this->admin_access = $validated['admin_access'];
         $this->rulables = json_encode($this->setRules($validated['rulables']));
         $this->save();
 
@@ -99,11 +100,14 @@ class Role extends Model
      * Has
      *
      * @param string $ability
-     * @param string $modelClass
+     * @param null|string $modelClass
      * @return boolean
      */
-    public function has(string $ability, string $modelClass)
+    public function has(string $ability, ?string $modelClass)
     {
+        if (!$modelClass)
+            return $this->$ability ?? false;
+
         $rulableName = self::RULABLES[$modelClass];
         if ($rulableRules = $this->rulables->$rulableName) {
             return $rulableRules->$ability ?? false;

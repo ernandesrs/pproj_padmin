@@ -19,7 +19,7 @@ class UserPolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(User::class, 'viewAny');
+        return $user->hasPermission('viewAny', User::class);
     }
 
     /**
@@ -33,7 +33,7 @@ class UserPolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(User::class, 'view');
+        return $user->hasPermission('view', User::class);
     }
 
     /**
@@ -46,7 +46,7 @@ class UserPolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(User::class, 'create');
+        return $user->hasPermission('create', User::class);
     }
 
     /**
@@ -60,7 +60,7 @@ class UserPolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(User::class, 'update') && $user->level > $model->level;
+        return $user->hasPermission('update', User::class) && $user->level > $model->level;
     }
 
     /**
@@ -74,7 +74,7 @@ class UserPolicy
     {
         if ($user->isSuperadmin()) return true;
 
-        return $user->hasPermission(User::class, 'delete') && $user->level > $model->level;
+        return $user->hasPermission('delete', User::class) && $user->level > $model->level;
     }
 
     /**

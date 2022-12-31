@@ -159,11 +159,11 @@ class User extends Authenticatable
     /**
      * Check if user has $ability to $modelClass
      *
-     * @param string $modelClass
      * @param string $ability
+     * @param string|null $modelClass
      * @return boolean
      */
-    public function hasPermission(string $modelClass, string $ability)
+    public function hasPermission(string $ability, ?string $modelClass = null)
     {
         $role = $this->roles()->first();
         if (!$role) return false;

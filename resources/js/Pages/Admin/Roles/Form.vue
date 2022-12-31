@@ -9,6 +9,11 @@
                             v-model="form.name" :error-message="form.errors.name" />
                     </div>
 
+                    <div class="col-12 mb-4">
+                        <InputForm type="checkbox"
+                            label="Acesso ao administrativo" name="admin_panel_access" v-model="form.admin_access" />
+                    </div>
+
                     <div v-for="rulable in rulables" class="col-12 mb-4">
                         <div class="d-flex flex-wrap align-items-start">
                             <span class="inline-block me-2 fs-6 fw-semibold">
@@ -28,9 +33,9 @@
                     </div>
 
                     <div class="col-12">
-                        <ButtonUi type="submit" :text="role.id ? 'Atualizar' : 'Cadastrar'"
-                            variant="primary" icon="checkLg"
-                            :disabled="form.processing" />
+                        <ButtonUi type="submit"
+                            :text="role.id ? 'Atualizar' : 'Cadastrar'" variant="primary"
+                            icon="checkLg" :disabled="form.processing" />
                     </div>
                 </div>
             </div>
@@ -61,6 +66,7 @@ export default {
             form: useForm({
                 id: null,
                 name: null,
+                admin_access: null,
                 rulables: {}
             }),
 
@@ -130,6 +136,7 @@ export default {
             }
 
             this.form.name = this.role.name;
+            this.form.admin_access = this.role.admin_access;
             this.form.rulables = this.role.rulables;
         },
     }

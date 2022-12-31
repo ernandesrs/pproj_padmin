@@ -79,8 +79,7 @@
         text: role.name,
         value: role.id
     };
-})" v-model="form.role_id"
-                            :error-message="form.errors.role_id" />
+})" v-model="form.role_id" :error-message="form.errors.role_id" />
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
@@ -200,6 +199,10 @@ export default {
 
         submit() {
             let action = route('admin.users.store');
+
+            if (this.form.role_id == 'none')
+                this.form.role_id = null;
+
             if (this.form?.id) {
                 action = route('admin.users.update', { user: this.form.id });
 
