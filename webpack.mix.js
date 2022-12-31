@@ -12,14 +12,14 @@ const mix = require('laravel-mix');
  */
 
 mix.vue()
-    .css("node_modules/bootstrap-icons/font/bootstrap-icons.css", "public/css")
+    .css("node_modules/bootstrap-icons/font/bootstrap-icons.css", "public/assets/css")
 
-    .js('resources/js/app.js', 'public/js')
+    .js('resources/js/app.js', 'public/assets/js/inertia')
 
-    .css("resources/css/auth/app.css", "public/css/auth")
+    .css("resources/css/auth/app.css", "public/assets/css/auth")
 
-    .css("resources/css/panel/app.css", "public/css/panel")
-    .scripts(["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"], "public/js/bootstrap.js")
+    .css("resources/css/panel/app.css", "public/assets/css/panel")
+    .scripts(["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"], "public/assets/js/bootstrap.js")
 
-    .css("resources/css/front/app.css", "public/css/front")
+    .css("resources/css/front/app.css", "public/assets/css/front")
     ;

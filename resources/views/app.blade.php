@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
     <link href="{{ asset('css/auth/app.css') }}" rel="stylesheet" />
     @routes
-    <script src="{{ asset('/js/app.js') }}" defer></script>
+    <script src="{{ asset('/js/inertia/app.js') }}" defer></script>
     @inertiaHead
 </head>
 

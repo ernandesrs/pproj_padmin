@@ -1,8 +1,8 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/front/app.css": "/css/front/app.css",
-    "/css/panel/app.css": "/css/panel/app.css",
-    "/css/auth/app.css": "/css/auth/app.css",
-    "/css/bootstrap-icons.css": "/css/bootstrap-icons.css",
-    "/js/bootstrap.js": "/js/bootstrap.js"
+    "/assets/js/inertia/app.js": "/assets/js/inertia/app.js",
+    "/assets/css/front/app.css": "/assets/css/front/app.css",
+    "/assets/css/panel/app.css": "/assets/css/panel/app.css",
+    "/assets/css/auth/app.css": "/assets/css/auth/app.css",
+    "/assets/css/bootstrap-icons.css": "/assets/css/bootstrap-icons.css",
+    "/assets/js/bootstrap.js": "/assets/js/bootstrap.js"
 }

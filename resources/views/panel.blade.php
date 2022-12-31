@@ -15,7 +15,7 @@
     @endif
 
     @routes
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/inertia/app.js') }}" defer></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     @inertiaHead
 </head>
