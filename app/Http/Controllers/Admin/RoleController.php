@@ -114,7 +114,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, Role $role)
     {
         $role->update($request->validated());
-        
+
         return redirect()->route("admin.roles.index")->with("flash_alert", [
             "variant" => "success",
             "message" => "Função {$role->name} foi atualizada com sucesso!"
@@ -129,6 +129,18 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        if ($count = $role->users()->count()) {
+            return back()->with("flash_alert", [
+                "variant" => "warning",
+                "message" => "Esta função está atribuida a {$count} usuário" . ($count > 1 ? "s" : "") . "!"
+            ]);
+        }
+
+        $role->delete();
+
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Função foi excluida definitivamente com sucesso!"
+        ]);
     }
 }

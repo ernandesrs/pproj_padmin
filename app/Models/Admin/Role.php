@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,6 +51,11 @@ class Role extends Model
     {
         $attributes['rulables'] = json_encode($this->setRules($attributes['rulables']));
         return parent::update($attributes, $options);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'role_id', 'id');
     }
 
     /**
