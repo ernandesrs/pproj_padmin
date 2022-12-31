@@ -83,7 +83,7 @@ export default {
                 update: "Atualizar",
                 delete: "Excluir",
                 forceDelete: "Excluir(forçado)",
-                restory: "Restaurar",
+                restore: "Restaurar",
             },
         };
     },

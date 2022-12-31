@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Role;
 use App\Models\Media\Image;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -133,5 +134,40 @@ class User extends Authenticatable
         }
 
         return $level;
+    }
+
+    /**
+     * Is superadmin
+     *
+     * @return boolean
+     */
+    public function isSuperadmin()
+    {
+        return $this->level === self::LEVEL_MASTER;
+    }
+
+    /**
+     * User role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function roles()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    /**
+     * Check if user has $ability to $modelClass
+     *
+     * @param string $modelClass
+     * @param string $ability
+     * @return boolean
+     */
+    public function hasPermission(string $modelClass, string $ability)
+    {
+        $role = $this->roles()->first();
+        if (!$role) return false;
+
+        return $role->has($ability, $modelClass);
     }
 }

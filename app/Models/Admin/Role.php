@@ -2,6 +2,9 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Content;
+use App\Models\Front\Service;
+use App\Models\Section\Section;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,17 +15,17 @@ class Role extends Model
 
     protected $fillable = ['name', 'rulables'];
 
-    public const RULES = ['view', 'viewAny', 'create', 'update', 'delete', 'forceDelete', 'restory'];
+    public const RULES = ['view', 'viewAny', 'create', 'update', 'delete', 'forceDelete', 'restore'];
     public const RULABLES = [
-        'role',
-        'service',
-        'image',
-        'video',
-        'section',
-        'content',
-        'menu',
-        'page',
-        'user'
+        Role::class => 'role',
+        Service::class => 'service',
+        Image::class => 'image',
+        Video::class => 'video',
+        Section::class => 'section',
+        Content::class => 'content',
+        Menu::class => 'menu',
+        Page::class => 'page',
+        User::class => 'user'
     ];
 
     /**
@@ -92,5 +95,22 @@ class Role extends Model
         static::retrieved(function ($role) {
             $role->rulables = json_decode($role->rulables);
         });
+    }
+
+    /**
+     * Has
+     *
+     * @param string $ability
+     * @param string $modelClass
+     * @return boolean
+     */
+    public function has(string $ability, string $modelClass)
+    {
+        $rulableName = self::RULABLES[$modelClass];
+        if ($rulableRules = $this->rulables->$rulableName) {
+            return $rulableRules->$ability ?? false;
+        }
+
+        return false;
     }
 }

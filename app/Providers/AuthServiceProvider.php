@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Admin\Role;
 use App\Models\Media\Image;
 use App\Models\Media\Video;
 use App\Models\Page;
 use App\Models\User;
+use App\Policies\Admin\RolePolicy;
 use App\Policies\ImagePolicy;
 use App\Policies\VideoPolicy;
 use App\Policies\PagePolicy;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Image::class => ImagePolicy::class,
         Video::class => VideoPolicy::class,
         Page::class => PagePolicy::class,
+        Role::class => RolePolicy::class
     ];
 
     /**
