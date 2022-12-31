@@ -185,6 +185,12 @@ export default {
                         activeIn: ['Admin/Users/List', 'Admin/Users/Form']
                     },
                     {
+                        text: 'Funções',
+                        to: this.$route("admin.roles.index"),
+                        icon: 'shieldLock',
+                        activeIn: ['Admin/Roles/List', 'Admin/Roles/Form']
+                    },
+                    {
                         text: 'Mídias',
                         href: '#',
                         icon: 'collection',

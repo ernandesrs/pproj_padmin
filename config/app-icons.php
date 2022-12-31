@@ -45,6 +45,7 @@ return [
     'logout' => 'bi bi-box-arrow-left',
     'load' => 'bi bi-arrow-clockwise',
     'loading' => 'bi bi-arrow-clockwise animation-rotate-z',
+    'lock' => 'bi bi-lock',
 
     'home' => 'bi bi-house',
 
@@ -59,6 +60,7 @@ return [
     'sliders' => 'bi bi-sliders',
     'sliders2' => 'bi bi-sliders2',
     'sliders2Vertical' => 'bi bi-sliders2-vertical',
+    'shieldLock' => 'bi bi-shield-lock',
 
     'trash' => 'bi bi-trash',
     'textLeft' => 'bi bi-text-left',
@@ -77,6 +79,8 @@ return [
     'userPlus' => 'bi bi-person-plus',
     'userCircle' => 'bi bi-person-circle',
     'userMinus' => 'bi bi-person-dash',
+
+    'unlock' => 'bi bi-unlock',
 
     'x' => 'bi bi-x',
     'xLg' => 'bi bi-x-lg',
