@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Policies\ImagePolicy;
+use App\Policies\Media\ImagePolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ImageResource extends JsonResource

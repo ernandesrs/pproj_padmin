@@ -11,38 +11,98 @@ class SectionPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can view any models.
      *
-     * @param User $user
-     * @param Section $section
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, Section $section)
+    public function viewAny(User $user)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('viewAny', Section::class);
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Section\Section  $section
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function view(User $user, Section $section)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('view', Section::class);
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function create(User $user)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('create', Section::class);
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param Section $section
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Section\Section  $section
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, Section $section)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('update', Section::class);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @param Section $section
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Section\Section  $section
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Section $section)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('delete', Section::class);
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Section\Section  $section
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, Section $section)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('restore', Section::class);
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Section\Section  $section
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, Section $section)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('forceDelete', Section::class);
     }
 }

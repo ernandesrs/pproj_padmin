@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Policies\VideoPolicy;
+use App\Policies\Media\VideoPolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
