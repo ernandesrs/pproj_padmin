@@ -8,8 +8,8 @@ use App\Models\Media\Video;
 use App\Models\Page;
 use App\Models\User;
 use App\Policies\Admin\RolePolicy;
-use App\Policies\ImagePolicy;
-use App\Policies\VideoPolicy;
+use App\Policies\Media\ImagePolicy;
+use App\Policies\Media\VideoPolicy;
 use App\Policies\PagePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -41,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('update_settings', function (User $user) {
-            return $user->level >= User::LEVEL_8;
+            return $user->is_superadmin;
         });
     }
 }
