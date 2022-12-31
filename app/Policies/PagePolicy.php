@@ -11,15 +11,43 @@ class PagePolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can view any models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewAny(User $user)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('viewAny', Page::class);
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Page  $page
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function view(User $user, Page $page)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('view', Page::class);
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
-     * @param  Page  $page
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, Page $page)
+    public function create(User $user)
     {
-        return $user->level >= User::LEVEL_8;
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('create', Page::class);
     }
 
     /**
@@ -31,9 +59,9 @@ class PagePolicy
      */
     public function update(User $user, Page $page)
     {
-        $author = $page->author()->first();
+        if ($user->isSuperadmin()) return true;
 
-        return $user->level >= User::LEVEL_8 && (($author->id == $user->id) || ($user->level > $author->level));
+        return $user->hasPermission('update', Page::class);
     }
 
     /**
@@ -45,8 +73,36 @@ class PagePolicy
      */
     public function delete(User $user, Page $page)
     {
-        $author = $page->author()->first();
+        if ($user->isSuperadmin()) return true;
 
-        return $user->level >= User::LEVEL_8 && (($author->id == $user->id) || ($user->level > $author->level));
+        return $user->hasPermission('delete', Page::class);
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Page  $page
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, Page $page)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('restore', Page::class);
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Page  $page
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, Page $page)
+    {
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('forceDelete', Page::class);
     }
 }
