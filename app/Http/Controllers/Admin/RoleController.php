@@ -23,7 +23,7 @@ class RoleController extends Controller
 
         return Inertia::render("Admin/Roles/List", [
             "pageTitle" => "Funções",
-            "roles" => $filter,
+            "roles" => $filter->model,
             "filterAction" => route("admin.roles.index"),
             "isFiltering" => $filter->filtering,
             "buttons" => [
@@ -88,19 +88,37 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return Inertia::render("Admin/Roles/Form", [
+            "pageTitle" => "Editar função",
+            "role" => $role,
+            "rulables" => Role::RULABLES,
+            "rules" => Role::RULES,
+            "buttons" => [
+                "back" => [
+                    "url" => route("admin.roles.index"),
+                ],
+                "new" => [
+                    "url" => route("admin.roles.create"),
+                ],
+            ],
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RoleRequest $request
      * @param  \App\Models\Admin\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        $role->update($request->validated());
+        
+        return redirect()->route("admin.roles.index")->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Função {$role->name} foi atualizada com sucesso!"
+        ]);
     }
 
     /**

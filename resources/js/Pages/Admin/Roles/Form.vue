@@ -28,7 +28,9 @@
                     </div>
 
                     <div class="col-12">
-                        <ButtonUi type="submit" text="Salvar" variant="primary" />
+                        <ButtonUi type="submit" :text="role.id ? 'Atualizar' : 'Cadastrar'"
+                            variant="primary" icon="checkLg"
+                            :disabled="form.processing" />
                     </div>
                 </div>
             </div>

@@ -9,6 +9,8 @@ class Role extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'rulables'];
+
     public const RULES = ['view', 'viewAny', 'create', 'update', 'delete', 'forceDelete', 'restory'];
     public const RULABLES = [
         'role',
