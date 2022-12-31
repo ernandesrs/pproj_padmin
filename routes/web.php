@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\Media\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
+use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetController;
@@ -33,6 +34,15 @@ Route::group([
     Route::post("/users/{user}/promote", [AdminUserController::class, "promote"])->name("admin.users.promote");
     Route::post("/users/{user}/demote", [AdminUserController::class, "demote"])->name("admin.users.demote");
     Route::post("/users/{user}/upload-photo", [AdminUserController::class, "uploadPhoto"])->name("admin.users.uploadPhoto");
+
+    Route::resource("roles", AdminRoleController::class)->names([
+        'index' => 'admin.roles.index',
+        'create' => 'admin.roles.create',
+        'store' => 'admin.roles.store',
+        'edit' => 'admin.roles.edit',
+        'update' => 'admin.roles.update',
+        'destroy' => 'admin.roles.destroy',
+    ]);
 
     Route::group(["prefix" => "medias"], function () {
         Route::resource("images", AdminImageController::class)->names([
@@ -118,7 +128,7 @@ Route::group(["prefix" => "auth"], function () {
         Route::post("/register", [AuthController::class, "store"])->name("auth.store");
 
         Route::get("/forget-password", [ForgetController::class, "forget"])->name("auth.forget");
-        Route::post("/forget-password", [ForgetController::class, "sendRecoveryLink"])->name("auth.sendRecoveryLink")->middleware("throttle:auth_attempts");
+        Route::post("/forget-password", [ForgetController::class, "sendRecoveryLink"])->name("auth.sendRecoveryLink");
         Route::get("/reset-password/{token}", [ForgetController::class, "reset"])->name("auth.reset");
         Route::post("/reset-password", [ForgetController::class, "resetPassword"])->name("auth.resetPassword");
     });

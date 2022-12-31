@@ -38,6 +38,12 @@ class FilterService
             ],
             "search_in" => "name,tags",
         ],
+        "App\Models\Admin\Role" => [
+            "order_by" => [
+                ["created_at", "desc"],
+            ],
+            "search_in" => "name",
+        ],
     ];
 
     /**

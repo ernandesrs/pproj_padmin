@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AdminController extends Controller
