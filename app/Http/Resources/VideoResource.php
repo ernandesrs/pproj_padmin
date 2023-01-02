@@ -16,18 +16,14 @@ class VideoResource extends JsonResource
      */
     public function toArray($request)
     {
-        $arr = [
-            "id" => $this->id,
-            "name" => $this->name,
-            "path" => $this->path,
-            "size" => $this->size,
-            "tags" => $this->tags,
-            "extension" => $this->extension,
-            "url" => Storage::url($this->path),
-            "can" => [
-                "delete" => (new VideoPolicy())->delete(auth()->user(), $this->resource),
-                "update" => (new VideoPolicy())->update(auth()->user(), $this->resource),
-            ]
+        $arr = parent::toArray($request);
+
+        $arr["url"] = Storage::url($this->path);
+        $arr["can"] = [
+            "view" => (new VideoPolicy())->view(auth()->user(), $this->resource),
+            "create" => (new VideoPolicy())->create(auth()->user(), $this->resource),
+            "update" => (new VideoPolicy())->update(auth()->user(), $this->resource),
+            "delete" => (new VideoPolicy())->delete(auth()->user(), $this->resource),
         ];
 
         return $arr;

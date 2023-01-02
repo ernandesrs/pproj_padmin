@@ -15,15 +15,15 @@ class MenuResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            "id" => $this->id,
-            "name" => $this->name,
-            "items" => $this->items,
-            "can" => [
-                "create" => (new MenuPolicy())->create(auth()->user(), $this->resource),
-                "update" => (new MenuPolicy())->update(auth()->user(), $this->resource),
-                "delete" => (new MenuPolicy())->delete(auth()->user(), $this->resource),
-            ],
+        $arr = parent::toArray($request);
+
+        $arr["can"] = [
+            "view" => (new MenuPolicy())->view(auth()->user(), $this->resource),
+            "create" => (new MenuPolicy())->create(auth()->user(), $this->resource),
+            "update" => (new MenuPolicy())->update(auth()->user(), $this->resource),
+            "delete" => (new MenuPolicy())->delete(auth()->user(), $this->resource),
         ];
+
+        return $arr;
     }
 }

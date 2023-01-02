@@ -17,21 +17,15 @@ class ImageResource extends JsonResource
      */
     public function toArray($request)
     {
-        $arr = [
-            "id" => $this->id,
-            "name" => $this->name,
-            "path" => $this->path,
-            "size" => $this->size,
-            "tags" => $this->tags,
-            "extension" => $this->extension,
-            "can" => [
-                "delete" => (new ImagePolicy())->delete(auth()->user(), $this->resource),
-                "update" => (new ImagePolicy())->update(auth()->user(), $this->resource),
-            ]
+        $arr = parent::toArray($request);
+
+        $arr["can"] = [
+            "view" => (new ImagePolicy())->view(auth()->user(), $this->resource),
+            "create" => (new ImagePolicy())->create(auth()->user(), $this->resource),
+            "delete" => (new ImagePolicy())->delete(auth()->user(), $this->resource),
+            "update" => (new ImagePolicy())->update(auth()->user(), $this->resource),
         ];
 
-        $arr = $this->thumbs("path", $arr);
-
-        return $arr;
+        return $this->thumbs("path", $arr);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Policies\Front\ServicePolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ServiceResource extends JsonResource
@@ -16,11 +17,13 @@ class ServiceResource extends JsonResource
      */
     public function toArray($request)
     {
-        $arr = [
-            "id" => $this->id,
-            "title" => $this->title,
-            "icon" => $this->icon,
-            "description" => $this->description,
+        $arr = parent::toArray($request);
+
+        $arr["can"] = [
+            "view" => (new ServicePolicy())->view(auth()->user(), $this->resource),
+            "create" => (new ServicePolicy())->create(auth()->user(), $this->resource),
+            "update" => (new ServicePolicy())->update(auth()->user(), $this->resource),
+            "delete" => (new ServicePolicy())->delete(auth()->user(), $this->resource)
         ];
 
         return $arr;
