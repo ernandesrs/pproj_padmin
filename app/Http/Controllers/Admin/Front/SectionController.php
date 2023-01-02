@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Front;
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
+use App\Http\Resources\SectionResource;
 use App\Models\Media\Image;
 use App\Models\Section\Section;
 use Illuminate\Support\Collection;
@@ -21,7 +22,7 @@ class SectionController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Front/Sections/List', [
-            'sections' => Section::paginate(20),
+            'sections' => SectionResource::collection(Section::paginate(20)),
             'pageTitle' => 'Seções',
             'terms' => __('terms.section'),
             "buttons" => [
@@ -109,7 +110,7 @@ class SectionController extends Controller
         }
 
         return Inertia::render("Admin/Front/Sections/Form", [
-            "section" => $section,
+            "section" => new SectionResource($section),
             "bindables" => Section::BINDABLES,
             "section_types" => Section::TYPES,
             "terms" => __("terms.section"),
