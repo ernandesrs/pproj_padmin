@@ -6,8 +6,10 @@ use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
 use App\Http\Resources\SectionResource;
+use App\Http\Services\FilterService;
 use App\Models\Media\Image;
 use App\Models\Section\Section;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -17,12 +19,17 @@ class SectionController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filter = (new FilterService(new Section()))->filter($request);
+
         return Inertia::render('Admin/Front/Sections/List', [
-            'sections' => SectionResource::collection(Section::paginate(20)),
+            'sections' => SectionResource::collection($filter->model),
+            'filterAction' => route('admin.sections.index'),
+            'isFiltering' => $filter->filtering,
             'pageTitle' => 'Seções',
             'terms' => __('terms.section'),
             "buttons" => [

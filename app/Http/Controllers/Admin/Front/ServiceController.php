@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\ServiceRequest;
 use App\Http\Resources\ServiceResource;
+use App\Http\Services\FilterService;
 use App\Models\Front\Service;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ServiceController extends Controller
@@ -13,12 +15,17 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filter = (new FilterService(new Service()))->filter($request);
+
         return Inertia::render('Admin/Front/Services/List', [
-            'services' => ServiceResource::collection(Service::paginate(18)),
+            'services' => ServiceResource::collection($filter->model),
+            'filterAction' => route('admin.services.index'),
+            'isFiltering' => $filter->filtering,
             'pageTitle' => 'Lista de serviços',
             "buttons" => [
                 "new" => [

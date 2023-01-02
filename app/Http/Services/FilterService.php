@@ -43,6 +43,24 @@ class FilterService
             ],
             "search_in" => "name",
         ],
+        "App\Models\Front\Service" => [
+            "order_by" => [
+                ["created_at", "desc"],
+            ],
+            "search_in" => "title,description",
+        ],
+        "App\Models\Section\Section" => [
+            "order_by" => [
+                ["created_at", "desc"],
+            ],
+            "search_in" => "name,title,subtitle",
+        ],
+        "App\Models\Menu" => [
+            "order_by" => [
+                ["created_at", "desc"],
+            ],
+            "search_in" => "name",
+        ],
     ];
 
     /**

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuRequest;
 use App\Http\Resources\MenuResource;
+use App\Http\Services\FilterService;
 use App\Models\Menu;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MenuController extends Controller
@@ -13,14 +15,17 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = MenuResource::collection(Menu::whereNotNull("id")->orderBy("created_at", "DESC")->paginate(20));
+        $filter = (new FilterService(new Menu()))->filter($request);
 
         return Inertia::render("Admin/Front/Menus/List", [
-            "menus" => $results,
+            "menus" => MenuResource::collection($filter->model),
+            "filterAction" => route("admin.menus.index"),
+            "isFiltering" => $filter->filtering,
             "terms" => __("terms.menu"),
             "pageTitle" => "Menus",
             "buttons" => [
