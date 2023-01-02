@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleRequest;
+use App\Http\Resources\RoleResource;
 use App\Http\Services\FilterService;
 use App\Models\Admin\Role;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class RoleController extends Controller
 
         return Inertia::render("Admin/Roles/List", [
             "pageTitle" => "Funções",
-            "roles" => $filter->model,
+            "roles" => RoleResource::collection($filter->model),
             "filterAction" => route("admin.roles.index"),
             "isFiltering" => $filter->filtering,
             "buttons" => [
@@ -96,7 +97,7 @@ class RoleController extends Controller
 
         return Inertia::render("Admin/Roles/Form", [
             "pageTitle" => "Editar função",
-            "role" => $role,
+            "role" => new RoleResource($role),
             "rulables" => Role::RULABLES,
             "rules" => Role::RULES,
             "buttons" => [
