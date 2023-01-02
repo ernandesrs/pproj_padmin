@@ -10,8 +10,8 @@
                     </div>
 
                     <div class="col-12 mb-4">
-                        <InputForm type="checkbox"
-                            label="Acesso ao administrativo" name="admin_panel_access" v-model="form.admin_access" />
+                        <InputForm type="checkbox" label="Acesso ao administrativo"
+                            name="admin_panel_access" v-model="form.admin_access" />
                     </div>
 
                     <div v-for="rulable in rulables" class="col-12 mb-4">
@@ -32,8 +32,9 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
-                        <ButtonUi v-if="role?.id && role?.can.update" type="submit"
+                    <div v-if="!role?.id || role?.id && role?.can.update"
+                        class="col-12 text-center">
+                        <ButtonUi type="submit"
                             :text="role.id ? 'Atualizar' : 'Cadastrar'" variant="primary"
                             icon="checkLg" :disabled="form.processing" />
                     </div>
