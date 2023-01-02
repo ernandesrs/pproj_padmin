@@ -4,19 +4,17 @@
         :pagination-pages="roles?.meta?.links">
         <ListItem v-for="role in roles.data" :key="role.id" :item="{
     title: role.name,
-    subtitle: ''
+    subtitle: '',
+    actions: {
+        show: null,
+        edit: $route('admin.roles.edit', {
+            id:
+                role.id
+        }),
+        delete: role.can.delete ? $route('admin.roles.destroy',
+            { role: role.id }) : null
+    }
 }">
-            <template v-slot:actions>
-                <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.roles.edit', {
-    id:
-        role.id
-})" />
-
-                <ButtonConfirmationUi v-if="role.can.delete" confirm-text="Excluir?"
-                    icon="trash" variant="danger" size="sm" class="ms-2" position="right"
-                    :data-action="$route('admin.roles.destroy',
-    { role: role.id })" confirm-with-request request-method="delete" />
-            </template>
         </ListItem>
     </ListGroup>
 
@@ -27,13 +25,11 @@
 import Layout from './../../../Layouts/Panel.vue';
 import ListGroup from '../../../Components/List/ListGroup.vue';
 import ListItem from '../../../Components/List/ListItem.vue';
-import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
-import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { ListItem, ButtonUi, ButtonConfirmationUi, ListGroup },
+    components: { ListItem, ListGroup },
 
     props: {
         roles: { type: Object, default: [] },

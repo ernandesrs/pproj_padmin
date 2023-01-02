@@ -6,7 +6,16 @@
     cover: user.thumb_small,
     title: user.first_name + ' ' + user.last_name,
     subtitle: user.email,
-    coverStyle: 'circle'
+    coverStyle: 'circle',
+    actions: {
+        show: null,
+        edit: $route('admin.users.edit', {
+            id:
+                user.id
+        }),
+        delete: user.can.delete ? $route('admin.users.destroy',
+            { user: user.id }) : null
+    }
 }">
             <template v-slot:badges>
                 <BadgeUi v-if="user.role?.id || user.is_superadmin" class="mb-1 me-1"
@@ -16,18 +25,6 @@
                     :icon="`${user.email_verified_at ? 'checkLg' : 'xLg'}`"
                     :text="`${user.email_verified_at ? 'Verificado' : 'Não verificado'}`"
                     variant="secondary" />
-            </template>
-
-            <template v-slot:actions>
-                <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.users.edit', {
-    id:
-        user.id
-})" />
-
-                <ButtonConfirmationUi v-if="user.can.delete" confirm-text="Excluir?"
-                    icon="trash" variant="danger" size="sm" class="ms-2" position="right"
-                    :data-action="$route('admin.users.destroy',
-    { user: user.id })" confirm-with-request request-method="delete" />
             </template>
         </ListItem>
     </ListGroup>
@@ -39,14 +36,12 @@
 import Layout from './../../../Layouts/Panel.vue';
 import ListGroup from '../../../Components/List/ListGroup.vue';
 import ListItem from '../../../Components/List/ListItem.vue';
-import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
-import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { ListItem, ButtonUi, BadgeUi, ButtonConfirmationUi, ListGroup },
+    components: { ListItem, BadgeUi, ListGroup },
 
     props: {
         users: { type: Object, default: [] },

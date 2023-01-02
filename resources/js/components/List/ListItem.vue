@@ -19,25 +19,38 @@
         <div
             class="d-flex justify-content-center align-items-center py-2 ms-sm-auto list-item-actions">
             <slot name="actions" />
+
+            <ButtonUi v-if="item?.actions?.show" icon="eye" variant="secondary"
+                size="sm" :to="item?.actions?.show" />
+
+            <ButtonUi v-if="item?.actions?.edit" icon="pencilSquare" variant="primary"
+                size="sm" :to="item?.actions?.edit" class="ms-2" />
+
+            <ButtonConfirmationUi v-if="item?.actions?.delete" confirm-text="Excluir?"
+                icon="trash" variant="danger" size="sm" class="ms-2" position="right"
+                :data-action="item?.actions?.delete" confirm-with-request
+                request-method="delete" />
         </div>
     </div>
 </template>
 
 <script>
 
+import ButtonUi from '../Ui/ButtonUi.vue';
+import ButtonConfirmationUi from '../Ui/ButtonConfirmationUi.vue';
+
 export default {
+    components: { ButtonUi, ButtonConfirmationUi },
     props: {
         item: { type: Object, default: null },
-
         title: { type: String, default: null },
         subtitle: { type: String, default: null },
         cover: { type: String, default: null },
         coverStyle: { type: String, default: null },
     },
-
     computed: {
         theCoverStyle() {
-            let style = this.item?.coverStyle ?? this.coverStyle ?? 'rectangle';
+            let style = this.item?.coverStyle ?? this.coverStyle ?? "rectangle";
             return `img-fluid ${style}`;
         },
         theCover() {
@@ -46,12 +59,12 @@ export default {
         theTitle() {
             let limit = 60;
             let tt = this.item?.title ?? this.title;
-            return tt.substr(0, limit) + (tt.length > limit ? '...' : '');
+            return tt.substr(0, limit) + (tt.length > limit ? "..." : "");
         },
         theSubtitle() {
             let limit = 125;
             let ts = this.item?.subtitle ?? this.subtitle;
-            return ts.substr(0, limit) + (ts.length > limit ? '...' : '');
+            return ts.substr(0, limit) + (ts.length > limit ? "..." : "");
         },
     }
 };
