@@ -11,7 +11,7 @@
         <ButtonUi icon="pencilSquare" variant="primary" size="sm" :to="$route('admin.roles.edit', {id:
         role.id})" />
 
-        <ButtonConfirmationUi confirm-text="Excluir?"
+        <ButtonConfirmationUi v-if="role.can.delete" confirm-text="Excluir?"
             icon="trash" variant="danger" size="sm" class="ms-2" position="right"
             :data-action="$route('admin.roles.destroy',
             {role: role.id})" confirm-with-request request-method="delete" />

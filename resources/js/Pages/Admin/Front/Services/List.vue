@@ -24,7 +24,7 @@
                     service: service.id
                 })" />
 
-                <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
+                <ButtonConfirmationUi v-if="service.can.delete" confirm-text="Excluir?" icon="trash"
                     variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.services.destroy',
                     { service: service.id })" confirm-with-request
                     request-method="delete" />

@@ -23,7 +23,7 @@
                     section: section.id
                 })" />
 
-                <ButtonConfirmationUi confirm-text="Excluir?" icon="trash"
+                <ButtonConfirmationUi v-if="section.can.delete" confirm-text="Excluir?" icon="trash"
                     variant="danger" size="sm" class="ms-2" position="right" :data-action="$route('admin.sections.destroy',
                     { section: section.id })" confirm-with-request
                     request-method="delete" />

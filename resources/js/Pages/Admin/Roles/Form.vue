@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="col-12">
-                        <ButtonUi type="submit"
+                        <ButtonUi v-if="role?.id && role?.can.update" type="submit"
                             :text="role.id ? 'Atualizar' : 'Cadastrar'" variant="primary"
                             icon="checkLg" :disabled="form.processing" />
                     </div>

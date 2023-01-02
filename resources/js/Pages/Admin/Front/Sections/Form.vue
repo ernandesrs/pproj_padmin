@@ -256,7 +256,7 @@
                     name="visible" v-model="form.visible" />
             </div>
 
-            <div class="col-12 text-center">
+            <div v-if="!section?.id || section?.id && section.can.update" class="col-12 text-center">
                 <ButtonUi type="submit" variant="primary"
                     :text="`${section.id ? 'Atualizar seção' : 'Salvar seção'}`"
                     icon="checkLg" :disabled="form.processing" />

@@ -76,7 +76,7 @@
                     </AccordionGroup>
                 </div>
 
-                <div class="col-12 text-center">
+                <div v-if="!menu?.id || menu?.id && menu.can.update" class="col-12 text-center">
                     <ButtonUi type="submit" variant="primary"
                         :text="`${menu.id ? 'Atualizar menu' : 'Salvar menu'}`"
                         icon="checkLg" :disabled="form.processing" />
