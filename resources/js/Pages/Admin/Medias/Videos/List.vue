@@ -46,17 +46,17 @@
 <script>
 
 import Layout from './../../../../Layouts/Panel.vue';
-import PaginationUi from '../../../../Components/PaginationUi.vue';
-import EmptyList from '../../../../Components/EmptyList.vue';
 import CardUi from '../../../../Components/Ui/CardUi.vue';
 import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../../Components/Ui/ButtonConfirmationUi.vue';
 import ImagePreviewUi from '../../../../Components/Ui/ImagePreviewUi.vue';
+import EmptyList from '../../../../Components/List/EmptyList.vue';
+import PaginationUi from '../../../../Components/List/PaginationUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { PaginationUi, EmptyList, CardUi, ButtonUi, ButtonConfirmationUi, ImagePreviewUi },
+    components: { CardUi, ButtonUi, ButtonConfirmationUi, ImagePreviewUi, EmptyList, PaginationUi },
 
     props: {
         videos: { type: Object, default: [] },

@@ -26,8 +26,6 @@
 <script>
 
 export default {
-    components: {},
-
     props: {
         item: { type: Object, default: null },
 

@@ -91,7 +91,7 @@ import ModalUi from '../../../../Components/Ui/ModalUi.vue';
 import InputForm from '../../../../Components/Form/InputForm.vue';
 import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
 import BackdropUi from '../../../../Components/Ui/BackdropUi.vue';
-import PaginationUi from '../../../../Components/PaginationUi.vue';
+import PaginationUi from '../../../../Components/List/PaginationUi.vue';
 import ImagePreviewUi from '../../../../Components/Ui/ImagePreviewUi.vue';
 import CardUi from '../../../../Components/Ui/CardUi.vue';
 
