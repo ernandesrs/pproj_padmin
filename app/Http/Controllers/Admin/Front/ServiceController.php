@@ -85,7 +85,7 @@ class ServiceController extends Controller
     public function edit(Service $service)
     {
         return Inertia::render('Admin/Front/Services/Form', [
-            'service' => $service,
+            'service' => new ServiceResource($service),
             'pageTitle' => 'Editar serviço',
             "buttons" => [
                 "new" => [
