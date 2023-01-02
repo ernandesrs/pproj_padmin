@@ -63,7 +63,7 @@
                             :disabled="form?.id ? true : false" />
                     </div>
 
-                    <div class="col-12 mb-4">
+                    <div v-if="roles?.length" class="col-12 mb-4">
                         <SelectForm label="Função" name="role" :options="Object.values(roles).map(role => {
     return {
         text: role.name,

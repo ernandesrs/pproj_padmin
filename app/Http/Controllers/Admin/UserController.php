@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\RoleResource;
 use App\Http\Resources\UserResource;
 use App\Http\Services\FilterService;
 use App\Http\Services\UserService;
@@ -110,7 +111,7 @@ class UserController extends Controller
 
         return Inertia::render("Admin/Users/Form", [
             "user" => new UserResource($user),
-            "roles" => Role::all(),
+            "roles" => RoleResource::collection(Role::all()),
             "terms" => __("terms.user"),
             "pageTitle" => "Editar usuário",
             "buttons" => [
