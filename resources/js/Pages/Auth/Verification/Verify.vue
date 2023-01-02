@@ -40,9 +40,9 @@
   
 <script>
 
-import Layout from './../../../Layouts/Auth.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
+import Layout from './../../../Layouts/Auth.vue';
 import BackdropUi from '../../../Components/Ui/BackdropUi.vue';
 
 export default {

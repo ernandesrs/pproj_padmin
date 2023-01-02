@@ -46,9 +46,9 @@
 
 <script>
 
+import { useForm } from '@inertiajs/inertia-vue3';
 import Layout from './../../../Layouts/Panel.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
-import { useForm } from '@inertiajs/inertia-vue3';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 
 export default {

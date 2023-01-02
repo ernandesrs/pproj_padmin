@@ -1,5 +1,3 @@
-
-import { V_SHOW } from '@vue/compiler-dom';
 <template>
     <div v-if="show"
         class="px-5 py-3 mt-2 mb-4 fs-5 fw-semibold text-center border text-muted">

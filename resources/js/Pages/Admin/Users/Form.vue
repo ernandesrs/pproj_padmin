@@ -101,12 +101,12 @@
 <script>
 
 import { useForm } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import Layout from './../../../Layouts/Panel.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
-import { Inertia } from '@inertiajs/inertia';
 
 export default {
     components: { InputForm, SelectForm, ButtonUi, ButtonConfirmationUi },

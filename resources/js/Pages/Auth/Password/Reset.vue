@@ -25,8 +25,8 @@
   
 <script>
 
-import Layout from './../../../Layouts/Auth.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
+import Layout from './../../../Layouts/Auth.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import InputForm from '../../../Components/Form/InputForm.vue';
 

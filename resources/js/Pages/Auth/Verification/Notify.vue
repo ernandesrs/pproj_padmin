@@ -20,8 +20,8 @@
   
 <script>
 
-import Layout from './../../../Layouts/Auth.vue';
 import { Inertia } from '@inertiajs/inertia';
+import Layout from './../../../Layouts/Auth.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),

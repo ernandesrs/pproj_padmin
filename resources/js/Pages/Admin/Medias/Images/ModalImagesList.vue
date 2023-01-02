@@ -85,11 +85,11 @@
 
 <script>
 
+import { useForm } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import ModalUi from '../../../../Components/Ui/ModalUi.vue';
 import InputForm from '../../../../Components/Form/InputForm.vue';
 import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
-import { useForm } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia';
 import BackdropUi from '../../../../Components/Ui/BackdropUi.vue';
 import PaginationUi from '../../../../Components/PaginationUi.vue';
 import ImagePreviewUi from '../../../../Components/Ui/ImagePreviewUi.vue';

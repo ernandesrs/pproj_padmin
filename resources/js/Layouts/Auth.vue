@@ -54,11 +54,6 @@ export default {
         pageTitle: { type: String, default: null },
         flash: { type: Object, default: null }
     },
-
-    data() {
-        return {
-        };
-    },
 }
 
 </script>
