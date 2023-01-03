@@ -37,6 +37,7 @@ class User extends Authenticatable
         'email',
         'confirmation_token',
         'password',
+        'email_verified_at',
     ];
 
     /**
