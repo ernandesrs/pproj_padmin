@@ -2,11 +2,14 @@
 
 namespace App\Console;
 
+use App\Http\Services\ImageService;
 use App\Models\Admin\Role;
 use App\Models\Content;
 use App\Models\Page;
 use App\Models\Slug;
 use App\Models\User;
+use Illuminate\Http\File;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 
 class AppBuilder
@@ -26,10 +29,15 @@ class AppBuilder
         $user = $this->userMaster($mail, $pass);
         $this->userVisitor($visitor);
 
-        $this->homePage($user);
-        $this->privacyTermsPage($user);
-        $this->useTermsPage($user);
-        $this->frontSettings();
+        $cover = $this->pagesCover($user);
+
+        $this->homePage($user, $cover);
+        $this->privacyTermsPage($user, $cover);
+        $this->useTermsPage($user, $cover);
+
+        $favicon = $this->favicon($user);
+        $logo = $this->logo($user);
+        $this->frontSettings($favicon, $logo);
     }
 
     /**
@@ -83,9 +91,9 @@ class AppBuilder
      */
     private function userMaster(string $mail, string $pass)
     {
-        if (User::where("email", $mail)->first()) {
+        if ($user = User::where("email", $mail)->first()) {
             echo "master user exists\n";
-            return;
+            return $user;
         }
 
         $user = User::create([
@@ -140,9 +148,25 @@ class AppBuilder
     }
 
     /**
+     * Default cover upload
+     *
+     * @param User $user
+     * @return Image
+     */
+    private function pagesCover(User $user)
+    {
+        $file = new File(resource_path("img/default-cover.jpg"));
+        $upload = new UploadedFile($file->getPathname(), $file->getBasename());
+
+        return (new ImageService())->store([
+            "file" => $upload,
+        ], "pages/cover", $user);
+    }
+
+    /**
      * Create the home page
      */
-    private function homePage($author)
+    private function homePage($author, $cover)
     {
         if (Slug::where(config("app.locale"), "inicio")->first()) {
             echo "home page exists\n";
@@ -154,7 +178,7 @@ class AppBuilder
             "lang" => config("app.locale"),
             "title" => "Página inicial",
             "description" => "Uma descrição boa para a página inicial do seu site. Isso ajudará os mecanismos de busca como o Google, Bing, etc, a encontra-lo",
-            "cover" => null,
+            "cover" => $cover->path ?? null,
             "follow" => false,
             "status" => Page::STATUS_PUBLISHED,
             "content_type" => Page::CONTENT_TYPE_VIEW,
@@ -172,7 +196,7 @@ class AppBuilder
     /**
      * Create the privacy terms page
      */
-    private function privacyTermsPage($author)
+    private function privacyTermsPage($author, $cover)
     {
         if (Slug::where(config("app.locale"), "termos-de-privacidade")->first()) {
             echo "privacy terms page exists\n";
@@ -184,7 +208,7 @@ class AppBuilder
             "lang" => config("app.locale"),
             "title" => "Termos de privacidade",
             "description" => "Descrição para a termos de privacidade",
-            "cover" => null,
+            "cover" =>  $cover->path ?? null,
             "follow" => false,
             "status" => Page::STATUS_PUBLISHED,
             "content_type" => Page::CONTENT_TYPE_TEXT,
@@ -202,7 +226,7 @@ class AppBuilder
     /**
      *  Create the use terms page
      */
-    private function useTermsPage($author)
+    private function useTermsPage($author, $cover)
     {
         if (Slug::where(config("app.locale"), "termos-de-uso")->first()) {
             echo "use terms page exists\n";
@@ -214,7 +238,7 @@ class AppBuilder
             "lang" => config("app.locale"),
             "title" => "Termos de uso",
             "description" => "Descrição para a termos de uso",
-            "cover" => null,
+            "cover" =>  $cover->path ?? null,
             "follow" => false,
             "status" => Page::STATUS_PUBLISHED,
             "content_type" => Page::CONTENT_TYPE_TEXT,
@@ -230,9 +254,41 @@ class AppBuilder
     }
 
     /**
+     * Default favicon upload
+     *
+     * @param User $user
+     * @return Image
+     */
+    private function favicon(User $user)
+    {
+        $file = new File(resource_path("img/favicon.svg"));
+        $upload = new UploadedFile($file->getPathname(), $file->getBasename());
+
+        return (new ImageService())->store([
+            "file" => $upload,
+        ], null, $user);
+    }
+
+    /**
+     * Default logo upload
+     *
+     * @param User $user
+     * @return Image
+     */
+    private function logo(User $user)
+    {
+        $file = new File(resource_path("img/logo.svg"));
+        $upload = new UploadedFile($file->getPathname(), $file->getBasename());
+
+        return (new ImageService())->store([
+            "file" => $upload,
+        ], "pages/cover", $user);
+    }
+
+    /**
      * @return void
      */
-    private function frontSettings()
+    private function frontSettings($favicon, $logo)
     {
         $contentName = "front_settings";
         if (Content::where("name", $contentName)->first()) {
@@ -243,8 +299,8 @@ class AppBuilder
         $content = [
             "locale" => config("app.locale"),
             "header" => [
-                "favicon" => null,
-                "logo" => null,
+                "favicon" => $favicon->path,
+                "logo" => $logo->path,
                 "menu_main" => null,
             ],
             "home" => [

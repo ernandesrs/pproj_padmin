@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Helpers\Thumb;
 use App\Models\Media\Image;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class ImageService
@@ -20,14 +21,13 @@ class ImageService
      * @param string|null $subdir the subdirectory in images dir
      * @return Image
      */
-    public function store(array $validated, ?string $subdir = null)
+    public function store(array $validated, ?string $subdir = null, ?User $user = null)
     {
         $file = $validated["file"];
-        $fileName = str_replace("." . $file->getClientOriginalExtension(), "", $file->getClientOriginalName());
 
         $image = Image::create([
-            "user_id" => auth()->user()->id,
-            "name" => $validated["name"] ?? $fileName,
+            "user_id" => $user->id ?? auth()->user()->id,
+            "name" => $validated["name"] ?? str_replace("." . $file->getClientOriginalExtension(), "", $file->getClientOriginalName()),
             "tags" => $validated["tags"] ?? null,
             "extension" => $file->getClientOriginalExtension(),
             "size" => $file->getSize(),

@@ -78,7 +78,6 @@ class ImageController extends Controller
         $this->authorize("create", new Image());
 
         $validated = $request->validated();
-
         $image = (new ImageService())->store($validated);
 
         session()->flash("flash_alert", [
