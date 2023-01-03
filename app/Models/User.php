@@ -32,6 +32,7 @@ class User extends Authenticatable
         'last_name',
         'username',
         'is_superadmin',
+        'role_id',
         'gender',
         'photo',
         'email',

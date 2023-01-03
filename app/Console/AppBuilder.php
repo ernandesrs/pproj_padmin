@@ -1,26 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console;
 
+use App\Models\Admin\Role;
 use App\Models\Content;
 use App\Models\Page;
 use App\Models\Slug;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class Builder extends Controller
+class AppBuilder
 {
     /**
      * The builder
      */
-    public function build()
+    public function build(string $mail, string $pass)
     {
         if (config("app.env") == "production") {
             return;
         }
 
-        $user = $this->userMaster();
-        $this->userVisitor();
+        $visitor = $this->visitorRole();
+        $this->administratorRole();
+
+        $user = $this->userMaster($mail, $pass);
+        $this->userVisitor($visitor);
+
         $this->homePage($user);
         $this->privacyTermsPage($user);
         $this->useTermsPage($user);
@@ -28,13 +33,58 @@ class Builder extends Controller
     }
 
     /**
+     * Start a default visitor role
+     *
+     * @return Role
+     */
+    private function visitorRole()
+    {
+        $rulables = array_fill_keys(Role::RULABLES, array_fill_keys(Role::RULES, false));
+        foreach ($rulables as $rulableName => $rulableValue) {
+            foreach ($rulableValue as $ruleKey => $ruleValue) {
+                if (in_array($ruleKey, ["view", "viewAny"]))
+                    $rulables[$rulableName][$ruleKey] = true;
+            }
+        }
+
+        return (new Role())->create([
+            "name" => "Visitor",
+            "admin_access" => true,
+            "rulables" => $rulables
+        ]);
+    }
+
+    /**
+     * Start a default administrator role
+     *
+     * @return Role
+     */
+    private function administratorRole()
+    {
+        $rulables = array_fill_keys(Role::RULABLES, array_fill_keys(Role::RULES, true));
+        foreach ($rulables as $rulableName => $rulableValue) {
+            if (in_array($rulableName, ["role"])) {
+                foreach ($rulableValue as $ruleKey => $ruleValue) {
+                    if (!in_array($ruleKey, ["view", "viewAny"]))
+                        $rulables[$rulableName][$ruleKey] = false;
+                }
+            }
+        }
+
+        return (new Role())->create([
+            "name" => "Administrator",
+            "admin_access" => true,
+            "rulables" => $rulables
+        ]);
+    }
+
+    /**
      * Create the master user
      */
-    private function userMaster()
+    private function userMaster(string $mail, string $pass)
     {
-        $mail = env("MAIL_ADMIN_ADDRESS", "master@master.com");
         if (User::where("email", $mail)->first()) {
-            echo "master user exists<br>";
+            echo "master user exists\n";
             return;
         }
 
@@ -43,15 +93,15 @@ class Builder extends Controller
             "last_name" => "Last Name",
             "username" => "Master",
             "email" => $mail,
-            "password" => Hash::make("masterpassword"),
+            "password" => Hash::make($pass),
             "is_superadmin" => true,
             "email_verified_at" => now(),
         ]);
 
         if (!$user) {
-            echo "fail on create the master user<br>";
+            echo "fail on create the master user\n";
         } else {
-            echo "the master user has been created<br>";
+            echo "the master user has been created\n";
         }
 
         return $user;
@@ -59,12 +109,14 @@ class Builder extends Controller
 
     /**
      * Create the visitor user
+     * 
+     * @param Role $role
      */
-    private function userVisitor()
+    private function userVisitor(Role $role)
     {
         $mail = "guest@guest.mail";
         if (User::where("email", $mail)->first()) {
-            echo "guest user exists<br>";
+            echo "guest user exists\n";
             return;
         }
 
@@ -75,12 +127,13 @@ class Builder extends Controller
             "email" => $mail,
             "password" => Hash::make("guestpassword"),
             "email_verified_at" => now(),
+            "role_id" => $role->id,
         ]);
 
         if (!$user) {
-            echo "fail on create the guest user<br>";
+            echo "fail on create the guest user\n";
         } else {
-            echo "the guest user has been created<br>";
+            echo "the guest user has been created\n";
         }
 
         return $user;
@@ -92,7 +145,7 @@ class Builder extends Controller
     private function homePage($author)
     {
         if (Slug::where(config("app.locale"), "inicio")->first()) {
-            echo "home page exists<br>";
+            echo "home page exists\n";
             return;
         }
 
@@ -110,9 +163,9 @@ class Builder extends Controller
         ], $author);
 
         if (!$page) {
-            echo "fail on home page create<br>";
+            echo "fail on home page create\n";
         } else {
-            echo "success on home page create<br>";
+            echo "success on home page create\n";
         }
     }
 
@@ -122,7 +175,7 @@ class Builder extends Controller
     private function privacyTermsPage($author)
     {
         if (Slug::where(config("app.locale"), "termos-de-privacidade")->first()) {
-            echo "privacy terms page exists<br>";
+            echo "privacy terms page exists\n";
             return;
         }
 
@@ -140,9 +193,9 @@ class Builder extends Controller
         ], $author);
 
         if (!$page) {
-            echo "fail on privacy terms page create<br>";
+            echo "fail on privacy terms page create\n";
         } else {
-            echo "success on privacy terms page create<br>";
+            echo "success on privacy terms page create\n";
         }
     }
 
@@ -152,7 +205,7 @@ class Builder extends Controller
     private function useTermsPage($author)
     {
         if (Slug::where(config("app.locale"), "termos-de-uso")->first()) {
-            echo "use terms page exists<br>";
+            echo "use terms page exists\n";
             return;
         }
 
@@ -170,9 +223,9 @@ class Builder extends Controller
         ], $author);
 
         if (!$page) {
-            echo "fail on use terms page create<br>";
+            echo "fail on use terms page create\n";
         } else {
-            echo "success on use terms page create<br>";
+            echo "success on use terms page create\n";
         }
     }
 
@@ -183,7 +236,7 @@ class Builder extends Controller
     {
         $contentName = "front_settings";
         if (Content::where("name", $contentName)->first()) {
-            echo "front settings exists<br>";
+            echo "front settings exists\n";
             return;
         }
 
@@ -211,9 +264,9 @@ class Builder extends Controller
         ]);
 
         if (!$settings) {
-            echo "default front settings create fail<br>";
+            echo "default front settings create fail\n";
         } else {
-            echo "default front settings created<br>";
+            echo "default front settings created\n";
         }
 
         return $settings;

@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('confirmation_token', 25)->nullable();
             $table->string('photo')->nullable();
-            $table->integer('level')->default(User::LEVEL_1);
+            $table->integer('level')->default(0);
             $table->integer('gender')->default(User::GENDER_NONE);
             $table->fullText(['first_name', 'last_name', 'username', 'email']);
 

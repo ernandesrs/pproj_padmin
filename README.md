@@ -40,16 +40,13 @@ Necessário todas as ferramentas básicas para um desenvolvimento em Laravel e V
    > php artisan key:generate
 7. Gere o link simbólico para a pasta pública:
    > php artisan storage:link
-8. Execute o servidor Laravel com:
+8. Execute o comando abaixo para criar um super usuário e criar os dados básicos da aplicação:
+   > php artisan padmin:start --mail=emailvalidoaqui --pass=senhaaqui
+9. Por fim, execute o servidor Laravel com:
    > php artisan serve
-9. Por fim, acesse no navegador a seguinte url: <b><i>http://127.0.0.1:8000</i>/builder</b> (funcionará apenas se sua aplicação estiver configurada com <b>APP_LOCAL</b> como 'local' e não 'production'). Esta url irá criar os dados básicos para a aplicação como usuário principal e um usuário comum; além de algumas páginas e dados de configuração para o front da aplicação.
-
-#### Dados do usuário principal:
-   - E-mail: master@master.mail ou então o email configurado na variável ambiente <b>MAIL_ADMIN_ADDRESS</b>.
-   - Senha: masterpassword
    
 #### Dados do usuário comum:
-   - E-mail: guest@guest.mail.
+   - E-mail: guest@guest.mail
    - Senha: guestpassword
 
 #### Acesso a página inicial:
