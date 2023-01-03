@@ -27,7 +27,8 @@ class SectionService
      */
     public function update(Section $section, array $validated)
     {
-        return $section->update($this->getImage($validated, $section));
+        $section->update($this->getImage($validated, $section));
+        return $section;
     }
 
     /**
