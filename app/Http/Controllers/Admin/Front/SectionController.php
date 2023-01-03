@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
 use App\Http\Resources\SectionResource;
 use App\Http\Services\FilterService;
+use App\Http\Services\SectionService;
 use App\Models\Media\Image;
 use App\Models\Section\Section;
 use Illuminate\Http\Request;
@@ -74,9 +75,7 @@ class SectionController extends Controller
     {
         $this->authorize("create", new Section());
 
-        $validated = $this->getImage($request->validated());
-
-        $section = Section::create($validated);
+        $section = (new SectionService())->store($request->validated());
 
         return redirect()->route("admin.sections.edit", ["section" => $section->id])->with("flash_alert", [
             "variant" => "success",
@@ -148,9 +147,7 @@ class SectionController extends Controller
     {
         $this->authorize("update", $section);
 
-        $validated = $this->getImage($request->validated(), $section);
-
-        $section->update($validated);
+        $section = (new SectionService())->update($section, $request->validated());
 
         return redirect()->route("admin.sections.edit", ["section" => $section->id])->with("flash_alert", [
             "variant" => "success",
@@ -174,40 +171,5 @@ class SectionController extends Controller
             "variant" => "success",
             "message" => "A seção foi excluída com sucesso!",
         ]);
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param array $validated
-     * @param Section|null $section
-     * @return array
-     */
-    private function getImage(array $validated, ?Section $section = null)
-    {
-        $type = $section ? $section->type : $validated["type"];
-
-        if (in_array($type, [Section::TYPE_DEFAULT, Section::TYPE_BANNER])) {
-            $image = $validated["content"]["image"] ?? null;
-            if ($image) {
-                $image = Image::where("id", $image)->first();
-                if ($image) {
-                    $image = $image->path;
-                }
-            }
-            $validated["content"]["image"] = $image;
-        } else {
-            $images = $validated["content"]["images"] ?? [];
-            foreach ($images as $key => $image) {
-                $imageModel = Image::where("id", $image["id"] ?? 0)->first();
-                if ($imageModel) {
-                    $images[$key]["path"] = $imageModel->path;
-                    $images[$key]["interval"] = ($image["interval"] ?? 2.5) * 1000;
-                } else
-                    unset($images[$key]);
-            }
-            $validated["content"]["images"] = $images;
-        }
-        return $validated;
     }
 }

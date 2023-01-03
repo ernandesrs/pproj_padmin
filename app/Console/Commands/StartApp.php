@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Console\AppBuilder;
+use App\Console\Defaults\AppBuilder;
 use Illuminate\Console\Command;
 
 class StartApp extends Command
@@ -48,6 +48,7 @@ class StartApp extends Command
             return 0;
         }
 
+        $this->call('db:seed');
         (new AppBuilder())->build($this->option('mail'), $this->option('pass'));
 
         return 1;

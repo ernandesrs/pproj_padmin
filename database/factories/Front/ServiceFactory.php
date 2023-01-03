@@ -14,8 +14,8 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->text([25, 26, 24][rand(0, 2)]),
-            'description' => $this->faker->text([80, 90][rand(0, 1)]),
+            'title' => $this->faker->text(20),
+            'description' => $this->faker->text(80),
             'icon' => json_encode([
                 "source" => "local",
                 "name" => ["collection", "app", "appIndicator", "home"][rand(0, 3)],
