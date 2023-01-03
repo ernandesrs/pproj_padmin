@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Admin\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RoleRequest extends FormRequest
@@ -26,7 +27,21 @@ class RoleRequest extends FormRequest
         return [
             "name" => ["required", "unique:roles,name" . ($this->role ? "," . $this->role->id : "")],
             "admin_access" => ["required", "boolean"],
-            "rulables" => ["required", "array"],
+            "rulables" => ["required", "array", function ($attr, $rulables, $fail) {
+                foreach ($rulables as $rulableName => $rulableValues) {
+                    if (!in_array($rulableName, Role::RULABLES)) {
+                        $fail("Regrável <{$rulableName}> é inválido!");
+                        return;
+                    }
+
+                    foreach ($rulableValues as $ruleName => $ruleValue) {
+                        if (!in_array($ruleName, Role::RULES)) {
+                            $fail("Regra <{$ruleName}> é inválida!");
+                            return;
+                        }
+                    }
+                }
+            }],
             "rulables.*.*" => ["required", "boolean"],
         ];
     }
