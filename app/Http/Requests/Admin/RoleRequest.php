@@ -30,15 +30,8 @@ class RoleRequest extends FormRequest
             "rulables" => ["required", "array", function ($attr, $rulables, $fail) {
                 foreach ($rulables as $rulableName => $rulableValues) {
                     if (!in_array($rulableName, Role::RULABLES)) {
-                        $fail("Regrável <{$rulableName}> é inválido!");
+                        $fail("Regrável <{$rulableName}> não é aceito!");
                         return;
-                    }
-
-                    foreach ($rulableValues as $ruleName => $ruleValue) {
-                        if (!in_array($ruleName, Role::RULES)) {
-                            $fail("Regra <{$ruleName}> é inválida!");
-                            return;
-                        }
                     }
                 }
             }],

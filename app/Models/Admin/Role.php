@@ -79,9 +79,9 @@ class Role extends Model
     {
         $arr = array_fill_keys(self::RULABLES, array_fill_keys(self::RULES, false));
 
-        foreach ($rulables as $rulable => $rules) {
+        foreach ($arr as $rulable => $rules) {
             foreach ($rules as $ruleKey => $ruleValue) {
-                $arr[$rulable][$ruleKey] = $ruleValue;
+                $arr[$rulable][$ruleKey] = $rulables[$rulable][$ruleKey] ?? false;
             }
         }
 

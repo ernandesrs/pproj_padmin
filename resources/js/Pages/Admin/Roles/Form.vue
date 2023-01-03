@@ -20,7 +20,8 @@
                                 {{ rulablesText[rulable] }}
                             </span>
                             <InputForm @hasChange="checkAll" type="checkbox"
-                                label="Marcar todos" :name="`${rulable}`" />
+                                label="Marcar todos" :name="`${rulable}`"
+                                v-model="form.rulables[rulable]['everything_is_checked']" />
                         </div>
                         <hr>
                         <div class="d-flex flex-wrap">
@@ -127,6 +128,7 @@ export default {
             if (!this.role?.id) {
                 Object.values(this.rulables).map(rulable => {
                     this.form.rulables[rulable] = {};
+                    this.form.rulables[rulable]['everything_is_checked'] = false;
 
                     Object.values(this.rules).map(rule => {
                         this.form.rulables[rulable][rule] = false;
@@ -134,12 +136,29 @@ export default {
                 });
 
                 return;
+            } else {
+                this.form.rulables = this.role.rulables;
+                Object.entries(this.form.rulables).map(rulable => {
+                    let flag = true;
+
+                    Object.entries(rulable[1]).map(rule => {
+                        if (!rule[1]) {
+                            flag = false;
+                        }
+                    });
+
+                    this.form.rulables[rulable[0]]['everything_is_checked'] = flag;
+                });
             }
 
             this.form.name = this.role.name;
             this.form.admin_access = this.role.admin_access;
-            this.form.rulables = this.role.rulables;
-        },
+        }
+    },
+    computed: {
+        opa() {
+            return true;
+        }
     }
 };
 

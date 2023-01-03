@@ -121,7 +121,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, Role $role)
     {
         $this->authorize("update", $role);
-
+// dd($request->validated());
         $role->update($request->validated());
 
         return redirect()->route("admin.roles.index")->with("flash_alert", [
