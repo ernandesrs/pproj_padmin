@@ -3,11 +3,30 @@
     <div class="row justify-content-center py-3">
         <div
             class="col-12 mb-4 d-flex flex-column justify-content-center align-items-center">
-            <div class="profile-photo text-center img-thumbnail shadow-sm">
+            <div
+                class="profile-photo text-center img-thumbnail shadow-sm mb-2 position-relative">
                 <img class="img-fluid" v-if="me?.thumb_normal" :src="me?.thumb_normal"
                     :alt="me.full_name">
                 <div v-else class="fs-1 fw-semibold text-muted">
                     {{ me.full_name.substring(0, 2) }}
+                </div>
+
+            </div>
+
+            <div v-if="me.photo" class="mb-3" style="margin-top: -25px;">
+                <ButtonConfirmationUi @hasConfirmed="deletePhoto" variant="danger"
+                    icon="trash" size="sm" position="center"
+                    confirm-text="Excluir foto?" />
+            </div>
+
+            <div class="mb-2">
+                <BadgeUi
+                    :text="`Função: ${(me.is_superadmin ? 'Superuser' : (me.role?.name ?? 'Não definido'))}`" />
+            </div>
+
+            <div>
+                <div class="text-muted">
+                    <strong>Registrado em:</strong> {{ me.created_at }}
                 </div>
             </div>
         </div>
@@ -53,7 +72,8 @@
                     </div>
 
                     <div class="col-12 mb-3">
-                        <InputForm @update:modelValue="form.photo = $event.target.files[0]"
+                        <InputForm
+                            @update:modelValue="form.photo = $event.target.files[0]"
                             type="file" label="Nova foto:"
                             :error-message="form.errors.photo" />
                         <progress v-if="form.progress" :value="form.progress.percentage"
@@ -91,11 +111,13 @@ import Layout from './../../Layouts/Panel.vue';
 import InputForm from '../../Components/Form/InputForm.vue';
 import SelectForm from '../../Components/Form/SelectForm.vue';
 import ButtonUi from '../../Components/Ui/ButtonUi.vue';
+import BadgeUi from '../../Components/Ui/BadgeUi.vue';
+import ButtonConfirmationUi from '../../Components/Ui/ButtonConfirmationUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, SelectForm, ButtonUi },
+    components: { InputForm, SelectForm, ButtonUi, BadgeUi, ButtonConfirmationUi },
     props: {
         me: { type: Object, default: {} }
     },
@@ -117,6 +139,10 @@ export default {
     methods: {
         submit() {
             this.form.post(route('admin.profile.update'));
+        },
+
+        deletePhoto() {
+            this.form.delete(route('admin.profile.photoDelete'));
         }
     }
 }

@@ -73,10 +73,26 @@ class UserService
     {
         if (!$photo) return $user;
 
+        $user = $this->deletePhoto($user);
+
+        $user->photo = $photo->store("avatars", "public") ?? null;
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * Delete user photo
+     *
+     * @param User $user
+     * @return User
+     */
+    public function deletePhoto(User $user)
+    {
         if ($user->photo)
             Storage::delete("public/{$user->photo}");
 
-        $user->photo = $photo->store("avatars", "public") ?? null;
+        $user->photo = null;
         $user->save();
 
         return $user;

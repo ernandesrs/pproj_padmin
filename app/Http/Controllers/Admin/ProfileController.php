@@ -14,7 +14,7 @@ class ProfileController extends Controller
     /**
      * Render profile
      *
-     * @return void
+     * @return \Inertia\Response
      */
     public function profile()
     {
@@ -33,7 +33,7 @@ class ProfileController extends Controller
      * Update profile
      *
      * @param ProfileRequest $request
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProfileRequest $request)
     {
@@ -42,6 +42,23 @@ class ProfileController extends Controller
         return back()->with("flash_alert", [
             "variant" => "success",
             "message" => "Seu perfil foi atualizado com sucesso!"
+        ]);
+    }
+
+    /**
+     * User photo delete
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function photoDelete()
+    {
+        $profile = Auth::user();
+
+        (new UserService())->deletePhoto($profile);
+
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Sua foto foi excluída com sucesso!"
         ]);
     }
 }
