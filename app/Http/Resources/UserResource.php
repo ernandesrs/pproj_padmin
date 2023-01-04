@@ -20,6 +20,7 @@ class UserResource extends JsonResource
         $arr = parent::toArray($request);
 
         $arr['full_name'] = (string) ($this->first_name . " " . $this->last_name);
+        $arr['role'] = $this->resource->roles()->first();
         $arr['can'] = [
             'view' => (new UserPolicy())->view(auth()->user(), $this->resource),
             'create' => (new UserPolicy())->create(auth()->user(), $this->resource),
