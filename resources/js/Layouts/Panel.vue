@@ -71,7 +71,7 @@
                             <DropdownDivider />
                             <DropdownHeader text="Menu" />
                             <DropdownItem text="Perfil" icon="userCircle"
-                                :to="$route('admin.users.edit', { user: auth.id })" />
+                                :to="$route('admin.profile')" />
                             <DropdownItem text="Logout" icon="logout"
                                 :to="$route('auth.logout')" />
                         </template>
@@ -247,6 +247,12 @@ export default {
                                 activeIn: ['Admin/Front/Settings']
                             }
                         ]
+                    },
+                    {
+                        text: 'Meu perfil',
+                        to: this.$route("admin.profile"),
+                        icon: 'userCircle',
+                        activeIn: ['Admin/Profile']
                     }
                 ],
             },

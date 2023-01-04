@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Admin\Media\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\Media\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -74,6 +75,7 @@ Route::group([
         'update' => 'admin.pages.update',
         'destroy' => 'admin.pages.destroy',
     ]);
+
     Route::resource("services", AdminServiceController::class)->names([
         'index' => 'admin.services.index',
         'create' => 'admin.services.create',
@@ -100,6 +102,10 @@ Route::group([
         'update' => 'admin.menus.update',
         'destroy' => 'admin.menus.destroy',
     ]);
+
+    Route::get("/profile", [ProfileController::class, "profile"])->name("admin.profile");
+    Route::post("/profile", [ProfileController::class, "update"])->name("admin.profile.update");
+    Route::delete("/profile/photo-delete", [ProfileController::class, "photoDelete"])->name("admin.profile.photoDelete");
 
     // FRONT SETTINGS
     Route::get("/settings", [SettingController::class, "edit"])->name("admin.settings.edit");

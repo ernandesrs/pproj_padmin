@@ -5,7 +5,9 @@ namespace App\Http\Services;
 use App\Events\UserRegistered;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserService
 {
@@ -48,11 +50,33 @@ class UserService
         $user->last_name = $validated["last_name"];
         $user->username = $validated["username"];
         $user->gender = $validated["gender"];
-        $user->role_id = $validated["role_id"];
+
+        if ($photo = $validated["photo"] ?? null)
+            $user = $this->storePhoto($photo, $user);
 
         if ($pass = $validated["password"] ?? null)
             $user->password = Hash::make($pass);
 
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * Store user photo
+     *
+     * @param UploadedFile $photo
+     * @param User $user
+     * @return User
+     */
+    public function storePhoto(?UploadedFile $photo, User $user)
+    {
+        if (!$photo) return $user;
+
+        if ($user->photo)
+            Storage::delete("public/{$user->photo}");
+
+        $user->photo = $photo->store("avatars", "public") ?? null;
         $user->save();
 
         return $user;

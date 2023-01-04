@@ -183,13 +183,11 @@ class UserController extends Controller
             "photo" => ["required", "max:5000", "mimes:png,jpg,webp"],
         ]);
 
-        $photo = $validated["photo"];
-        if ($user->photo)
-            Storage::delete("public/{$user->photo}");
+        (new UserService())->storePhoto($validated["photo"], $user);
 
-        $user->photo = $photo->store("avatars", "public");
-        $user->save();
-
-        return back();
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "A foto do usuário foi atualizada com sucesso!"
+        ]);
     }
 }
