@@ -3,8 +3,21 @@
     <div class="row justify-content-center">
         <div v-if="form?.id" class="col-12 col-md-4 mb-3 mb-md-0">
             <div class="d-flex flex-column align-items-center">
-                <div>
-                    <img class="img-fluid rounded-circle" :src="user.thumb_normal" />
+                <div
+                    class="profile-photo text-center img-thumbnail shadow-sm mb-2 position-relative">
+                    <img class="img-fluid" v-if="user?.thumb_normal"
+                        :src="user?.thumb_normal" :alt="user.full_name">
+                    <div v-else class="fs-1 fw-semibold text-muted">
+                        {{ user.full_name.substring(0, 2) }}
+                    </div>
+
+                </div>
+
+                <div v-if="user.photo && user?.can?.delete" class="mb-3"
+                    style="margin-top: -25px;">
+                    <ButtonConfirmationUi @hasConfirmed="photoDelete" variant="danger"
+                        icon="trash" size="sm" position="center"
+                        confirm-text="Excluir foto?" />
                 </div>
 
                 <div v-if="form.id && user.can.update" class="px-lg-4 pt-3">
@@ -20,10 +33,9 @@
         getDate(user.created_at)
 }}</span>
                     </p>
-                    <p v-if="user.role?.id" class="mb-0">
-                        <span class="badge bg-primary">
-                            Função: {{ user.role.name }}
-                        </span>
+                    <p class="mb-0">
+                        <BadgeUi
+                            :text="`Função: ${(user.is_superadmin ? 'Superuser' : (user.role?.name ?? 'Não definido'))}`" />
                     </p>
                 </div>
             </div>
@@ -107,9 +119,10 @@ import InputForm from '../../../Components/Form/InputForm.vue';
 import SelectForm from '../../../Components/Form/SelectForm.vue';
 import ButtonUi from '../../../Components/Ui/ButtonUi.vue';
 import ButtonConfirmationUi from '../../../Components/Ui/ButtonConfirmationUi.vue';
+import BadgeUi from '../../../Components/Ui/BadgeUi.vue';
 
 export default {
-    components: { InputForm, SelectForm, ButtonUi, ButtonConfirmationUi },
+    components: { InputForm, SelectForm, ButtonUi, ButtonConfirmationUi, BadgeUi },
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
     props: {
@@ -187,6 +200,12 @@ export default {
             });
         },
 
+        photoDelete() {
+            Inertia.delete(route('admin.users.deletePhoto', {
+                'user': this.user.id
+            }));
+        },
+
         submit() {
             let action = route('admin.users.store');
 
@@ -209,3 +228,29 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.profile-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+@media(min-width: 375px) {
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media(min-width: 768px) {
+    .profile-photo {
+        width: 250px;
+        height: 250px;
+    }
+}
+</style>

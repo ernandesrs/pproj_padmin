@@ -190,4 +190,22 @@ class UserController extends Controller
             "message" => "A foto do usuário foi atualizada com sucesso!"
         ]);
     }
+
+    /**
+     * User photo delete
+     *
+     * @param User $user
+     * @return void
+     */
+    public function deletePhoto(User $user)
+    {
+        $this->authorize("update", $user);
+
+        (new UserService())->deletePhoto($user);
+
+        return back()->with("flash_alert", [
+            "variant" => "success",
+            "message" => "A foto do usuário foi excluída com sucesso!"
+        ]);
+    }
 }

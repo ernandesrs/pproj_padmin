@@ -33,6 +33,7 @@ Route::group([
         'destroy' => 'admin.users.destroy',
     ]);
     Route::post("/users/{user}/upload-photo", [AdminUserController::class, "uploadPhoto"])->name("admin.users.uploadPhoto");
+    Route::delete("/users/{user}/delete-photo", [AdminUserController::class, "deletePhoto"])->name("admin.users.deletePhoto");
 
     Route::resource("roles", AdminRoleController::class)->names([
         'index' => 'admin.roles.index',
