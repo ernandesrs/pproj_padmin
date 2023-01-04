@@ -62,6 +62,8 @@ class UserPolicy
 
         if ($user->isSuperadmin()) return true;
 
+        if ($model->isSuperadmin()) return false;
+
         return $user->hasPermission('update', User::class);
     }
 
@@ -77,6 +79,8 @@ class UserPolicy
         if ($user->id === $model->id) return false;
 
         if ($user->isSuperadmin()) return true;
+
+        if ($model->isSuperadmin()) return false;
 
         return $user->hasPermission('delete', User::class);
     }

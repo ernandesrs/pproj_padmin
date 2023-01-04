@@ -51,6 +51,9 @@ class UserService
         $user->username = $validated["username"];
         $user->gender = $validated["gender"];
 
+        if ($role_id = $validated["role_id"] ?? null)
+            $user->role_id = $role_id;
+
         if ($photo = $validated["photo"] ?? null)
             $user = $this->storePhoto($photo, $user);
 
