@@ -140,6 +140,13 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->images()->detach();
+
+        $section->delete();
+
+        return redirect()->route("admin.sections.index")->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Seção excluída com sucesso!"
+        ]);
     }
 }
