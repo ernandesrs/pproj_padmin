@@ -34,16 +34,33 @@ class SectionRequest extends FormRequest
             "bindable_class" => ["required_if:type," . Section::TYPE_BINDABLE],
 
             "buttons" => ["nullable"],
-            "buttons.*.text" => ["string"],
-            "buttons.*.title" => ["string"],
-            "buttons.*.url" => ["string"],
-            "buttons.*.target" => ["string", Rule::in(["_blank", "_self"])],
-            "buttons.*.style" => ["string", Rule::in(["primary", "outline-primary", "secondary", "secondary-primary", "link"])],
+            "buttons.*.text" => ["nullable", "string"],
+            "buttons.*.title" => ["nullable", "string"],
+            "buttons.*.url" => ["nullable", "string"],
+            "buttons.*.target" => ["nullable", "string", Rule::in(["_blank", "_self"])],
+            "buttons.*.style" => ["nullable", "string", Rule::in(["primary", "outline-primary", "secondary", "secondary-primary", "link"])],
 
             "images" => ["nullable"],
-            "images.*" => ["numeric", "exists:images,id"]
+            "images.*" => ["nullable", "numeric", "exists:images,id"]
         ];
 
         return $rules;
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($validator->errors()->count())
+                session()->flash("flash_alert", [
+                    "message" => "Erro na validação dos dados, verifique os dados e tente de novo.",
+                    "variant" => "danger"
+                ]);
+        });
     }
 }

@@ -57,6 +57,7 @@
                 </div>
 
                 <div class="col-12 col-md-10 col-lg-6 mb-4">
+                    <!-- images -->
                     <div class="mb-4">
                         <CardUi no-shadow border
                             v-if="['banner', 'default'].includes(form.type)">
@@ -101,7 +102,7 @@
                                                 <div
                                                     class="d-flex justify-content-center gap-2">
                                                     <ButtonConfirmationUi
-                                                        @hasConfirmed=""
+                                                        @hasConfirmed="removeImage"
                                                         @hasCanceled=""
                                                         :text="`${'Excluir'} `"
                                                         icon="trash" variant="danger"
@@ -119,7 +120,7 @@
                                     </TabpanelUi>
 
                                     <div class="text-center">
-                                        <ButtonUi @click=""
+                                        <ButtonUi @click="addNewImage"
                                             text="Adicionar imagem" icon="plusLg"
                                             variant="link" size="sm" />
                                     </div>
@@ -302,12 +303,15 @@ export default {
 
             tinyEditor: null,
             tinyEditorError: null,
+
             showImagesModalList: false,
+            insertImageOn: null,
+
             showHowItWorkModal: false,
-            imagePreview: null,
 
             showModalIconsHelp: false,
             showIconsModal: false,
+
             buttonIndex: -1,
         };
     },
@@ -343,7 +347,6 @@ export default {
 
         this.form.buttons = this.section.buttons;
 
-        console.log(this.images);
         this.updateButtonsOrder();
     },
 
@@ -351,7 +354,13 @@ export default {
         submit() {
             let action = route("admin.sections.store");
 
-            this.setContent();
+            if (["default", "banner"].includes(this.form.type))
+                this.form.content = this.tinyEditor;
+
+            this.form.images = [];
+            Object.values(this.images).map((image) => {
+                this.form.images.push(image.id);
+            });
 
             if (this.form?.id) {
                 action = route('admin.sections.update', { section: this.section.id });
@@ -361,11 +370,14 @@ export default {
             }
         },
 
+        /**
+         * start images modal
+         */
         modalImagesListShow(event) {
             this.showImagesModalList = true;
 
             if (["default", "banner"].includes(this.form.type)) {
-                this.form.content.insertImageOn = event.target.getAttribute("data-item");
+                this.insertImageOn = event.target.getAttribute("data-item");
             }
         },
 
@@ -374,15 +386,37 @@ export default {
         },
 
         insertImage(data) {
-            if (["default", "banner"].includes(parseInt(this.form.type))) {
-                this.form.images[this.form.content.insertImageOn].id = data.id;
-                this.form.images[this.form.content.insertImageOn].url = data.thumb_small;
-            } else {
-                this.imagePreview = data.thumb_small;
-                this.form.content.image = data.id;
+            if (["default", "banner"].includes(this.form.type)) {
+                this.images[this.insertImageOn].id = data.id;
+                this.images[this.insertImageOn].url = data.thumb_small;
             }
         },
+        /**
+         * end images modal
+         */
 
+        /**
+         * start images
+         */
+        addNewImage() {
+            this.images.push({
+                id: null,
+                url: null
+            });
+        },
+        removeImage(event) {
+            let index = event.path[2].getAttribute("data-item");
+            if (!index) return;
+
+            this.images.splice(index, 1);
+        },
+        /**
+         * end images
+         */
+
+        /**
+         * start button
+         */
         addNewButton() {
             let index = this.form.buttons.length + 1;
 
@@ -435,14 +469,12 @@ export default {
             });
         },
 
-        setContent() {
-            if (["default", "banner"].includes(this.form.type))
-                this.form.content = this.tinyEditor;
-        },
-
         updateButtonIndex(nindex) {
             this.buttonIndex = nindex;
         },
+        /**
+         * end button
+         */
 
         /**
          * ICON

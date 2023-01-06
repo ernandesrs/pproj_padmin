@@ -19,68 +19,13 @@ class SectionController extends Controller
      */
     public function index(Request $request)
     {
-        // $bannerData = [
-        //     'type' => Section::TYPE_BANNER,
-        //     'name' => 'Lorem banner',
-        //     'title' => 'Lorem title',
-        //     'content' => '<strong>Banner</strong> content',
-        //     'bindable_class' => null,
-        //     'buttons' => json_encode([
-        //         [
-        //             'text' => 'Banner button',
-        //             'title' => 'Banner button',
-        //             'url' => null,
-        //             'target' => '_self',
-        //             'style' => 'primary',
-        //             'icon' => [
-        //                 'source' => 'local',
-        //                 'name' => 'app',
-        //                 'class' => '',
-        //                 'position' => 'start',
-        //             ],
-        //         ]
-        //     ]),
-        // ];
-        // $defaultData = [
-        //     'type' => Section::TYPE_DEFAULT,
-        //     'name' => 'Lorem default',
-        //     'title' => 'Lorem title',
-        //     'subtitle' => 'Lorem default subtitle',
-        //     'content' => '<strong>Banner</strong> content',
-        //     'bindable_class' => null,
-        //     'buttons' => json_encode([
-        //         [
-        //             'text' => 'Banner button',
-        //             'title' => 'Banner button',
-        //             'url' => null,
-        //             'target' => '_self',
-        //             'style' => 'primary',
-        //             'icon' => [
-        //                 'source' => 'local',
-        //                 'name' => 'app',
-        //                 'class' => '',
-        //                 'position' => 'start',
-        //             ],
-        //         ]
-        //     ]),
-        // ];
-
-        // /**
-        //  * @var Section $banner
-        //  * @var Section $default
-        //  */
-
-        // $banner = Section::create($bannerData);
-        // $default = Section::create($defaultData);
-        // $banner->images()->attach([1, 2]);
-        // dd($banner, $default);
         $sections = (new FilterService(new Section()))->filter($request);
 
         return Inertia::render('Admin/Front/Sections/List', [
             'pageTitle' => 'Seções',
             'sections' => SectionResource::collection($sections->model),
-            'terms' => __('terms.section'),
             'sectionTypes' => Section::TYPES,
+            'terms' => __('terms.section'),
             'buttons' => [
                 'new' => [
                     'icon' => 'plusLg',
@@ -100,9 +45,11 @@ class SectionController extends Controller
     {
         return Inertia::render('Admin/Front/Sections/Form', [
             'pageTitle' => 'Nova seção',
-            'terms' => __('terms.section'),
             'sectionTypes' => Section::TYPES,
-            'bindables' => Section::BINDABLES
+            'bindables' => Section::BINDABLES,
+            "images" => session()->get("images", null),
+            'terms' => __('terms.section'),
+            "tinyApiKey" => env("TINY_API_KEY", "no-api-key")
         ]);
     }
 
@@ -140,8 +87,9 @@ class SectionController extends Controller
         return Inertia::render('Admin/Front/Sections/Form', [
             'pageTitle' => 'Editar seção',
             'section' => new SectionResource($section),
-            'terms' => __('terms.section'),
             'sectionTypes' => Section::TYPES,
+            "images" => session()->get("images", null),
+            'terms' => __('terms.section'),
             'buttons' => [
                 'back' => [
                     'icon' => 'arrowLeft',
@@ -153,20 +101,22 @@ class SectionController extends Controller
                     'text' => 'Novo',
                     'url' => route('admin.sections.create')
                 ]
-            ]
+            ],
+            "tinyApiKey" => env("TINY_API_KEY", "no-api-key")
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  SectionRequest  $request
      * @param  \App\Models\Section\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(SectionRequest $request, Section $section)
     {
-        //
+        $validated  = $request->validated();
+        dd($validated);
     }
 
     /**
