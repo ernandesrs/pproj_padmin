@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Front;
 
+use App\Policies\Section\SectionPolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SectionResource extends JsonResource
@@ -19,10 +20,10 @@ class SectionResource extends JsonResource
         $arr = parent::toArray($request);
 
         $arr['can'] = [
-            'view' => true,
-            'create' => true,
-            'update' => true,
-            'delete' => true,
+            'view' => (new SectionPolicy())->view($request->user(), $this->resource),
+            'create' => (new SectionPolicy())->create($request->user(), $this->resource),
+            'update' => (new SectionPolicy())->update($request->user(), $this->resource),
+            'delete' => (new SectionPolicy())->delete($request->user(), $this->resource),
         ];
 
         return $arr;

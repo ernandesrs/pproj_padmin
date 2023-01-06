@@ -19,6 +19,8 @@ class SectionController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Section::class);
+
         $sections = (new FilterService(new Section()))->filter($request);
 
         return Inertia::render('Admin/Front/Sections/List', [
@@ -43,6 +45,8 @@ class SectionController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Section::class);
+
         return Inertia::render('Admin/Front/Sections/Form', [
             'pageTitle' => 'Nova seção',
             'sectionTypes' => Section::TYPES,
@@ -61,6 +65,8 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
+        $this->authorize('store', Section::class);
+
         $validated  = $request->validated();
 
         Section::create($validated);
@@ -79,6 +85,8 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
+        $this->authorize('view', $section);
+
         return back();
     }
 
@@ -90,6 +98,8 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
+        $this->authorize('view', $section);
+
         return Inertia::render('Admin/Front/Sections/Form', [
             'pageTitle' => 'Editar seção',
             'section' => new SectionResource($section),
@@ -122,6 +132,8 @@ class SectionController extends Controller
      */
     public function update(SectionRequest $request, Section $section)
     {
+        $this->authorize('update', $section);
+
         $validated  = $request->validated();
 
         $section->update($validated);
@@ -140,6 +152,8 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
+        $this->authorize('delete', $section);
+
         $section->delete();
 
         return redirect()->route("admin.sections.index")->with("flash_alert", [

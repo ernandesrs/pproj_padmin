@@ -2,9 +2,9 @@
 
 namespace App\Policies\Section;
 
+use App\Models\Section\Section;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Section\Section;
 
 class SectionPolicy
 {
@@ -18,7 +18,9 @@ class SectionPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('viewAny', Section::class);
     }
 
     /**
@@ -30,7 +32,9 @@ class SectionPolicy
      */
     public function view(User $user, Section $section)
     {
-        //
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('view', Section::class);
     }
 
     /**
@@ -41,7 +45,9 @@ class SectionPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('create', Section::class);
     }
 
     /**
@@ -53,7 +59,9 @@ class SectionPolicy
      */
     public function update(User $user, Section $section)
     {
-        //
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('update', Section::class);
     }
 
     /**
@@ -65,7 +73,9 @@ class SectionPolicy
      */
     public function delete(User $user, Section $section)
     {
-        //
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('delete', Section::class);
     }
 
     /**
@@ -77,7 +87,9 @@ class SectionPolicy
      */
     public function restore(User $user, Section $section)
     {
-        //
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('restore', Section::class);
     }
 
     /**
@@ -89,6 +101,8 @@ class SectionPolicy
      */
     public function forceDelete(User $user, Section $section)
     {
-        //
+        if ($user->isSuperadmin()) return true;
+
+        return $user->hasPermission('forceDelete', Section::class);
     }
 }

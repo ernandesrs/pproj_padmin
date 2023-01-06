@@ -87,7 +87,7 @@ class User extends Authenticatable
      */
     public function isSuperadmin()
     {
-        return $this->is_superadmin;
+        return $this->is_superadmin ? true : false;
     }
 
     /**
