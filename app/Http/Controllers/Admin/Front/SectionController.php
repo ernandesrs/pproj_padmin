@@ -15,7 +15,7 @@ class SectionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index(Request $request)
     {
@@ -39,7 +39,7 @@ class SectionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -57,7 +57,7 @@ class SectionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param SectionRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(SectionRequest $request)
     {
@@ -75,18 +75,18 @@ class SectionController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Section\Section  $section
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show(Section $section)
     {
-        //
+        return back();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Section\Section  $section
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit(Section $section)
     {
@@ -118,7 +118,7 @@ class SectionController extends Controller
      *
      * @param  SectionRequest  $request
      * @param  \App\Models\Section\Section  $section
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function update(SectionRequest $request, Section $section)
     {
@@ -136,12 +136,10 @@ class SectionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Section\Section  $section
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function destroy(Section $section)
     {
-        $section->images()->detach();
-
         $section->delete();
 
         return redirect()->route("admin.sections.index")->with("flash_alert", [

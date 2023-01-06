@@ -94,6 +94,17 @@ class Section extends Model
     }
 
     /**
+     * Delete section
+     *
+     * @return bool
+     */
+    public function delete()
+    {
+        $this->images()->detach();
+        return parent::delete();
+    }
+
+    /**
      * Organize data, get images id, remove not required field on specific section types
      *
      * @param array $validated
