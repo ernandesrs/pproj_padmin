@@ -123,7 +123,13 @@ class SectionController extends Controller
     public function update(SectionRequest $request, Section $section)
     {
         $validated  = $request->validated();
-        dd($validated);
+
+        $section->update($validated);
+
+        return redirect()->route("admin.sections.index")->with("flash_alert", [
+            "variant" => "success",
+            "message" => "A seção {$section->name} foi atualizada com sucesso!"
+        ]);
     }
 
     /**

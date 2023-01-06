@@ -32,6 +32,7 @@ class SectionRequest extends FormRequest
             "subtitle" => ["required_unless:type," . Section::TYPE_BANNER, "max:75"],
             "content" => ["required_unless:type," . Section::TYPE_BINDABLE],
             "bindable_class" => ["required_if:type," . Section::TYPE_BINDABLE],
+            "visible" => ["required", "boolean"],
 
             "buttons" => ["nullable"],
             "buttons.*.text" => ["nullable", "string"],
