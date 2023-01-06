@@ -118,4 +118,43 @@ class SectionBuilder
         ]);
         return $section;
     }
+
+    /**
+     * Undocumented function
+     *
+     * @return Section
+     */
+    public function sectionBindable()
+    {
+        $name = "Serviços";
+        if (Section::where("name", $name)->count()) {
+            echo "{$name} exists\n";
+            return;
+        }
+
+        $section = Section::create([
+            "type" => Section::TYPE_BINDABLE,
+            "name" => $name,
+            "title" => "Example title",
+            "subtitle" => "Bindable section example title",
+            "visible" => true,
+            "bindable_class" => "service",
+            "buttons" => [
+                [
+                    "text" => "Previsualização",
+                    "title" => "Previsualizar o painel",
+                    "target" => "_self",
+                    "url" => route("admin.index"),
+                    "style" => "primary",
+                    "icon" => [
+                        "source" => "local",
+                        "class" => null,
+                        "name" => "pieChart",
+                        "position" => "start"
+                    ],
+                ]
+            ]
+        ]);
+        return $section;
+    }
 }

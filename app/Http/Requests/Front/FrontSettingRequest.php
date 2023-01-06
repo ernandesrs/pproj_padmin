@@ -49,7 +49,7 @@ class FrontSettingRequest extends FormRequest
             "header.menu_main.id" => ["nullable", "numeric", "exists:menus,id"],
 
             "home.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
-                $allowed = [Section::TYPE_BANNER, Section::TYPE_BANNER_IMAGES];
+                $allowed = [Section::TYPE_BANNER];
                 $s = Section::where("id", $val)->first();
 
                 if ($s && !in_array($s->type, $allowed))
@@ -58,7 +58,7 @@ class FrontSettingRequest extends FormRequest
                     }, $allowed)));
             }],
             "home.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
-                $allowed = [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES];
+                $allowed = [Section::TYPE_DEFAULT];
                 $s = Section::where("id", $val)->first();
 
                 if ($s && !in_array($s->type, $allowed))
@@ -67,7 +67,7 @@ class FrontSettingRequest extends FormRequest
                     }, $allowed)));
             }],
             "home.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
-                $allowed = [Section::TYPE_BOUND];
+                $allowed = [Section::TYPE_BINDABLE];
                 $s = Section::where("id", $val)->first();
 
                 if ($s && !in_array($s->type, $allowed))
@@ -76,7 +76,7 @@ class FrontSettingRequest extends FormRequest
                     }, $allowed)));
             }],
             "home.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
-                $allowed = [Section::TYPE_DEFAULT, Section::TYPE_DEFAULT_IMAGES];
+                $allowed = [Section::TYPE_DEFAULT];
                 $s = Section::where("id", $val)->first();
 
                 if ($s && !in_array($s->type, $allowed))

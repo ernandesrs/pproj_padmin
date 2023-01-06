@@ -145,6 +145,23 @@ class Section extends Model
     }
 
     /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function bindables()
+    {
+        if ($this->type !== self::TYPE_BINDABLE)
+            return null;
+
+        $bindableClass = self::BINDABLES[$this->bindable_class] ?? null;
+        if (!$bindableClass)
+            return null;
+
+        return (new $bindableClass())->all();
+    }
+
+    /**
      * Section images
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
