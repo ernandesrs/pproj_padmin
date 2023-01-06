@@ -5,8 +5,7 @@
                 class="col-lg-6 {{ ($alignment ?? 'left') == 'right' ? 'order-lg-5' : '' }} d-flex justify-content-center mb-4 mb-lg-0">
                 @component('front.components.sections.images',
                     [
-                        'image' => $section->content->image ?? null,
-                        'images' => $section->content->images ?? [],
+                        'images' => $section->images ?? [],
                         'slideOptions' => [
                             'arrows' => false,
                             'pagination' => true,
@@ -24,7 +23,7 @@
                     {{ $section->subtitle }}
                 </h2>
                 <div class="section-content text-dark-light px-3 px-lg-0 py-4">
-                    {!! $section->content->content !!}
+                    {!! $section->content !!}
                 </div>
                 <div class="d-grid gap-2 d-lg-flex justify-content-lg-start">
                     @foreach ($section->buttons as $button)

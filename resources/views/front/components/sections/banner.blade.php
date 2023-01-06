@@ -4,8 +4,7 @@
             <div class="col-lg-6 mb-4 mb-lg-0 p-0 d-flex justify-content-center align-items-center">
                 @component('front.components.sections.images',
                     [
-                        'images' => $section->content->images ?? null,
-                        'image' => $section->content->image ?? null,
+                        'images' => $section->images ?? null,
                     ])
                 @endcomponent
             </div>
@@ -15,7 +14,7 @@
                     {{ $section->title }}
                 </h1>
                 <div class="lead text-dark-light fw-normal my-3 pt-3 pe-3 pb-3 rounded-lg">
-                    {!! $section->content->description !!}
+                    {!! $section->content !!}
                 </div>
                 <div class="d-grid gap-2 d-lg-flex justify-content-lg-start">
                     @foreach ($section->buttons as $button)

@@ -8,8 +8,7 @@
     @foreach ($home_sections ?? [] as $section)
         @if ($section)
             @if (in_array($section->type, [
-                \App\Models\Section\Section::TYPE_BANNER,
-                \App\Models\Section\Section::TYPE_BANNER_IMAGES,
+                \App\Models\Section\Section::TYPE_BANNER
             ]))
                 @component('front.components.sections.banner',
                     [
@@ -19,7 +18,6 @@
                 @endcomponent
             @elseif(in_array($section->type, [
                 \App\Models\Section\Section::TYPE_DEFAULT,
-                \App\Models\Section\Section::TYPE_DEFAULT_IMAGES,
             ]))
                 @component('front.components.sections.default',
                     [
@@ -27,7 +25,7 @@
                         'alignment' => $alignments[$key],
                     ])
                 @endcomponent
-            @elseif(in_array($section->type, [\App\Models\Section\Section::TYPE_BOUND]))
+            @elseif(in_array($section->type, [\App\Models\Section\Section::TYPE_BINDABLE]))
                 @component('front.components.sections.cards-list',
                     [
                         'section' => $section,
