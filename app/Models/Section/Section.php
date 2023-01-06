@@ -6,7 +6,6 @@ use App\Models\Front\Service;
 use App\Models\Media\Image;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 class Section extends Model
 {
