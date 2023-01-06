@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Section\Section;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,14 +17,15 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('type')->default(0);
+            $table->string('type')->default(Section::TYPE_DEFAULT);
             $table->string('name', 25)->unique();
-            $table->string('title', 50)->unique();
+            $table->string('title', 50);
             $table->string('subtitle', 75)->nullable();
+            $table->string('bindable_class', 125)->nullable()->default(null);
             $table->text('content')->nullable();
-            $table->boolean('visible')->default(false);
             $table->json('buttons')->default(json_encode([]));
-            $table->fullText(['name', 'title', 'subtitle']);
+            $table->boolean('visible')->default(false);
+            $table->fullText(['name', 'title']);
 
             $table->timestamps();
         });

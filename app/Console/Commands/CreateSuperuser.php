@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class CreateSuperuser extends Command
 {
@@ -64,6 +65,7 @@ class CreateSuperuser extends Command
         }
 
         $data['first_name'] = ucfirst(explode('@', $data['email'])[0]);
+        $data['password'] = Hash::make($data['password']);
         if (User::create($data)) {
             $this->info('Superuser registered!');
             return 0;

@@ -27,10 +27,8 @@ return [
     'section' => [
         'type' => [
             'type_' . Section::TYPE_DEFAULT => 'Padrão',
-            'type_' . Section::TYPE_DEFAULT_IMAGES => 'Padrão com imagens',
             'type_' . Section::TYPE_BANNER => 'Banner',
-            'type_' . Section::TYPE_BANNER_IMAGES => 'Banner com imagens',
-            'type_' . Section::TYPE_BOUND => 'Vinculado',
+            'type_' . Section::TYPE_BINDABLE => 'Vinculado',
         ],
         'bindable' => [
             'service' => 'Services',

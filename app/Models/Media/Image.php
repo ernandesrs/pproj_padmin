@@ -2,9 +2,11 @@
 
 namespace App\Models\Media;
 
+use App\Models\Section\Section;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
@@ -25,5 +27,17 @@ class Image extends Model
     public function user()
     {
         return $this->hasOne(User::class, "id", "user_id")->first();
+    }
+
+    public function sections()
+    {
+        return $this->morphedByMany(Section::class, "imageable");
+    }
+
+    protected static function booted()
+    {
+        static::retrieved(function ($image) {
+            $image->url = Storage::url($image->path);
+        });
     }
 }

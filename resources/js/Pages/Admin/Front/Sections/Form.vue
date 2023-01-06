@@ -32,14 +32,14 @@
                             label="Título:" :error-message="form.errors.title" />
                     </div>
 
-                    <div v-if="showSubtitleField" class="mb-4">
+                    <div v-if="['bindable', 'default'].includes(form.type)" class="mb-4">
                         <InputForm type="text" name="subtitle" v-model="form.subtitle"
                             label="Subtítulo:" :error-message="form.errors.subtitle" />
                     </div>
 
-                    <div v-if="showContentField" class="mb-4">
+                    <div v-if="['default', 'banner'].includes(form.type)" class="mb-4">
                         <label class="mb-1">
-                            {{ tinyEditorLabelText }}
+                            Conteúdo
                         </label>
                         <EditorTiny v-model="tinyEditor" :api-key="tinyApiKey" basic
                             min-height=200 />
@@ -49,45 +49,26 @@
                     </div>
 
                     <div class="mb-4">
-                        <SelectForm v-if="showBindablesField" label="Vincular com:"
-                            :options="bindablesOptions" v-model="form.content.bindable"
-                            :error-message="form.errors.bindable" />
+                        <SelectForm v-if="['bindable'].includes(form.type)"
+                            label="Vincular com:" :options="bindablesOptions"
+                            v-model="form.bindable_class"
+                            :error-message="form.errors.bindable_class" />
                     </div>
                 </div>
 
                 <div class="col-12 col-md-10 col-lg-6 mb-4">
                     <div class="mb-4">
                         <CardUi no-shadow border
-                            v-if="showSingleImageUploadField || showMultipleImagesUploadField">
+                            v-if="['banner', 'default'].includes(form.type)">
                             <template v-slot:content>
-                                <div v-if="showSingleImageUploadField">
-                                    <div class="fs-5 mb-3 fw-semibold">
-                                        Imagem da seção
-                                    </div>
-
-                                    <div
-                                        class="d-flex flex-column justify-content-center align-items-center mb-3">
-                                        <ImagePreviewUi :preview-url="imagePreview"
-                                            :borderless="imagePreview ? true : false" />
-                                    </div>
-
-                                    <!-- cover upload -->
-                                    <div class="text-center">
-                                        <ButtonUi @click="modalImagesListShow"
-                                            :text="`${imagePreview ? 'Atualizar imagem' : 'Escolher imagem'}`"
-                                            icon="image" variant="success" size="sm" />
-                                    </div>
-                                </div>
-
-                                <div v-else-if="showMultipleImagesUploadField">
+                                <div>
                                     <div class="fs-5 mb-3 fw-semibold">
                                         Imagens da seção
                                     </div>
 
                                     <TabpanelUi pills navs-alignment="center">
                                         <template v-slot:tabNavs>
-                                            <TabNavItem
-                                                v-for="image, key in form.content.images"
+                                            <TabNavItem v-for="image, key in images"
                                                 :key="key" :name="`image${key}`"
                                                 :content-name="`image${key}Panel`"
                                                 :text="`${(key + 1)}`"
@@ -95,8 +76,7 @@
                                         </template>
 
                                         <template v-slot:tabContents>
-                                            <TabContent
-                                                v-for="image, key in form.content.images"
+                                            <TabContent v-for="image, key in images"
                                                 :key="key" :name="`image${key}Panel`"
                                                 :nav-name="`image${key}`"
                                                 :show="key == 0 ? true : false">
@@ -110,17 +90,18 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <InputForm
+                                                    <InputForm v-if="false"
                                                         label="Duração em segundos:"
-                                                        v-model="form.content.images[key].interval"
-                                                        :error-message="form.errors['content.images.' + key + '.interval']" :mask="['#.###', '##.###']" />
+                                                        v-model="form.images[key].interval"
+                                                        :error-message="form.errors['images.' + key + '.interval']"
+                                                        :mask="['#.###', '##.###']" />
                                                 </div>
 
                                                 <!-- image delete/upload -->
                                                 <div
                                                     class="d-flex justify-content-center gap-2">
                                                     <ButtonConfirmationUi
-                                                        @hasConfirmed="removeImageField"
+                                                        @hasConfirmed=""
                                                         @hasCanceled=""
                                                         :text="`${'Excluir'} `"
                                                         icon="trash" variant="danger"
@@ -138,7 +119,7 @@
                                     </TabpanelUi>
 
                                     <div class="text-center">
-                                        <ButtonUi @click="addNewImageField"
+                                        <ButtonUi @click=""
                                             text="Adicionar imagem" icon="plusLg"
                                             variant="link" size="sm" />
                                     </div>
@@ -256,7 +237,8 @@
                     name="visible" v-model="form.visible" />
             </div>
 
-            <div v-if="!section?.id || section?.id && section.can.update" class="col-12 text-center">
+            <div v-if="!section?.id || section?.id && section.can.update"
+                class="col-12 text-center">
                 <ButtonUi type="submit" variant="primary"
                     :text="`${section.id ? 'Atualizar seção' : 'Salvar seção'}`"
                     icon="checkLg" :disabled="form.processing" />
@@ -296,7 +278,7 @@ export default {
     props: {
         section: { type: Object, default: {} },
         bindables: { type: Object, default: {} },
-        section_types: { type: Object, default: {} },
+        sectionTypes: { type: Object, default: {} },
         terms: { type: Object, default: {} },
         tinyApiKey: { type: String, default: null },
     },
@@ -305,40 +287,24 @@ export default {
         return {
             form: useForm({
                 id: null,
-                type: 0,
+                type: 'default',
                 name: null,
                 title: null,
                 subtitle: null,
+                content: null,
+                buttons: [],
+                bindable_class: null,
                 visible: false,
-                content: {
-                    image: null,
-                    content: null,
-                    description: null,
-                    insertImageOn: null,
-                    bindable: null,
-                    images: [
-                        {
-                            id: null,
-                            path: null,
-                            url: null
-                        }
-                    ],
-                },
-                buttons: []
+                images: []
             }),
+
+            images: [],
 
             tinyEditor: null,
             tinyEditorError: null,
             showImagesModalList: false,
             showHowItWorkModal: false,
             imagePreview: null,
-            sectionsThatHasImage: [0, 2],
-            sectionsThatHasImages: [1, 3],
-            sectionsThatHasDescription: [2, 3],
-            sectionsThatHasContent: [0, 1],
-            sectionsThatHasSubtitle: [0, 1, 4],
-            sectionsThatHasContents: [0, 1, 2, 3],
-            sectionsThatHasBindables: [4],
 
             showModalIconsHelp: false,
             showIconsModal: false,
@@ -352,12 +318,7 @@ export default {
             handler(nv) {
                 let errors = nv.errors;
 
-                this.tinyEditorError = null;
-                if (errors["content.content"]) {
-                    this.tinyEditorError = errors["content.content"];
-                } else if (errors["content.description"]) {
-                    this.tinyEditorError = errors["content.description"];
-                }
+                this.tinyEditorError = errors?.content;
             }
         }
     },
@@ -366,33 +327,24 @@ export default {
         if (!this.section?.id) return;
 
         this.form.id = this.section.id;
-        this.form.type = parseInt(this.section.type);
+        this.form.type = this.section.type;
         this.form.name = this.section.name;
         this.form.title = this.section.title;
-        this.form.visible = this.section.visible;
         this.form.subtitle = this.section.subtitle;
-
-        // content/description/bindable
-        if (this.sectionsThatHasContent.includes(parseInt(this.section.type))) {
-            this.tinyEditor = this.section.content.content;
-        } else if (this.sectionsThatHasDescription.includes(parseInt(this.section.type))) {
-            this.tinyEditor = this.section.content.description;
-        } else if (this.sectionsThatHasBindables.includes(parseInt(this.section.type))) {
-            this.form.content.bindable = this.section.content.bindable;
-            this.bindable = [this.form.content.bindable.id, this.form.content.bindable.name].join("*");
-        }
+        this.tinyEditor = this.section.content;
+        this.form.buttons = this.section.buttons;
+        this.form.bindable_class = this.section.bindable_class;
+        this.form.visible = this.section.visible;
 
         // image/images
-        if (this.sectionsThatHasImages.includes(parseInt(this.section.type))) {
-            this.form.content.images = this.section.content.images ?? [];
-        } else {
-            this.imagePreview = this.section.content.image_url;
+        if (["default", "banner"].includes(this.section.type)) {
+            this.images = this.section.images ?? [];
         }
 
         this.form.buttons = this.section.buttons;
 
+        console.log(this.images);
         this.updateButtonsOrder();
-        this.updateImagesOrder();
     },
 
     methods: {
@@ -412,7 +364,7 @@ export default {
         modalImagesListShow(event) {
             this.showImagesModalList = true;
 
-            if (this.sectionsThatHasImages.includes(parseInt(this.form.type))) {
+            if (["default", "banner"].includes(this.form.type)) {
                 this.form.content.insertImageOn = event.target.getAttribute("data-item");
             }
         },
@@ -422,9 +374,9 @@ export default {
         },
 
         insertImage(data) {
-            if (this.sectionsThatHasImages.includes(parseInt(this.form.type))) {
-                this.form.content.images[this.form.content.insertImageOn].id = data.id;
-                this.form.content.images[this.form.content.insertImageOn].url = data.thumb_small;
+            if (["default", "banner"].includes(parseInt(this.form.type))) {
+                this.form.images[this.form.content.insertImageOn].id = data.id;
+                this.form.images[this.form.content.insertImageOn].url = data.thumb_small;
             } else {
                 this.imagePreview = data.thumb_small;
                 this.form.content.image = data.id;
@@ -484,35 +436,8 @@ export default {
         },
 
         setContent() {
-            if (this.sectionsThatHasContent.includes(parseInt(this.form.type)))
-                this.form.content.content = this.tinyEditor;
-            else
-                this.form.content.description = this.tinyEditor;
-        },
-
-        addNewImageField() {
-            this.form.content.images.push({
-                id: null,
-                path: null,
-                url: null
-            });
-            this.updateImagesOrder();
-        },
-
-        removeImageField(event) {
-            let item = event.path[2].getAttribute("data-item");
-
-            if (!item) return;
-
-            this.form.content.images.splice(item, 1);
-            this.updateImagesOrder();
-        },
-
-        updateImagesOrder() {
-            this.form.content.images = this.form.content.images.map((item, index) => {
-                item.order = index;
-                return item;
-            });
+            if (["default", "banner"].includes(this.form.type))
+                this.form.content = this.tinyEditor;
         },
 
         updateButtonIndex(nindex) {
@@ -547,7 +472,7 @@ export default {
         },
 
         sectionTypesOptions() {
-            let types = (Object.values(this.section_types)).map((item) => {
+            let types = (Object.values(this.sectionTypes)).map((item) => {
                 return {
                     value: item,
                     text: `${this.terms.type['type_' + item]}`
@@ -556,34 +481,12 @@ export default {
             return types;
         },
 
-        showSubtitleField() {
-            return this.sectionsThatHasSubtitle.includes(parseInt(this.form.type));
-        },
-
-        showSingleImageUploadField() {
-            return this.sectionsThatHasImage.includes(parseInt(this.form.type));
-        },
-
-        showMultipleImagesUploadField() {
-            return this.sectionsThatHasImages.includes(parseInt(this.form.type));
-        },
-
-        tinyEditorLabelText() {
-            return this.sectionsThatHasContent.includes(parseInt(this.form.type)) ?
-                'Conteúdo:' :
-                'Descrição:';
-        },
-
-        showContentField() {
-            return this.sectionsThatHasContents.includes(parseInt(this.form.type));
-        },
-
         showBindablesField() {
-            return this.sectionsThatHasBindables.includes(parseInt(this.form.type));
+            return ["bindable"].includes(this.form.type);
         },
 
         showSlideIntervalField() {
-            return this.sectionsThatHasImages.includes(parseInt(this.form.type));
+            return ["default", "banner"].includes(this.form.type);
         },
 
         bindablesOptions() {

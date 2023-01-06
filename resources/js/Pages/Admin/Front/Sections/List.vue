@@ -2,20 +2,20 @@
     <ListGroup :is-filtering="isFiltering" :total-items="sections.data.length"
         :pagination-pages="sections?.meta?.links">
         <ListItem v-for="section in sections?.data" :key="section.id" :item="{
-    cover: null,
-    title: section.name,
-    subtitle: section.title,
-    coverStyle: 'rectangle',
-    actions: {
-        show: null,
-        edit: $route('admin.sections.edit', {
-            id:
-                section.id
-        }),
-        delete: section.can.delete ? $route('admin.sections.destroy',
-            { section: section.id }) : null
-    }
-}">
+            cover: null,
+            title: section.name,
+            subtitle: section.title,
+            coverStyle: 'rectangle',
+            actions: {
+                show: null,
+                edit: $route('admin.sections.edit', {
+                    id:
+                        section.id
+                }),
+                delete: section.can.delete ? $route('admin.sections.destroy',
+                    { section: section.id }) : null
+            }
+        }">
             <template v-slot:badges>
                 <BadgeUi class="mb-1 me-1 fw-light"
                     :text="section.visible ? 'Visível' : 'Oculto'"
@@ -47,7 +47,7 @@ export default {
         sections: { type: Object, default: [] },
         isFiltering: { type: Boolean, default: false },
         terms: { type: Object, default: {} }
-    },
+    }
 }
 
 </script>

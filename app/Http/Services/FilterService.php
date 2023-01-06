@@ -53,7 +53,7 @@ class FilterService
             "order_by" => [
                 ["created_at", "desc"],
             ],
-            "search_in" => "name,title,subtitle",
+            "search_in" => "name,title",
         ],
         "App\Models\Menu" => [
             "order_by" => [
