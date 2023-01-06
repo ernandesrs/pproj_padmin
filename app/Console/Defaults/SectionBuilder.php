@@ -2,7 +2,6 @@
 
 namespace App\Console\Defaults;
 
-use App\Http\Services\SectionService;
 use App\Models\Section\Section;
 use App\Models\User;
 
@@ -15,7 +14,7 @@ class SectionBuilder
      */
     public function sectionBannerImages(User $author)
     {
-        $name = "Default Banner";
+        $name = "Banner";
         if (Section::where("name", $name)->count()) {
             echo "{$name} exists\n";
             return;
@@ -24,24 +23,13 @@ class SectionBuilder
         $image1 = (new ImageBuilder())->save($author, resource_path("img/examples/padmin_preview_1_right.png"), "sections");
         $image2 = (new ImageBuilder())->save($author, resource_path("img/examples/padmin_preview_2_right.png"), "sections");
 
-        $section = (new SectionService())->store([
+        $section = Section::create([
+            "type" => Section::TYPE_BANNER,
             "name" => $name,
             "title" => "Bem vindo ao live-preview do PADMIN",
+            "content" => "PADMIN é um painel administrativo criado com o objetivo de colocar em teste meus conhecimentos em Vue JS com Inertia JS no frontend e Laravel no backend.",
             "visible" => true,
-            "type" => Section::TYPE_BANNER_IMAGES,
-            "content" => [
-                "description" => "PADMIN é um painel administrativo criado com o objetivo de colocar em teste meus conhecimentos em Vue JS com Inertia JS no frontend e Laravel no backend.",
-                "images" => [
-                    [
-                        "id" => $image1->id,
-                        "interval" => 3.5
-                    ],
-                    [
-                        "id" => $image2->id,
-                        "interval" => 3.5
-                    ],
-                ]
-            ],
+            "images" => [$image1->id, $image2->id],
             "buttons" => [
                 [
                     "text" => "Acessar painel",
@@ -91,25 +79,14 @@ class SectionBuilder
         $image1 = (new ImageBuilder())->save($author, resource_path("img/examples/padmin_preview_1_left.png"), "sections");
         $image2 = (new ImageBuilder())->save($author, resource_path("img/examples/padmin_preview_2_left.png"), "sections");
 
-        $section = (new SectionService())->store([
+        $section = Section::create([
+            "type" => Section::TYPE_DEFAULT,
             "name" => $name,
             "title" => "Oque é o PADMIN?",
             "subtitle" => "PADMIN é um painel administrativo!",
             "visible" => true,
-            "type" => Section::TYPE_DEFAULT_IMAGES,
-            "content" => [
-                "content" => "<p>Ele foi criado para colocar em teste meus conhecimentos adquiridos em Laravel e Vue JS com Inertia JS. Ele possui toda a parte de autenticação criada do zero, além do gerenciamento de usuários, regras, mídias; e o gerenciamento de um site.</p><h4>Este site é gerenciado por um painel PADMIN!</h4>",
-                "images" => [
-                    [
-                        "id" => $image1->id,
-                        "interval" => 3.5
-                    ],
-                    [
-                        "id" => $image2->id,
-                        "interval" => 2.5
-                    ],
-                ]
-            ],
+            "content" => "<p>Ele foi criado para colocar em teste meus conhecimentos adquiridos em Laravel e Vue JS com Inertia JS. Ele possui toda a parte de autenticação criada do zero, além do gerenciamento de usuários, regras, mídias; e o gerenciamento de um site.</p><h4>Este site é gerenciado por um painel PADMIN!</h4>",
+            "images" => [$image1->id, $image2->id],
             "buttons" => [
                 [
                     "text" => "Previsualização",
