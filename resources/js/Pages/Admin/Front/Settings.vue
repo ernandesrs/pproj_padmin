@@ -128,25 +128,25 @@
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 1:" name="section_1"
                                             v-model="form.home.section_1"
-                                            :options="sectionsOptions([2, 3])"
+                                            :options="sectionsOptions(['banner'])"
                                             :error-message="form.errors['sections.section_1']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 2:" name="section-2"
                                             v-model="form.home.section_2"
-                                            :options="sectionsOptions([0, 1])"
+                                            :options="sectionsOptions(['default'])"
                                             :error-message="form.errors['sections.section_2']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 3:" name="section_3"
                                             v-model="form.home.section_3"
-                                            :options="sectionsOptions([4])"
+                                            :options="sectionsOptions(['bindable'])"
                                             :error-message="form.errors['sections.section_3']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 4:" name="section_4"
                                             v-model="form.home.section_4"
-                                            :options="sectionsOptions([0, 1])"
+                                            :options="sectionsOptions(['default'])"
                                             :error-message="form.errors['sections.section_4']" />
                                     </div>
                                 </div>
