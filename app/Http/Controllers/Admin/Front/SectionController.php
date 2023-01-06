@@ -62,7 +62,13 @@ class SectionController extends Controller
     public function store(SectionRequest $request)
     {
         $validated  = $request->validated();
-        dd($validated);
+
+        Section::create($validated);
+
+        return redirect()->route("admin.sections.index")->with("flash_alert", [
+            "variant" => "success",
+            "message" => "Nova seção criada e salva com sucesso!"
+        ]);
     }
 
     /**
@@ -88,6 +94,7 @@ class SectionController extends Controller
             'pageTitle' => 'Editar seção',
             'section' => new SectionResource($section),
             'sectionTypes' => Section::TYPES,
+            'bindables' => Section::BINDABLES,
             "images" => session()->get("images", null),
             'terms' => __('terms.section'),
             'buttons' => [

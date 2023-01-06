@@ -36,6 +36,58 @@ class Section extends Model
     ];
 
     /**
+     * Create Section
+     *
+     * @param array $validated
+     * @return Section
+     */
+    public static function create(array $validated)
+    {
+        $images = null;
+
+        $validated["buttons"] = json_encode($validated["buttons"] ?? []);
+        switch ($validated["type"]) {
+            case self::TYPE_DEFAULT:
+                $images = self::getImages($validated);
+                unset($validated["bindable_class"]);
+                break;
+            case self::TYPE_BANNER:
+                $images = self::getImages($validated);
+                unset($validated["bindable_class"]);
+                break;
+            case self::TYPE_BINDABLE:
+                unset($validated["content"]);
+                break;
+        }
+
+        unset($validated["images"]);
+
+        $section = (new Section($validated));
+
+        if (!$section->save())
+            return null;
+
+        if ($images)
+            $section->images()->attach($images);
+
+        return $section;
+    }
+
+    /**
+     * Get images
+     *
+     * @param array $validated
+     * @return array
+     */
+    public static function getImages(array $validated)
+    {
+        $images = $validated["images"] ?? [];
+        return array_filter($images, function ($image) {
+            if ($image) return $image;
+        });
+    }
+
+    /**
      * Section images
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany

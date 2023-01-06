@@ -29,11 +29,21 @@ class Image extends Model
         return $this->hasOne(User::class, "id", "user_id")->first();
     }
 
+    /**
+     * Sections
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
     public function sections()
     {
         return $this->morphedByMany(Section::class, "imageable");
     }
 
+    /**
+     * Booted
+     *
+     * @return void
+     */
     protected static function booted()
     {
         static::retrieved(function ($image) {
