@@ -3,7 +3,7 @@
     <ListGroup :is-filtering="isFiltering" :total-items="pages.data.length"
         :pagination-pages="pages?.meta?.links">
         <ListItem v-for="page in pages?.data" :key="page.id" :item="{
-    cover: page.thumb_small,
+    cover: page.cover.thumb_small,
     title: page.title,
     subtitle: page.description,
     coverStyle: 'rectangle',

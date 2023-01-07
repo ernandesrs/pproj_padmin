@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\Thumb;
 use App\Models\Page;
 use App\Policies\PagePolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -36,6 +35,15 @@ class PageResource extends JsonResource
         else
             $arr["content"] = $this->content;
 
-        return $this->thumbs("cover", $arr);
+        if ($this->cover) {
+            /**
+             * flag to page resource(make only small thumbnail)
+             */
+            session()->flash("mk_thumb", ["small", "normal"]);
+
+            $arr["cover"] = new ImageResource($this->cover);
+        }
+
+        return $arr;
     }
 }

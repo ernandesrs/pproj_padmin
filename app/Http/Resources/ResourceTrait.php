@@ -18,7 +18,6 @@ trait ResourceTrait
     protected function thumbs(string $fieldName, ?array $arr = null, ?string $type = null)
     {
         $arrThumbs = [];
-
         $arrThumbs[$fieldName . "_url"] = Storage::url($this->$fieldName);
         $arrThumbs["location"] = Storage::url($this->$fieldName); // to tinymce response
         if ($thumbs = session()->get("mk_thumb")) {

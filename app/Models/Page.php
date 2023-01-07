@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Media\Image;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -169,6 +170,28 @@ class Page extends Model
     {
         $slug = Slug::where($lang ?? config("app.name"), $slug)->first();
         return $slug ? $slug->pages() : null;
+    }
+
+    /**
+     * Booted
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::retrieved(function ($page) {
+            $page->cover = $page->cover()->first();
+        });
+    }
+
+    /**
+     * Page cover
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function cover()
+    {
+        return $this->hasOne(Image::class, "id", "cover");
     }
 
     /**

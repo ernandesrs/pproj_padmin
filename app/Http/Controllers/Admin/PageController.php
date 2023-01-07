@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\Front\SettingController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
 use App\Http\Resources\PageResource;
@@ -23,11 +22,6 @@ class PageController extends Controller
     public function index(Request $request)
     {
         $filter = (new FilterService(new Page()))->filter($request);
-
-        /**
-         * flag to page resource(make only small thumbnail)
-         */
-        session()->flash("mk_thumb", ["small"]);
 
         return Inertia::render("Admin/Pages/List", [
             "pages" => PageResource::collection($filter->model),
@@ -79,9 +73,8 @@ class PageController extends Controller
         if ($coverId = $validated["cover"] ?? null) {
             $image = Image::where("id", $coverId)->first();
             if ($image) {
-                $validated["cover"] = $image->path;
+                $validated["cover"] = $image->id;
             }
-
         }
 
         $page = Page::create($validated);

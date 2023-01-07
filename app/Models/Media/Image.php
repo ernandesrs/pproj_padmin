@@ -2,6 +2,7 @@
 
 namespace App\Models\Media;
 
+use App\Models\Page;
 use App\Models\Section\Section;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,6 +38,16 @@ class Image extends Model
     public function sections()
     {
         return $this->morphedByMany(Section::class, "imageable");
+    }
+
+    /**
+     * Pages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages()
+    {
+        return $this->hasMany(Page::class, "cover", "id");
     }
 
     /**
