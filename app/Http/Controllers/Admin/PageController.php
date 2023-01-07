@@ -55,7 +55,6 @@ class PageController extends Controller
         return Inertia::render("Admin/Pages/Form", [
             "pageTitle" => "Nova página",
             "terms" => __("terms.page"),
-            "images" => session()->get("images", null),
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
             "buttons" => [
                 "back" => [
@@ -122,7 +121,6 @@ class PageController extends Controller
             "terms" => __("terms.page"),
             "pageTitle" => "Editar página",
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
-            "images" => session()->get("images", null),
             "buttons" => [
                 "back" => [
                     "url" => route("admin.pages.index"),

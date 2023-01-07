@@ -87,6 +87,7 @@
 
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
+import axios from 'axios';
 import ModalUi from '../../../../Components/Ui/ModalUi.vue';
 import InputForm from '../../../../Components/Form/InputForm.vue';
 import ButtonUi from '../../../../Components/Ui/ButtonUi.vue';
@@ -121,15 +122,6 @@ export default {
         };
     },
 
-    beforeMount() {
-        if (this.$page.props.images?.data) {
-            this.images = this.$page.props.images;
-
-            if (!this.showModal)
-                this.showModal = true;
-        }
-    },
-
     watch: {
         show: {
             immediate: true,
@@ -143,7 +135,7 @@ export default {
     },
 
     methods: {
-        getImages(force = false) {
+        getImages(force = true) {
             if (this.images?.data && !force) return;
 
             Inertia.visit(route("admin.medias.images.index", { onlyList: 1 }), {

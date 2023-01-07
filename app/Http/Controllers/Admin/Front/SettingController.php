@@ -43,7 +43,6 @@ class SettingController extends Controller
             "terms" => __("terms"),
             "menus" => $menus,
             "sections" => $sections,
-            "images" => session()->get("images", null),
             "pageTitle" => "Configurações de: " . config("app.name"),
         ]);
     }

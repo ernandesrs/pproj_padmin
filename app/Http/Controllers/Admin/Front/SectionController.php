@@ -51,7 +51,6 @@ class SectionController extends Controller
             'pageTitle' => 'Nova seção',
             'sectionTypes' => Section::TYPES,
             'bindables' => Section::BINDABLES,
-            "images" => session()->get("images", null),
             'terms' => __('terms.section'),
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key")
         ]);
@@ -105,7 +104,6 @@ class SectionController extends Controller
             'section' => new SectionResource($section),
             'sectionTypes' => Section::TYPES,
             'bindables' => Section::BINDABLES,
-            "images" => session()->get("images", null),
             'terms' => __('terms.section'),
             'buttons' => [
                 'back' => [
