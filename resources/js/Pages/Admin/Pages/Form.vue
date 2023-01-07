@@ -180,7 +180,7 @@ export default {
         setPageContentOnForm() {
             if (!this.page?.id) return;
 
-            this.coverPreview = this.page?.thumb_small;
+            this.coverPreview = this.page?.cover?.thumb_small;
 
             this.form.id = this.page.id;
             this.form.title = this.page.title;

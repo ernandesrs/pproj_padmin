@@ -51,6 +51,16 @@ class Image extends Model
     }
 
     /**
+     * References count
+     *
+     * @return int
+     */
+    public function referencesCount()
+    {
+        return $this->sections()->count() + $this->pages()->count();
+    }
+
+    /**
      * Booted
      *
      * @return void
@@ -59,6 +69,7 @@ class Image extends Model
     {
         static::retrieved(function ($image) {
             $image->url = Storage::url($image->path);
+            $image->references = $image->referencesCount();
         });
     }
 }

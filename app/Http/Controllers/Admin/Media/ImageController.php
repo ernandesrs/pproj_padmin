@@ -183,12 +183,18 @@ class ImageController extends Controller
     {
         $this->authorize("delete", $image);
 
+        if ($count = $image->referencesCount()) {
+            return back()->with("flash_alert", [
+                "variant" => "danger",
+                "message" => "Esta imagem possui {$count} referência" . ($count > 1 ? "s" : "") . " e não pode ser excluída!"
+            ]);
+        }
+
         (new ImageService())->delete($image);
 
-        session()->flash("flash_alert", [
+        return back()->with("flash_alert", [
             "variant" => "info",
-            "message" => "Imagem exluída com sucesso!",
+            "message" => "A imagem foi exluída com sucesso!",
         ]);
-        return back();
     }
 }

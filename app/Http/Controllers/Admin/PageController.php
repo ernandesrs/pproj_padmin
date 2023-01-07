@@ -104,11 +104,6 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        /**
-         * flag to page resource(make only small thumbnail)
-         */
-        session()->flash("mk_thumb", ["small"]);
-
         return Inertia::render("Admin/Pages/Form", [
             "page" => new PageResource($page),
             "terms" => __("terms.page"),
@@ -143,7 +138,7 @@ class PageController extends Controller
         if ($coverId = $validated["cover"] ?? null) {
             $image = Image::where("id", $coverId)->first();
             if ($image) {
-                $validated["cover"] = $image->path;
+                $validated["cover"] = $image->id;
             }
         }
 

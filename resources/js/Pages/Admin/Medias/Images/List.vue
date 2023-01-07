@@ -15,7 +15,7 @@
                             <h2 class="fs-6 fw-semibold text-muted mb-0">
                                 <a :href="image.path_url" target="_blank"
                                     title="Visualizar original">
-                                    {{ `${ $helpers.string.substr(image.name, 15) }` }}
+                                    {{ `${$helpers.string.substr(image.name, 15)}` }}
                                 </a>
                             </h2>
                             <small class="text-muted">
@@ -23,19 +23,25 @@
                                     <strong>Tam:</strong> <span>{{ (image.size /
                                     1000000).toFixed(3) }} Mb</span>
                                 </p>
+                                <p class="mb-0">
+                                    {{ image.references }} referência{{
+                                        image.references >
+                                            1 ? 's' : ''
+                                    }}
+                                </p>
                             </small>
                         </div>
                         <div class="d-flex justify-content-center pt-1">
-                            <ButtonUi size="sm" variant="info"
-                                icon="eye" class="mx-1 my-1"
-                                :href="image.path_url" target="_blank" />
+                            <ButtonUi size="sm" variant="info" icon="eye"
+                                class="mx-1 my-1" :href="image.path_url"
+                                target="_blank" />
                             <ButtonUi v-if="image.can.update" size="sm" variant="primary"
                                 icon="pencilSquare" class="mx-1 my-1"
-                                :to="$route('admin.medias.images.edit', {image: image.id})" />
+                                :to="$route('admin.medias.images.edit', { image: image.id })" />
                             <ButtonConfirmationUi v-if="image.can.delete"
                                 confirm-text="Excluir?" size="sm" variant="danger"
                                 icon="trash" position="center" class="mx-1 my-1"
-                                :data-action="$route('admin.medias.images.destroy', {image: image.id})"
+                                :data-action="$route('admin.medias.images.destroy', { image: image.id })"
                                 confirm-with-request request-method="delete" outlined />
                         </div>
                     </div>
