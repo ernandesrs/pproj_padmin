@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SettingResource;
-use App\Models\Content;
 use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Contracts\View\View;
@@ -26,7 +24,7 @@ class FrontController extends Controller
         $page = Page::findBySlug("inicio", config("app.locale"))->first();
         return view("front.index", [
             "pageTitle" => $page->title,
-            "settings" => new SettingResource($settings)
+            "settings" => $settings
         ]);
     }
 }

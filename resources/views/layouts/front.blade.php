@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }} - {{ $pageTitle }}</title>
-    @if ($favicon = $settings->content->header->favicon->path_url)
-        <link rel="shortcut icon" href="{{ Storage::url($favicon) }}" type="image/x-icon">
+    @if ($favicon = $settings->content->header->favicon)
+        <link rel="shortcut icon" href="{{ Storage::url($favicon->path) }}" type="image/x-icon">
     @endif
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
@@ -24,9 +24,8 @@
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        @if ($logo = $settings->content->header->logo->path_url ?? null)
-                            <img class="img-fluid" src="{{ Storage::url($logo) }}"
-                                alt="">
+                        @if ($logo = $settings->content->header->logo ?? null)
+                            <img class="img-fluid" src="{{ Storage::url($logo->path) }}" alt="">
                         @else
                             {{ config('app.name') }}
                         @endif
