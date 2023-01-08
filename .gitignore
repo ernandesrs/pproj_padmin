@@ -1,7 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
-/public/assets/js/inertia
+/public/assets/js/inertia/*_vue.js
 /storage/*.key
 /vendor
 .env
