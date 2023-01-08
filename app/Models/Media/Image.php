@@ -4,6 +4,7 @@ namespace App\Models\Media;
 
 use App\Models\Page;
 use App\Models\Section\Section;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

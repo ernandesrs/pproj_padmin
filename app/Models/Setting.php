@@ -13,6 +13,11 @@ class Setting extends Model
 
     protected $fillable = ["name", "title", "description", "content"];
 
+    /**
+     * Booted
+     *
+     * @return void
+     */
     protected static function booted()
     {
         static::retrieved(function ($setting) {
