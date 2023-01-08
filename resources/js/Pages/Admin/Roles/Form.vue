@@ -82,6 +82,7 @@ export default {
                 menu: "Menu",
                 page: "Página",
                 user: "Usuário",
+                setting: "Configuração",
             },
 
             rulesText: {

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\Front\SectionResource;
+use App\Policies\SettingPolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SettingResource extends JsonResource
@@ -37,6 +38,13 @@ class SettingResource extends JsonResource
 
         if ($menu_footer = $arr["content"]->footer->menu_footer)
             $arr["content"]->footer->menu_footer = new MenuResource($menu_footer);
+
+        $arr["can"] = [
+            "view" => (new SettingPolicy())->view(auth()->user(), $this->resource),
+            "create" => (new SettingPolicy())->create(auth()->user(), $this->resource),
+            "update" => (new SettingPolicy())->update(auth()->user(), $this->resource),
+            "delete" => (new SettingPolicy())->delete(auth()->user(), $this->resource)
+        ];
 
         return $arr;
     }

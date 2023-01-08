@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\FrontSettingRequest;
 use App\Http\Resources\MenuResource;
 use App\Http\Resources\SettingResource;
-use App\Models\Content;
 use App\Models\Media\Image;
 use App\Models\Menu;
 use App\Models\Section\Section;
@@ -23,6 +22,8 @@ class SettingController extends Controller
     public function edit()
     {
         $settings = Setting::where("name", "front_settings")->first();
+
+        $this->authorize("view", $settings);
 
         $menus = MenuResource::collection(Menu::all());
         $sections = Section::where("visible", true)->get();
@@ -65,6 +66,8 @@ class SettingController extends Controller
         if (!$settings) {
             return null;
         }
+
+        $this->authorize("update", $settings);
 
         $content = $settings->content;
 

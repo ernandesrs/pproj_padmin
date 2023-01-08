@@ -8,6 +8,7 @@ use App\Models\Media\Image;
 use App\Models\Media\Video;
 use App\Models\Page;
 use App\Models\Section\Section;
+use App\Models\Setting;
 use App\Models\User;
 
 use App\Policies\Admin\RolePolicy;
@@ -16,9 +17,9 @@ use App\Policies\Media\ImagePolicy;
 use App\Policies\Media\VideoPolicy;
 use App\Policies\PagePolicy;
 use App\Policies\Section\SectionPolicy;
+use App\Policies\SettingPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,8 @@ class AuthServiceProvider extends ServiceProvider
         Role::class => RolePolicy::class,
 
         Service::class => ServicePolicy::class,
-        Section::class => SectionPolicy::class
+        Section::class => SectionPolicy::class,
+        Setting::class => SettingPolicy::class
     ];
 
     /**
@@ -47,9 +49,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::define('update_settings', function (User $user) {
-            return $user->is_superadmin;
-        });
     }
 }

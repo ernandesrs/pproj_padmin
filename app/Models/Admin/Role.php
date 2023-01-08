@@ -8,6 +8,7 @@ use App\Models\Media\Video;
 use App\Models\Menu;
 use App\Models\Page;
 use App\Models\Section\Section;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,8 @@ class Role extends Model
         Section::class => 'section',
         Menu::class => 'menu',
         Page::class => 'page',
-        User::class => 'user'
+        User::class => 'user',
+        Setting::class => 'setting'
     ];
 
     /**

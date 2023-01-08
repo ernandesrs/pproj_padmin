@@ -160,7 +160,7 @@
             </template>
         </TabpanelUi>
 
-        <div class="row justify-content-center">
+        <div v-if="settings.can?.update" class="row justify-content-center">
             <div class="col-12 text-center">
                 <ButtonUi text="Atualizar" icon="checkLg" type="submit"
                     variant="primary" />
