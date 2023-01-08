@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SettingResource;
 use App\Models\Content;
 use App\Models\Page;
+use App\Models\Setting;
 use Illuminate\Contracts\View\View;
 
 class FrontController extends Controller
@@ -16,7 +18,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $settings = Content::where("name", "front_settings")->first();
+        $settings = Setting::where("name", "front_settings")->first();
         if (!$settings) {
             return;
         }
@@ -24,9 +26,7 @@ class FrontController extends Controller
         $page = Page::findBySlug("inicio", config("app.locale"))->first();
         return view("front.index", [
             "pageTitle" => $page->title,
-            "settings" => $settings,
-            "menu_main" => $settings->content->header->menu_main,
-            "home_sections" => $settings->content->home
+            "settings" => new SettingResource($settings)
         ]);
     }
 }

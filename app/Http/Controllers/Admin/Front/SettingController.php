@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Front;
 
-use App\Helpers\Thumb;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\FrontSettingRequest;
 use App\Http\Resources\MenuResource;
+use App\Http\Resources\SettingResource;
 use App\Models\Content;
 use App\Models\Media\Image;
 use App\Models\Menu;
 use App\Models\Section\Section;
+use App\Models\Setting;
 use Inertia\Inertia;
 
 class SettingController extends Controller
@@ -21,25 +22,13 @@ class SettingController extends Controller
      */
     public function edit()
     {
-        $settings = Content::where("name", "front_settings")->first();
+        $settings = Setting::where("name", "front_settings")->first();
 
         $menus = MenuResource::collection(Menu::all());
         $sections = Section::where("visible", true)->get();
 
-        if ($favicon = $settings->content->header->favicon) {
-            $settings->content->header->favicon_url = Thumb::thumb($favicon);
-        } else {
-            $settings->content->header->favicon_url = null;
-        }
-
-        if ($logo = $settings->content->header->logo) {
-            $settings->content->header->logo_url = Thumb::thumb($logo);
-        } else {
-            $settings->content->header->logo_url = null;
-        }
-
         return Inertia::render("Admin/Front/Settings", [
-            "settings" => $settings,
+            "settings" => new SettingResource($settings),
             "terms" => __("terms"),
             "menus" => $menus,
             "sections" => $sections,
@@ -67,11 +56,11 @@ class SettingController extends Controller
 
     /**
      * @param array $validated
-     * @return null|Content
+     * @return null|Setting
      */
     public function updateSettings(array $validated)
     {
-        $settings = Content::where("name", "front_settings")->first();
+        $settings = Setting::where("name", "front_settings")->first();
 
         if (!$settings) {
             return null;
@@ -82,22 +71,27 @@ class SettingController extends Controller
         $content->socials = $validated["socials"] ?? null;
         $content->header->menu_main = $validated["header"]["menu_main"]["id"] ?? null;
         $content->footer->menu_footer = $validated["footer"]["menu_footer"]["id"] ?? null;
-        $content->home = $validated["home"];
-
-        if ($faviconId = $validated["header"]["favicon"] ?? null) {
+        $content->pages = $validated["pages"];
+        if ($faviconId = $validated["header"]["favicon"]["id"] ?? null) {
             $favicon = Image::where("id", $faviconId)->first();
             if ($favicon) {
-                $content->header->favicon = $favicon->path;
+                $content->header->favicon = $favicon->id;
             }
+        } else {
+            $content->header->favicon = $content->header->favicon->id ?? null;
         }
 
-        if ($logoId = $validated["header"]["logo"] ?? null) {
+        if ($logoId = $validated["header"]["logo"]["id"] ?? null) {
             $logo = Image::where("id", $logoId)->first();
             if ($logo) {
-                $content->header->logo = $logo->path;
+                $content->header->logo = $logo->id;
             }
+        } else {
+            $content->header->logo = $content->header->logo->id ?? null;
         }
+
         $settings->content = json_encode($content);
+
         $settings->save();
 
         return $settings;

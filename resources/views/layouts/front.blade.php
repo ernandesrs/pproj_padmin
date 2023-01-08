@@ -1,3 +1,7 @@
+@php
+    $menu_main = $settings->content->header->menu_main;
+@endphp
+
 <!DOCTYPE html>
 <html lang="pt_BR">
 
@@ -6,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }} - {{ $pageTitle }}</title>
-    @if ($favicon = $settings->content->header->favicon)
+    @if ($favicon = $settings->content->header->favicon->path_url)
         <link rel="shortcut icon" href="{{ Storage::url($favicon) }}" type="image/x-icon">
     @endif
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
@@ -20,8 +24,8 @@
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        @if ($settings->content->header->logo ?? null)
-                            <img class="img-fluid" src="{{ Storage::url($settings->content->header->logo) }}"
+                        @if ($logo = $settings->content->header->logo->path_url ?? null)
+                            <img class="img-fluid" src="{{ Storage::url($logo) }}"
                                 alt="">
                         @else
                             {{ config('app.name') }}

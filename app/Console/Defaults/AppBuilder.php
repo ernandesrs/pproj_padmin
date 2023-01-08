@@ -2,8 +2,8 @@
 
 namespace App\Console\Defaults;
 
-use App\Models\Content;
 use App\Models\Menu;
+use App\Models\Setting;
 
 class AppBuilder
 {
@@ -51,8 +51,8 @@ class AppBuilder
      */
     private function frontSettings($favicon, $logo, $section1, $section2, $section3)
     {
-        $contentName = "front_settings";
-        if (Content::where("name", $contentName)->first()) {
+        $settingsName = "front_settings";
+        if (Setting::where("name", $settingsName)->first()) {
             echo "front settings exists\n";
             return;
         }
@@ -62,23 +62,26 @@ class AppBuilder
         $content = [
             "locale" => config("app.locale"),
             "header" => [
-                "favicon" => $favicon->path,
-                "logo" => $logo->path,
+                "favicon" => $favicon->id,
+                "logo" => $logo->id,
                 "menu_main" => $menu ? $menu->id : null
             ],
-            "home" => [
-                "section_1" => $section1->id,
-                "section_2" => $section2->id,
-                "section_3" => $section3->id,
+            "pages" => [
+                "home" => [
+                    "section_1" => $section1->id,
+                    "section_2" => $section2->id,
+                    "section_3" => $section3->id,
+                ]
             ],
             "footer" => [
                 "menu_footer" => null,
             ],
         ];
 
-        $settings = Content::create([
-            "name" => $contentName,
-            "is_json" => true,
+        $settings = Setting::create([
+            "name" => $settingsName,
+            "title" => "Configurações do site",
+            "description" => "Configurações do site",
             "content" => json_encode($content),
         ]);
 

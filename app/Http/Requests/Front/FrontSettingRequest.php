@@ -15,17 +15,7 @@ class FrontSettingRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows("update_settings");
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        return;
+        return true;
     }
 
     /**
@@ -48,7 +38,7 @@ class FrontSettingRequest extends FormRequest
             "header.logo" => ["nullable", "numeric", "exists:images,id"],
             "header.menu_main.id" => ["nullable", "numeric", "exists:menus,id"],
 
-            "home.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "pages.home.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_BANNER];
                 $s = Section::where("id", $val)->first();
 
@@ -57,7 +47,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "home.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "pages.home.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_DEFAULT];
                 $s = Section::where("id", $val)->first();
 
@@ -66,7 +56,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "home.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "pages.home.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_BINDABLE];
                 $s = Section::where("id", $val)->first();
 
@@ -75,7 +65,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "home.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "pages.home.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_DEFAULT];
                 $s = Section::where("id", $val)->first();
 

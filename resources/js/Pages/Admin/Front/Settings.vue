@@ -127,25 +127,25 @@
                                 <div class="row">
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 1:" name="section_1"
-                                            v-model="form.home.section_1"
+                                            v-model="form.pages.home.section_1"
                                             :options="sectionsOptions(['banner'])"
                                             :error-message="form.errors['sections.section_1']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 2:" name="section-2"
-                                            v-model="form.home.section_2"
+                                            v-model="form.pages.home.section_2"
                                             :options="sectionsOptions(['default'])"
                                             :error-message="form.errors['sections.section_2']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 3:" name="section_3"
-                                            v-model="form.home.section_3"
+                                            v-model="form.pages.home.section_3"
                                             :options="sectionsOptions(['bindable'])"
                                             :error-message="form.errors['sections.section_3']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 4:" name="section_4"
-                                            v-model="form.home.section_4"
+                                            v-model="form.pages.home.section_4"
                                             :options="sectionsOptions(['default'])"
                                             :error-message="form.errors['sections.section_4']" />
                                     </div>
@@ -197,8 +197,8 @@ export default {
 
     data() {
         return {
-            faviconPreview: this.settings?.content?.header?.favicon_url ?? null,
-            logoPreview: this.settings?.content?.header?.logo_url ?? null,
+            faviconPreview: this.settings?.content?.header?.favicon?.path_url ?? null,
+            logoPreview: this.settings?.content?.header?.logo?.path_url ?? null,
             form: useForm({
                 socials: {
                     facebook: this.settings?.content?.socials?.facebook ?? null,
@@ -216,11 +216,13 @@ export default {
                         id: null
                     },
                 },
-                home: {
-                    section_1: this.settings?.content?.home?.section_1?.id ?? null,
-                    section_2: this.settings?.content?.home?.section_2?.id ?? null,
-                    section_3: this.settings?.content?.home?.section_3?.id ?? null,
-                    section_4: this.settings?.content?.home?.section_4?.id ?? null,
+                pages: {
+                    home: {
+                        section_1: this.settings?.content?.pages?.home?.section_1?.id ?? null,
+                        section_2: this.settings?.content?.pages?.home?.section_2?.id ?? null,
+                        section_3: this.settings?.content?.pages?.home?.section_3?.id ?? null,
+                        section_4: this.settings?.content?.pages?.home?.section_4?.id ?? null,
+                    }
                 },
                 footer: {
                     menu_footer: this.settings?.content?.footer?.menu_footer ?? {
