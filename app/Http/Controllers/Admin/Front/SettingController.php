@@ -69,31 +69,28 @@ class SettingController extends Controller
 
         $this->authorize("update", $settings);
 
-        $content = $settings->content;
+        $settings->socials = json_encode($validated["socials"] ?? []);
+        $settings->menu_header = $validated["menu_header"]["id"] ?? $settings->menu_header;
+        $settings->menu_footer = $validated["menu_footer"]["id"] ?? $settings->menu_footer;
 
-        $content->socials = $validated["socials"] ?? null;
-        $content->header->menu_main = $validated["header"]["menu_main"]["id"] ?? null;
-        $content->footer->menu_footer = $validated["footer"]["menu_footer"]["id"] ?? null;
-        $content->pages = $validated["pages"];
-        if ($faviconId = $validated["header"]["favicon"]["id"] ?? null) {
+        $settings->sections = json_encode($validated["sections"] ?? []);
+        if ($faviconId = $validated["favicon"] ?? null) {
             $favicon = Image::where("id", $faviconId)->first();
             if ($favicon) {
-                $content->header->favicon = $favicon->id;
+                $settings->favicon = $favicon->id;
             }
         } else {
-            $content->header->favicon = $content->header->favicon->id ?? null;
+            $settings->favicon = $settings->favicon->id ?? null;
         }
 
-        if ($logoId = $validated["header"]["logo"]["id"] ?? null) {
+        if ($logoId = $validated["logo"] ?? null) {
             $logo = Image::where("id", $logoId)->first();
             if ($logo) {
-                $content->header->logo = $logo->id;
+                $settings->logo = $logo->id;
             }
         } else {
-            $content->header->logo = $content->header->logo->id ?? null;
+            $settings->logo = $settings->logo->id ?? null;
         }
-
-        $settings->content = json_encode($content);
 
         $settings->save();
 

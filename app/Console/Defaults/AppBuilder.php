@@ -43,54 +43,69 @@ class AppBuilder
         $logo = (new ImageBuilder())->logo($master);
 
         // default settings
-        $this->frontSettings($favicon, $logo, $banner, $defaultImages, $bindable);
+        $this->settings($favicon, $logo, $banner, $defaultImages, $bindable);
     }
 
     /**
      * @return void
      */
-    private function frontSettings($favicon, $logo, $section1, $section2, $section3)
+    private function settings($favicon, $logo, $section1, $section2, $section3)
     {
-        $settingsName = "front_settings";
-        if (Setting::where("name", $settingsName)->first()) {
-            echo "front settings exists\n";
+        $frontSettingsName = "front_settings";
+        $adminSettingsName = "admin_settings";
+        if (Setting::where("name", $frontSettingsName)->first() || Setting::where("name", $adminSettingsName)->first()) {
+            echo "Settings exists\n";
             return;
         }
 
-        $menu = Menu::all()->first();
+        $frontMenu = Menu::all()->first();
 
-        $content = [
-            "locale" => config("app.locale"),
-            "header" => [
-                "favicon" => $favicon->id,
-                "logo" => $logo->id,
-                "menu_main" => $menu ? $menu->id : null
-            ],
-            "pages" => [
-                "home" => [
-                    "section_1" => $section1->id,
-                    "section_2" => $section2->id,
-                    "section_3" => $section3->id,
-                ]
-            ],
-            "footer" => [
-                "menu_footer" => null,
-            ],
+        $frontSections = [
+            "home" => [
+                "section_1" => $section1->id,
+                "section_2" => $section2->id,
+                "section_3" => $section3->id,
+            ]
         ];
 
-        $settings = Setting::create([
-            "name" => $settingsName,
+        $frontSettings = Setting::create([
+            "locale" => config("app.locale"),
+            "name" => $frontSettingsName,
             "title" => "Configurações do site",
             "description" => "Configurações do site",
-            "content" => json_encode($content),
+            "sections" => json_encode($frontSections),
+
+            "favicon" => $favicon->id,
+            "logo" => $logo->id,
+            "menu_header" => $frontMenu->id,
+            "menu_footer" => null,
         ]);
 
-        if (!$settings) {
+        $adminSettings = Setting::create([
+            "locale" => config("app.locale"),
+            "name" => $adminSettingsName,
+            "title" => "Configurações do painel",
+            "description" => "Configurações do painel",
+            "sections" => json_encode([]),
+
+            "favicon" => $favicon->id,
+            "logo" => $logo->id,
+            "menu_header" => null,
+            "menu_footer" => null,
+        ]);
+
+        if (!$frontSettings) {
             echo "default front settings create fail\n";
         } else {
             echo "default front settings created\n";
         }
 
-        return $settings;
+        if (!$adminSettings) {
+            echo "default admin settings create fail\n";
+        } else {
+            echo "default admin settings created\n";
+        }
+
+        return;
     }
 }

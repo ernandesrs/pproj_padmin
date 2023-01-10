@@ -20,24 +20,24 @@ class SettingResource extends JsonResource
     {
         $arr = parent::toArray($request);
 
-        if ($favicon = $arr["content"]->header->favicon)
-            $arr["content"]->header->favicon = new ImageResource($favicon);
+        if ($favicon = $arr["favicon"])
+            $arr["favicon"] = new ImageResource($favicon);
 
-        if ($logo = $arr["content"]->header->logo)
-            $arr["content"]->header->logo = new ImageResource($logo);
+        if ($logo = $arr["logo"])
+            $arr["logo"] = new ImageResource($logo);
 
-        if ($menu_main = $arr["content"]->header->menu_main)
-            $arr["content"]->header->menu_main = new MenuResource($menu_main);
+        if ($menu_header = $arr["menu_header"])
+            $arr["menu_header"] = new MenuResource($menu_header);
 
-        foreach ($arr["content"]->pages as $keyPage => $page) {
-            foreach ($page as $keySection => $section) {
+        foreach ($arr["sections"] as $keyPage => $pageSections) {
+            foreach ($pageSections as $keySection => $section) {
                 if ($section)
-                    $arr["content"]->pages->$keyPage->$keySection = new SectionResource($section);
+                    $arr["sections"]->$keyPage->$keySection = new SectionResource($section);
             }
         }
 
-        if ($menu_footer = $arr["content"]->footer->menu_footer)
-            $arr["content"]->footer->menu_footer = new MenuResource($menu_footer);
+        if ($menu_footer = $arr["menu_footer"])
+            $arr["menu_footer"] = new MenuResource($menu_footer);
 
         $arr["can"] = [
             "view" => (new SettingPolicy())->view(auth()->user(), $this->resource),

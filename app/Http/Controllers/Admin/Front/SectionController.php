@@ -64,7 +64,7 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        $this->authorize('store', Section::class);
+        $this->authorize('create', Section::class);
 
         $validated  = $request->validated();
 

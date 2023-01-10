@@ -1,7 +1,3 @@
-@php
-    $menu_main = $settings->content->header->menu_main;
-@endphp
-
 <!DOCTYPE html>
 <html lang="pt_BR">
 
@@ -10,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }} - {{ $pageTitle }}</title>
-    @if ($favicon = $settings->content->header->favicon)
+    @if ($favicon = $settings->favicon)
         <link rel="shortcut icon" href="{{ Storage::url($favicon->path) }}" type="image/x-icon">
     @endif
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
@@ -24,7 +20,7 @@
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        @if ($logo = $settings->content->header->logo ?? null)
+                        @if ($logo = $settings->logo ?? null)
                             <img class="img-fluid" src="{{ Storage::url($logo->path) }}" alt="">
                         @else
                             {{ config('app.name') }}
@@ -36,10 +32,10 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="headerMainNav">
-                        @if ($menu_main)
+                        @if ($menu_header = $settings->menu_header)
                             @component('front.components.nav',
                                 [
-                                    'items' => $menu_main->items,
+                                    'items' => $menu_header->items,
                                     'customClass' => 'ms-auto',
                                     'vertical' => false,
                                 ])
@@ -57,7 +53,7 @@
 
     <footer class="footer py-4 text-center">
         <div class="container">
-            @if ($settings->content->socials ?? null)
+            @if ($socials = $settings->socials ?? null)
                 <div class="pb-3">
                     @php
                         $urls = [
@@ -72,7 +68,7 @@
                     @endphp
 
                     <ul class="nav justify-content-center fs-5">
-                        @foreach ($settings->content->socials as $key => $social)
+                        @foreach ($socials as $key => $social)
                             @if ($social)
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ $urls[$key] ?? null }}{{ $social }}"

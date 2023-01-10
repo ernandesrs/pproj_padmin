@@ -52,13 +52,37 @@ class Image extends Model
     }
 
     /**
+     * Settings favicon
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function settingsFavicon()
+    {
+        return $this->hasMany(Setting::class, "favicon", "id");
+    }
+
+    /**
+     * Settings logo
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function settingsLogo()
+    {
+        return $this->hasMany(Setting::class, "logo", "id");
+    }
+
+    /**
      * References count
      *
      * @return int
      */
     public function referencesCount()
     {
-        return $this->sections()->count() + $this->pages()->count();
+        return
+            $this->sections()->count() +
+            $this->pages()->count() +
+            $this->settingsFavicon()->count() +
+            $this->settingsLogo()->count();
     }
 
     /**

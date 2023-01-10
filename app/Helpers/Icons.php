@@ -24,7 +24,7 @@ class Icons
      * @param string $tag
      * @return string
      */
-    public static function elem(string $name, string $tag = "i")
+    public static function elem(?string $name, string $tag = "i")
     {
         return "<{$tag} class='icon " . (self::get($name) ?? self::get("app")) . "'></{$tag}>";
     }

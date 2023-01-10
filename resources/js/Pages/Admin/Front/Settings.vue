@@ -87,14 +87,14 @@
 
                                     <div class="col-12">
                                         <SelectForm label="Menu principal:"
-                                            name="menu_main"
-                                            v-model="form.header.menu_main.id" :options="menus.map((menu) => {
+                                            name="menu_main" v-model="form.menu_header.id"
+                                            :options="menus.map((menu) => {
                                                 return {
                                                     text: menu.name,
                                                     value: menu.id
                                                 };
                                             })"
-                                            :error-message="form.errors['header.menu_main']" />
+                                            :error-message="form.errors['menu_header']" />
                                     </div>
                                 </div>
 
@@ -103,13 +103,13 @@
                                     <div class="col-12">
                                         <SelectForm label="Menu rodapé:"
                                             name="menu_footer"
-                                            v-model="form.footer.menu_footer.id" :options="menus.map((menu) => {
+                                            v-model="form.menu_footer.id" :options="menus.map((menu) => {
                                                 return {
                                                     text: menu.name,
                                                     value: menu.id
                                                 };
                                             })"
-                                            :error-message="form.errors['footer.menu_footer']" />
+                                            :error-message="form.errors['menu_footer']" />
                                     </div>
                                 </div>
                             </div>
@@ -127,25 +127,25 @@
                                 <div class="row">
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 1:" name="section_1"
-                                            v-model="form.pages.home.section_1"
+                                            v-model="form.sections.home.section_1"
                                             :options="sectionsOptions(['banner'])"
                                             :error-message="form.errors['sections.section_1']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 2:" name="section-2"
-                                            v-model="form.pages.home.section_2"
+                                            v-model="form.sections.home.section_2"
                                             :options="sectionsOptions(['default'])"
                                             :error-message="form.errors['sections.section_2']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 3:" name="section_3"
-                                            v-model="form.pages.home.section_3"
+                                            v-model="form.sections.home.section_3"
                                             :options="sectionsOptions(['bindable'])"
                                             :error-message="form.errors['sections.section_3']" />
                                     </div>
                                     <div class="col-12 mb-4">
                                         <SelectForm label="Seção 4:" name="section_4"
-                                            v-model="form.pages.home.section_4"
+                                            v-model="form.sections.home.section_4"
                                             :options="sectionsOptions(['default'])"
                                             :error-message="form.errors['sections.section_4']" />
                                     </div>
@@ -197,37 +197,25 @@ export default {
 
     data() {
         return {
-            faviconPreview: this.settings?.content?.header?.favicon?.path_url ?? null,
-            logoPreview: this.settings?.content?.header?.logo?.path_url ?? null,
+            faviconPreview: this.settings.favicon?.path_url ?? null,
+            logoPreview: this.settings.logo?.path_url ?? null,
             form: useForm({
-                socials: {
-                    facebook: this.settings?.content?.socials?.facebook ?? null,
-                    instagram: this.settings?.content?.socials?.instagram ?? null,
-                    youtube: this.settings?.content?.socials?.youtube ?? null,
-                    twitter: this.settings?.content?.socials?.twitter ?? null,
-                    tiktok: this.settings?.content?.socials?.tiktok ?? null,
-                    github: this.settings?.content?.socials?.github ?? null,
-                    linkedin: this.settings?.content?.socials?.linkedin ?? null,
+                socials: this.settings.socials,
+                favicon: null,
+                logo: null,
+                menu_header: this.settings?.menu_header ?? {
+                    id: null
                 },
-                header: {
-                    favicon: null,
-                    logo: null,
-                    menu_main: this.settings?.content?.header?.menu_main ?? {
-                        id: null
-                    },
+                menu_footer: this.settings?.menu_footer ?? {
+                    id: null
                 },
-                pages: {
+                sections: {
                     home: {
-                        section_1: this.settings?.content?.pages?.home?.section_1?.id ?? null,
-                        section_2: this.settings?.content?.pages?.home?.section_2?.id ?? null,
-                        section_3: this.settings?.content?.pages?.home?.section_3?.id ?? null,
-                        section_4: this.settings?.content?.pages?.home?.section_4?.id ?? null,
+                        section_1: this.settings?.sections?.home?.section_1?.id ?? null,
+                        section_2: this.settings?.sections?.home?.section_2?.id ?? null,
+                        section_3: this.settings?.sections?.home?.section_3?.id ?? null,
+                        section_4: this.settings?.sections?.home?.section_4?.id ?? null,
                     }
-                },
-                footer: {
-                    menu_footer: this.settings?.content?.footer?.menu_footer ?? {
-                        id: null
-                    },
                 }
 
             }),
@@ -238,11 +226,11 @@ export default {
 
     methods: {
         submit() {
-            if (this.form.header.menu_main.id == "none")
-                this.form.header.menu_main.id = null;
+            if (this.form.menu_header.id == "none")
+                this.form.menu_header.id = null;
 
-            if (this.form.footer.menu_footer.id == "none")
-                this.form.footer.menu_footer.id = null;
+            if (this.form.menu_footer.id == "none")
+                this.form.menu_footer.id = null;
 
             this.form.post(route("admin.settings.update"));
         },
@@ -259,10 +247,10 @@ export default {
         insertImage(data) {
             if (this.showImagesModalListTo == 'favicon') {
                 this.faviconPreview = data.url;
-                this.form.header.favicon = data.id;
+                this.form.favicon = data.id;
             } else {
                 this.logoPreview = data.url;
-                this.form.header.logo = data.id;
+                this.form.logo = data.id;
             }
         },
 

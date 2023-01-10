@@ -34,11 +34,11 @@ class FrontSettingRequest extends FormRequest
             "socials.tiktok" => ["nullable", "string"],
             "socials.youtube" => ["nullable", "string"],
 
-            "header.favicon" => ["nullable", "numeric", "exists:images,id"],
-            "header.logo" => ["nullable", "numeric", "exists:images,id"],
-            "header.menu_main.id" => ["nullable", "numeric", "exists:menus,id"],
+            "favicon" => ["nullable", "numeric", "exists:images,id"],
+            "logo" => ["nullable", "numeric", "exists:images,id"],
+            "menu_header.id" => ["nullable", "numeric", "exists:menus,id"],
 
-            "pages.home.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "sections.home.section_1" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_BANNER];
                 $s = Section::where("id", $val)->first();
 
@@ -47,7 +47,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "pages.home.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "sections.home.section_2" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_DEFAULT];
                 $s = Section::where("id", $val)->first();
 
@@ -56,7 +56,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "pages.home.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "sections.home.section_3" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_BINDABLE];
                 $s = Section::where("id", $val)->first();
 
@@ -65,7 +65,7 @@ class FrontSettingRequest extends FormRequest
                         return __("terms.section.type.type_" . $item);
                     }, $allowed)));
             }],
-            "pages.home.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
+            "sections.home.section_4" => ["nullable", "numeric", "exists:sections,id", function ($attr, $val, $fail) {
                 $allowed = [Section::TYPE_DEFAULT];
                 $s = Section::where("id", $val)->first();
 
@@ -75,7 +75,7 @@ class FrontSettingRequest extends FormRequest
                     }, $allowed)));
             }],
 
-            "footer.menu_footer.id" => ["nullable", "numeric", "exists:menus,id"],
+            "menu_footer.id" => ["nullable", "numeric", "exists:menus,id"],
         ];
     }
 }

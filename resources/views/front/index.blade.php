@@ -2,7 +2,7 @@
 
 @section('content')
     @php
-        $home_sections = $settings->content->pages->home;
+        $home_sections = $settings->sections->home;
         $alignments = ['left', 'right', 'center', 'left'];
         $key = 0;
     @endphp
