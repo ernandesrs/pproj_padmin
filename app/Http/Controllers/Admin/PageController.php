@@ -73,6 +73,10 @@ class PageController extends Controller
 
         $validated = $request->validated();
 
+        $validated["sections"] = array_map(function($item){
+            return $item["id"];
+        }, $validated["sections"]);
+
         if ($coverId = $validated["cover"] ?? null) {
             $image = Image::where("id", $coverId)->first();
             if ($image) {
@@ -109,6 +113,7 @@ class PageController extends Controller
     {
         return Inertia::render("Admin/Pages/Form", [
             "page" => new PageResource($page),
+            "sections" => SectionResource::collection(Section::all()),
             "terms" => __("terms.page"),
             "pageTitle" => "Editar página",
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
@@ -143,6 +148,9 @@ class PageController extends Controller
             if ($image) {
                 $validated["cover"] = $image->id;
             }
+        } else {
+            // refatora isso
+            $page->cover = $page->cover->id;
         }
 
         $page->update($validated);

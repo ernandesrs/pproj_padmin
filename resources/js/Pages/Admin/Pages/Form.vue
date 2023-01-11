@@ -46,7 +46,7 @@
                                     <div class="col-9 col-lg-8 mb-4">
                                         <SelectForm label="Seção:" :options="Object.entries(sections).map((sectionInSections) => {
                                             return {
-                                                value: sectionInSections[0],
+                                                value: sectionInSections[1].id,
                                                 text: sectionInSections[1].title
                                             };
                                         })" v-model="item.id" />
@@ -232,7 +232,15 @@ export default {
             this.form.content_type = this.page.content_type;
             this.form.follow = this.page.follow;
             this.form.content = this.page.content;
-            this.form.view_path = this.page.view_path;
+            this.form.sections = Object.values(this.page.sections ?? []).map((section) => {
+                return {
+                    id: section.id,
+                    alignment: (Object.values(this.page.sections_settings).find((s_setting) => {
+                        return s_setting.id == section.id;
+                    }))?.alignment
+                }
+            });
+            this.form.sections_settings = [];
             this.form.status = this.page.status;
 
             this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;

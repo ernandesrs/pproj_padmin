@@ -4,6 +4,7 @@ namespace App\Models\Section;
 
 use App\Models\Front\Service;
 use App\Models\Media\Image;
+use App\Models\Page;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -170,16 +171,14 @@ class Section extends Model
     {
         return $this->morphToMany(Image::class, "imageable");
     }
-
+    
     /**
-     * Booted
+     * Pages
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    protected static function booted()
+    public function pages()
     {
-        static::retrieved(function ($section) {
-            $section->buttons = json_decode($section->buttons);
-        });
+        return $this->belongsToMany(Page::class, "section_page", "section_id", "page_id");
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Media\Image;
+use App\Models\Section\Section;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -58,7 +59,11 @@ class Page extends Model
         $page->status = $validatedData["status"];
         $page->content_type = $validatedData["content_type"];
 
-        $page->content = $page->makeContent($validatedData);
+        if ($page->content_type == self::CONTENT_TYPE_VIEW) {
+            $page->sections_settings = json_encode($validatedData["sections_settings"]);
+        } else if ($page->content == self::CONTENT_TYPE_TEXT) {
+            $page->content = $validatedData["content"];
+        }
 
         switch ($page->status) {
             case self::STATUS_SCHEDULED:
@@ -73,6 +78,10 @@ class Page extends Model
             $page->protection = $validatedData["protection"];
 
         $page->save();
+
+        if ($page->content_type == self::CONTENT_TYPE_VIEW) {
+            $page->sections()->attach($validatedData["sections"] ?? []);
+        }
 
         return $page;
     }
@@ -212,5 +221,15 @@ class Page extends Model
     public function author()
     {
         return $this->hasOne(User::class, "id", "user_id");
+    }
+
+    /**
+     * Sections
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function sections()
+    {
+        return $this->belongsToMany(Section::class, "section_page", "page_id", "section_id");
     }
 }

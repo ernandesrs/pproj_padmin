@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Front\SectionResource;
 use App\Models\Page;
 use App\Policies\PagePolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -30,9 +31,10 @@ class PageResource extends JsonResource
             "delete" => (new PagePolicy())->delete(auth()->user(), $this->resource)
         ];
 
-        if ($this->content_type == Page::CONTENT_TYPE_VIEW)
-            $arr["view_path"] = $this->content;
-        else
+        if ($this->content_type == Page::CONTENT_TYPE_VIEW) {
+            $arr["sections"] = SectionResource::collection($this->sections);
+            $arr["sections_settings"] = json_decode($this->sections_settings);
+        } else
             $arr["content"] = $this->content;
 
         if ($this->cover) {

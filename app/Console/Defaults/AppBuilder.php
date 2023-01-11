@@ -28,15 +28,15 @@ class AppBuilder
         // default page cover
         $cover = (new ImageBuilder())->pageCover($master);
 
-        // default pages
-        (new PageBuilder())->homePage($master, $cover);
-        (new PageBuilder())->privacyTermsPage($master, $cover);
-        (new PageBuilder())->useTermsPage($master, $cover);
-
         // default sections
         $banner = (new SectionBuilder())->sectionBannerImages($master);
         $defaultImages = (new SectionBuilder())->sectionDefaultImages($master);
         $bindable = (new SectionBuilder())->sectionBindable($master);
+
+        // default pages
+        (new PageBuilder())->homePage($master, $cover, $banner, $defaultImages, $bindable);
+        (new PageBuilder())->privacyTermsPage($master, $cover);
+        (new PageBuilder())->useTermsPage($master, $cover);
 
         // default favicon and logo
         $favicon = (new ImageBuilder())->favicon($master);

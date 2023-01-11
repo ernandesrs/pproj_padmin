@@ -12,7 +12,7 @@ class PageBuilder
     /**
      * Create the home page
      */
-    public function homePage(User $author, Image $cover)
+    public function homePage(User $author, Image $cover, $s1, $s2, $s3)
     {
         if (Slug::where(config("app.locale"), "inicio")->first()) {
             echo "home page exists\n";
@@ -28,8 +28,22 @@ class PageBuilder
             "follow" => false,
             "status" => Page::STATUS_PUBLISHED,
             "content_type" => Page::CONTENT_TYPE_VIEW,
-            "view_path" => "Front/Index",
             "protection" => Page::PROTECTION_SYSTEM,
+            "sections" => [$s1->id, $s2->id, $s3->id],
+            "sections_settings" => [
+                [
+                    "id" => $s1->id,
+                    "alignment" => "left"
+                ],
+                [
+                    "id" => $s2->id,
+                    "alignment" => "right"
+                ],
+                [
+                    "id" => $s3->id,
+                    "alignment" => "left"
+                ]
+            ],
         ], $author);
 
         if (!$page) {
