@@ -3,7 +3,8 @@
     <div class="position-relative">
         <!-- the button -->
         <ButtonUi @click="click" type="button" :text="text" :icon="icon"
-            :variant="variant" :size="size" :outlined="outlined" />
+            :variant="variant" :size="size" :outlined="outlined"
+            :class="{'w-100':full}" />
 
         <Transition :name="animationName">
             <div v-if="showConfirmButtons"
@@ -40,6 +41,7 @@ export default {
         variant: { type: String, default: null },
         icon: { type: String, default: null },
         size: { type: String, default: null },
+        full: { type: Boolean, default: false },
 
         dataAction: { type: String, default: null },
         confirmWithRequest: { type: Boolean, default: false },

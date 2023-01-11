@@ -24,10 +24,11 @@
                     </div>
 
                     <div v-else-if="form.content_type == 2" class="col-12 mb-4">
-                        <InputForm label="Página customizada:" name="view_path"
-                            v-model="form.view_path"
-                            :error-message="form.errors.view_path"
-                            :disabled="page.protection == 9" />
+                        <div class="w-100 bg-light">
+                            <ButtonUi @click="addNewSection" text="Adicionar nova seção"
+                                icon="plusLg" />
+                        </div>
+
                         <div v-if="page?.id && page.content_type == 1 && form.content_type == 2"
                             class="mt-2">
                             <p class="mb-0 alert alert-warning text-center">
@@ -38,6 +39,37 @@
                                     de atualizar para manter o conteúdo.</small>
                             </p>
                         </div>
+
+                        <SortableList v-model="form.sections">
+                            <template #item="{ item, index }">
+                                <div class="row justify-centent-center">
+                                    <div class="col-9 col-lg-8 mb-4">
+                                        <SelectForm label="Seção:" :options="Object.entries(sections).map((sectionInSections) => {
+                                            return {
+                                                value: sectionInSections[0],
+                                                text: sectionInSections[1].title
+                                            };
+                                        })" v-model="item.id" />
+                                    </div>
+                                    <div class="col-3 col-lg-4">
+                                        <SelectForm label="Alinhamento:" :options="[
+                                            {
+                                                value: 'left',
+                                                text: 'Esquerda'
+                                            },
+                                            {
+                                                value: 'right',
+                                                text: 'Direita'
+                                            },
+                                            {
+                                                value: 'center',
+                                                text: 'Centro'
+                                            },
+                                        ]" v-model="item.alignment" />
+                                    </div>
+                                </div>
+                            </template>
+                        </SortableList>
                     </div>
 
                     <div v-else class="col-12 mb-4">
@@ -133,27 +165,29 @@ import EditorTiny from '../../../Components/EditorTiny.vue';
 import ModalImagesList from '../Medias/Images/ModalImagesList.vue';
 import ImagePreviewUi from '../../../Components/Ui/ImagePreviewUi.vue';
 import TextAreaForm from '../../../Components/Form/TextAreaForm.vue';
+import SortableList from '../../../Components/List/Sortable/SortableList.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi, TextAreaForm },
+    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi, TextAreaForm, SortableList },
     props: {
         page: { type: Object, default: {} },
+        sections: { type: Object, default: {} },
         terms: { type: Object, default: {} },
         tinyApiKey: { type: String, default: null }
     },
-
     data() {
         return {
             form: useForm({
                 id: null,
                 title: null,
                 description: null,
-                content_type: 1,
+                content_type: 2,
                 follow: false,
                 content: null,
-                view_path: null,
+                sections: [],
+                sections_settings: [],
                 status: 1,
                 schedule_to: null,
                 cover: null,
@@ -168,6 +202,16 @@ export default {
     methods: {
         submit() {
             let action = route("admin.pages.store");
+
+            this.form.sections_settings = [];
+            if (this.form.sections.length) {
+                Object.values(this.form.sections).map((item) => {
+                    this.form.sections_settings.push({
+                        id: item.id,
+                        alignment: item.alignment,
+                    });
+                });
+            }
 
             if (this.page?.id) {
                 action = route("admin.pages.update", { page: this.page.id });
@@ -205,6 +249,13 @@ export default {
         insertImage(data) {
             this.coverPreview = data.thumb_small;
             this.form.cover = data.id;
+        },
+
+        addNewSection() {
+            this.form.sections.push({
+                id: null,
+                alignment: "left"
+            });
         }
     }
 };

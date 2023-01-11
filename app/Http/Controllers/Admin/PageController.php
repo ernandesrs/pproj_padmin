@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
+use App\Http\Resources\Front\SectionResource;
 use App\Http\Resources\PageResource;
 use App\Http\Services\FilterService;
 use App\Models\Media\Image;
 use App\Models\Page;
+use App\Models\Section\Section;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -48,6 +50,7 @@ class PageController extends Controller
     {
         return Inertia::render("Admin/Pages/Form", [
             "pageTitle" => "Nova página",
+            "sections" => SectionResource::collection(Section::all()),
             "terms" => __("terms.page"),
             "tinyApiKey" => env("TINY_API_KEY", "no-api-key"),
             "buttons" => [
