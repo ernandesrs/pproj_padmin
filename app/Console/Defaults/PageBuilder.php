@@ -29,19 +29,32 @@ class PageBuilder
             "status" => Page::STATUS_PUBLISHED,
             "content_type" => Page::CONTENT_TYPE_VIEW,
             "protection" => Page::PROTECTION_SYSTEM,
-            "sections" => [$s1->id, $s2->id, $s3->id],
-            "sections_settings" => [
+            "sections" => [
                 [
                     "id" => $s1->id,
-                    "alignment" => "left"
                 ],
                 [
                     "id" => $s2->id,
-                    "alignment" => "right"
+                ],
+                [
+                    "id" => $s3->id
+                ]
+            ],
+            "sections_settings" => [
+                [
+                    "id" => $s1->id,
+                    "alignment" => "left",
+                    "order" => 1
+                ],
+                [
+                    "id" => $s2->id,
+                    "alignment" => "right",
+                    "order" => 2
                 ],
                 [
                     "id" => $s3->id,
-                    "alignment" => "left"
+                    "alignment" => "left",
+                    "order" => 3
                 ]
             ],
         ], $author);

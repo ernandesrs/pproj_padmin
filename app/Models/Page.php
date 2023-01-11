@@ -36,7 +36,7 @@ class Page extends Model
 
     public const PROTECTIONS = [self::PROTECTION_NONE, self::PROTECTION_AUTHOR, self::PROTECTION_SYSTEM];
 
-    protected $fillable = ["title", "description", "cover", "lang", "content_type", "content", "status", "published_at", "schedule_to", "follow"];
+    protected $fillable = ["title", "description", "cover", "lang", "content_type", "content", "sections_settings", "status", "published_at", "schedule_to", "follow"];
 
     /**
      * Create page
@@ -80,7 +80,7 @@ class Page extends Model
         $page->save();
 
         if ($page->content_type == self::CONTENT_TYPE_VIEW) {
-            $page->sections()->attach($validatedData["sections"] ?? []);
+            $page->sections()->attach(self::onlySectionsIds($validatedData));
         }
 
         return $page;
@@ -111,7 +111,25 @@ class Page extends Model
                 break;
         }
 
+        $attributes["sections_settings"] = json_encode($attributes["sections_settings"]);
+        if (($attributes["content_type"] ?? $this->content_type) == self::CONTENT_TYPE_VIEW) {
+            $this->sections()->sync(self::onlySectionsIds($attributes));
+        }
+
         return parent::update($this->safeAttributes($attributes), $options);
+    }
+
+    /**
+     * Only sections ids
+     *
+     * @param array $validated
+     * @return array
+     */
+    private static function onlySectionsIds(array $validated)
+    {
+        return array_map(function ($item) {
+            return $item["id"];
+        }, $validated["sections"] ?? []);
     }
 
     /**
@@ -128,14 +146,12 @@ class Page extends Model
             unset($attributes["status"]);
         }
 
-        $attributes["content"] = $this->makeContent($attributes);
-
         if (!$attributes["cover"])
             unset($attributes["cover"]);
 
         // no longer needed for the update
         unset($attributes["slug"]);
-        unset($attributes["view_path"]);
+        unset($attributes["sections"]);
 
         return $attributes;
     }
@@ -148,24 +164,24 @@ class Page extends Model
      */
     public function makeContent(array $validatedData)
     {
-        $content = null;
+        $return = null;
 
         if ($this->protection == self::PROTECTION_SYSTEM) {
             if ($this->content_type == self::CONTENT_TYPE_VIEW)
-                $content = $this->content;
+                $return = $this->sections;
             else
-                $content = $validatedData["content"];
+                $return = $validatedData["content"];
         } else {
             switch ($validatedData["content_type"]) {
                 case self::CONTENT_TYPE_TEXT:
-                    $content = $validatedData["content"];
+                    $return = $validatedData["content"];
                     break;
                 case self::CONTENT_TYPE_VIEW:
-                    $content = $validatedData["view_path"];
+                    $return = $validatedData["view_path"];
                     break;
             }
         }
-        return $content;
+        return $return;
     }
 
     /**
@@ -190,6 +206,7 @@ class Page extends Model
     {
         static::retrieved(function ($page) {
             $page->cover = $page->cover()->first();
+            $page->sections_settings = json_decode($page->sections_settings);
         });
     }
 

@@ -209,6 +209,7 @@ export default {
                     this.form.sections_settings.push({
                         id: item.id,
                         alignment: item.alignment,
+                        order: item.order,
                     });
                 });
             }
@@ -232,12 +233,15 @@ export default {
             this.form.content_type = this.page.content_type;
             this.form.follow = this.page.follow;
             this.form.content = this.page.content;
-            this.form.sections = Object.values(this.page.sections ?? []).map((section) => {
+
+            /**
+             * ordena de acordo com sections_settings
+             */
+            this.form.sections = Object.values(this.page.sections_settings).map((s_setting) => {
                 return {
-                    id: section.id,
-                    alignment: (Object.values(this.page.sections_settings).find((s_setting) => {
-                        return s_setting.id == section.id;
-                    }))?.alignment
+                    id: s_setting.id,
+                    alignment: s_setting.alignment,
+                    order: s_setting.order,
                 }
             });
             this.form.sections_settings = [];
@@ -262,7 +266,8 @@ export default {
         addNewSection() {
             this.form.sections.push({
                 id: null,
-                alignment: "left"
+                alignment: "left",
+                order: this.form.sections.length
             });
         }
     }

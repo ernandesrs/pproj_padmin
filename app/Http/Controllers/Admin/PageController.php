@@ -73,10 +73,6 @@ class PageController extends Controller
 
         $validated = $request->validated();
 
-        $validated["sections"] = array_map(function($item){
-            return $item["id"];
-        }, $validated["sections"]);
-
         if ($coverId = $validated["cover"] ?? null) {
             $image = Image::where("id", $coverId)->first();
             if ($image) {

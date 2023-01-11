@@ -6,3 +6,5 @@
 
 [User update]: ao fazer upload de foto ocorre erro de validação(campos obrigatórios não preenchidos)
 (Resolvido com implementação de upload de foto a parte)
+
+[Models correction]: evitar carregamento de relacionamentos no método booted() nos modelos
