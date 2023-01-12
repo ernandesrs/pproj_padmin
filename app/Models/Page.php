@@ -120,6 +120,17 @@ class Page extends Model
     }
 
     /**
+     * Delete section
+     *
+     * @return bool
+     */
+    public function delete()
+    {
+        $this->sections()->detach();
+        return parent::delete();
+    }
+
+    /**
      * Only sections ids
      *
      * @param array $validated
