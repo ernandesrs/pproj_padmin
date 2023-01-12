@@ -76,7 +76,7 @@ class SettingController extends Controller
                 $settings->favicon = $favicon->id;
             }
         } else {
-            $settings->favicon = $settings->favicon->id ?? null;
+            $settings->favicon = $settings->favicon;
         }
 
         if ($logoId = $validated["logo"] ?? null) {
@@ -85,7 +85,7 @@ class SettingController extends Controller
                 $settings->logo = $logo->id;
             }
         } else {
-            $settings->logo = $settings->logo->id ?? null;
+            $settings->logo = $settings->logo;
         }
 
         $settings->save();
