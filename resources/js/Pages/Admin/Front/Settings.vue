@@ -177,13 +177,9 @@ export default {
         };
     },
 
-    created(){
-        console.log(this.settings)
-    },
-
     methods: {
         submit() {
-        console.log(this.form)
+            console.log(this.form.socials);
             if (this.form.menu_header.id == "none")
                 this.form.menu_header.id = null;
 

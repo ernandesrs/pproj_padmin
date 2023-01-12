@@ -17,7 +17,8 @@ class Setting extends Model
         "menu_footer",
         "name",
         "title",
-        "description"
+        "description",
+        "socials",
     ];
 
     /**

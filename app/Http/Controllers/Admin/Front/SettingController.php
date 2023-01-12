@@ -43,7 +43,7 @@ class SettingController extends Controller
     public function update(SettingRequest $request)
     {
         $validated = $request->validated();
-dd($validated);
+
         $this->updateSettings($validated);
 
         return back()->with("flash_alert", [

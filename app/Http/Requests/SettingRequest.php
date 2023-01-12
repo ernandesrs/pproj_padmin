@@ -23,7 +23,6 @@ class SettingRequest extends FormRequest
      */
     public function rules()
     {
-        dd(json_decode($this->content));
         return [
             "socials.facebook" => ["nullable", "string"],
             "socials.instagram" => ["nullable", "string"],
