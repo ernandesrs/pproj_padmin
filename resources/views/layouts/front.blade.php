@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }} - {{ $pageTitle }}</title>
-    @if ($favicon = $settings->favicon)
+    @if ($favicon = $settings->favicon()->first())
         <link rel="shortcut icon" href="{{ Storage::url($favicon->path) }}" type="image/x-icon">
     @endif
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
@@ -20,7 +20,7 @@
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        @if ($logo = $settings->logo ?? null)
+                        @if ($logo = $settings->logo()->first())
                             <img class="img-fluid" src="{{ Storage::url($logo->path) }}" alt="">
                         @else
                             {{ config('app.name') }}
@@ -32,7 +32,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="headerMainNav">
-                        @if ($menu_header = $settings->menu_header)
+                        @if ($menu_header = $settings->menu('menu_header')->first())
                             @component('front.components.nav',
                                 [
                                     'items' => $menu_header->items,

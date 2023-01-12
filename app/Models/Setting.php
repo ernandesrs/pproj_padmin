@@ -42,6 +42,16 @@ class Setting extends Model
     }
 
     /**
+     * Menu header
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function menu(string $menuIdField)
+    {
+        return $this->hasOne(Menu::class, "id", $menuIdField);
+    }
+
+    /**
      * Booted
      *
      * @return void
