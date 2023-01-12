@@ -24,7 +24,8 @@ class FrontController extends Controller
         $page = Page::findBySlug("inicio", config("app.locale"))->first();
         return view("front.index", [
             "pageTitle" => $page->title,
-            "settings" => $settings
+            "settings" => $settings,
+            "page" => $page,
         ]);
     }
 }

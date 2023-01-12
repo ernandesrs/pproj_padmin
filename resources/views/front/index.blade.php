@@ -2,24 +2,29 @@
 
 @section('content')
     @php
-        $home_sections = $settings->sections->home;
-        $alignments = ['left', 'right', 'center', 'left'];
+        $sections = $page->sections;
+        $sections_settings = $page->sections_settings;
         $key = 0;
     @endphp
-    @foreach ($home_sections ?? [] as $section)
+
+    @foreach ($sections_settings ?? [] as $setting_section)
+        @php
+            $section = $sections->where('id', $setting_section->id)->first();
+        @endphp
+
         @if ($section)
             @if (in_array($section->type, [\App\Models\Section\Section::TYPE_BANNER]))
                 @component('front.components.sections.banner',
                     [
                         'section' => $section,
-                        'alignment' => $alignments[$key],
+                        'alignment' => $setting_section->alignment,
                     ])
                 @endcomponent
             @elseif(in_array($section->type, [\App\Models\Section\Section::TYPE_DEFAULT]))
                 @component('front.components.sections.default',
                     [
                         'section' => $section,
-                        'alignment' => $alignments[$key],
+                        'alignment' => $setting_section->alignment,
                     ])
                 @endcomponent
             @elseif(in_array($section->type, [\App\Models\Section\Section::TYPE_BINDABLE]))
@@ -27,7 +32,7 @@
                     [
                         'section' => $section,
                         'items' => $section->bindables() ?? [],
-                        'alignment' => $alignments[$key],
+                        'alignment' => $setting_section->alignment,
                     ])
                 @endcomponent
             @endif

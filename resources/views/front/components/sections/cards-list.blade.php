@@ -1,4 +1,4 @@
-<section class="section default-section {{ $alignment ?? 'left' }}-section cards-section" id="{{ Str::slug($section->name) }}">
+<section class="section default-section cards-section" id="{{ Str::slug($section->name) }}">
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-sm-10 col-lg-8 col-xl-6 text-center px-5">

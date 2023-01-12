@@ -181,4 +181,11 @@ class Section extends Model
     {
         return $this->belongsToMany(Page::class, "section_page", "section_id", "page_id");
     }
+
+    protected static function booted()
+    {
+        static::retrieved(function($section){
+            $section->buttons = json_decode($section->buttons);
+        });
+    }
 }

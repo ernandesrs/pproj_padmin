@@ -1,8 +1,8 @@
-<section class="section default-section {{ $alignment ?? 'left' }}-section" id="{{ Str::slug($section->name) }}">
+<section class="section default-section" id="{{ Str::slug($section->name) }}">
     <div class="container">
-        <div class="row justify-content-center justify-content-lg-start align-items-center">
+        <div class="row justify-content-center {{ $alignment == 'center' ? '' : 'justify-content-lg-start' }} align-items-center">
             <div
-                class="col-lg-6 {{ ($alignment ?? 'left') == 'right' ? 'order-lg-5' : '' }} d-flex justify-content-center mb-4 mb-lg-0">
+                class="col-12 mb-4 {{ $alignment == 'center' ? 'col-lg-10 g-success' : ($alignment == 'right' ? 'col-lg-6 order-lg-5 mb-lg-0' : 'col-lg-6 mb-lg-0') }} p-0 d-flex justify-content-center align-items-center">
                 @component('front.components.sections.images',
                     [
                         'images' => $section->images ?? [],
@@ -15,7 +15,7 @@
                 @endcomponent
             </div>
 
-            <div class="col-lg-6 text-center text-lg-start {{ ($alignment ?? 'left') == 'right' ? 'order-lg-1' : '' }}">
+            <div class="{{ $alignment == 'center' ? 'col-lg-10 col-xl-8 bg-danger' : 'col-lg-6 text-lg-start' }} text-center">
                 <h1 class="section-title fw-semibold lh-1">
                     {{ $section->title }}
                 </h1>
@@ -25,7 +25,7 @@
                 <div class="section-content text-dark-light px-3 px-lg-0 py-4">
                     {!! $section->content !!}
                 </div>
-                <div class="d-grid gap-2 d-lg-flex justify-content-lg-start">
+                <div class="d-grid gap-2 d-lg-flex {{ $alignment == 'center' ? 'justify-content-center' : 'justify-content-lg-start' }}">
                     @foreach ($section->buttons as $button)
                         @component('front.components.link',
                             [
