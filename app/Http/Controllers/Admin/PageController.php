@@ -144,9 +144,6 @@ class PageController extends Controller
             if ($image) {
                 $validated["cover"] = $image->id;
             }
-        } else {
-            // refatora isso
-            $page->cover = $page->cover ? $page->cover->id : $page->cover;
         }
 
         $page->update($validated);

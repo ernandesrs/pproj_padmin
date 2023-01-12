@@ -188,7 +188,6 @@ class Page extends Model
     protected static function booted()
     {
         static::retrieved(function ($page) {
-            $page->cover = $page->cover()->first();
             $page->sections_settings = json_decode($page->sections_settings);
         });
     }

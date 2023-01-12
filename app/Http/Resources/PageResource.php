@@ -36,13 +36,13 @@ class PageResource extends JsonResource
         } else
             $arr["content"] = $this->content;
 
-        if ($this->cover) {
+        if ($cover = $this->cover()->first()) {
             /**
              * flag to page resource(make only small thumbnail)
              */
             session()->flash("mk_thumb", ["small", "normal"]);
 
-            $arr["cover"] = new ImageResource($this->cover);
+            $arr["cover"] = new ImageResource($cover);
         }
 
         return $arr;

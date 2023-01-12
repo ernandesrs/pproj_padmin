@@ -8,5 +8,6 @@
 (Resolvido com implementação de upload de foto a parte)
 
 [Models correction]: evitar carregamento de relacionamentos no método booted() nos modelos
+(Resolvido. Relacionamentos são carregados na classe ResourceApi.)
 
 [Settings View -> SettingsRequest]: redes sociais não estão sendo recebidos no SettingsRequest
