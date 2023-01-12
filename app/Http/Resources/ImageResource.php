@@ -18,7 +18,8 @@ class ImageResource extends JsonResource
     public function toArray($request)
     {
         $arr = parent::toArray($request);
-
+        
+        $arr["references"] = $this->referencesCount();
         $arr["can"] = [
             "view" => (new ImagePolicy())->view(auth()->user(), $this->resource),
             "create" => (new ImagePolicy())->create(auth()->user(), $this->resource),

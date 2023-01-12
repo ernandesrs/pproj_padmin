@@ -24,6 +24,9 @@
                 <BadgeUi class="mb-1 me-1 fw-light"
                     :text="`Tipo de seção: ${terms.type['type_' + section.type]} `"
                     variant="warning" />
+                <BadgeUi class="mb-1 me-1 fw-light text-muted"
+                    :text="`${section.references} referência${section.references > 1 ? 's' : ''}`"
+                    variant="light" />
             </template>
         </ListItem>
     </ListGroup>

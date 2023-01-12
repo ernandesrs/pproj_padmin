@@ -152,6 +152,13 @@ class SectionController extends Controller
     {
         $this->authorize('delete', $section);
 
+        if ($section->pages()->count()) {
+            return redirect()->route("admin.sections.index")->with("flash_alert", [
+                "variant" => "danger",
+                "message" => "Esta seção está sendo referenciada por uma ou mais páginas e não pode ser excluída."
+            ]);
+        }
+
         $section->delete();
 
         return redirect()->route("admin.sections.index")->with("flash_alert", [

@@ -19,6 +19,7 @@ class SectionResource extends JsonResource
 
         $arr = parent::toArray($request);
 
+        $arr['references'] = $this->pages()->count();
         $arr['can'] = [
             'view' => (new SectionPolicy())->view($request->user(), $this->resource),
             'create' => (new SectionPolicy())->create($request->user(), $this->resource),

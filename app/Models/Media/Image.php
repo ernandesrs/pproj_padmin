@@ -94,7 +94,6 @@ class Image extends Model
     {
         static::retrieved(function ($image) {
             $image->url = Storage::url($image->path);
-            $image->references = $image->referencesCount();
         });
     }
 }
