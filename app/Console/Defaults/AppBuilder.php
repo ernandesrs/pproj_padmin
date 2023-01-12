@@ -43,13 +43,13 @@ class AppBuilder
         $logo = (new ImageBuilder())->logo($master);
 
         // default settings
-        $this->settings($favicon, $logo, $banner, $defaultImages, $bindable);
+        $this->settings($favicon, $logo);
     }
 
     /**
      * @return void
      */
-    private function settings($favicon, $logo, $section1, $section2, $section3)
+    private function settings($favicon, $logo)
     {
         $frontSettingsName = "front_settings";
         $adminSettingsName = "admin_settings";
@@ -60,20 +60,11 @@ class AppBuilder
 
         $frontMenu = Menu::all()->first();
 
-        $frontSections = [
-            "home" => [
-                "section_1" => $section1->id,
-                "section_2" => $section2->id,
-                "section_3" => $section3->id,
-            ]
-        ];
-
         $frontSettings = Setting::create([
             "locale" => config("app.locale"),
             "name" => $frontSettingsName,
             "title" => "Configurações do site",
             "description" => "Configurações do site",
-            "sections" => json_encode($frontSections),
 
             "favicon" => $favicon->id,
             "logo" => $logo->id,
@@ -86,7 +77,6 @@ class AppBuilder
             "name" => $adminSettingsName,
             "title" => "Configurações do painel",
             "description" => "Configurações do painel",
-            "sections" => json_encode([]),
 
             "favicon" => $favicon->id,
             "logo" => $logo->id,

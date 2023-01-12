@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\Front\SectionResource;
+use App\Models\Menu;
 use App\Policies\SettingPolicy;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,24 +21,18 @@ class SettingResource extends JsonResource
     {
         $arr = parent::toArray($request);
 
-        if ($favicon = $arr["favicon"])
+        if ($favicon = $this->favicon()->first()) {
             $arr["favicon"] = new ImageResource($favicon);
+        }
 
-        if ($logo = $arr["logo"])
+        if ($logo = $this->logo()->first())
             $arr["logo"] = new ImageResource($logo);
 
         if ($menu_header = $arr["menu_header"])
-            $arr["menu_header"] = new MenuResource($menu_header);
-
-        foreach ($arr["sections"] as $keyPage => $pageSections) {
-            foreach ($pageSections as $keySection => $section) {
-                if ($section)
-                    $arr["sections"]->$keyPage->$keySection = new SectionResource($section);
-            }
-        }
+            $arr["menu_header"] = new MenuResource(Menu::where("id", $menu_header)->first());
 
         if ($menu_footer = $arr["menu_footer"])
-            $arr["menu_footer"] = new MenuResource($menu_footer);
+            $arr["menu_header"] = new MenuResource(Menu::where("id", $menu_footer)->first());
 
         $arr["can"] = [
             "view" => (new SettingPolicy())->view(auth()->user(), $this->resource),

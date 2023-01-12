@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin\Front;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Front\FrontSettingRequest;
+use App\Http\Requests\SettingRequest;
 use App\Http\Resources\MenuResource;
 use App\Http\Resources\SettingResource;
 use App\Models\Media\Image;
 use App\Models\Menu;
-use App\Models\Section\Section;
 use App\Models\Setting;
 use Inertia\Inertia;
 
@@ -26,13 +25,11 @@ class SettingController extends Controller
         $this->authorize("view", $settings);
 
         $menus = MenuResource::collection(Menu::all());
-        $sections = Section::where("visible", true)->get();
 
         return Inertia::render("Admin/Front/Settings", [
             "settings" => new SettingResource($settings),
             "terms" => __("terms"),
             "menus" => $menus,
-            "sections" => $sections,
             "pageTitle" => "Configurações de: " . config("app.name"),
         ]);
     }
@@ -40,13 +37,13 @@ class SettingController extends Controller
     /**
      * Undocumented function
      *
-     * @param FrontSettingRequest $request
+     * @param SettingRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(FrontSettingRequest $request)
+    public function update(SettingRequest $request)
     {
         $validated = $request->validated();
-
+dd($validated);
         $this->updateSettings($validated);
 
         return back()->with("flash_alert", [
@@ -73,7 +70,6 @@ class SettingController extends Controller
         $settings->menu_header = $validated["menu_header"]["id"] ?? $settings->menu_header;
         $settings->menu_footer = $validated["menu_footer"]["id"] ?? $settings->menu_footer;
 
-        $settings->sections = json_encode($validated["sections"] ?? []);
         if ($faviconId = $validated["favicon"] ?? null) {
             $favicon = Image::where("id", $faviconId)->first();
             if ($favicon) {

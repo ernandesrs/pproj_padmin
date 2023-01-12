@@ -19,7 +19,6 @@ class CreateSettingsTable extends Migration
             $table->string('name')->nullable(false)->unique();
             $table->string('title', 50)->nullable(false);
             $table->string('description', 75)->nullable();
-            $table->json('sections')->default(json_encode([]));
             $table->json('socials')->default(json_encode([]));
 
             // FOREIGN KEYS

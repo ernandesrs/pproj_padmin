@@ -58,7 +58,7 @@
                 </TabContent>
                 <TabContent name="contentContent" navName="contentNav">
                     <div class="row">
-                        <div class="col-12 col-xl-6 mb-4">
+                        <div class="col-12 mb-4">
                             <div class="card card-body mb-4 h-100">
                                 <h2 class="fs-5 fw-semibold">Cabeçalho</h2>
                                 <div class="row mb-4">
@@ -114,44 +114,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-12 col-xl-6 mb-4">
-                            <div class="card card-body mb- h-100">
-                                <h2 class="fs-5 fw-semibold">Corpo</h2>
-                                <p class="text-muted">
-                                    Crie seções em <strong>Seções</strong> >
-                                    <Link :href="$route('admin.sections.create')">
-                                    <strong>Nova seção</strong>
-                                    </Link> e defina abaixo quais delas serão exibidas.
-                                </p>
-                                <div class="row">
-                                    <div class="col-12 mb-4">
-                                        <SelectForm label="Seção 1:" name="section_1"
-                                            v-model="form.sections.home.section_1"
-                                            :options="sectionsOptions(['banner'])"
-                                            :error-message="form.errors['sections.section_1']" />
-                                    </div>
-                                    <div class="col-12 mb-4">
-                                        <SelectForm label="Seção 2:" name="section-2"
-                                            v-model="form.sections.home.section_2"
-                                            :options="sectionsOptions(['default'])"
-                                            :error-message="form.errors['sections.section_2']" />
-                                    </div>
-                                    <div class="col-12 mb-4">
-                                        <SelectForm label="Seção 3:" name="section_3"
-                                            v-model="form.sections.home.section_3"
-                                            :options="sectionsOptions(['bindable'])"
-                                            :error-message="form.errors['sections.section_3']" />
-                                    </div>
-                                    <div class="col-12 mb-4">
-                                        <SelectForm label="Seção 4:" name="section_4"
-                                            v-model="form.sections.home.section_4"
-                                            :options="sectionsOptions(['default'])"
-                                            :error-message="form.errors['sections.section_4']" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </TabContent>
                 <TabContent name="othersContent" navName="othersNav">
@@ -191,8 +153,7 @@ export default {
     props: {
         settings: { type: Object, default: {} },
         menus: { type: Object, default: {} },
-        terms: { type: Object, default: {} },
-        sections: { type: Object, default: {} },
+        terms: { type: Object, default: {} }
     },
 
     data() {
@@ -208,14 +169,6 @@ export default {
                 },
                 menu_footer: this.settings?.menu_footer ?? {
                     id: null
-                },
-                sections: {
-                    home: {
-                        section_1: this.settings?.sections?.home?.section_1?.id ?? null,
-                        section_2: this.settings?.sections?.home?.section_2?.id ?? null,
-                        section_3: this.settings?.sections?.home?.section_3?.id ?? null,
-                        section_4: this.settings?.sections?.home?.section_4?.id ?? null,
-                    }
                 }
 
             }),
@@ -224,8 +177,13 @@ export default {
         };
     },
 
+    created(){
+        console.log(this.settings)
+    },
+
     methods: {
         submit() {
+        console.log(this.form)
             if (this.form.menu_header.id == "none")
                 this.form.menu_header.id = null;
 
@@ -253,17 +211,6 @@ export default {
                 this.form.logo = data.id;
             }
         },
-
-        sectionsOptions(allowedSectionTypes = []) {
-            return this.sections.filter((section) => {
-                return allowedSectionTypes.includes(section.type);
-            }).map((section) => {
-                return {
-                    text: `${section.name}`,
-                    value: section.id
-                };
-            });
-        }
     }
 }
 </script>
