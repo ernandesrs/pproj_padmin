@@ -60,7 +60,7 @@ class Page extends Model
         $page->content_type = $validatedData["content_type"];
 
         if ($page->content_type == self::CONTENT_TYPE_VIEW) {
-            $page->sections_settings = json_encode($validatedData["sections_settings"]);
+            $page->sections_settings = json_encode($validatedData["sections_settings"] ?? []);
         } else if ($page->content == self::CONTENT_TYPE_TEXT) {
             $page->content = $validatedData["content"];
         }
@@ -111,7 +111,7 @@ class Page extends Model
                 break;
         }
 
-        $attributes["sections_settings"] = json_encode($attributes["sections_settings"]);
+        $attributes["sections_settings"] = json_encode($attributes["sections_settings"] ?? []);
         if (($attributes["content_type"] ?? $this->content_type) == self::CONTENT_TYPE_VIEW) {
             $this->sections()->sync(self::onlySectionsIds($attributes));
         }
@@ -154,34 +154,6 @@ class Page extends Model
         unset($attributes["sections"]);
 
         return $attributes;
-    }
-
-    /**
-     * Make the page content for view or text content type
-     *
-     * @param array $validatedData
-     * @return string|null
-     */
-    public function makeContent(array $validatedData)
-    {
-        $return = null;
-
-        if ($this->protection == self::PROTECTION_SYSTEM) {
-            if ($this->content_type == self::CONTENT_TYPE_VIEW)
-                $return = $this->sections;
-            else
-                $return = $validatedData["content"];
-        } else {
-            switch ($validatedData["content_type"]) {
-                case self::CONTENT_TYPE_TEXT:
-                    $return = $validatedData["content"];
-                    break;
-                case self::CONTENT_TYPE_VIEW:
-                    $return = $validatedData["view_path"];
-                    break;
-            }
-        }
-        return $return;
     }
 
     /**

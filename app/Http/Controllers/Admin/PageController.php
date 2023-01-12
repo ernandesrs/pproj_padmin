@@ -146,7 +146,7 @@ class PageController extends Controller
             }
         } else {
             // refatora isso
-            $page->cover = $page->cover->id;
+            $page->cover = $page->cover ? $page->cover->id : $page->cover;
         }
 
         $page->update($validated);

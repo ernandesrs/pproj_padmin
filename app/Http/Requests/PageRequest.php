@@ -52,12 +52,27 @@ class PageRequest extends FormRequest
 
             "content_type" => ["required", Rule::in(Page::CONTENT_TYPES)],
             "content" => ["nullable"],
-            "sections" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "array"],
-            "sections_settings" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "array"],
 
-            "sections.*.id" => ["required", "numeric", "exists:sections,id"],
-            "sections_settings.*.id" => ["required", "numeric", "exists:sections,id"],
-            "sections_settings.*.alignment" => ["required", "string", Rule::in(["left", "center", "right"])],
+            "sections.*.id" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "exists:sections,id"],
+
+            "sections_settings.*.id" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "exists:sections,id"],
+            "sections_settings.*.order" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "numeric"],
+            "sections_settings.*.alignment" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, function ($attr, $val, $fail) {
+                $sectionId = json_decode($this->content)->sections[explode(".", $attr)[1]]->id;
+                $section = Section::find($sectionId);
+
+                if ($section->type == Section::TYPE_BINDABLE) {
+                    if (!in_array($val, ["center"])) {
+                        $fail("Alinhamento não aceito para seção escolhida.");
+                        return;
+                    }
+                } else {
+                    if (!in_array($val, ["left", "center", "right"])) {
+                        $fail("Alinhamento do conteúdo da seção não aceito.");
+                        return;
+                    }
+                }
+            }],
         ];
 
         if ($this->page) {

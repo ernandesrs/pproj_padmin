@@ -67,6 +67,26 @@
                                             },
                                         ]" v-model="item.alignment" />
                                     </div>
+                                    <div v-if="form.errors[`sections_settings.${index}.id`] || form.errors[`sections_settings.${index}.alignment`] || form.errors[`sections_settings.${index}.order`]"
+                                        class="col-12">
+                                        <small class="text-danger">
+                                            <span class="me-1">
+                                                {{
+                                                    form.errors[`sections_settings.${index}.id`]
+                                                }}
+                                            </span>
+                                            <span class="me-1">
+                                                {{
+                                                    form.errors[`sections_settings.${index}.alignment`]
+                                                }}
+                                            </span>
+                                            <span>
+                                                {{
+                                                    form.errors[`sections_settings.${index}.order`]
+                                                }}
+                                            </span>
+                                        </small>
+                                    </div>
                                 </div>
                             </template>
                         </SortableList>
@@ -209,7 +229,7 @@ export default {
                     this.form.sections_settings.push({
                         id: item.id,
                         alignment: item.alignment,
-                        order: item.order,
+                        order: item.order
                     });
                 });
             }
