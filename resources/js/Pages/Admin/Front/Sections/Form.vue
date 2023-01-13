@@ -357,12 +357,6 @@ export default {
             if (["default", "banner"].includes(this.form.type))
                 this.form.content = this.tinyEditor;
 
-            // this.form.images = [];
-            // Object.values(this.form.images).map((image) => {
-            //     this.form.images.push(image.id);
-            // });
-            console.log(this.form.images);
-
             if (this.form?.id) {
                 action = route('admin.sections.update', { section: this.section.id });
                 this.form.put(action);
