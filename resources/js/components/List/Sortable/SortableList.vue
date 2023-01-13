@@ -37,9 +37,15 @@ export default {
     },
     methods: {
         reorder(event) {
-            let targetIndexContent = this.theItems[event.newIndex];
+            let targetIndexContent = {
+                ...this.theItems[event.newIndex],
+                order: (parseInt(event.currentIndex) + 1)
+            };
 
-            this.theItems[event.newIndex] = this.theItems[event.currentIndex];
+            this.theItems[event.newIndex] = {
+                ...this.theItems[event.currentIndex],
+                order: (parseInt(event.newIndex) + 1)
+            };
             this.theItems[event.currentIndex] = targetIndexContent;
         },
         deleteItem(event) {

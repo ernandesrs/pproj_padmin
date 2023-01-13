@@ -54,10 +54,8 @@ class PageRequest extends FormRequest
             "content" => ["nullable"],
 
             "sections.*.id" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "exists:sections,id"],
-
-            "sections_settings.*.id" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "exists:sections,id"],
-            "sections_settings.*.order" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "numeric"],
-            "sections_settings.*.alignment" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, function ($attr, $val, $fail) {
+            "sections.*.order" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, "numeric"],
+            "sections.*.alignment" => ["required_if:content_type," . Page::CONTENT_TYPE_VIEW, function ($attr, $val, $fail) {
                 $sectionId = json_decode($this->content)->sections[explode(".", $attr)[1]]->id;
                 $section = Section::find($sectionId);
 

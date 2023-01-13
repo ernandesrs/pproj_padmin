@@ -32,7 +32,7 @@ class PageResource extends JsonResource
         ];
 
         if ($this->content_type == Page::CONTENT_TYPE_VIEW) {
-            $arr["sections"] = SectionResource::collection($this->sections);
+            $arr["sections"] = SectionResource::collection($this->sectionsMergedWithSectionsSettings());
         } else
             $arr["content"] = $this->content;
 

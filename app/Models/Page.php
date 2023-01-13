@@ -6,6 +6,7 @@ use App\Models\Media\Image;
 use App\Models\Section\Section;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Page extends Model
 {
@@ -60,7 +61,7 @@ class Page extends Model
         $page->content_type = $validatedData["content_type"];
 
         if ($page->content_type == self::CONTENT_TYPE_VIEW) {
-            $page->sections_settings = json_encode($validatedData["sections_settings"] ?? []);
+            $page->sections_settings = json_encode(self::getSectionsSettings($validatedData));
         } else if ($page->content == self::CONTENT_TYPE_TEXT) {
             $page->content = $validatedData["content"];
         }
@@ -80,7 +81,7 @@ class Page extends Model
         $page->save();
 
         if ($page->content_type == self::CONTENT_TYPE_VIEW) {
-            $page->sections()->attach(self::onlySectionsIds($validatedData));
+            $page->sections()->attach(self::getOnlySectionsIds($validatedData));
         }
 
         return $page;
@@ -111,9 +112,9 @@ class Page extends Model
                 break;
         }
 
-        $attributes["sections_settings"] = json_encode($attributes["sections_settings"] ?? []);
+        $attributes["sections_settings"] = json_encode(self::getSectionsSettings($attributes));
         if (($attributes["content_type"] ?? $this->content_type) == self::CONTENT_TYPE_VIEW) {
-            $this->sections()->sync(self::onlySectionsIds($attributes));
+            $this->sections()->sync(self::getOnlySectionsIds($attributes));
         }
 
         return parent::update($this->safeAttributes($attributes), $options);
@@ -131,12 +132,29 @@ class Page extends Model
     }
 
     /**
+     * Get sections settings
+     *
+     * @param array $validated
+     * @return array
+     */
+    public static function getSectionsSettings(array $validated)
+    {
+        return Collection::make($validated["sections"] ?? [])->map(function ($section) {
+            return [
+                "id" => $section["id"],
+                "order" => $section["order"],
+                "alignment" => $section["alignment"]
+            ];
+        });
+    }
+
+    /**
      * Only sections ids
      *
      * @param array $validated
      * @return array
      */
-    private static function onlySectionsIds(array $validated)
+    private static function getOnlySectionsIds(array $validated)
     {
         return array_map(function ($item) {
             return $item["id"];
@@ -230,5 +248,26 @@ class Page extends Model
     public function sections()
     {
         return $this->belongsToMany(Section::class, "section_page", "page_id", "section_id");
+    }
+
+    /**
+     * Sections merged with sections settings
+     *
+     * @return array
+     */
+    public function sectionsMergedWithSectionsSettings()
+    {
+        $sectionsSettings = $this->sections_settings;
+        $sections = $this->sections;
+
+        return Collection::make($sectionsSettings)->map(function ($sectionSettings) use ($sections) {
+            $finded = $sections->where("id", $sectionSettings->id)->first();
+
+            if ($finded) {
+                $finded->order = $sectionSettings->order;
+                $finded->alignment = $sectionSettings->alignment;
+                return $finded;
+            }
+        });
     }
 }

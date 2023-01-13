@@ -43,15 +43,18 @@
                         <SortableList v-model="form.sections">
                             <template #item="{ item, index }">
                                 <div class="row justify-centent-center">
-                                    <div class="col-9 col-lg-8 mb-4">
+                                    <div class="col-9 col-lg-8">
                                         <SelectForm label="Seção:" :options="Object.entries(sections).map((sectionInSections) => {
                                             return {
                                                 value: sectionInSections[1].id,
                                                 text: sectionInSections[1].title
                                             };
                                         })" v-model="item.id" />
-                                        <small v-if="!item.visible" class="mt-2 text-muted">
-                                            <IconUi icon="infoCircleFill" /> <span>Seção não será visível. Altere sua visibilidade em Seções.</span>
+                                        <small v-if="page?.id && !item.visible"
+                                            class="mt-2 text-muted">
+                                            <IconUi icon="infoCircleFill" /> <span>Seção
+                                                não será visível. Altere sua visibilidade
+                                                em Seções.</span>
                                         </small>
                                     </div>
                                     <div class="col-3 col-lg-4">
@@ -70,22 +73,22 @@
                                             },
                                         ]" v-model="item.alignment" />
                                     </div>
-                                    <div v-if="form.errors[`sections_settings.${index}.id`] || form.errors[`sections_settings.${index}.alignment`] || form.errors[`sections_settings.${index}.order`]"
+                                    <div v-if="form.errors[`sections.${index}.id`] || form.errors[`sections.${index}.alignment`] || form.errors[`sections.${index}.order`]"
                                         class="col-12">
                                         <small class="text-danger">
                                             <span class="me-1">
                                                 {{
-                                                    form.errors[`sections_settings.${index}.id`]
+                                                    form.errors[`sections.${index}.id`]
                                                 }}
                                             </span>
                                             <span class="me-1">
                                                 {{
-                                                    form.errors[`sections_settings.${index}.alignment`]
+                                                    form.errors[`sections.${index}.alignment`]
                                                 }}
                                             </span>
                                             <span>
                                                 {{
-                                                    form.errors[`sections_settings.${index}.order`]
+                                                    form.errors[`sections.${index}.order`]
                                                 }}
                                             </span>
                                         </small>
@@ -227,17 +230,6 @@ export default {
         submit() {
             let action = route("admin.pages.store");
 
-            this.form.sections_settings = [];
-            if (this.form.sections.length) {
-                Object.values(this.form.sections).map((item) => {
-                    this.form.sections_settings.push({
-                        id: item.id,
-                        alignment: item.alignment,
-                        order: item.order
-                    });
-                });
-            }
-
             if (this.page?.id) {
                 action = route("admin.pages.update", { page: this.page.id });
                 this.form.put(action);
@@ -258,21 +250,17 @@ export default {
             this.form.follow = this.page.follow;
             this.form.content = this.page.content;
 
-            /**
-             * ordena de acordo com sections_settings
-             */
-            this.form.sections = Object.values(this.page.sections_settings).map((s_setting) => {
-                let finded = Object.values(this.page.sections).find((section) => section.id === s_setting.id);
+            this.form.sections = Object.values(this.page.sections).map((section) => {
                 return {
-                    id: s_setting.id,
-                    alignment: s_setting.alignment,
-                    order: s_setting.order,
-                    visible: finded.visible,
-                }
+                    id: section.id,
+                    alignment: section.alignment,
+                    order: section.order,
+                    visible: section.visible,
+                };
             });
+
             this.form.sections_settings = [];
             this.form.status = this.page.status;
-            console.log(this.form.sections);
 
             this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;
         },
