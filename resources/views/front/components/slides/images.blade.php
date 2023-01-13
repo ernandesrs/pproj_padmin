@@ -8,7 +8,7 @@
         @foreach ($images as $key => $image)
             @component('front.components.slides.item',
                 [
-                    'interval' => $slideOptions['interval'] ?? false ? $slideOptions['interval'] : $image->interval ?? 3500,
+                    'interval' => $image->duration ?? 3500,
                 ])
                 @slot('slotItem')
                     <img src="{{ Storage::url($image->path) }}" alt="Slide #{{ $key }}">

@@ -53,7 +53,7 @@ class PageBuilder
                 ],
                 [
                     "id" => $s3->id,
-                    "alignment" => "left",
+                    "alignment" => "center",
                     "order" => 3
                 ]
             ],

@@ -24,6 +24,7 @@ class CreateSectionsTable extends Migration
             $table->string('bindable_class', 125)->nullable()->default(null);
             $table->text('content')->nullable();
             $table->json('buttons')->default(json_encode([]));
+            $table->json('images_settings')->nullable()->default(json_encode([]));
             $table->boolean('visible')->default(false);
             $table->fullText(['name', 'title']);
 

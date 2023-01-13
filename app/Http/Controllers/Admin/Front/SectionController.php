@@ -133,7 +133,7 @@ class SectionController extends Controller
         $this->authorize('update', $section);
 
         $validated  = $request->validated();
-
+// dd($validated);
         $section->update($validated);
 
         return redirect()->route("admin.sections.index")->with("flash_alert", [

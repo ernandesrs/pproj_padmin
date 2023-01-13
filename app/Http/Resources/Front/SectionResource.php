@@ -19,6 +19,19 @@ class SectionResource extends JsonResource
 
         $arr = parent::toArray($request);
 
+        $images = $arr['images'];
+        $arr['images'] = array_map(function ($image_setting) use ($images) {
+            $findedKey = array_search($image_setting->id, array_column($images, 'id'));
+            if ($findedKey === false)
+                return [];
+
+            $image = $images[$findedKey];
+
+            return array_merge($image, [
+                'duration' => $image_setting->duration
+            ]);
+        }, $arr['images_settings']);
+
         $arr['references'] = $this->pages()->count();
         $arr['can'] = [
             'view' => (new SectionPolicy())->view($request->user(), $this->resource),

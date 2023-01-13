@@ -7,6 +7,7 @@ use App\Models\Media\Image;
 use App\Models\Page;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Section extends Model
 {
@@ -32,6 +33,7 @@ class Section extends Model
         "subtitle",
         "content",
         "buttons",
+        "images_settings",
         "bindable_class",
         "visible"
     ];
@@ -45,11 +47,10 @@ class Section extends Model
     public static function create(array $validated)
     {
         $validated = self::organizeData($validated);
-        $images = $validated["images"] ?? null;
+        $images = $validated["images"] ?? [];
         $validated["buttons"] = json_encode($validated["buttons"] ?? []);
 
         unset($validated["images"]);
-
         $section = (new Section($validated));
 
         if (!$section->save())
@@ -71,23 +72,24 @@ class Section extends Model
     public function update(array $attributes = [], array $options = [])
     {
         $validated = self::organizeData($attributes);
-        $images = $validated["images"] ?? null;
+        $images = $validated["images"] ?? [];
         $validated["buttons"] = json_encode($validated["buttons"] ?? []);
 
         unset($validated["images"]);
 
         if ($images) {
-            $existingImagesId = $this->images->map(function ($image) {
-                return $image->id;
-            })->toArray();
-            $imagesToDetach = array_diff($existingImagesId, $images);
-            $imagesToAttach = array_diff($images, $existingImagesId);
+            $this->images()->sync($images);
+            // $existingImagesId = $this->images->map(function ($image) {
+            //     return $image->id;
+            // })->toArray();
+            // $imagesToDetach = array_diff($existingImagesId, $images);
+            // $imagesToAttach = array_diff($images, $existingImagesId);
 
-            if ($imagesToDetach)
-                $this->images()->detach($imagesToDetach);
+            // if ($imagesToDetach)
+            //     $this->images()->detach($imagesToDetach);
 
-            if ($imagesToAttach)
-                $this->images()->attach($imagesToAttach);
+            // if ($imagesToAttach)
+            //     $this->images()->attach($imagesToAttach);
         }
 
         return parent::update($validated, $options);
@@ -105,6 +107,37 @@ class Section extends Model
     }
 
     /**
+     * Get images settings
+     *
+     * @param array $validated
+     * @return array
+     */
+    public static function getImagesSettings(array $validated)
+    {
+        return array_map(function ($image) {
+            return [
+                "id" => $image["id"],
+                "duration" => $image["duration"],
+            ];
+        }, $validated["images"] ?? []);
+    }
+
+    /**
+     * Get images
+     *
+     * @param array $validated
+     * @return array
+     */
+    public static function getImagesId(array $validated)
+    {
+        return array_map(function ($image) {
+            if ($id = $image["id"] ?? null) {
+                return $id;
+            }
+        }, $validated["images"] ?? []);
+    }
+
+    /**
      * Organize data, get images id, remove not required field on specific section types
      *
      * @param array $validated
@@ -114,10 +147,12 @@ class Section extends Model
     {
         switch ($validated["type"]) {
             case self::TYPE_DEFAULT:
+                $validated["images_settings"] = json_encode(self::getImagesSettings($validated));
                 $validated["images"] = self::getImagesId($validated);
                 unset($validated["bindable_class"]);
                 break;
             case self::TYPE_BANNER:
+                $validated["images_settings"] = json_encode(self::getImagesSettings($validated));
                 $validated["images"] = self::getImagesId($validated);
                 unset($validated["bindable_class"]);
                 break;
@@ -126,23 +161,6 @@ class Section extends Model
                 break;
         }
         return $validated;
-    }
-
-    /**
-     * Get images
-     *
-     * @param array $validated
-     * @return null|array
-     */
-    public static function getImagesId(array $validated)
-    {
-        if (empty($validated["images"]))
-            return null;
-
-        $images = $validated["images"];
-        return array_filter($images, function ($image) {
-            if ($image) return $image;
-        });
     }
 
     /**
@@ -171,7 +189,24 @@ class Section extends Model
     {
         return $this->morphToMany(Image::class, "imageable");
     }
-    
+
+    /**
+     * Images merget with images settings
+     *
+     * @return 
+     */
+    public function imagesMergedWithImagesSettings()
+    {
+        $images = $this->images;
+        return Collection::make($this->images_settings)->map(function ($image_setting) use ($images) {
+            $finded = $images->where("id", $image_setting->id)->first();
+            if ($finded) {
+                $finded->duration = $image_setting->duration;
+                return $finded;
+            }
+        });
+    }
+
     /**
      * Pages
      *
@@ -182,10 +217,16 @@ class Section extends Model
         return $this->belongsToMany(Page::class, "section_page", "section_id", "page_id");
     }
 
+    /**
+     * Booted
+     *
+     * @return void
+     */
     protected static function booted()
     {
-        static::retrieved(function($section){
+        static::retrieved(function ($section) {
             $section->buttons = json_decode($section->buttons);
+            $section->images_settings = json_decode($section->images_settings);
         });
     }
 }

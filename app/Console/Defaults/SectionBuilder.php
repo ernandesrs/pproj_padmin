@@ -29,7 +29,16 @@ class SectionBuilder
             "title" => "Bem vindo ao live-preview do PADMIN",
             "content" => "PADMIN é um painel administrativo criado com o objetivo de colocar em teste meus conhecimentos em Vue JS com Inertia JS no frontend e Laravel no backend.",
             "visible" => true,
-            "images" => [$image1->id, $image2->id],
+            "images" => [
+                [
+                    "id" => $image1->id,
+                    "duration" => 3500,
+                ],
+                [
+                    "id" => $image2->id,
+                    "duration" => 3500,
+                ]
+            ],
             "buttons" => [
                 [
                     "text" => "Acessar painel",
@@ -86,7 +95,16 @@ class SectionBuilder
             "subtitle" => "PADMIN é um painel administrativo!",
             "visible" => true,
             "content" => "<p>Ele foi criado para colocar em teste meus conhecimentos adquiridos em Laravel e Vue JS com Inertia JS. Ele possui toda a parte de autenticação criada do zero, além do gerenciamento de usuários, regras, mídias; e o gerenciamento de um site.</p><h4>Este site é gerenciado por um painel PADMIN!</h4>",
-            "images" => [$image1->id, $image2->id],
+            "images" => [
+                [
+                    "id" => $image1->id,
+                    "duration" => 2500,
+                ],
+                [
+                    "id" => $image2->id,
+                    "duration" => 1500,
+                ]
+            ],
             "buttons" => [
                 [
                     "text" => "Previsualização",

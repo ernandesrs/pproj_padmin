@@ -34,15 +34,18 @@ class SectionRequest extends FormRequest
             "bindable_class" => ["required_if:type," . Section::TYPE_BINDABLE],
             "visible" => ["required", "boolean"],
 
-            "buttons" => ["nullable"],
             "buttons.*.text" => ["nullable", "string"],
             "buttons.*.title" => ["nullable", "string"],
             "buttons.*.url" => ["nullable", "string"],
             "buttons.*.target" => ["nullable", "string", Rule::in(["_blank", "_self"])],
             "buttons.*.style" => ["nullable", "string", Rule::in(["primary", "outline-primary", "secondary", "secondary-primary", "link"])],
+            "buttons.*.icon.source" => ["nullable", "string", Rule::in(["html", "local"])],
+            "buttons.*.icon.class" => ["nullable", "string"],
+            "buttons.*.icon.name" => ["nullable", "string"],
+            "buttons.*.icon.position" => ["nullable", "string", Rule::in(["start", "end"])],
 
-            "images" => ["nullable"],
-            "images.*" => ["nullable", "numeric", "exists:images,id"]
+            "images.*.id" => ["nullable", "numeric", "exists:images,id"],
+            "images.*.duration" => ["nullable", "numeric", "min:1000", "max:99000"],
         ];
 
         return $rules;

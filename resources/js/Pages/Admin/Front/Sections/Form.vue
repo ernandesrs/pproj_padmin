@@ -69,7 +69,7 @@
 
                                     <TabpanelUi pills navs-alignment="center">
                                         <template v-slot:tabNavs>
-                                            <TabNavItem v-for="image, key in images"
+                                            <TabNavItem v-for="image, key in form.images"
                                                 :key="key" :name="`image${key}`"
                                                 :content-name="`image${key}Panel`"
                                                 :text="`${(key + 1)}`"
@@ -77,7 +77,7 @@
                                         </template>
 
                                         <template v-slot:tabContents>
-                                            <TabContent v-for="image, key in images"
+                                            <TabContent v-for="image, key in form.images"
                                                 :key="key" :name="`image${key}Panel`"
                                                 :nav-name="`image${key}`"
                                                 :show="key == 0 ? true : false">
@@ -91,11 +91,11 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <InputForm v-if="false"
-                                                        label="Duração em segundos:"
-                                                        v-model="form.images[key].interval"
-                                                        :error-message="form.errors['images.' + key + '.interval']"
-                                                        :mask="['#.###', '##.###']" />
+                                                    <InputForm
+                                                        label="Duração em milisegundos:"
+                                                        v-model="image.duration"
+                                                        :error-message="form.errors['images.' + key + '.duration']"
+                                                        :mask="['####', '#####']" />
                                                 </div>
 
                                                 <!-- image delete/upload -->
@@ -296,10 +296,9 @@ export default {
                 buttons: [],
                 bindable_class: null,
                 visible: false,
-                images: []
+                images: [],
+                images_settings: [],
             }),
-
-            images: [],
 
             tinyEditor: null,
             tinyEditorError: null,
@@ -339,10 +338,11 @@ export default {
         this.form.buttons = this.section.buttons;
         this.form.bindable_class = this.section.bindable_class;
         this.form.visible = this.section.visible;
+        console.log(this.section);
 
         // image/images
         if (["default", "banner"].includes(this.section.type)) {
-            this.images = this.section.images ?? [];
+            this.form.images = this.section.images ?? [];
         }
 
         this.form.buttons = this.section.buttons;
@@ -357,10 +357,11 @@ export default {
             if (["default", "banner"].includes(this.form.type))
                 this.form.content = this.tinyEditor;
 
-            this.form.images = [];
-            Object.values(this.images).map((image) => {
-                this.form.images.push(image.id);
-            });
+            // this.form.images = [];
+            // Object.values(this.form.images).map((image) => {
+            //     this.form.images.push(image.id);
+            // });
+            console.log(this.form.images);
 
             if (this.form?.id) {
                 action = route('admin.sections.update', { section: this.section.id });
@@ -387,8 +388,8 @@ export default {
 
         insertImage(data) {
             if (["default", "banner"].includes(this.form.type)) {
-                this.images[this.insertImageOn].id = data.id;
-                this.images[this.insertImageOn].url = data.thumb_small;
+                this.form.images[this.insertImageOn].id = data.id;
+                this.form.images[this.insertImageOn].url = data.thumb_small;
             }
         },
         /**
@@ -399,8 +400,9 @@ export default {
          * start images
          */
         addNewImage() {
-            this.images.push({
+            this.form.images.push({
                 id: null,
+                duration: 2000,
                 url: null
             });
         },
@@ -408,7 +410,7 @@ export default {
             let index = event.path[2].getAttribute("data-item");
             if (!index) return;
 
-            this.images.splice(index, 1);
+            this.form.images.splice(index, 1);
         },
         /**
          * end images
