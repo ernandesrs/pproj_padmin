@@ -50,6 +50,9 @@
                                                 text: sectionInSections[1].title
                                             };
                                         })" v-model="item.id" />
+                                        <small v-if="!item.visible" class="mt-2 text-muted">
+                                            <IconUi icon="infoCircleFill" /> <span>Seção não será visível. Altere sua visibilidade em Seções.</span>
+                                        </small>
                                     </div>
                                     <div class="col-3 col-lg-4">
                                         <SelectForm label="Alinhamento:" :options="[
@@ -186,11 +189,12 @@ import ModalImagesList from '../Medias/Images/ModalImagesList.vue';
 import ImagePreviewUi from '../../../Components/Ui/ImagePreviewUi.vue';
 import TextAreaForm from '../../../Components/Form/TextAreaForm.vue';
 import SortableList from '../../../Components/List/Sortable/SortableList.vue';
+import IconUi from '../../../Components/Ui/IconUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi, TextAreaForm, SortableList },
+    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi, TextAreaForm, SortableList, IconUi },
     props: {
         page: { type: Object, default: {} },
         sections: { type: Object, default: {} },
@@ -258,14 +262,17 @@ export default {
              * ordena de acordo com sections_settings
              */
             this.form.sections = Object.values(this.page.sections_settings).map((s_setting) => {
+                let finded = Object.values(this.page.sections).find((section) => section.id === s_setting.id);
                 return {
                     id: s_setting.id,
                     alignment: s_setting.alignment,
                     order: s_setting.order,
+                    visible: finded.visible,
                 }
             });
             this.form.sections_settings = [];
             this.form.status = this.page.status;
+            console.log(this.form.sections);
 
             this.form.schedule_to = this.page.schedule_to ? new Date(this.page.schedule_to).toISOString().slice(0, 10) : null;
         },

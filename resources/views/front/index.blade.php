@@ -9,7 +9,7 @@
 
     @foreach ($sections_settings ?? [] as $setting_section)
         @php
-            $section = $sections->where('id', $setting_section->id)->first();
+            $section = $sections->where('id', $setting_section->id)->where('visible', true)->first();
         @endphp
 
         @if ($section)
