@@ -32,17 +32,6 @@ class PageBuilder
             "sections" => [
                 [
                     "id" => $s1->id,
-                ],
-                [
-                    "id" => $s2->id,
-                ],
-                [
-                    "id" => $s3->id
-                ]
-            ],
-            "sections_settings" => [
-                [
-                    "id" => $s1->id,
                     "alignment" => "left",
                     "order" => 1
                 ],
