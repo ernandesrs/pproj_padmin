@@ -75,7 +75,6 @@ export default {
     },
 
     emits: {
-        // 'iconHasSet': null,
         'requestingIconsModal': null,
         'requestingModalIconsHelp': null
     },
@@ -83,10 +82,10 @@ export default {
     data() {
         return {
             icon: {
-                source: this.iconData.source ?? 'local',
-                name: this.iconData.name ?? null,
-                class: this.iconData.class ?? null,
-                position: this.iconData.position ?? 'start'
+                source: this.iconData?.source ?? 'local',
+                name: this.iconData?.name ?? null,
+                class: this.iconData?.class ?? null,
+                position: this.iconData?.position ?? 'start'
             }
         }
     },
@@ -96,10 +95,10 @@ export default {
             immediate: true,
             deep: true,
             handler(nv) {
-                this.icon.source = nv.source;
-                this.icon.name = nv.name;
-                this.icon.class = nv.class;
-                this.icon.position = nv.position;
+                this.icon.source = nv?.source;
+                this.icon.name = nv?.name;
+                this.icon.class = nv?.class;
+                this.icon.position = nv?.position;
             }
         }
     },
@@ -134,10 +133,6 @@ export default {
 
         showIconsHelpModal() {
             this.$emit('requestingModalIconsHelp');
-        },
-
-        emitUpdateEvent() {
-            // this.$emit('iconHasSet', this.icon);
         }
     }
 };

@@ -19,64 +19,55 @@
                 </div>
 
                 <div class="col-12 col-md-10 col-lg-7 mb-4">
-                    <AccordionGroup>
-                        <AccordionItem v-for="item, key in items" :key="key" :id="key"
-                            :header-text="item.text"
-                            @showedIndexHasUpdated="updateButtonIndex">
-                            <div class="row">
-                                <div class="col-12 col-sm-6 mb-3">
-                                    <SelectForm @hasChange="changeOrder" label="Ordem:"
-                                        v-model="item.order" :options="options"
-                                        only-values />
-                                </div>
+                    <AccordionGroup id="menu_links">
+                        <SortableList v-model="form.items">
+                            <template #item="{ item, index }">
+                                <AccordionItem :id="index" :header-text="item.text">
+                                    <div class="row" :data-index="index">
+                                        <div class="col-12 col-sm-6 mb-3">
+                                            <SelectForm label="Abrir na:" :options="[
+                                                {
+                                                    value: '_self',
+                                                    text: 'Aba atual'
+                                                },
+                                                {
+                                                    value: '_blank',
+                                                    text: 'Outra aba'
+                                                }
+                                            ]" v-model="item.target"
+                                                :error-message="form.errors[`items.${index}.target`]" />
+                                        </div>
 
-                                <div class="col-12 col-sm-6 mb-3">
-                                    <SelectForm label="Abrir na:" :options="[
-                                        {
-                                            value: '_self',
-                                            text: 'Aba atual'
-                                        },
-                                        {
-                                            value: '_blank',
-                                            text: 'Outra aba'
-                                        }
-                                    ]" v-model="item.target"
-                                        :error-message="form.errors[`items.${key}.target`]" />
-                                </div>
+                                        <div class="col-12 col-sm-6 mb-3">
+                                            <InputForm label="Texto:" v-model="item.text"
+                                                :error-message="form.errors[`items.${index}.text`]" />
+                                        </div>
 
-                                <div class="col-12 col-sm-6 mb-3">
-                                    <InputForm label="Texto:" v-model="item.text"
-                                        :error-message="form.errors[`items.${key}.text`]" />
-                                </div>
+                                        <div class="col-12 col-sm-6 mb-3">
+                                            <InputForm label="Título:"
+                                                v-model="item.title"
+                                                :error-message="form.errors[`items.${index}.title`]" />
+                                        </div>
 
-                                <div class="col-12 col-sm-6 mb-3">
-                                    <InputForm label="Título:" v-model="item.title"
-                                        :error-message="form.errors[`items.${key}.title`]" />
-                                </div>
+                                        <div class="col-12 mb-3">
+                                            <InputForm label="URL:" v-model="item.url"
+                                                :error-message="form.errors[`items.${index}.url`]" />
+                                        </div>
 
-                                <div class="col-12 mb-3">
-                                    <InputForm label="URL:" v-model="item.url"
-                                        :error-message="form.errors[`items.${key}.url`]" />
-                                </div>
-
-                                <div class="col-12 mb-3">
-                                    <IconSetter @iconHasSet="iconHasSet"
-                                        @requestingIconsModal="showIconsModal = true"
-                                        @requestingModalIconsHelp="showModalIconsHelp = true"
-                                        :icon-data="item.icon" />
-                                </div>
-
-                                <div class="col-12 text-center">
-                                    <ButtonConfirmationUi @hasConfirmed="removeItem"
-                                        @hasCanceled="" icon="trash" variant="danger"
-                                        size="sm" position="center" :data-item="key" />
-                                </div>
-                            </div>
-                        </AccordionItem>
+                                        <div class="col-12 mb-3">
+                                            <IconSetter
+                                                @requestingIconsModal="showIconModalAndUpdateLinkItemIndexUnderEdit"
+                                                @requestingModalIconsHelp="showModalIconsHelp = true" :icon-data="item.icon" />
+                                        </div>
+                                    </div>
+                                </AccordionItem>
+                            </template>
+                        </SortableList>
                     </AccordionGroup>
                 </div>
 
-                <div v-if="!menu?.id || menu?.id && menu.can.update" class="col-12 text-center">
+                <div v-if="!menu?.id || menu?.id && menu.can.update"
+                    class="col-12 text-center">
                     <ButtonUi type="submit" variant="primary"
                         :text="`${menu.id ? 'Atualizar menu' : 'Salvar menu'}`"
                         icon="checkLg" :disabled="form.processing" />
@@ -101,11 +92,12 @@ import ModalUi from '../../../../Components/Ui/ModalUi.vue';
 import IconSetter from '../../../../Components/IconSetter/IconSetter.vue';
 import ModalIcons from '../../../../Components/IconSetter/ModalIcons.vue';
 import ModalIconHelp from '../../../../Components/IconSetter/ModalIconHelp.vue';
+import SortableList from '../../../../Components/List/Sortable/SortableList.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, AccordionGroup, AccordionItem, ModalUi, IconSetter, ModalIcons, ModalIconHelp },
+    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, AccordionGroup, AccordionItem, ModalUi, IconSetter, ModalIcons, ModalIconHelp, SortableList },
     props: {
         menu: { type: Object, default: {} }
     },
@@ -115,30 +107,28 @@ export default {
             form: useForm({
                 id: null,
                 name: null,
-                items: null
+                items: []
             }),
-            items: [],
 
             showModalIconsHelp: false,
             showIconsModal: false,
-            buttonIndex: -1,
+            linkItemIndex: -1,
         };
     },
 
-    mounted() {
+    created() {
         if (!this.menu?.id) return;
 
         this.form.id = this.menu.id;
         this.form.name = this.menu.name;
-        this.items = this.menu.items;
+        this.form.items = this.menu.items;
 
-        this.updateItemsOrder();
+        console.log(this.form.items);
     },
 
     methods: {
         submit() {
             let action = route("admin.menus.store");
-            this.form.items = this.items;
 
             if (this.form?.id) {
                 action = route('admin.menus.update', { menu: this.menu.id });
@@ -149,11 +139,13 @@ export default {
         },
 
         addMenuItem() {
-            this.items.unshift({
-                text: "Menu item text",
+            let index = this.form.items.length + 1;
+
+            this.form.items.unshift({
+                text: "Menu text " + index,
                 url: "https://example.com",
                 target: "_self",
-                title: "Menu item title",
+                title: "Menu item title " + index,
                 icon: {
                     source: "local",
                     name: null,
@@ -161,65 +153,26 @@ export default {
                     position: "start"
                 },
             });
-
-            this.updateItemsOrder();
-        },
-
-        removeItem(event) {
-            let item = event.path[2].getAttribute("data-item");
-
-            if (!item) return;
-
-            this.items.splice(item, 1);
-            this.updateItemsOrder();
-        },
-
-        changeOrder(event) {
-            let max = this.items.length;
-            let oldOrder = event.target._value;
-            let newOrder = event.target.value;
-
-            if (newOrder < 0 || newOrder > max) {
-                this.items[oldOrder].order = oldOrder;
-                return;
-            }
-
-            let bkp = this.items[newOrder];
-            this.items[newOrder] = this.items[oldOrder];
-            this.items[oldOrder] = bkp;
-
-            this.updateItemsOrder();
-        },
-
-        updateItemsOrder() {
-            this.items = this.items.map((item, index) => {
-                item.order = index;
-                return item;
-            });
-        },
-
-        updateButtonIndex(nindex) {
-            this.buttonIndex = nindex;
         },
 
         /**
          * ICON
          */
+        showIconModalAndUpdateLinkItemIndexUnderEdit(event) {
+            this.showIconsModal = true;
+            this.linkItemIndex = parseInt(event.path[5].getAttribute("data-index"));s
+        },
 
         iconHasChoosed(icon) {
             this.showIconsModal = false;
-            this.items[this.buttonIndex].icon.class = icon.class;
-            this.items[this.buttonIndex].icon.name = icon.name;
+            this.form.items[this.linkItemIndex].icon.class = icon.class;
+            this.form.items[this.linkItemIndex].icon.name = icon.name;
         },
-
-        iconHasSet(icon) {
-            this.items[this.buttonIndex].icon = icon;
-        }
     },
 
     computed: {
         options() {
-            let numbers = Object.keys(new Array(this.items.length).fill(null)).map(Number);
+            let numbers = Object.keys(new Array(this.form.items.length).fill(null)).map(Number);
             let options = numbers.map((item) => {
                 return {
                     text: item + 1,
