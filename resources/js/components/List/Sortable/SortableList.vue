@@ -1,12 +1,12 @@
 <template>
 
-    <SortableListItem @changeOrder="reorder" @deleteConfirm="deleteItem"
-        v-for="item, index in theItems" :key="index" :index="index">
-        <slot name="item" v-bind="{
-            item: item,
-            index: index
-        }" />
-    </SortableListItem>
+        <SortableListItem @changeOrder="reorder" @deleteConfirm="deleteItem"
+            v-for="item, index in theItems" :key="index" :index="index">
+            <slot name="item" v-bind="{
+                item: item,
+                index: index
+            }" />
+        </SortableListItem>
 
 </template>
 
@@ -42,11 +42,14 @@ export default {
                 order: (parseInt(event.currentIndex) + 1)
             };
 
-            this.theItems[event.newIndex] = {
-                ...this.theItems[event.currentIndex],
-                order: (parseInt(event.newIndex) + 1)
-            };
-            this.theItems[event.currentIndex] = targetIndexContent;
+            /**
+             * para evitar o problema: Failed to execute 'replaceState' on 'History'
+             */
+            Object.entries(this.theItems[event.newIndex]).map((theItem)=>{
+                this.theItems[event.newIndex][theItem[0]] = this.theItems[event.currentIndex][theItem[0]];
+
+                this.theItems[event.currentIndex][theItem[0]] = targetIndexContent[theItem[0]];
+            });
         },
         deleteItem(event) {
             this.theItems.splice(event.currentIndex, 1);

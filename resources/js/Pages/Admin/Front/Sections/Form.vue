@@ -1,7 +1,7 @@
 <template>
 
-    <ModalIcons :show="showIconsModal" @modalClose="showIconsModal = false"
-        @iconHasChoosed="iconHasChoosed" />
+    <ModalIcons @icon-has-choosed="iconHasChoosed" :show="showIconsModal"
+        @modalClose="showIconsModal = false" />
 
     <ModalIconHelp :show="showModalIconsHelp" @modalClose="showModalIconsHelp = false" />
 
@@ -149,62 +149,64 @@
                                             icon="plusLg" size="sm" />
                                     </div>
                                     <AccordionGroup id="sections_buttons_links">
-                                    <SortableList v-model="form.buttons">
-                                        <template #item="{ item, index }">
-                                            <AccordionItem :header-text="item.text" :id="index">
-                                            <div class="row" :data-index="index">
-                                                <div class="col-6 col-xl-6 mb-3">
-                                                    <SelectForm label="Estilo:"
-                                                        v-model="item.style" :options="[
-                                                            { value: 'primary', text: 'Primário' },
-                                                            { value: 'outline-primary', text: 'Primário bordado' },
-                                                            { value: 'secondary', text: 'Secundário' },
-                                                            { value: 'outline-secondary', text: 'Secundário bordado' },
-                                                            { value: 'link', text: 'Link' },
-                                                        ]" only-values />
-                                                </div>
-                                                <div class="col-12 col-sm-6 mb-3">
-                                                    <InputForm label="Texto:"
-                                                        v-model="item.text"
-                                                        :error-message="form.errors[`buttons.${index}.text`]" />
-                                                </div>
-                                                <div class="col-12 col-sm-6 mb-3">
-                                                    <InputForm label="Título:"
-                                                        v-model="item.title"
-                                                        :error-message="form.errors[`buttons.${index}.title`]" />
-                                                </div>
-                                                <div
-                                                    class="col-12 col-sm-6 col-lg-8 mb-3">
-                                                    <InputForm label="URL:"
-                                                        v-model="item.url"
-                                                        :error-message="form.errors[`buttons.${index}.url`]" />
-                                                </div>
-                                                <div
-                                                    class="col-12 col-sm-6 col-lg-4 mb-3">
-                                                    <SelectForm label="Abrir na:"
-                                                        :options="[
-                                                            {
-                                                                value: '_self',
-                                                                text: 'Aba atual'
-                                                            },
-                                                            {
-                                                                value: '_blank',
-                                                                text: 'Outra aba'
-                                                            }
-                                                        ]" v-model="item.target"
-                                                        :error-message="form.errors[`buttons.${index}.target`]" />
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <IconSetter @iconHasSet="iconHasSet"
-                                                        @requestingIconsModal="showIconModalAndUpdateLinkIndexUnderEdit"
-                                                        @requestingModalIconsHelp="showModalIconsHelp = true"
-                                                        :icon-data="item.icon" />
-                                                </div>
-                                            </div>
-                                        </AccordionItem>
-                                        </template>
-                                    </SortableList>
-                                </AccordionGroup>
+                                        <SortableList v-model="form.buttons">
+                                            <template #item="{ item, index }">
+                                                <AccordionItem :header-text="item.text"
+                                                    :id="index">
+                                                    <div class="row" :data-index="index">
+                                                        <div class="col-6 col-xl-6 mb-3">
+                                                            <SelectForm label="Estilo:"
+                                                                v-model="item.style"
+                                                                :options="[
+                                                                    { value: 'primary', text: 'Primário' },
+                                                                    { value: 'outline-primary', text: 'Primário bordado' },
+                                                                    { value: 'secondary', text: 'Secundário' },
+                                                                    { value: 'outline-secondary', text: 'Secundário bordado' },
+                                                                    { value: 'link', text: 'Link' },
+                                                                ]" only-values />
+                                                        </div>
+                                                        <div class="col-12 col-sm-6 mb-3">
+                                                            <InputForm label="Texto:"
+                                                                v-model="item.text"
+                                                                :error-message="form.errors[`buttons.${index}.text`]" />
+                                                        </div>
+                                                        <div class="col-12 col-sm-6 mb-3">
+                                                            <InputForm label="Título:"
+                                                                v-model="item.title"
+                                                                :error-message="form.errors[`buttons.${index}.title`]" />
+                                                        </div>
+                                                        <div
+                                                            class="col-12 col-sm-6 col-lg-8 mb-3">
+                                                            <InputForm label="URL:"
+                                                                v-model="item.url"
+                                                                :error-message="form.errors[`buttons.${index}.url`]" />
+                                                        </div>
+                                                        <div
+                                                            class="col-12 col-sm-6 col-lg-4 mb-3">
+                                                            <SelectForm label="Abrir na:"
+                                                                :options="[
+                                                                    {
+                                                                        value: '_self',
+                                                                        text: 'Aba atual'
+                                                                    },
+                                                                    {
+                                                                        value: '_blank',
+                                                                        text: 'Outra aba'
+                                                                    }
+                                                                ]" v-model="item.target"
+                                                                :error-message="form.errors[`buttons.${index}.target`]" />
+                                                        </div>
+                                                        <div class="col-12 mb-3">
+                                                            <IconSetter
+                                                                @requestingIconsModal="showIconModalAndUpdateLinkIndexUnderEdit"
+                                                                @requestingModalIconsHelp="showModalIconsHelp = true"
+                                                                :icon-data="item.icon" />
+                                                        </div>
+                                                    </div>
+                                                </AccordionItem>
+                                            </template>
+                                        </SortableList>
+                                    </AccordionGroup>
                                 </div>
 
                                 <div v-if="form.buttons.length == 0"
@@ -328,8 +330,6 @@ export default {
         if (["default", "banner"].includes(this.section.type)) {
             this.form.images = this.section.images ?? [];
         }
-
-        this.form.buttons = this.section.buttons;
     },
 
     methods: {
@@ -429,10 +429,6 @@ export default {
             this.form.buttons[this.buttonIndex].icon.class = icon.class;
             this.form.buttons[this.buttonIndex].icon.name = icon.name;
         },
-
-        iconHasSet(icon) {
-            this.form.buttons[this.buttonIndex].icon = icon;
-        }
         /**
          * end icon
          */

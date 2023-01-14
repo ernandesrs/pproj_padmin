@@ -75,7 +75,7 @@ export default {
     },
 
     emits: {
-        'iconHasSet': null,
+        // 'iconHasSet': null,
         'requestingIconsModal': null,
         'requestingModalIconsHelp': null
     },
@@ -137,7 +137,7 @@ export default {
         },
 
         emitUpdateEvent() {
-            this.$emit('iconHasSet', this.icon);
+            // this.$emit('iconHasSet', this.icon);
         }
     }
 };

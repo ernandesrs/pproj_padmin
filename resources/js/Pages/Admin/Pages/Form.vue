@@ -257,14 +257,7 @@ export default {
             this.form.follow = this.page.follow;
             this.form.content = this.page.content;
 
-            this.form.sections = Object.values(this.page.sections).map((section) => {
-                return {
-                    id: section.id,
-                    alignment: section.alignment,
-                    order: section.order,
-                    visible: section.visible,
-                };
-            });
+            this.form.sections = this.page.sections;
 
             this.form.sections_settings = [];
             this.form.status = this.page.status;
