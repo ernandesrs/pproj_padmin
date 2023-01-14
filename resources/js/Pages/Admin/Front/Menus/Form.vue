@@ -43,7 +43,7 @@
                                                 :error-message="form.errors[`items.${index}.text`]" />
                                         </div>
 
-                                        <div class="col-12 col-sm-6 mb-3">
+                                        <div class="col-12 mb-3">
                                             <InputForm label="Título:"
                                                 v-model="item.title"
                                                 :error-message="form.errors[`items.${index}.title`]" />
