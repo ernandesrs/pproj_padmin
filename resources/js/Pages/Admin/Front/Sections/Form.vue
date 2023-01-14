@@ -58,7 +58,7 @@
 
                 <div class="col-12 col-md-10 col-lg-6 mb-4">
                     <!-- images -->
-                    <div class="mb-4 d-none">
+                    <div class="mb-4">
                         <CardUi no-shadow border
                             v-if="['banner', 'default'].includes(form.type)">
                             <template v-slot:content>
@@ -201,9 +201,33 @@
                                                                 @requestingIconsModal="showIconModalAndUpdateLinkIndexUnderEdit"
                                                                 @requestingModalIconsHelp="showModalIconsHelp = true"
                                                                 :icon-data="item.icon" />
+
+                                                            <small
+                                                                v-if="form.errors[`buttons.${index}.icon.source`] || form.errors[`buttons.${index}.icon.class`] || form.errors[`buttons.${index}.icon.name`] || form.errors[`buttons.${index}.icon.position`]"
+                                                                class="pt-1 text-danger">
+                                                                {{
+                                                                    form.errors[`buttons.${index}.icon.source`]
+                                                                }}
+                                                                {{
+                                                                    form.errors[`buttons.${index}.icon.class`]
+                                                                }}
+                                                                {{
+                                                                    form.errors[`buttons.${index}.icon.name`]
+                                                                }}
+                                                                {{
+                                                                    form.errors[`buttons.${index}.icon.position`]
+                                                                }}
+                                                            </small>
                                                         </div>
                                                     </div>
                                                 </AccordionItem>
+
+                                                <small
+                                                    v-if="form.errors[`buttons.${index}.target`] || form.errors[`buttons.${index}.text`] || form.errors[`buttons.${index}.title`] || form.errors[`buttons.${index}.url`] || form.errors[`buttons.${index}.icon.source`] || form.errors[`buttons.${index}.icon.class`] || form.errors[`buttons.${index}.icon.name`] || form.errors[`buttons.${index}.icon.position`]"
+                                                    class="pt-1 text-danger">
+                                                    Erro(s) foi/foram encontrados neste
+                                                    item.
+                                                </small>
                                             </template>
                                         </SortableList>
                                     </AccordionGroup>
