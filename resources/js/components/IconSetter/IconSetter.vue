@@ -128,8 +128,8 @@ export default {
             this.emitUpdateEvent();
         },
 
-        showIconsModal() {
-            this.$emit('requestingIconsModal');
+        showIconsModal(event) {
+            this.$emit('requestingIconsModal', event);
         },
 
         showIconsHelpModal() {

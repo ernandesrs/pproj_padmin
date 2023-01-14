@@ -1,21 +1,21 @@
 <template>
 
-    <SortingItem @changeOrder="reorder" @deleteConfirm="deleteItem"
+    <SortableListItem @changeOrder="reorder" @deleteConfirm="deleteItem"
         v-for="item, index in theItems" :key="index" :index="index">
         <slot name="item" v-bind="{
             item: item,
             index: index
         }" />
-    </SortingItem>
+    </SortableListItem>
 
 </template>
 
 <script>
 
-import SortingItem from './SortingItem.vue';
+import SortableListItem from './SortableListItem.vue';
 
 export default {
-    components: { SortingItem },
+    components: { SortableListItem },
     props: {
         modelValue: { type: Array, default: [] }
     },

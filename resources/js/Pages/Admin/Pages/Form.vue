@@ -42,58 +42,64 @@
 
                         <SortableList v-model="form.sections">
                             <template #item="{ item, index }">
-                                <div class="row justify-centent-center">
-                                    <div class="col-9 col-lg-8">
-                                        <SelectForm label="Seção:" :options="Object.entries(sections).map((sectionInSections) => {
-                                            return {
-                                                value: sectionInSections[1].id,
-                                                text: sectionInSections[1].title
-                                            };
-                                        })" v-model="item.id" />
-                                        <small v-if="page?.id && !item.visible"
-                                            class="mt-2 text-muted">
-                                            <IconUi icon="infoCircleFill" /> <span>Seção
-                                                não será visível. Altere sua visibilidade
-                                                em Seções.</span>
-                                        </small>
-                                    </div>
-                                    <div class="col-3 col-lg-4">
-                                        <SelectForm label="Alinhamento:" :options="[
-                                            {
-                                                value: 'left',
-                                                text: 'Esquerda'
-                                            },
-                                            {
-                                                value: 'right',
-                                                text: 'Direita'
-                                            },
-                                            {
-                                                value: 'center',
-                                                text: 'Centro'
-                                            },
-                                        ]" v-model="item.alignment" />
-                                    </div>
-                                    <div v-if="form.errors[`sections.${index}.id`] || form.errors[`sections.${index}.alignment`] || form.errors[`sections.${index}.order`]"
-                                        class="col-12">
-                                        <small class="text-danger">
-                                            <span class="me-1">
-                                                {{
-                                                    form.errors[`sections.${index}.id`]
-                                                }}
-                                            </span>
-                                            <span class="me-1">
-                                                {{
-                                                    form.errors[`sections.${index}.alignment`]
-                                                }}
-                                            </span>
-                                            <span>
-                                                {{
-                                                    form.errors[`sections.${index}.order`]
-                                                }}
-                                            </span>
-                                        </small>
-                                    </div>
-                                </div>
+                                <CardUi no-shadow>
+                                    <template v-slot:content>
+                                        <div class="row justify-centent-center">
+                                            <div class="col-9 col-lg-8">
+                                                <SelectForm label="Seção:" :options="Object.entries(sections).map((sectionInSections) => {
+                                                    return {
+                                                        value: sectionInSections[1].id,
+                                                        text: sectionInSections[1].title
+                                                    };
+                                                })" v-model="item.id" />
+                                                <small v-if="page?.id && !item.visible"
+                                                    class="mt-2 text-muted">
+                                                    <IconUi icon="infoCircleFill" />
+                                                    <span>Seção
+                                                        não será visível. Altere sua
+                                                        visibilidade
+                                                        em Seções.</span>
+                                                </small>
+                                            </div>
+                                            <div class="col-3 col-lg-4">
+                                                <SelectForm label="Alinhamento:" :options="[
+                                                    {
+                                                        value: 'left',
+                                                        text: 'Esquerda'
+                                                    },
+                                                    {
+                                                        value: 'right',
+                                                        text: 'Direita'
+                                                    },
+                                                    {
+                                                        value: 'center',
+                                                        text: 'Centro'
+                                                    },
+                                                ]" v-model="item.alignment" />
+                                            </div>
+                                            <div v-if="form.errors[`sections.${index}.id`] || form.errors[`sections.${index}.alignment`] || form.errors[`sections.${index}.order`]"
+                                                class="col-12">
+                                                <small class="text-danger">
+                                                    <span class="me-1">
+                                                        {{
+                                                            form.errors[`sections.${index}.id`]
+                                                        }}
+                                                    </span>
+                                                    <span class="me-1">
+                                                        {{
+                                                            form.errors[`sections.${index}.alignment`]
+                                                        }}
+                                                    </span>
+                                                    <span>
+                                                        {{
+                                                            form.errors[`sections.${index}.order`]
+                                                        }}
+                                                    </span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </CardUi>
                             </template>
                         </SortableList>
                     </div>
@@ -193,11 +199,12 @@ import ImagePreviewUi from '../../../Components/Ui/ImagePreviewUi.vue';
 import TextAreaForm from '../../../Components/Form/TextAreaForm.vue';
 import SortableList from '../../../Components/List/Sortable/SortableList.vue';
 import IconUi from '../../../Components/Ui/IconUi.vue';
+import CardUi from '../../../Components/Ui/CardUi.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi, TextAreaForm, SortableList, IconUi },
+    components: { InputForm, ButtonUi, SelectForm, EditorTiny, ModalImagesList, ImagePreviewUi, TextAreaForm, SortableList, IconUi, CardUi },
     props: {
         page: { type: Object, default: {} },
         sections: { type: Object, default: {} },

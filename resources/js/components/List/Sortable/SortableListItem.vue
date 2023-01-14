@@ -1,19 +1,16 @@
 <template>
+    <div class="pb-3 mt-3 mb-4 shadow-sm">
+        <div class="w-100 mb-2">
+            <slot />
+        </div>
 
-    <div class="card my-3">
-        <div class="card-body d-flex">
-            <div class="w-100">
-                <slot />
+        <div class="card card-body border-0 bg-transparent py-0 d-flex flex-row justify-content-center align-items-end">
+            <div class="me-auto">
+                <SelectForm @hasChange="changeOrder" label="Ordem:"
+                    :options="this.$parent.orders" v-model="theIndex" />
             </div>
-
-            <div class="d-flex flex-column ms-3">
-                <div class="mb-2">
-                    <SelectForm @hasChange="changeOrder" label="Ordem:"
-                        :options="this.$parent.orders" v-model="theIndex" />
-                </div>
-                <ButtonConfirmationUi @hasConfirmed="deleteConfirm" text="Excluir" confirmText="Certeza?"
-                    variant="danger" icon="trash" full size="sm" />
-            </div>
+            <ButtonConfirmationUi @hasConfirmed="deleteConfirm" confirmText="Certeza?"
+                variant="danger" icon="trash" outlined />
         </div>
     </div>
 
@@ -42,7 +39,7 @@ export default {
                 currentIndex: this.index,
                 newIndex: parseInt(e.target.value)
             });
-            
+
             e.target.value = this.index;
         },
         deleteConfirm(e) {

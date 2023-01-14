@@ -1,7 +1,7 @@
 <template>
     <div ref="accordionItem" class="accordion-item">
         <h2 class="accordion-header" :id="['heading' + id]">
-            <button :class="['accordion-button', { 'collapsed': !show }]" type="button"
+            <button :class="['fw-semibold accordion-button', { 'collapsed': !show }]" type="button"
                 data-bs-toggle="collapse" :data-bs-target="['#collapse' + id]">
                 {{ headerText }}
             </button>

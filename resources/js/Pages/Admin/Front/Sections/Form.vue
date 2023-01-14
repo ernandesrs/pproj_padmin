@@ -58,7 +58,7 @@
 
                 <div class="col-12 col-md-10 col-lg-6 mb-4">
                     <!-- images -->
-                    <div class="mb-4">
+                    <div class="mb-4 d-none">
                         <CardUi no-shadow border
                             v-if="['banner', 'default'].includes(form.type)">
                             <template v-slot:content>
@@ -143,24 +143,19 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <AccordionGroup>
-                                        <AccordionItem
-                                            v-for="button, index in form.buttons"
-                                            :key="index" :header-text="button.text"
-                                            :id="index"
-                                            @showedIndexHasUpdated="updateButtonIndex">
-                                            <div class="row">
-                                                <div class="col-6 mb-3">
-                                                    <SelectForm
-                                                        @hasChange="changeButtonsOrder"
-                                                        label="Ordem:"
-                                                        v-model="button.order"
-                                                        :options="buttonsOrder"
-                                                        only-values />
-                                                </div>
+                                    <div class="text-center">
+                                        <ButtonUi @click="addNewButton"
+                                            text="Adicionar link" variant="link"
+                                            icon="plusLg" size="sm" />
+                                    </div>
+                                    <AccordionGroup id="sections_buttons_links">
+                                    <SortableList v-model="form.buttons">
+                                        <template #item="{ item, index }">
+                                            <AccordionItem :header-text="item.text" :id="index">
+                                            <div class="row" :data-index="index">
                                                 <div class="col-6 col-xl-6 mb-3">
                                                     <SelectForm label="Estilo:"
-                                                        v-model="button.style" :options="[
+                                                        v-model="item.style" :options="[
                                                             { value: 'primary', text: 'Primário' },
                                                             { value: 'outline-primary', text: 'Primário bordado' },
                                                             { value: 'secondary', text: 'Secundário' },
@@ -170,18 +165,18 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6 mb-3">
                                                     <InputForm label="Texto:"
-                                                        v-model="button.text"
+                                                        v-model="item.text"
                                                         :error-message="form.errors[`buttons.${index}.text`]" />
                                                 </div>
                                                 <div class="col-12 col-sm-6 mb-3">
                                                     <InputForm label="Título:"
-                                                        v-model="button.title"
+                                                        v-model="item.title"
                                                         :error-message="form.errors[`buttons.${index}.title`]" />
                                                 </div>
                                                 <div
                                                     class="col-12 col-sm-6 col-lg-8 mb-3">
                                                     <InputForm label="URL:"
-                                                        v-model="button.url"
+                                                        v-model="item.url"
                                                         :error-message="form.errors[`buttons.${index}.url`]" />
                                                 </div>
                                                 <div
@@ -196,36 +191,25 @@
                                                                 value: '_blank',
                                                                 text: 'Outra aba'
                                                             }
-                                                        ]" v-model="button.target"
+                                                        ]" v-model="item.target"
                                                         :error-message="form.errors[`buttons.${index}.target`]" />
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <IconSetter @iconHasSet="iconHasSet"
-                                                        @requestingIconsModal="showIconsModal = true"
+                                                        @requestingIconsModal="showIconModalAndUpdateLinkIndexUnderEdit"
                                                         @requestingModalIconsHelp="showModalIconsHelp = true"
-                                                        :icon-data="button.icon" />
-                                                </div>
-                                                <div class="col-12 text-center">
-                                                    <ButtonConfirmationUi
-                                                        @hasConfirmed="removeButton"
-                                                        @hasCanceled="" icon="trash"
-                                                        variant="danger" size="sm"
-                                                        position="center"
-                                                        :data-item="index" />
+                                                        :icon-data="item.icon" />
                                                 </div>
                                             </div>
                                         </AccordionItem>
-                                    </AccordionGroup>
+                                        </template>
+                                    </SortableList>
+                                </AccordionGroup>
                                 </div>
 
                                 <div v-if="form.buttons.length == 0"
                                     class="p-2 mb-3 border text-center">
                                     Não há links nesta seção
-                                </div>
-
-                                <div class="text-center">
-                                    <ButtonUi @click="addNewButton" text="Adicionar link"
-                                        variant="link" icon="plusLg" size="sm" />
                                 </div>
                             </template>
                         </CardUi>
@@ -271,11 +255,12 @@ import TabContent from '../../../../Components/Ui/Tabpanel/TabContent.vue';
 import ModalIcons from '../../../../Components/IconSetter/ModalIcons.vue';
 import ModalIconHelp from '../../../../Components/IconSetter/ModalIconHelp.vue';
 import IconSetter from '../../../../Components/IconSetter/IconSetter.vue';
+import SortableList from '../../../../Components/List/Sortable/SortableList.vue';
 
 export default {
     layout: (h, page) => h(Layout, () => child),
     layout: Layout,
-    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi, CardUi, TabpanelUi, TabNavItem, TabContent, ModalIcons, ModalIconHelp, IconSetter },
+    components: { InputForm, ButtonUi, ButtonConfirmationUi, SelectForm, TextAreaForm, EditorTiny, ImagePreviewUi, ModalImagesList, AccordionGroup, AccordionItem, ModalUi, CardUi, TabpanelUi, TabNavItem, TabContent, ModalIcons, ModalIconHelp, IconSetter, SortableList },
     props: {
         section: { type: Object, default: {} },
         bindables: { type: Object, default: {} },
@@ -338,7 +323,6 @@ export default {
         this.form.buttons = this.section.buttons;
         this.form.bindable_class = this.section.bindable_class;
         this.form.visible = this.section.visible;
-        console.log(this.section);
 
         // image/images
         if (["default", "banner"].includes(this.section.type)) {
@@ -346,8 +330,6 @@ export default {
         }
 
         this.form.buttons = this.section.buttons;
-
-        this.updateButtonsOrder();
     },
 
     methods: {
@@ -429,52 +411,18 @@ export default {
                 },
                 style: "primary",
             });
-            this.updateButtonsOrder();
-        },
-
-        removeButton(event) {
-            let item = event.path[2].getAttribute("data-item");
-
-            if (!item) return;
-
-            this.form.buttons.splice(item, 1);
-            this.updateButtonsOrder();
-        },
-
-        changeButtonsOrder(event) {
-            let max = this.form.buttons.length;
-            let oldOrder = event.target._value;
-            let newOrder = event.target.value;
-
-            if (newOrder < 0 || newOrder > max) {
-                this.form.buttons[oldOrder].order = oldOrder;
-                return;
-            }
-
-            let bkp = this.form.buttons[newOrder];
-            this.form.buttons[newOrder] = this.form.buttons[oldOrder];
-            this.form.buttons[oldOrder] = bkp;
-
-            this.updateButtonsOrder();
-        },
-
-        updateButtonsOrder() {
-            this.form.buttons = this.form.buttons.map((item, index) => {
-                item.order = index;
-                return item;
-            });
-        },
-
-        updateButtonIndex(nindex) {
-            this.buttonIndex = nindex;
         },
         /**
          * end button
          */
 
         /**
-         * ICON
+         * start icon
          */
+        showIconModalAndUpdateLinkIndexUnderEdit(event) {
+            this.showIconsModal = true;
+            this.buttonIndex = parseInt(event.path[5].getAttribute("data-index"));
+        },
 
         iconHasChoosed(icon) {
             this.showIconsModal = false;
@@ -485,6 +433,9 @@ export default {
         iconHasSet(icon) {
             this.form.buttons[this.buttonIndex].icon = icon;
         }
+        /**
+         * end icon
+         */
     },
 
     computed: {
