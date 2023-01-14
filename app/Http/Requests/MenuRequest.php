@@ -38,7 +38,6 @@ class MenuRequest extends FormRequest
      */
     public function rules()
     {
-        // dd(json_decode($this->content));
         return [
             "name" => ["required", "max:25", "unique:menus,name" . ($this->menu ? "," . $this->menu->id : "")],
             "items.*.text" => ["required", "max:30", "string"],
@@ -46,10 +45,32 @@ class MenuRequest extends FormRequest
             "items.*.target" => ["required", Rule::in(["_self", "_blank"])],
             "items.*.url" => ["required", "string", "max:255"],
 
-            "items.*.icon.source" => ["nullable", "string", Rule::in("local", "html")],
+            "items.*.icon.source" => ["required", "string", Rule::in("local", "html")],
             "items.*.icon.name" => ["nullable", "required_if:items.*.icon.source,local", "string"],
             "items.*.icon.class" => ["nullable", "required_if:items.*.icon.class,html", "string"],
-            "items.*.icon.position" => ["nullable", "string", Rule::in("start", "end", "center")],
+            "items.*.icon.position" => ["required", "string", Rule::in("start", "end", "center")]
+        ];
+    }
+
+    /**
+     * Messages
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            "items.*.icon.source.required" => "Fonte do ícone obrigatório.",
+            "items.*.icon.source.in" => "Fonte do ícone selecionada é inválida.",
+
+            "items.*.icon.name.required_if" => "O ícone é obrigatório.",
+            "items.*.icon.name.string" => "Ícone inválido.",
+
+            "items.*.icon.class.required_if" => "Informe a classe do ícone.",
+            "items.*.icon.class.string" => "Classe de ícone inválido.",
+
+            "items.*.icon.position.required" => "Escolha uma posição: Início(start), Final(end) ou Centro(center).",
+            "items.*.icon.position.string" => "Posição do ícone inválido."
         ];
     }
 

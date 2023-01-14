@@ -57,10 +57,34 @@
                                         <div class="col-12 mb-3">
                                             <IconSetter
                                                 @requestingIconsModal="showIconModalAndUpdateLinkItemIndexUnderEdit"
-                                                @requestingModalIconsHelp="showModalIconsHelp = true" :icon-data="item.icon" />
+                                                @requestingModalIconsHelp="showModalIconsHelp = true"
+                                                :icon-data="item.icon" />
+
+                                            <small
+                                                v-if="form.errors[`items.${index}.icon.source`] || form.errors[`items.${index}.icon.class`] || form.errors[`items.${index}.icon.name`] || form.errors[`items.${index}.icon.position`]"
+                                                class="pt-1 text-danger">
+                                                {{
+                                                    form.errors[`items.${index}.icon.source`]
+                                                }}
+                                                {{
+                                                    form.errors[`items.${index}.icon.class`]
+                                                }}
+                                                {{
+                                                    form.errors[`items.${index}.icon.name`]
+                                                }}
+                                                {{
+                                                    form.errors[`items.${index}.icon.position`]
+                                                }}
+                                            </small>
                                         </div>
                                     </div>
                                 </AccordionItem>
+
+                                <small
+                                    v-if="form.errors[`items.${index}.target`] || form.errors[`items.${index}.text`] || form.errors[`items.${index}.title`] || form.errors[`items.${index}.url`] || form.errors[`items.${index}.icon.source`] || form.errors[`items.${index}.icon.class`] || form.errors[`items.${index}.icon.name`] || form.errors[`items.${index}.icon.position`]"
+                                    class="pt-1 text-danger">
+                                    Erro(s) foi/foram encontrados neste item.
+                                </small>
                             </template>
                         </SortableList>
                     </AccordionGroup>
@@ -122,8 +146,6 @@ export default {
         this.form.id = this.menu.id;
         this.form.name = this.menu.name;
         this.form.items = this.menu.items;
-
-        console.log(this.form.items);
     },
 
     methods: {
@@ -160,7 +182,7 @@ export default {
          */
         showIconModalAndUpdateLinkItemIndexUnderEdit(event) {
             this.showIconsModal = true;
-            this.linkItemIndex = parseInt(event.path[5].getAttribute("data-index"));s
+            this.linkItemIndex = parseInt(event.path[5].getAttribute("data-index"));
         },
 
         iconHasChoosed(icon) {
